@@ -5,29 +5,41 @@ using UnityEngine;
 public class GunControl : MonoBehaviour
 {
     [SerializeField]
-    [Range(1,3)]
-    int fireRate;
+    [Range(0f,2f)]
+    float fireRate;
 
     public Camera cam;
+    public GameObject projectileStartPos;
+    public ObjectPool_Projectiles opP;
 
     Vector3 direction;
     Vector3 mousePos;
     Vector3 targetLoc;
 
     GameObject obj;
-    public GameObject projectileStartPos;
-    public ObjectPool_Bullets obP;
-    // Start is called before the first frame update
+    bool coolDown;
+    float fireTimer;
     void Start()
     {
         cam = Camera.main;
+        coolDown = false;
+        fireTimer = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Aim();
         Shoot();
+
+        if (coolDown)
+        {
+            fireTimer += Time.deltaTime;
+            if (fireTimer >= fireRate)
+            {
+                fireTimer = 0;
+                coolDown = false;
+            }
+        }
     }
 
     void Aim()
@@ -50,7 +62,7 @@ public class GunControl : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !coolDown)
         {
             var ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
@@ -59,8 +71,9 @@ public class GunControl : MonoBehaviour
                 targetLoc.y = 0;
                 targetLoc = targetLoc.normalized;
             }
-            obj = obP.GetProjectile(this.gameObject.tag);
-            obj.GetComponent<MagicBullet>().SetUp(targetLoc, projectileStartPos.transform.position, this.gameObject.tag);
+            obj = opP.GetProjectile(this.gameObject.tag);
+            obj.GetComponent<Projectile>().SetUp(targetLoc, projectileStartPos.transform.position, this.gameObject.tag);
+            coolDown = true;
         }
     }
 }

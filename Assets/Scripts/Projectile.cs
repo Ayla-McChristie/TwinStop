@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicBullet : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     #region Serialized Variables
     [SerializeField]
@@ -15,11 +15,11 @@ public class MagicBullet : MonoBehaviour
     #endregion
     Vector3 direction;
     string projectileUser;
-    ObjectPool_Bullets opB;
+    ObjectPool_Projectiles opP;
 
     void Start()
     {
-        opB = new ObjectPool_Bullets();
+        opP = new ObjectPool_Projectiles();
     }
 
     public void SetUp(Vector3 direction, Vector3 position, string projectileUser)
@@ -33,28 +33,28 @@ public class MagicBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += direction * b_Speed * Time.deltaTime + Vector3.down*bd_Speed*Time.deltaTime;
+        transform.position += direction * b_Speed * Time.deltaTime + Vector3.down * bd_Speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(projectileUser == "Player")
+        if (projectileUser == "Player")
         {
-            if(other.gameObject.tag == "Enemy")
+            if (other.gameObject.tag == "Enemy")
             {
-                opB.ReturnToList(this.gameObject);
+                opP.DeactivateProjectile(this.gameObject);
             }
         }
-        else if(projectileUser == "Enemy")
+        else if (projectileUser == "Enemy")
         {
-            if(other.gameObject.tag == "Player")
+            if (other.gameObject.tag == "Player")
             {
-                opB.ReturnToList(this.gameObject);
+                opP.DeactivateProjectile(this.gameObject);
             }
         }
-        if(other.gameObject.tag == "Obstacle")
+        if (other.gameObject.tag == "Obstacle")
         {
-            opB.ReturnToList(this.gameObject);
+            opP.DeactivateProjectile(this.gameObject);
         }
     }
 }
