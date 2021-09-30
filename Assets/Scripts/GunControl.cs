@@ -17,10 +17,13 @@ public class GunControl : MonoBehaviour
     Vector3 targetLoc;
 
     GameObject obj;
+
+    string projectileType;
     bool coolDown;
     float fireTimer;
     void Start()
     {
+        projectileType = "PlayerBullet";
         cam = Camera.main;
         coolDown = false;
         fireTimer = 0;
@@ -71,7 +74,7 @@ public class GunControl : MonoBehaviour
                 targetLoc.y = 0;
                 targetLoc = targetLoc.normalized;
             }
-            obj = opP.GetProjectile(this.gameObject.tag);
+            obj = opP.GetProjectile(projectileType);
             obj.GetComponent<Projectile>().SetUp(targetLoc, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
