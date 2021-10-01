@@ -9,7 +9,9 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        /*
+         * TODO Get enemy object pools
+         */
     }
 
     // Update is called once per frame
@@ -28,6 +30,9 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn()
     {
+        /*
+         * TODO Pull from object pool instead of making new entities
+         */
         GameObject e = Instantiate(basicEnemy, this.transform);
     }
 }

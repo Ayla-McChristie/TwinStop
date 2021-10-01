@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
         this.acceleration += force;
     }
     /*
-     * Adds the for
+     * Adds force so the enemy walks towards their target
      */
     public void Seek(Vector3 target)
     {
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
 
         Vector3 steer = desired - velocity;
 
-        AddForce(desired);
+        AddForce(steer);
     }
     /*
      * When ever death conditions are met we run this to disable the enemy
@@ -98,7 +98,12 @@ public class Enemy : MonoBehaviour
              * TODO add enemy attack 
              */
 
+            //put code for enemy to do damage to player here
             this.Die();
         }
+
+       /*
+        * TODO Add collision for if enemy gets hit by the bullets
+        */
     }
 }
