@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
     /* 
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
      */
 
     //movement
+    protected Rigidbody rigidbody;
     protected float Speed;
     Vector3 acceleration;
     Vector3 velocity;
@@ -17,24 +19,24 @@ public class Enemy : MonoBehaviour
 
     //combat
     //this will be used to get the players transform for first playable
-    protected GameObject targetPlayer;
+    protected GameObject target;
     public float Health { get; set; }
     protected float Damage;
+
 
 
     /*
      * Methods
      */
-
-    public Enemy()
-    {
-
-    }
-
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -46,14 +48,12 @@ public class Enemy : MonoBehaviour
 
         if (!stationary)
         {
-            this.transform.position += velocity;
+            rigidbody.velocity = velocity;
         }
 
         acceleration *= 0;
 
-        /*
-        * TODO Combine with player system to make it so enemies look at the player
-        */
+        this.transform.LookAt(target.transform);
     }
 
     void TakeDamage(float damageAmmount)
@@ -74,5 +74,18 @@ public class Enemy : MonoBehaviour
         Vector3 steer = desired - velocity;
 
         AddForce(desired);
+    }
+    void Die()
+    {
+        this.enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            this.Die();
+        }
     }
 }
