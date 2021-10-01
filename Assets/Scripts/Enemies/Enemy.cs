@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     Vector3 acceleration;
     Vector3 velocity;
 
+    //stationary is used for enemy types who like to keep their distance
     bool stationary;
 
     //combat
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     /*
      * Methods
      */
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -65,19 +67,26 @@ public class Enemy : MonoBehaviour
     {
         this.acceleration += force;
     }
+    /*
+     * Adds the for
+     */
     public void Seek(Vector3 target)
     {
         Vector3 desired = target - this.gameObject.transform.position;
-        desired.Normalize();
-        desired *= Speed * Time.deltaTime;
 
         Vector3 steer = desired - velocity;
 
         AddForce(desired);
     }
+    /*
+     * When ever death conditions are met we run this to disable the enemy
+     */
     void Die()
     {
         this.enabled = false;
+        /*
+         * Should replace this with object pooling instead of destruction
+         */
         Destroy(this.gameObject);
     }
 
@@ -85,6 +94,10 @@ public class Enemy : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
+            /*
+             * TODO add enemy attack 
+             */
+
             this.Die();
         }
     }
