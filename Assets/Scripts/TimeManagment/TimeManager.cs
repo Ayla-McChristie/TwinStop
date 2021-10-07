@@ -45,6 +45,11 @@ public class TimeManager : MonoBehaviour
         {
             Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
         }
+
+        if (Input.GetKey(KeyCode.L))
+        {
+            TimeStop();
+        }
     }
 
     /*
@@ -53,5 +58,6 @@ public class TimeManager : MonoBehaviour
     void TimeStop()
     {
         Time.timeScale = 0;
+        Time.fixedDeltaTime = Time.timeScale * .02f;
     }
 }

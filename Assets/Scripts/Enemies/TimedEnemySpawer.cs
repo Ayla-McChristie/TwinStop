@@ -36,6 +36,7 @@ public class TimedEnemySpawer : EnemyManager
             if (currentCoolDown <= 0)
             {
                 this.onCooldown = false;
+                currentCoolDown = coolDownTime;
             }
         }
     }
