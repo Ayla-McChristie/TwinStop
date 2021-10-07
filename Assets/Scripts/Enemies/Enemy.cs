@@ -102,8 +102,9 @@ public class Enemy : MonoBehaviour
             this.Die();
         }
 
-       /*
-        * TODO Add collision for if enemy gets hit by the bullets
-        */
+        if (collision.transform.tag == "PlayerBullet")
+        {
+            this.Die();
+        }
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField]
-    public float timeSlowDownRate { get; private set; }
-    public float timeSpeedUpRate { get; private set; }
-    public float timeStopLength { get; private set; }
+    public float timeSlowDownRate = .5f;
+    [SerializeField]
+    public float timeSpeedUpRate = .5f;
+    [SerializeField]
+    public float timeStopLength = 2;
     private float defaultTimeScale;
     private float defaultFixedDeltaTime;
 
@@ -44,7 +46,10 @@ public class TimeManager : MonoBehaviour
         if (Time.timeScale < 1f)
         {
             Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
         }
+
+        //Debug.Log(Time.timeScale.ToString());
 
         if (Input.GetKey(KeyCode.L))
         {
@@ -57,7 +62,8 @@ public class TimeManager : MonoBehaviour
      */
     void TimeStop()
     {
-        Time.timeScale = 0;
-        Time.fixedDeltaTime = Time.timeScale * .02f;
+        //Debug.Log("Time has been stopped");
+        Time.timeScale = .1f;
+        
     }
 }
