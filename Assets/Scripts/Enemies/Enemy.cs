@@ -58,6 +58,11 @@ public class Enemy : MonoBehaviour
         this.transform.LookAt(target.transform);
     }
 
+    public void FixedUpdate()
+    {
+        
+    }
+
     void TakeDamage(float damageAmmount)
     {
         this.Health -= damageAmmount;

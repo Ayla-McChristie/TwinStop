@@ -11,6 +11,7 @@ public class TimeManager : MonoBehaviour
     public float timeStopLength = 2;
     private float defaultTimeScale;
     private float defaultFixedDeltaTime;
+    private bool isTimeStopped = false;
 
     /*
      * singleton to ensure we only have 1 time manager
@@ -43,18 +44,9 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale < 1f)
-        {
-            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-        }
+        EaseTimeToDefault();
 
-        //Debug.Log(Time.timeScale.ToString());
-
-        if (Input.GetKey(KeyCode.L))
-        {
-            TimeStop();
-        }
+        FreezeTime();
     }
 
     /*
@@ -65,5 +57,26 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("Time has been stopped");
         Time.timeScale = .1f;
         
+    }
+
+    void FreezeTime()
+    {
+        if (Input.GetKey(KeyCode.L))
+        {
+            TimeStop();
+        }
+    }
+
+    /*
+     * Method to gradually reset time to 1. 
+     * may need to rename
+     */
+    void EaseTimeToDefault()
+    {
+        if (Time.timeScale < 1f)
+        {
+            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+        }
     }
 }
