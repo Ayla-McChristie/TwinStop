@@ -19,7 +19,9 @@ public class EnemyManager : MonoBehaviour
     {
         TestSpawn();
     }
-
+    /*
+     * Test method used to spawn enemies on button press
+     */
     void TestSpawn()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -28,7 +30,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    void Spawn()
+    protected virtual void Spawn()
     {
         /*
          * TODO Pull from object pool instead of making new entities

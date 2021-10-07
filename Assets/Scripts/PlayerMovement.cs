@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private Rigidbody playerRigidbody;
+    private Rigidbody playerRigidbody;
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
 
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        this.playerRigidbody = GetComponent<Rigidbody>();
+        mainCamera = Camera.main;
+    }
 
     // Update is called once per frame
     void Update()
