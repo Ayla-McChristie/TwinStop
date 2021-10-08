@@ -8,10 +8,6 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     [Range(1f, 3f)]
     float b_Speed; //Bullet's Speed
-
-    [SerializeField]
-    float bd_Speed; //Rate The Bullet Drops
-                    // Start is called before the first frame update
     #endregion
     Vector3 direction;
     string projectileUser;
@@ -33,26 +29,26 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += direction * b_Speed * Time.deltaTime + Vector3.down * bd_Speed * Time.deltaTime;
+        transform.position += direction * b_Speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         if (projectileUser == "Player")
         {
-            if (other.gameObject.tag == "Enemy")
+            if (collision.transform.tag == "Enemy")
             {
                 opP.DeactivateProjectile(this.gameObject);
             }
         }
         else if (projectileUser == "Enemy")
         {
-            if (other.gameObject.tag == "Player")
+            if (collision.transform.tag == "Player")
             {
                 opP.DeactivateProjectile(this.gameObject);
             }
         }
-        if (other.gameObject.tag == "Obstacle")
+        if (collision.transform.tag == "Obstacle")
         {
             opP.DeactivateProjectile(this.gameObject);
         }

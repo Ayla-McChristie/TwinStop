@@ -7,7 +7,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
     [System.Serializable]
     public class Pool
     {
-        public string tag;
+        public string name;
         public GameObject prefab;
         public int maxSize;
     }
@@ -31,15 +31,15 @@ public class ObjectPool_Projectiles : MonoBehaviour
                 objectPool.Enqueue(temp);
             }
 
-            poolDictionary.Add(p.tag, objectPool);
+            poolDictionary.Add(p.name, objectPool);
         }
     }
 
-    public GameObject GetProjectile(string objectTag)
+    public GameObject GetProjectile(string objectName)
     {
-        GameObject objectSpawn = poolDictionary[objectTag].Dequeue();
+        GameObject objectSpawn = poolDictionary[objectName].Dequeue();
         objectSpawn.SetActive(true);
-        poolDictionary[objectTag].Enqueue(objectSpawn);
+        poolDictionary[objectName].Enqueue(objectSpawn);
         return objectSpawn;
     }
 

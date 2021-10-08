@@ -27,17 +27,17 @@ public class PlayerMovement : MonoBehaviour
 
         //this.playerRigidbody.MovePosition(playerRigidbody.position + (moveVelocity * Time.unscaledDeltaTime));
 
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength; // Length of line from Camera to nearest ground
+        //Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        //float rayLength; // Length of line from Camera to nearest ground
 
-        if(groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
+        //if(groundPlane.Raycast(cameraRay, out rayLength))
+        //{
+        //    Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+        //    Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
 
-            transform.LookAt(pointToLook);
-        }
+        //    transform.LookAt(pointToLook);
+        //}
     }
 
     void FixedUpdate()

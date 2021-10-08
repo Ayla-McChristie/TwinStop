@@ -4,24 +4,38 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class RoomDetail
+    {
+        public int roomNum;
+        public List<GameObject> listOfEnemies;
+        public Transform[] SpawnLoc;
+    }
+    //[SerializeField]
+    //private GameObject basicEnemy;
     [SerializeField]
-    private GameObject basicEnemy;
+    List<RoomDetail> roomDetailTemp;
+    List<RoomDetail> roomDetail;
+    public GameObject basicEnemy;
+    public ObjectPool_Projectiles o;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        /*
-         * TODO Get enemy object pools
-         */
+        roomDetail = new List<RoomDetail>();
+        foreach (RoomDetail r in roomDetailTemp)
+        {
+            roomDetail.Add(r);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        TestSpawn();
+        //TestSpawn();
     }
-    /*
-     * Test method used to spawn enemies on button press
-     */
+
     void TestSpawn()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -30,11 +44,28 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    protected virtual void Spawn()
+    protected void Spawn()
     {
         /*
          * TODO Pull from object pool instead of making new entities
          */
         GameObject e = Instantiate(basicEnemy, this.transform);
+    }
+
+    public void SpawnEnemies(int room)
+    {
+        foreach (RoomDetail r in roomDetail)
+        {
+            if (r.roomNum == room)
+            {
+                for (int i = 0; i < r.listOfEnemies.Count; i++)
+                {
+                    GameObject enemy = o.GetProjectile(r.listOfEnemies[i].gameObject.name);
+                    enemy.transform.position = r.SpawnLoc[i].position;
+                }
+            }
+        }
+
+
     }
 }

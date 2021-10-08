@@ -5,8 +5,11 @@ using UnityEngine;
 public class GunControl : MonoBehaviour
 {
     [SerializeField]
-    [Range(0f,2f)]
+    [Range(0f, 2f)]
     float fireRate;
+
+    [SerializeField]
+    float rotSpeed;
 
     public Camera cam;
     public GameObject projectileStartPos;
@@ -47,9 +50,26 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
-        direction = GetMousePos() - transform.position;
-        direction.y = 0;
-        transform.forward = direction;
+        //direction = GetMousePos() - transform.position;
+        //direction.y = 0;
+        //transform.forward = direction;
+        Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength; // Length of line from Camera to nearest ground
+
+        if (groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength) - this.transform.position;
+            pointToLook = new Vector3(pointToLook.x, this.transform.position.y, pointToLook.z);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
+            this.transform.LookAt(pointToLook);
+            pointToLook.y = 0;
+            direction = pointToLook;
+
+            //var rotation = Quaternion.LookRotation(pointToLook);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed*Time.deltaTime);
+
+        }
     }
 
     Vector3 GetMousePos()
@@ -67,15 +87,16 @@ public class GunControl : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !coolDown)
         {
-            var ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
-            {
-                targetLoc = hitInfo.point;
-                targetLoc.y = 0;
-                targetLoc = targetLoc.normalized;
-            }
+            //var ray = cam.ScreenPointToRay(Input.mousePosition);
+            //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
+            //{
+            //    targetLoc = hitInfo.point;
+            //    targetLoc.y = 0;
+            //    targetLoc = targetLoc.normalized;
+            //}
+            direction = direction.normalized;
             obj = opP.GetProjectile(projectileType);
-            obj.GetComponent<Projectile>().SetUp(targetLoc, projectileStartPos.transform.position, this.gameObject.tag);
+            obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
     }
