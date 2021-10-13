@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 137762789}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4094b835d7bab634fa9765a2bf715e7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -251,11 +251,11 @@ RectTransform:
   m_Father: {fileID: 662380041}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 310, y: 336}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -262, y: 1}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &160199009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,10 +521,10 @@ MonoBehaviour:
   numOfHearts: 3
   hearts:
   - {fileID: 160199009}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullHeart: {fileID: 0}
-  emptyHeart: {fileID: 0}
+  - {fileID: 1516996233}
+  - {fileID: 1770477453}
+  fullHeart: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  emptyHeart: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &615763022
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,11 +946,11 @@ RectTransform:
   m_Father: {fileID: 662380041}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 198, y: 336}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -152, y: 1}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1516996233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,11 +1118,11 @@ RectTransform:
   m_Father: {fileID: 662380041}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 88, y: 336}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -40, y: 1}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1770477453
 MonoBehaviour:
   m_ObjectHideFlags: 0

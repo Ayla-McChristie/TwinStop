@@ -5,22 +5,23 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int health;
-    public int numOfHearts;
+    public int health; // Total amount of health left
+    public int numOfHearts; // Max amount of hearts a player can have, should be 3
 
-    public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
+    public Image[] hearts; // all heart UI game objects go here
+    public Sprite fullHeart; // sprite of full heart here
+    public Sprite emptyHeart; // sprite of empty heart here
 
     void Update() 
     {
         // Health Lock
         if(health > numOfHearts)
         {
-            health = numOfHearts;
-            // this makes sure that players can never go over the set amount of hearths
+            health = numOfHearts; // this makes sure that players can never go over the set amount of hearts
+            
         }
 
+        // system for turning full hearts to empty hearts
         for (int i = 0; i < hearts.Length; i++)
         {
             if(i < health)
@@ -43,5 +44,12 @@ public class Health : MonoBehaviour
         }
     }
 
-    
+    // TODO add code for projectiles
+    void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Enemy") // || other.gameObject.tag == "Projectiles"?
+        {
+            health--;
+        }
+    }   
 }
