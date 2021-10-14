@@ -9,6 +9,7 @@ public class TimeManager : MonoBehaviour
     public float timeSpeedUpRate = .5f;
     [SerializeField]
     public float timeStopLength = 4;
+
     public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
     private float defaultFixedDeltaTime;
