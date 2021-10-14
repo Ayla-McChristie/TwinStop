@@ -32,13 +32,19 @@ public class Projectile : MonoBehaviour
         transform.position += direction * b_Speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (projectileUser == "Player")
         {
             if (collision.transform.tag == "Enemy")
             {
                 opP.DeactivateProjectile(this.gameObject);
+
+                /*
+                * Technical debt. Implement the object pool for the enemies
+                * so we can deactivate instead of destroy
+                */
+                Destroy(collision.gameObject);
             }
         }
         else if (projectileUser == "Enemy")
@@ -46,6 +52,8 @@ public class Projectile : MonoBehaviour
             if (collision.transform.tag == "Player")
             {
                 opP.DeactivateProjectile(this.gameObject);
+
+               
             }
         }
         if (collision.transform.tag == "Obstacle")

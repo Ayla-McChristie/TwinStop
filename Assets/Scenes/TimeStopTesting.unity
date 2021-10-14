@@ -934,7 +934,7 @@ MonoBehaviour:
   pool:
   - name: PlayerBullet
     prefab: {fileID: 604275624657675717, guid: 2fc3f0ea76a3c484d996f0616efcd0be, type: 3}
-    maxSize: 10
+    maxSize: 50
 --- !u!4 &911393876
 Transform:
   m_ObjectHideFlags: 0
@@ -1288,6 +1288,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2078936455}
+    - target: {fileID: 5934155473987625185, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155473987625188, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1296,6 +1300,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2078936455}
+    - target: {fileID: 5934155474483065524, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155474483065530, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1308,6 +1316,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 973400550}
+    - target: {fileID: 5934155474560566464, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155474560566470, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1328,6 +1340,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 243341505}
+    - target: {fileID: 5934155474641125974, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155474641125977, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1380,6 +1396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room
       objectReference: {fileID: 0}
+    - target: {fileID: 5934155474691934717, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155474841304208, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1388,6 +1408,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2008730870}
+    - target: {fileID: 5934155474841304210, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155474841304213, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1400,10 +1424,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2013991245}
+    - target: {fileID: 5934155474956279878, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155474956279881, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2013991245}
+    - target: {fileID: 5934155475308630032, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155475308630038, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1416,6 +1448,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 689533790}
+    - target: {fileID: 5934155475346420620, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155475346420626, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1432,6 +1468,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 363786377}
+    - target: {fileID: 5934155475877557173, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5934155475877557176, guid: efaf2d1d741eb324d9e437384550c5e9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2082,8 +2122,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1104430885, guid: 9610aaa8a2e768043ab95b8c03479369, type: 3}
+      propertyPath: opP
+      value: 
+      objectReference: {fileID: 911393875}
+    - target: {fileID: 1104430885, guid: 9610aaa8a2e768043ab95b8c03479369, type: 3}
+      propertyPath: fireRate
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104430885, guid: 9610aaa8a2e768043ab95b8c03479369, type: 3}
       propertyPath: rotSpeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617221774119671334, guid: 9610aaa8a2e768043ab95b8c03479369, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.022
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617221774119671334, guid: 9610aaa8a2e768043ab95b8c03479369, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.891
       objectReference: {fileID: 0}
     - target: {fileID: 4901428594880704834, guid: 9610aaa8a2e768043ab95b8c03479369, type: 3}
       propertyPath: m_Name
