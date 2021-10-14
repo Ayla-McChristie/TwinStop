@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace Assets.Scripts.Player
 {
     [RequireComponent(typeof(PlayerMovement))]
-    class PlayerStats
+    class PlayerStats : MonoBehaviour
     {
         public int health; // Total amount of health left
         public int numOfHearts; // Max amount of hearts a player can have, should be 3
