@@ -11,7 +11,7 @@ public class GunControl : MonoBehaviour
     [SerializeField]
     float rotSpeed;
 
-    public Camera cam;
+    private Camera cam;
     public GameObject projectileStartPos;
     public ObjectPool_Projectiles opP;
 

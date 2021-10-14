@@ -46,5 +46,6 @@ public class ObjectPool_Projectiles : MonoBehaviour
     public void DeactivateProjectile(GameObject ObjectType)
     {
         ObjectType.SetActive(false);
+        Rigidbody rb = ObjectType.GetComponent<Rigidbody>();
     }
 }
