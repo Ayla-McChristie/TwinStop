@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class KeyDoor : Door
@@ -11,12 +12,20 @@ public class KeyDoor : Door
         this.IsOpen = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collider other)
     {
-        //checks to see if the player has a key
+        /*
+         * checks to see if the player has a key and unlocks the door if they do.
+         */
         if (other.transform.tag == "Player")
         {
-            this.IsLocked = false;
+            throw new NotImplementedException();
+
+            //if (other.playerStats.keys > 1)
+            //{
+            //    other.playerStats.keys--;
+            //    this.IsLocked = false;
+            //}
         }
     }
 }
