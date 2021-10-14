@@ -8,10 +8,11 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     public float timeSpeedUpRate = .5f;
     [SerializeField]
-    public float timeStopLength = 2;
+    public float timeStopLength = 4;
+    public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
     private float defaultFixedDeltaTime;
-    private bool isTimeStopped = false;
+    [SerializeField] private bool isTimeStopped = false;
 
     /*
      * singleton to ensure we only have 1 time manager
@@ -39,14 +40,16 @@ public class TimeManager : MonoBehaviour
     {
         defaultTimeScale = Time.timeScale;
         defaultFixedDeltaTime = Time.fixedDeltaTime;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        EaseTimeToDefault();
-
+        TimeLeft();
         FreezeTime();
+        Debug.Log(Time.timeScale);
+        Debug.Log(isTimeStopped);
     }
 
     /*
@@ -54,16 +57,37 @@ public class TimeManager : MonoBehaviour
      */
     void TimeStop()
     {
-        //Debug.Log("Time has been stopped");
+        Debug.Log("Time has been stopped");
         Time.timeScale = .1f;
         
     }
 
     void FreezeTime()
     {
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) && timeTillLength > 0)
         {
             TimeStop();
+            isTimeStopped = true;
+        }
+
+        // code to undo the time pause if activated
+        if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
+        {
+            isTimeStopped = false;
+            EaseTimeToDefault();
+        }
+    }
+
+    void TimeLeft()
+    {
+        if (timeTillLength <= timeStopLength && isTimeStopped == true)
+        {
+            timeTillLength--;
+        }
+
+        if (timeTillLength <= 0)
+        {
+            EaseTimeToDefault();
         }
     }
 
@@ -73,10 +97,34 @@ public class TimeManager : MonoBehaviour
      */
     void EaseTimeToDefault()
     {
-        if (Time.timeScale < 1f)
+        while (Time.timeScale < 1f)
         {
+            Debug.Log("Time has started to revert back");
             Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
+
+        // original code do not delete!
+        /*if (Time.timeScale < 1f)
+        {
+            Debug.Log("Time has started to revert back");
+            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+        }*/
+
+        // testing code
+        /*for (int i = 0; i < 1f; i++)
+        {
+            if (Time.timeScale < 1f)
+            {
+            Debug.Log("Time has started to revert back");
+            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+            }
+
+            Debug.Log("Time is back to normal");
+        }*/
+
+        
     }
 }
