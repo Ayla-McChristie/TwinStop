@@ -20,7 +20,6 @@ public class EnemyManager : MonoBehaviour
     public ObjectPool_Projectiles o;
 
     //lets us know if were in combat or not. Should probably be move to the room manager
-    [HideInInspector]
     public bool isInCombat;
     private int numOfEnemiesInCombat;
 
@@ -53,11 +52,11 @@ public class EnemyManager : MonoBehaviour
      */
     void TestInCombat()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             isInCombat = true;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             isInCombat = false;
         }

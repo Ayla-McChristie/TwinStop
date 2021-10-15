@@ -28,8 +28,8 @@ public class Door : MonoBehaviour
     void Start()
     {
         DoorManager.Instance.doors.Add(this);
-        this.doorCollider = this.gameObject.GetComponent<Collider>();
-        this.renderer = this.gameObject.GetComponent<Renderer>();
+        this.doorCollider = this.gameObject.GetComponent<MeshCollider>();
+        this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
     }
 

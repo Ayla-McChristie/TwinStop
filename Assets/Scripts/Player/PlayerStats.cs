@@ -9,8 +9,8 @@ class PlayerStats : MonoBehaviour
     public int health; // Total amount of health left
     public int numOfHearts; // Max amount of hearts a player can have, should be 3
 
-    public int keys;
-    public int bossKeys;
+    public int keys; //number of keys the player has -A
+    public int bossKeys; //number of bossKeys the player has -A
 
     public Image[] hearts; // all heart UI game objects go here
     public Sprite fullHeart; // sprite of full heart here
