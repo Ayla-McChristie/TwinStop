@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
+    protected enum State { Attacking, MoveToTarget, ChangePosition }
     /* 
      * Attributes 
      */
@@ -14,7 +15,7 @@ public class Enemy : MonoBehaviour
     protected float Speed;
     Vector3 acceleration;
     Vector3 velocity;
-
+    protected ObjectPool_Projectiles oP;
     //stationary is used for enemy types who like to keep their distance
     bool stationary;
 
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour
         {
             target = GameObject.FindGameObjectWithTag("Player");
         }
-
+        oP = GameObject.Find("ObjectPool").GetComponent<ObjectPool_Projectiles>();
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -95,7 +96,7 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Player")
         {

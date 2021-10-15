@@ -6,13 +6,10 @@ public class GunControl : MonoBehaviour
 {
     [SerializeField]
     [Range(0f, 2f)]
-    float fireRate;
+    float fireRate = .5f;
 
-    [SerializeField]
-    float rotSpeed;
-
-    private Camera cam;
-    public GameObject projectileStartPos;
+    Camera cam;
+    GameObject projectileStartPos;
     public ObjectPool_Projectiles opP;
 
     Vector3 direction;
@@ -26,6 +23,7 @@ public class GunControl : MonoBehaviour
     float fireTimer;
     void Start()
     {
+        projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;
         projectileType = "PlayerBullet";
         cam = Camera.main;
         coolDown = false;
@@ -50,26 +48,26 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
-        //direction = GetMousePos() - transform.position;
-        //direction.y = 0;
-        //transform.forward = direction;
-        Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength; // Length of line from Camera to nearest ground
+        direction = GetMousePos() - transform.position;
+        direction.y = 0;
+        transform.forward = direction;
+        //Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
+        //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        //float rayLength; // Length of line from Camera to nearest ground
 
-        if (groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength) - this.transform.position;
-            pointToLook = new Vector3(pointToLook.x, this.transform.position.y, pointToLook.z);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
-            this.transform.LookAt(pointToLook);
-            pointToLook.y = 0;
-            direction = pointToLook;
+        //if (groundPlane.Raycast(cameraRay, out rayLength))
+        //{
+        //    Vector3 pointToLook = cameraRay.GetPoint(rayLength) - this.transform.position;
+        //    pointToLook = new Vector3(pointToLook.x, this.transform.position.y, pointToLook.z);
+        //    Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
+        //    this.transform.LookAt(pointToLook);
+        //    pointToLook.y = 0;
+        //    direction = pointToLook;
 
-            //var rotation = Quaternion.LookRotation(pointToLook);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed*Time.deltaTime);
+        //    //var rotation = Quaternion.LookRotation(pointToLook);
+        //    //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed*Time.deltaTime);
 
-        }
+        //}
     }
 
     Vector3 GetMousePos()

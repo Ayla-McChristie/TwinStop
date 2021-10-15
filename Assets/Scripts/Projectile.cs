@@ -6,8 +6,8 @@ public class Projectile : MonoBehaviour
 {
     #region Serialized Variables
     [SerializeField]
-    [Range(1f, 3f)]
-    float b_Speed; //Bullet's Speed
+    [Range(5f, 10f)]
+    float b_Speed = 10; //Bullet's Speed
     #endregion
     Vector3 direction;
     string projectileUser;
@@ -24,27 +24,43 @@ public class Projectile : MonoBehaviour
         this.transform.position = position;
         this.projectileUser = projectileUser;
         transform.forward = direction;
+        IgnoreCollision(projectileUser);
+    }
+
+    void IgnoreCollision(string user)
+    {
+        if (user == "Player")
+            Physics.IgnoreCollision(GameObject.FindWithTag("Player").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+        else if (user == "Enemy")
+            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += direction * b_Speed * Time.deltaTime;
+        IgnoreProjectiles();
     }
 
-    private void OnTriggerEnter(Collider collision)
+    void IgnoreProjectiles()
     {
+        if (GameObject.FindWithTag("PlayerBullet"))
+            Physics.IgnoreCollision(GameObject.FindWithTag("PlayerBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+        if (GameObject.FindWithTag("EnemyBullet"))
+            Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Obstacle")
+        {
+            opP.DeactivateProjectile(this.gameObject);
+        }
         if (projectileUser == "Player")
         {
             if (collision.transform.tag == "Enemy")
             {
                 opP.DeactivateProjectile(this.gameObject);
-
-                /*
-                * Technical debt. Implement the object pool for the enemies
-                * so we can deactivate instead of destroy
-                */
-                Destroy(collision.gameObject);
             }
         }
         else if (projectileUser == "Enemy")
@@ -52,14 +68,7 @@ public class Projectile : MonoBehaviour
             if (collision.transform.tag == "Player")
             {
                 opP.DeactivateProjectile(this.gameObject);
-
-               
             }
-        }
-
-        if (collision.transform.tag == "Obstacle")
-        {
-            opP.DeactivateProjectile(this.gameObject);
         }
     }
 }
