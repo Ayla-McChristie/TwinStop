@@ -50,25 +50,26 @@ public class Projectile : MonoBehaviour
             Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.transform.tag == "Obstacle")
-        {
-            opP.DeactivateProjectile(this.gameObject);
-        }
         if (projectileUser == "Player")
         {
-            if (collision.transform.tag == "Enemy")
+            if (other.transform.tag == "Enemy")
             {
-                opP.DeactivateProjectile(this.gameObject);
+                /*
+                 * technical debt. make enemies use object pool
+                 */
+                Destroy(other.gameObject);
             }
         }
         else if (projectileUser == "Enemy")
         {
-            if (collision.transform.tag == "Player")
+            if (other.transform.tag == "Player")
             {
-                opP.DeactivateProjectile(this.gameObject);
+                //Deal damage script here
             }
         }
+        opP.DeactivateProjectile(this.gameObject);
     }
 }

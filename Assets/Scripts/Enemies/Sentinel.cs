@@ -44,7 +44,7 @@ public class Sentinel : Enemy
     }
 
     // Update is called once per frame
-    public override void Update()
+    public override void FixedUpdate()
     {
         Debug.DrawRay(transform.position, transform.forward * fovDist, Color.red, 1, true); Debug.Log(state);
 
@@ -168,6 +168,7 @@ public class Sentinel : Enemy
 
     bool CanSeeTarget()
     {
+        Debug.Log(target);
         Vector3 direction = target.transform.position - this.transform.position;
         float angle = Vector3.Angle(direction, this.transform.position);
 

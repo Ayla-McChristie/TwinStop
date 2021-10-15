@@ -42,12 +42,11 @@ public class Enemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    public virtual void Update()
+    public virtual void FixedUpdate()
     {
         velocity += acceleration;
         velocity.Normalize();
-        velocity *= this.Speed * Time.deltaTime;
+        velocity *= this.Speed;
 
         if (!stationary)
         {
@@ -57,11 +56,6 @@ public class Enemy : MonoBehaviour
         acceleration *= 0;
 
         this.transform.LookAt(target.transform);
-    }
-
-    public void FixedUpdate()
-    {
-        
     }
 
     void TakeDamage(float damageAmmount)
