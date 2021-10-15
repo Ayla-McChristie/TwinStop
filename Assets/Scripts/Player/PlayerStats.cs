@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Player
-{
     [RequireComponent(typeof(PlayerMovement))]
     class PlayerStats : MonoBehaviour
     {
@@ -61,4 +56,3 @@ namespace Assets.Scripts.Player
             }
         }
     }
-}

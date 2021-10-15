@@ -6,25 +6,25 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class Door : MonoBehaviour
 {
+    [SerializeField]
+    public bool isBossDoor = false;
+    [SerializeField]
+    public bool IsLocked = false;
     public bool IsOpen { get; set; }
-    public bool IsLocked { get; set; }
 
     Collider doorCollider;
     Renderer renderer;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         this.doorCollider = this.gameObject.GetComponent<Collider>();
         this.renderer = this.gameObject.GetComponent<Renderer>();
         IsOpen = false;
     }
-
-    // Update is called once per frame
-    public virtual void Update()
-    {
-    }
-
+    /*
+     * Used to open the door. turns off the renderer and collider but still allows it to update if need be
+     */
     public void OpenDoor()
     {
         if (this.IsLocked == false)
@@ -34,19 +34,25 @@ public class Door : MonoBehaviour
             this.doorCollider.enabled = false;
         }
     }
-
+    /*
+     * Closes the door. doesnt check if the door is locked because open doors are by definition unlocked
+     */
     public void CloseDoor()
     {
         this.IsOpen = false;
         this.renderer.enabled = true;
         this.doorCollider.enabled = true;
     }
-
+    /*
+     * Unlocks the door.
+     */
     public void UnlockDoor()
     {
         this.IsLocked = false;
     }
-
+    /*
+     * Locks the door. Locked doors can only be opened if the player has keys
+     */
     public void LockDoor()
     {
         this.IsLocked = true;

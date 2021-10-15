@@ -14,21 +14,38 @@ public class DoorTrigger : MonoBehaviour
         targetDoor = Door.GetComponent<Door>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player" && targetDoor)
+        if (other.transform.tag == "Player")
         {
-            targetDoor.OpenDoor();
-            Debug.Log("Door Opened");
-        }
+            if (targetDoor.IsLocked == false)
+            {
+                targetDoor.OpenDoor();
+                //Debug.Log("Door Opened");
+            }
+            else
+            {
+                PlayerStats ps = other.GetComponent<PlayerStats>();
+
+                if (ps.keys >= 1)
+                {
+                    ps.keys--;
+                    targetDoor.IsLocked = false;
+                    /*
+                     * play really cool animation here
+                     */
+                    this.OnTriggerEnter(other);
+                }
+            }
+        }     
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "Player" && targetDoor)
+        if (other.transform.tag == "Player")
         {
             targetDoor.CloseDoor();
-            Debug.Log("Door Closed");
+            //Debug.Log("Door Closed");
         }
     }
 }
