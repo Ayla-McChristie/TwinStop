@@ -4,14 +4,31 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
+    [SerializeField]
+    GameObject Door;
+
+    Door targetDoor;
+
+    private void Awake()
+    {
+        targetDoor = Door.GetComponent<Door>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" && targetDoor)
         {
-            /*
-            * TODO Go to next room
-            */
+            targetDoor.OpenDoor();
+            Debug.Log("Door Opened");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player" && targetDoor)
+        {
+            targetDoor.CloseDoor();
+            Debug.Log("Door Closed");
         }
     }
 }

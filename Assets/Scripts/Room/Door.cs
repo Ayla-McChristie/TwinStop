@@ -23,14 +23,16 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-
     }
 
     public void OpenDoor()
     {
-        this.IsOpen = true;
-        this.renderer.enabled = false;
-        this.doorCollider.enabled = false;
+        if (this.IsLocked == false)
+        {
+            this.IsOpen = true;
+            this.renderer.enabled = false;
+            this.doorCollider.enabled = false;
+        }
     }
 
     public void CloseDoor()
