@@ -9,19 +9,38 @@ public class DoorTrigger : MonoBehaviour
 
     Door targetDoor;
 
+    [SerializeField]
+    bool amIALargeRoom;
+
+    [SerializeField]
+    GameObject roomCenter;
+
+    GameObject cameraFollowMe;
+
+    FollowPlayer followPlayerScript; 
+
     private void Awake()
     {
         targetDoor = Door.GetComponent<Door>();
+        
+    }
+
+    private void Start()
+    {
+       cameraFollowMe = GameObject.FindWithTag("CamFollow");
+       followPlayerScript = cameraFollowMe.GetComponent<FollowPlayer>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player" && DoorManager.Instance.enemyManager.isInCombat == false)
+        if (other.transform.tag == "Player") //&& DoorManager.Instance.enemyManager.isInCombat == false)
         {
+            
             if (targetDoor.IsLocked == false)
             {
                 targetDoor.OpenDoor();
-                targetDoor.MoveCamera();
+                
+
                 //Debug.Log("Door Opened");
             }
             else
@@ -46,7 +65,13 @@ public class DoorTrigger : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             targetDoor.CloseDoor();
+            followPlayerScript.Move(roomCenter);
+            if(amIALargeRoom)
+            {
+                followPlayerScript.doIFollow = !followPlayerScript.doIFollow;
+            }
             //Debug.Log("Door Closed");
+
         }
     }
 }

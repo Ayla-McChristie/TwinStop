@@ -49,8 +49,8 @@ public class TimeManager : MonoBehaviour
     {
         TimeLeft();
         FreezeTime();
-        Debug.Log(Time.timeScale);
-        Debug.Log(isTimeStopped);
+        //Debug.Log(Time.timeScale);
+        //Debug.Log(isTimeStopped);
     }
 
     /*

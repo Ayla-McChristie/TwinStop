@@ -21,11 +21,11 @@ public class Door : MonoBehaviour
         /*
          * adds This door to the door manager on awake. If there is no doorManager, make one -A
          */
-        if (DoorManager.Instance == null)
-        {
-            DoorManager.CreateDoorManager();
-        }
-        DoorManager.Instance.doors.Add(this);
+        //if (DoorManager.Instance == null)
+        //{
+        //    DoorManager.CreateDoorManager();
+        //}
+        //DoorManager.Instance.doors.Add(this);
         Debug.Log("added door to door manager");
     }
     void Start()
@@ -71,15 +71,5 @@ public class Door : MonoBehaviour
     public void LockDoor()
     {
         this.IsLocked = true;
-    }
-
-    /// <summary>
-    /// Pans the camera to the next room by setting the 'focuson' and 'lookat' values
-    /// to the RoomCenter game object of the corresponding room
-    /// </summary>
-    public void MoveCamera()
-    {
-        cam.Follow = roomCenter.transform;
-        cam.LookAt = roomCenter.transform;
     }
 }
