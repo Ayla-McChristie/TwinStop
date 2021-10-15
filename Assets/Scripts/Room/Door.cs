@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Renderer))]
@@ -32,6 +33,8 @@ public class Door : MonoBehaviour
         this.doorCollider = this.gameObject.GetComponent<MeshCollider>();
         this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
+
+        //cam = GameObject.Find("2Dcam");
     }
 
     /*
@@ -68,5 +71,15 @@ public class Door : MonoBehaviour
     public void LockDoor()
     {
         this.IsLocked = true;
+    }
+
+    /// <summary>
+    /// Pans the camera to the next room by setting the 'focuson' and 'lookat' values
+    /// to the RoomCenter game object of the corresponding room
+    /// </summary>
+    public void MoveCamera()
+    {
+        cam.Follow = roomCenter.transform;
+        cam.LookAt = roomCenter.transform;
     }
 }
