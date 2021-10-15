@@ -29,6 +29,7 @@ public class DoorManager : MonoBehaviour
 
     void CheckDoorsInCombat()
     {
+        //Debug.Log("checking if were in combat");
         if (enemyManager.isInCombat == true)
         {
             foreach (Door door in doors)
@@ -47,9 +48,6 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-
-
-
     /*
      * Singleton methods -A
      */
@@ -58,5 +56,6 @@ public class DoorManager : MonoBehaviour
         GameObject dmGameObject = new GameObject("DoorManager");
         dmGameObject.AddComponent<DoorManager>();
         DoorManager._instance = dmGameObject.GetComponent<DoorManager>();
+        _instance.enemyManager = (EnemyManager)GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
     }
 }

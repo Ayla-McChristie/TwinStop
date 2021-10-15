@@ -24,10 +24,11 @@ public class Door : MonoBehaviour
         {
             DoorManager.CreateDoorManager();
         }
+        DoorManager.Instance.doors.Add(this);
+        Debug.Log("added door to door manager");
     }
     void Start()
     {
-        DoorManager.Instance.doors.Add(this);
         this.doorCollider = this.gameObject.GetComponent<MeshCollider>();
         this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
