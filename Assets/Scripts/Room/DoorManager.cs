@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorManager : ScriptableObject
+public class DoorManager : MonoBehaviour
 {
     /*
      * This is all for sigleton pattern. I only want 1 door manager and i want all the doors to check into said door manager -A
@@ -55,7 +55,8 @@ public class DoorManager : ScriptableObject
      */
     public static void CreateDoorManager()
     {
-        DoorManager dm = new DoorManager();
-        _instance = dm;
+        GameObject dmGameObject = new GameObject("DoorManager");
+        dmGameObject.AddComponent<DoorManager>();
+        DoorManager._instance = dmGameObject.GetComponent<DoorManager>();
     }
 }
