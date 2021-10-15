@@ -19,6 +19,9 @@ public class EnemyManager : MonoBehaviour
     public GameObject basicEnemy;
     public ObjectPool_Projectiles o;
 
+    //lets us know if were in combat or not. Should probably be move to the room manager
+    public bool isInCombat;
+    private int numOfEnemiesInCombat;
 
     // Start is called before the first frame update
     void Start()
@@ -51,13 +54,13 @@ public class EnemyManager : MonoBehaviour
          */
         GameObject e = Instantiate(basicEnemy, this.transform);
     }
-
     public void SpawnEnemies(int room)
     {
         foreach (RoomDetail r in roomDetail)
         {
             if (r.roomNum == room)
             {
+                numOfEnemiesInCombat = r.listOfEnemies.Count;
                 for (int i = 0; i < r.listOfEnemies.Count; i++)
                 {
                     GameObject enemy = o.GetProjectile(r.listOfEnemies[i].gameObject.name);
@@ -66,6 +69,17 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-
+        //lets us know combat has started
+        isInCombat = true;
+    }
+    /*
+     * Runs in update and will tell us when combat is over by turning isInCombat to false
+     */
+    void CheckForCombat()
+    {
+        if (numOfEnemiesInCombat <= 0)
+        {
+            isInCombat = false;
+        }
     }
 }
