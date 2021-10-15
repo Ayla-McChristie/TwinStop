@@ -21,8 +21,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void Awake()
     {
-        targetDoor = Door.GetComponent<Door>();
-        
+        targetDoor = Door.GetComponent<Door>();       
     }
 
     private void Start()
@@ -33,7 +32,7 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player") //&& DoorManager.Instance.enemyManager.isInCombat == false)
+        if (other.transform.tag == "Player" && DoorManager.Instance.enemyManager.isInCombat == false) //
         {
             
             if (targetDoor.IsLocked == false)

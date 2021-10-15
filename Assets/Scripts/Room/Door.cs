@@ -21,11 +21,11 @@ public class Door : MonoBehaviour
         /*
          * adds This door to the door manager on awake. If there is no doorManager, make one -A
          */
-        //if (DoorManager.Instance == null)
-        //{
-        //    DoorManager.CreateDoorManager();
-        //}
-        //DoorManager.Instance.doors.Add(this);
+        if (DoorManager.Instance == null)
+        {
+            DoorManager.CreateDoorManager();
+        }
+        DoorManager.Instance.doors.Add(this);
         Debug.Log("added door to door manager");
     }
     void Start()
