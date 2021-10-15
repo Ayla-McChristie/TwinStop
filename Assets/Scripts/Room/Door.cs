@@ -15,7 +15,19 @@ public class Door : MonoBehaviour
     Collider doorCollider;
     Renderer renderer;
 
-    
+    private void Awake()
+    {
+        /*
+         * deletes this game object of one instance of time manager exists already
+         */
+        if (DoorManager.Instance != null && _instance != this)
+        {
+        }
+        else
+        {
+            DoorManager.CreateDoorManager();
+        }
+    }
     void Start()
     {
         this.doorCollider = this.gameObject.GetComponent<Collider>();
