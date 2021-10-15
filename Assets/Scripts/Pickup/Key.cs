@@ -18,7 +18,7 @@ public class Key : MonoBehaviour
             ps.keys++;
 
             /*
-             * technical debt. this should use the object pool system but this will work for now 
+             * technical debt. this should use the object pool system but this will work for now -A
              */
             Destroy(this.gameObject);
         }

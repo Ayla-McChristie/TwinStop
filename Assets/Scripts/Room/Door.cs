@@ -16,23 +16,29 @@ public class Door : MonoBehaviour
     Collider doorCollider;
     Renderer renderer;
 
-    [SerializeField]
-    CinemachineVirtualCamera cam;
-
-    [SerializeField]
-    GameObject roomCenter;
-    
-    
+    private void Awake()
+    {
+        /*
+         * adds This door to the door manager on awake. If there is no doorManager, make one -A
+         */
+        if (DoorManager.Instance == null)
+        {
+            DoorManager.CreateDoorManager();
+        }
+        DoorManager.Instance.doors.Add(this);
+        Debug.Log("added door to door manager");
+    }
     void Start()
     {
-        this.doorCollider = this.gameObject.GetComponent<Collider>();
-        this.renderer = this.gameObject.GetComponent<Renderer>();
+        this.doorCollider = this.gameObject.GetComponent<MeshCollider>();
+        this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
 
         //cam = GameObject.Find("2Dcam");
     }
+
     /*
-     * Used to open the door. turns off the renderer and collider but still allows it to update if need be
+     * Used to open the door. turns off the renderer and collider but still allows it to update if need be -A
      */
     public void OpenDoor()
     {
@@ -44,7 +50,7 @@ public class Door : MonoBehaviour
         }
     }
     /*
-     * Closes the door. doesnt check if the door is locked because open doors are by definition unlocked
+     * Closes the door. doesnt check if the door is locked because open doors are by definition unlocked -A
      */
     public void CloseDoor()
     {
@@ -53,14 +59,14 @@ public class Door : MonoBehaviour
         this.doorCollider.enabled = true;
     }
     /*
-     * Unlocks the door.
+     * Unlocks the door. -A
      */
     public void UnlockDoor()
     {
         this.IsLocked = false;
     }
     /*
-     * Locks the door. Locked doors can only be opened if the player has keys
+     * Locks the door. Locked doors can only be opened if the player has keys -A
      */
     public void LockDoor()
     {

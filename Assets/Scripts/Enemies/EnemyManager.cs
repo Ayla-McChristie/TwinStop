@@ -37,6 +37,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         //TestSpawn();
+        TestInCombat();
     }
 
     void TestSpawn()
@@ -44,6 +45,20 @@ public class EnemyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Spawn();
+        }
+    }
+    /*
+     * this should probably just call a method from the door manager that lets us lock and unlock all the doors
+     */
+    void TestInCombat()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            isInCombat = true;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            isInCombat = false;
         }
     }
 

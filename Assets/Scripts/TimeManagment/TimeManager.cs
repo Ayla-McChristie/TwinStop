@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private bool isTimeStopped = false;
 
     /*
-     * singleton to ensure we only have 1 time manager
+     * singleton to ensure we only have 1 time manager -A
      */
     private static TimeManager _instance;
     public static TimeManager Instance { get { return _instance; } }
@@ -24,7 +24,7 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         /*
-         * deletes this game object of one instance of time manager exists already
+         * deletes this game object of one instance of time manager exists already -A
          */
         if (_instance != null && _instance != this)
         {
@@ -54,7 +54,7 @@ public class TimeManager : MonoBehaviour
     }
 
     /*
-     * this is the method used for the time stop mechanic
+     * this is the method used for the time stop mechanic -A
      */
     void TimeStop()
     {
@@ -93,8 +93,7 @@ public class TimeManager : MonoBehaviour
     }
 
     /*
-     * Method to gradually reset time to 1. 
-     * may need to rename
+     * Method to gradually reset time to 1. may need to rename -A
      */
     void EaseTimeToDefault()
     {
