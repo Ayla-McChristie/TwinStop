@@ -9,12 +9,13 @@ public class DoorManager : MonoBehaviour
      */
     private static DoorManager _instance;
     public static DoorManager Instance { get { return _instance; } }
-
+    [SerializeField]
+    EnemyManager enemyManager;
     /*
      * here is where the non singleton stuff starts -A
      */
 
-    List<Door> doors;
+    public List<Door> doors;
 
     private void Awake()
     {
@@ -23,17 +24,25 @@ public class DoorManager : MonoBehaviour
 
     private void Update()
     {
-        ShutAllDoorsInCombat();
+        CheckDoorsInCombat();
     }
 
-    void ShutAllDoorsInCombat()
+    void CheckDoorsInCombat()
     {
-        if (enemymanager.isInCombat == true)
+        if (enemyManager.isInCombat == true)
         {
             foreach (Door door in doors)
             {
                 DoorTrigger dt = door.GetComponentInChildren<DoorTrigger>();
                 dt.enabled = false;
+            }
+        }
+        else
+        {
+            foreach (Door door in doors)
+            {
+                DoorTrigger dt = door.GetComponentInChildren<DoorTrigger>();
+                dt.enabled = true;
             }
         }
     }

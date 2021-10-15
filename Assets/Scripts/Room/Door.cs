@@ -18,24 +18,23 @@ public class Door : MonoBehaviour
     private void Awake()
     {
         /*
-         * deletes this game object of one instance of time manager exists already
+         * adds This door to the door manager on awake. If there is no doorManager, make one -A
          */
-        if (DoorManager.Instance != null && _instance != this)
-        {
-        }
-        else
+        if (DoorManager.Instance == null)
         {
             DoorManager.CreateDoorManager();
         }
     }
     void Start()
     {
+        DoorManager.Instance.doors.Add(this);
         this.doorCollider = this.gameObject.GetComponent<Collider>();
         this.renderer = this.gameObject.GetComponent<Renderer>();
         IsOpen = false;
     }
+
     /*
-     * Used to open the door. turns off the renderer and collider but still allows it to update if need be
+     * Used to open the door. turns off the renderer and collider but still allows it to update if need be -A
      */
     public void OpenDoor()
     {
@@ -47,7 +46,7 @@ public class Door : MonoBehaviour
         }
     }
     /*
-     * Closes the door. doesnt check if the door is locked because open doors are by definition unlocked
+     * Closes the door. doesnt check if the door is locked because open doors are by definition unlocked -A
      */
     public void CloseDoor()
     {
@@ -56,14 +55,14 @@ public class Door : MonoBehaviour
         this.doorCollider.enabled = true;
     }
     /*
-     * Unlocks the door.
+     * Unlocks the door. -A
      */
     public void UnlockDoor()
     {
         this.IsLocked = false;
     }
     /*
-     * Locks the door. Locked doors can only be opened if the player has keys
+     * Locks the door. Locked doors can only be opened if the player has keys -A
      */
     public void LockDoor()
     {

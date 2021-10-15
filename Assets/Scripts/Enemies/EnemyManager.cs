@@ -20,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     public ObjectPool_Projectiles o;
 
     //lets us know if were in combat or not. Should probably be move to the room manager
+    [HideInInspector]
     public bool isInCombat;
     private int numOfEnemiesInCombat;
 
@@ -37,6 +38,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         //TestSpawn();
+        TestInCombat();
     }
 
     void TestSpawn()
@@ -44,6 +46,20 @@ public class EnemyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Spawn();
+        }
+    }
+    /*
+     * this should probably just call a method from the door manager that lets us lock and unlock all the doors
+     */
+    void TestInCombat()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            isInCombat = true;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            isInCombat = false;
         }
     }
 
