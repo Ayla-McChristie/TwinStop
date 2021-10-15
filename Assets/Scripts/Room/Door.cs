@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Renderer))]
@@ -15,12 +16,20 @@ public class Door : MonoBehaviour
     Collider doorCollider;
     Renderer renderer;
 
+    [SerializeField]
+    CinemachineVirtualCamera cam;
+
+    [SerializeField]
+    GameObject roomCenter;
+    
     
     void Start()
     {
         this.doorCollider = this.gameObject.GetComponent<Collider>();
         this.renderer = this.gameObject.GetComponent<Renderer>();
         IsOpen = false;
+
+        //cam = GameObject.Find("2Dcam");
     }
     /*
      * Used to open the door. turns off the renderer and collider but still allows it to update if need be
@@ -56,5 +65,15 @@ public class Door : MonoBehaviour
     public void LockDoor()
     {
         this.IsLocked = true;
+    }
+
+    /// <summary>
+    /// Pans the camera to the next room by setting the 'focuson' and 'lookat' values
+    /// to the RoomCenter game object of the corresponding room
+    /// </summary>
+    public void MoveCamera()
+    {
+        cam.Follow = roomCenter.transform;
+        cam.LookAt = roomCenter.transform;
     }
 }

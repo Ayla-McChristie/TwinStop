@@ -21,6 +21,7 @@ public class DoorTrigger : MonoBehaviour
             if (targetDoor.IsLocked == false)
             {
                 targetDoor.OpenDoor();
+                targetDoor.MoveCamera();
                 //Debug.Log("Door Opened");
             }
             else
