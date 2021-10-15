@@ -10,7 +10,7 @@ public class DoorManager : MonoBehaviour
     private static DoorManager _instance;
     public static DoorManager Instance { get { return _instance; } }
     [SerializeField]
-    EnemyManager enemyManager;
+    public EnemyManager enemyManager;
     /*
      * here is where the non singleton stuff starts -A
      */
@@ -21,33 +21,6 @@ public class DoorManager : MonoBehaviour
     {
         doors = new List<Door>();
     }
-
-    private void Update()
-    {
-        CheckDoorsInCombat();
-    }
-
-    void CheckDoorsInCombat()
-    {
-        //Debug.Log("checking if were in combat");
-        if (enemyManager.isInCombat == true)
-        {
-            foreach (Door door in doors)
-            {
-                DoorTrigger dt = door.GetComponentInChildren<DoorTrigger>();
-                dt.enabled = false;
-            }
-        }
-        else
-        {
-            foreach (Door door in doors)
-            {
-                DoorTrigger dt = door.GetComponentInChildren<DoorTrigger>();
-                dt.enabled = true;
-            }
-        }
-    }
-
     /*
      * Singleton methods -A
      */
