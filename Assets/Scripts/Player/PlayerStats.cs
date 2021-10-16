@@ -51,7 +51,15 @@ class PlayerStats : MonoBehaviour
     // TODO add code for projectiles
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Projectiles") // || other.gameObject.tag == "Projectiles"? 
+        if (other.gameObject.tag == "Enemy")
+        {
+            health--;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "EnemyBullet")
         {
             health--;
         }
