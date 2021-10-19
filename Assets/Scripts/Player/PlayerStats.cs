@@ -46,6 +46,11 @@ class PlayerStats : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+
+        if (health == 0)
+        {
+            PlayerDead();
+        }
     }
 
     // TODO add code for projectiles
@@ -63,5 +68,10 @@ class PlayerStats : MonoBehaviour
         {
             health--;
         }
+    }
+
+    void PlayerDead()
+    {
+        FindObjectOfType<SceneManagement>().LoadCurrentLevel();
     }
 }
