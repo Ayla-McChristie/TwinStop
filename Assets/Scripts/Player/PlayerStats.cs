@@ -47,7 +47,7 @@ class PlayerStats : MonoBehaviour
             }
         }
 
-        if (health == 0)
+        if (health <= 0)
         {
             PlayerDead();
         }
