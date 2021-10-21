@@ -50,6 +50,25 @@ public class Projectile : MonoBehaviour
             Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        //player bullet vs enemy
+        if (projectileUser == "Player" && collision.transform.tag == "Enemy")
+        {
+            opP.DeactivateProjectile(this.gameObject);
+            Destroy(collision.gameObject);
+        }
 
-    
+        //enemy bullet vs player
+        if (projectileUser == "Enemy" && collision.transform.tag == "Player")
+        {
+            opP.DeactivateProjectile(this.gameObject);
+        }
+
+        if (collision.transform.tag == "Obsticale")
+        {
+            opP.DeactivateProjectile(this.gameObject);
+        }
+
+    }
 }
