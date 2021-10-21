@@ -51,25 +51,5 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (projectileUser == "Player")
-        {
-            if (other.transform.tag == "Enemy")
-            {
-                /*
-                 * technical debt. make enemies use object pool
-                 */
-                Destroy(other.gameObject);
-            }
-        }
-        else if (projectileUser == "Enemy")
-        {
-            if (other.transform.tag == "Player")
-            {
-                //Deal damage script here
-            }
-        }
-        opP.DeactivateProjectile(this.gameObject);
-    }
+    
 }
