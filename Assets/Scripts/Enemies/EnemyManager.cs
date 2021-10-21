@@ -37,7 +37,8 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         //TestSpawn();
-        TestInCombat();
+        //TestInCombat();
+        CheckForCombat();
     }
 
     void TestSpawn()
