@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    private static EnemyManager _instance;
+    public static EnemyManager Instance { get { return _instance; } }
+
     [System.Serializable]
     public class RoomDetail
     {
@@ -23,6 +26,17 @@ public class EnemyManager : MonoBehaviour
     public bool isInCombat;
     private int numOfEnemiesInCombat;
 
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -48,28 +62,15 @@ public class EnemyManager : MonoBehaviour
             Spawn();
         }
     }
-    /*
-     * this should probably just call a method from the door manager that lets us lock and unlock all the doors
-     */
-    void TestInCombat()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            isInCombat = true;
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            isInCombat = false;
-        }
-    }
 
-    protected void Spawn()
+    public void Spawn()
     {
         /*
          * TODO Pull from object pool instead of making new entities
          */
         GameObject e = Instantiate(basicEnemy, this.transform);
     }
+
     public void SpawnEnemies(int room)
     {
         foreach (RoomDetail r in roomDetail)
@@ -94,6 +95,21 @@ public class EnemyManager : MonoBehaviour
     void CheckForCombat()
     {
         if (numOfEnemiesInCombat <= 0)
+        {
+            isInCombat = false;
+        }
+    }
+
+    /*
+     * this should probably just call a method from the door manager that lets us lock and unlock all the doors
+     */
+    void TestInCombat()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            isInCombat = true;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
         {
             isInCombat = false;
         }
