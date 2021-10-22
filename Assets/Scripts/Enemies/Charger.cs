@@ -65,21 +65,21 @@ public class Charger : Enemy
     void Attack()
     {
         //Temporary
-        if(scaledUp)
-        {
-            this.transform.localScale -= new Vector3(0.7f, 0.7f, 0.7f) * Time.deltaTime;
-            if (this.transform.localScale.magnitude <= (new Vector3(1f, 1f, 1f).magnitude))
-            {
-                scaledUp = false;
-                state = State.Charge;
-            }
-        }
-        else if(!scaledUp)
-        {
-            this.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f) * Time.deltaTime;
-            if(this.transform.localScale.magnitude > (new Vector3(1.5f, 1.5f, 1.5f).magnitude))
-                scaledUp = true;
-        }
+        //if(scaledUp)
+        //{
+        //    this.transform.localScale -= new Vector3(0.7f, 0.7f, 0.7f) * Time.deltaTime;
+        //    if (this.transform.localScale.magnitude <= (new Vector3(1f, 1f, 1f).magnitude))
+        //    {
+        //        scaledUp = false;
+        //        state = State.Charge;
+        //    }
+        //}
+        //else if(!scaledUp)
+        //{
+        //    this.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f) * Time.deltaTime;
+        //    if(this.transform.localScale.magnitude > (new Vector3(1.5f, 1.5f, 1.5f).magnitude))
+        //        scaledUp = true;
+        //}
     }
     
     public void DamageTaken(float damage)

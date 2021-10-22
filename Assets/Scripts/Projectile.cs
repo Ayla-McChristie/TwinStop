@@ -66,7 +66,7 @@ public class Projectile : MonoBehaviour
             opP.DeactivateProjectile(this.gameObject);
         }
 
-        if (collision.transform.tag == "Obsticale")
+        if (collision.transform.tag == "Obstacle")
         {
             opP.DeactivateProjectile(this.gameObject);
         }

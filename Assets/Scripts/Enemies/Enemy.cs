@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         this.transform.LookAt(target.transform);
     }
 
-    void TakeDamage(float damageAmmount)
+    protected void TakeDamage(float damageAmmount)
     {
         this.Health -= damageAmmount;
     }

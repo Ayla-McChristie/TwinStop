@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         this.playerRigidbody = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
