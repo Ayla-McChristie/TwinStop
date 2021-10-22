@@ -18,14 +18,7 @@ public class RoomTrigger : MonoBehaviour
     EnemyManager em;
 
     int waveNum;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    bool hasStarted = false;
 
     // Update is called once per frame
     void Update()
@@ -35,9 +28,10 @@ public class RoomTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" && !hasStarted)
         {
             Debug.Log("player has entered a room");
+            hasStarted = true;
             /*
             * Start wave spawn 
             */
@@ -47,6 +41,7 @@ public class RoomTrigger : MonoBehaviour
                 var temp = item.GetComponent<RoomSpawnPoint>();
                 em.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
             }
+            waveNum++;
         }
     }
 }
