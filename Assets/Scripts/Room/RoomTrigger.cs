@@ -35,6 +35,7 @@ public class RoomTrigger : MonoBehaviour
         }
         if (waveNum < totalWaves && EnemyManager.Instance.isInCombat == false && hasStarted) 
         {
+            PlayerStats.ResetKillCount();
             SpawnNextWave();
         }
     }
