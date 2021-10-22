@@ -40,6 +40,8 @@ public class Sentinel : Enemy
         projectileStart = this.gameObject.transform.GetChild(0).gameObject;
         state = State.Attacking;
         this.Health = health;
+        this.Speed = speed;
+        this.Damage = damage;
         base.Start();
     }
 
@@ -53,7 +55,7 @@ public class Sentinel : Enemy
         else if (CanSeeTarget())
             state = State.Attacking;
 
-        LookAtTarget();
+        Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
         switch (state)
         {
             case State.Attacking:
@@ -155,17 +157,6 @@ public class Sentinel : Enemy
         return Vector3.zero;
     }
 
-    void GetNewDestination()
-    {
-        moveDir = new Vector3(Random.Range(target.transform.position.x - moveRange, target.transform.position.x + moveRange), this.transform.position.y, Random.Range(target.transform.position.z - moveRange, target.transform.position.z + moveRange));
-        waitToMove = true;
-    }
-
-    void LookAtTarget() //Always facing the player
-    {
-        transform.LookAt(target.transform);
-    }
-
     bool CanSeeTarget()
     {
         Debug.Log(target);
@@ -181,8 +172,7 @@ public class Sentinel : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Obstacle")
-            GetNewDestination();
+
 
         base.OnCollisionEnter(collision);   
     }
