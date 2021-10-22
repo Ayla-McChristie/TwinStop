@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class TimeManager : MonoBehaviour
 {
     [SerializeField]
@@ -9,6 +10,15 @@ public class TimeManager : MonoBehaviour
     public float timeSpeedUpRate = .5f;
     [SerializeField]
     public float timeStopLength = 4;
+     
+    //The timer variable for the time stop
+    float timeValue;
+
+    //Keeps track of when the timer times out, turns true when the timer runs out and false after
+    //the cooldown
+    bool outtaTime;
+
+   
 
     public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
@@ -34,6 +44,7 @@ public class TimeManager : MonoBehaviour
         {
             _instance = this;
         }
+
     }
 
     // Start is called before the first frame update
@@ -41,6 +52,8 @@ public class TimeManager : MonoBehaviour
     {
         defaultTimeScale = Time.timeScale;
         defaultFixedDeltaTime = Time.fixedDeltaTime;
+        timeValue = 10;
+        outtaTime = false;
         
     }
 
@@ -59,14 +72,18 @@ public class TimeManager : MonoBehaviour
      */
     void TimeStop()
     {
-        Debug.Log("Time has been stopped");
-        Time.timeScale = .1f;
+        //Debug.Log("Time has been stopped");
+        if (Time.timeScale > .1f && !outtaTime)
+        {
+            Debug.Log("AYEAH");
+            Time.timeScale -= .006f;
+        }
         
     }
 
     void FreezeTime()
     {
-        if (Input.GetKey(KeyCode.LeftShift) )
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             TimeStop();
             isTimeStopped = true;
@@ -93,6 +110,19 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Increments the timer for the time stop, decreasing while time stop is active and
+    /// rrefilling it when it's not
+    /// </summary>
+    void Timer()
+    {
+        if (isTimeStopped)
+        {
+            timeValue -= Time.deltaTime;
+            Debug.Log(timeValue);
+        }
+    }
+
     /*
      * Method to gradually reset time to 1. may need to rename -A
      */
@@ -108,7 +138,7 @@ public class TimeManager : MonoBehaviour
         // original code do not delete!
         if (Time.timeScale < 1f)
         {
-            Debug.Log("Time has started to revert back");
+            //Debug.Log("Time has started to revert back");
             Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
