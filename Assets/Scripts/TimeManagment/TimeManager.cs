@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
@@ -10,9 +11,16 @@ public class TimeManager : MonoBehaviour
     public float timeSpeedUpRate = .5f;
     [SerializeField]
     public float timeStopLength = 4;
+
+    //REMOVE LATER - Just for showing off new Timestop
+    [SerializeField]
+    public Image timeStopReadyIndicator;
      
     //The timer variable for the time stop
     float timeValue;
+
+    //The cooldown timer variable
+    float coolDownValue;
 
     //Keeps track of when the timer times out, turns true when the timer runs out and false after
     //the cooldown
@@ -52,7 +60,9 @@ public class TimeManager : MonoBehaviour
     {
         defaultTimeScale = Time.timeScale;
         defaultFixedDeltaTime = Time.fixedDeltaTime;
-        timeValue = 10;
+        timeValue = 4f; //This will (hopefully) give the player 4 seconds total of meter
+        coolDownValue = 4f;
+
         outtaTime = false;
         
     }
@@ -60,11 +70,56 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(timeValue);
+        Debug.Log(coolDownValue);
+        //Debug.Log(isTimeStopped);
         //TimeLeft();
         FreezeTime();
+
+        Cooldown();
+
         EaseTimeToDefault();
+
+        //Cooldown();
+        
+        Timer();
+        AmIOuttaTime();
         //Debug.Log(Time.timeScale);
         //Debug.Log(isTimeStopped);
+
+        //REMOVE LATER -just for demonstration purposes -Ryan
+        if(outtaTime)
+        {
+            timeStopReadyIndicator.gameObject.SetActive(false);
+        }
+        else
+        {
+            timeStopReadyIndicator.gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Checks on update whether or not the player has time meter left
+    /// </summary>
+    void AmIOuttaTime()
+    {
+        if (timeValue <= 0)
+        {
+            if (!outtaTime)
+            {
+                coolDownValue = 0;
+            }
+            outtaTime = true;
+
+        }
+        if (coolDownValue >= 4f)
+        {
+            if (outtaTime)
+            {
+                timeValue = 4f;
+            }
+            outtaTime = false;
+        }
     }
 
     /*
@@ -73,12 +128,24 @@ public class TimeManager : MonoBehaviour
     void TimeStop()
     {
         //Debug.Log("Time has been stopped");
-        if (Time.timeScale > .1f && !outtaTime)
+        if (!outtaTime && Time.timeScale > .1f)
         {
-            Debug.Log("AYEAH");
+            //Debug.Log("AYEAH");
+            isTimeStopped = true;
             Time.timeScale -= .006f;
         }
         
+    }
+
+    /// <summary>
+    /// Adds to the cool down
+    /// </summary>
+    void Cooldown()
+    {
+        if (coolDownValue < 4f && outtaTime)
+        {
+            coolDownValue += Time.unscaledDeltaTime;
+        }
     }
 
     void FreezeTime()
@@ -86,8 +153,17 @@ public class TimeManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             TimeStop();
-            isTimeStopped = true;
+            
         }
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            //TimeStop();
+            isTimeStopped = false;
+        }
+        //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
+        //{
+        //    isTimeStopped = false;
+        //}
 
         //// code to undo the time pause if activated
         //if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
@@ -112,15 +188,22 @@ public class TimeManager : MonoBehaviour
 
     /// <summary>
     /// Increments the timer for the time stop, decreasing while time stop is active and
-    /// rrefilling it when it's not
+    /// refilling it when it's not
     /// </summary>
     void Timer()
     {
-        if (isTimeStopped)
+        if (isTimeStopped && !outtaTime)
         {
-            timeValue -= Time.deltaTime;
-            Debug.Log(timeValue);
+            timeValue -= Time.unscaledDeltaTime;
+            
         }
+        //else
+        //{
+        //    if (timeValue <= 0 && timeValue < .4f)
+        //    {
+        //        timeValue += Time.deltaTime;
+        //    }
+        //}
     }
 
     /*
@@ -139,8 +222,8 @@ public class TimeManager : MonoBehaviour
         if (Time.timeScale < 1f)
         {
             //Debug.Log("Time has started to revert back");
-            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
+            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime ;
+            Time.fixedDeltaTime = Time.timeScale * .02f * timeSpeedUpRate;
         }
 
         // testing code
