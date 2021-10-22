@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomSpawnPoint : MonoBehaviour
 {
     [SerializeField]
-    List<WaveListWrapper> listOfWaves;
+    public List<WaveListWrapper> listOfWaves;
 
     //this is because unity doesnt serialized nested lists without it
     [System.Serializable]
@@ -16,16 +16,6 @@ public class RoomSpawnPoint : MonoBehaviour
 
     private void Start()
     {
-        List<WaveListWrapper> listOfWaves = new List<WaveListWrapper>();
-    }
-
-    public void SpawnWave(int i)
-    {
-        foreach (GameObject go in listOfWaves[i].WaveList)
-        {
-            /*
-             * spawn that thing
-             */
-        }
+        //List<WaveListWrapper> listOfWaves = new List<WaveListWrapper>();
     }
 }

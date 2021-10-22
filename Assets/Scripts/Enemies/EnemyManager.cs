@@ -89,11 +89,26 @@ public class EnemyManager : MonoBehaviour
         //lets us know combat has started
         isInCombat = true;
     }
+    public void SpawnEnemies(List<GameObject> listOfEnemies, Transform spawnPoint)
+    {
+        numOfEnemiesInCombat += listOfEnemies.Count;
+        Debug.Log($"spawning {listOfEnemies.Count} enemies");
+        foreach (var go in listOfEnemies)
+        {
+            /*
+             * rn we create new enemies but i need to make it use object pool
+             */
+            GameObject e = Instantiate(go, spawnPoint);
+
+        }
+        isInCombat = true;
+    }
     /*
      * Runs in update and will tell us when combat is over by turning isInCombat to false
      */
     void CheckForCombat()
     {
+        Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
         if (numOfEnemiesInCombat <= 0)
         {
             isInCombat = false;

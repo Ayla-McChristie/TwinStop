@@ -12,15 +12,19 @@ public class RoomTrigger : MonoBehaviour
     }
 
     [SerializeField]
-    List<GameObject> spawnpoints;
+    List<GameObject> spawnPoints;
+    //enemy manager should make itself
+    [SerializeField]
+    EnemyManager em;
 
     int waveNum;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,8 +35,18 @@ public class RoomTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*
-         * Start wave spawn 
-         */
+        if (other.transform.tag == "Player")
+        {
+            Debug.Log("player has entered a room");
+            /*
+            * Start wave spawn 
+            */
+            foreach (var item in spawnPoints)
+            {
+                Debug.Log("Spawning enemies");
+                var temp = item.GetComponent<RoomSpawnPoint>();
+                em.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+            }
+        }
     }
 }
