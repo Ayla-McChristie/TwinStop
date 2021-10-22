@@ -57,6 +57,7 @@ public class Projectile : MonoBehaviour
         {
             opP.DeactivateProjectile(this.gameObject);
             Destroy(collision.gameObject);
+            PlayerStats.AddToKillCount();
         }
 
         //enemy bullet vs player

@@ -47,8 +47,9 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeLeft();
+        //TimeLeft();
         FreezeTime();
+        EaseTimeToDefault();
         //Debug.Log(Time.timeScale);
         //Debug.Log(isTimeStopped);
     }
@@ -65,18 +66,18 @@ public class TimeManager : MonoBehaviour
 
     void FreezeTime()
     {
-        if (Input.GetKeyDown(KeyCode.L) && timeTillLength > 0)
+        if (Input.GetKey(KeyCode.LeftShift) )
         {
             TimeStop();
             isTimeStopped = true;
         }
 
-        // code to undo the time pause if activated
-        if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
-        {
-            isTimeStopped = false;
-            EaseTimeToDefault();
-        }
+        //// code to undo the time pause if activated
+        //if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
+        //{
+        //    isTimeStopped = false;
+        //    EaseTimeToDefault();
+        //}
     }
 
     void TimeLeft()
@@ -97,20 +98,20 @@ public class TimeManager : MonoBehaviour
      */
     void EaseTimeToDefault()
     {
-        while (Time.timeScale < 1f)
+        //while (Time.timeScale < 1f)
+        //{
+        //    Debug.Log("Time has started to revert back");
+        //    Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
+        //    Time.fixedDeltaTime = Time.timeScale * .02f;
+        //}
+
+        // original code do not delete!
+        if (Time.timeScale < 1f)
         {
             Debug.Log("Time has started to revert back");
             Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
-
-        // original code do not delete!
-        /*if (Time.timeScale < 1f)
-        {
-            Debug.Log("Time has started to revert back");
-            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-        }*/
 
         // testing code
         /*for (int i = 0; i < 1f; i++)
@@ -125,6 +126,6 @@ public class TimeManager : MonoBehaviour
             Debug.Log("Time is back to normal");
         }*/
 
-        
+
     }
 }

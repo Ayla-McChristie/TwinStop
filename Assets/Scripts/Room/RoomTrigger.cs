@@ -12,27 +12,70 @@ public class RoomTrigger : MonoBehaviour
     }
 
     [SerializeField]
-    List<GameObject> spawnpoints;
+    List<GameObject> spawnPoints;
+    //enemy manager should make itself
 
     int waveNum;
+    int totalWaves;
+    bool hasStarted = false;
 
+    private bool noMoreWaves;
+    public static bool NoMoreWaves { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        totalWaves = GetTotalWaves();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (waveNum < totalWaves && EnemyManager.Instance.isInCombat == false && hasStarted) 
+        {
+            SpawnNextWave();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        /*
-         * Start wave spawn 
-         */
+        if (other.transform.tag == "Player" && !hasStarted)
+        {
+            Debug.Log("player has entered a room");
+            PlayerStats.ResetKillCount();
+
+            hasStarted = true;
+            NoMoreWaves = false;
+            /*
+            * Start wave spawn 
+            */
+        }
+    }
+
+    void SpawnNextWave()
+    {
+        foreach (var item in spawnPoints)
+        {
+            Debug.Log("Spawning enemies");
+            var temp = item.GetComponent<RoomSpawnPoint>();
+            EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+        }
+        waveNum++;
+    }
+
+    int GetTotalWaves()
+    {
+        int highestWaveCount = 0;
+        foreach (var spawnPoint in spawnPoints)
+        {
+            int waveCount = 0;
+            foreach (var wave in spawnPoint.GetComponent<RoomSpawnPoint>().listOfWaves)
+            {
+                waveCount++;
+            }
+
+            if (waveCount > highestWaveCount)
+            {
+                highestWaveCount = waveCount;
+            }
+        }
+        return highestWaveCount;
     }
 }
