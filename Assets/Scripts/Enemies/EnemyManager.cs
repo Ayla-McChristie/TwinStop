@@ -92,7 +92,7 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemies(List<GameObject> listOfEnemies, Transform spawnPoint)
     {
         numOfEnemiesInCombat += listOfEnemies.Count;
-        Debug.Log($"spawning {listOfEnemies.Count} enemies");
+        //Debug.Log($"spawning {listOfEnemies.Count} enemies");
         foreach (var go in listOfEnemies)
         {
             /*
@@ -108,7 +108,7 @@ public class EnemyManager : MonoBehaviour
      */
     void CheckForCombat()
     {
-        Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
+        //Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
         if (numOfEnemiesInCombat <= 0)
         {
             isInCombat = false;
