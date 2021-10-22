@@ -14,19 +14,24 @@ public class RoomTrigger : MonoBehaviour
     [SerializeField]
     List<GameObject> spawnPoints;
     //enemy manager should make itself
-    [SerializeField]
-    EnemyManager em;
 
     int waveNum;
     int totalWaves;
     bool hasStarted = false;
 
     private bool noMoreWaves;
-    public bool NoMoreWaves { get; private set; }
+    public static bool NoMoreWaves { get; private set; }
 
     private void Start()
     {
         totalWaves = GetTotalWaves();
+    }
+    private void Update()
+    {
+        if (waveNum < totalWaves && EnemyManager.Instance.isInCombat == false && hasStarted) 
+        {
+            SpawnNextWave();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,17 +42,22 @@ public class RoomTrigger : MonoBehaviour
             PlayerStats.ResetKillCount();
 
             hasStarted = true;
+            NoMoreWaves = false;
             /*
             * Start wave spawn 
             */
-            foreach (var item in spawnPoints)
-            {
-                Debug.Log("Spawning enemies");
-                var temp = item.GetComponent<RoomSpawnPoint>();
-                em.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
-            }
-            waveNum++;
         }
+    }
+
+    void SpawnNextWave()
+    {
+        foreach (var item in spawnPoints)
+        {
+            Debug.Log("Spawning enemies");
+            var temp = item.GetComponent<RoomSpawnPoint>();
+            EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+        }
+        waveNum++;
     }
 
     int GetTotalWaves()
