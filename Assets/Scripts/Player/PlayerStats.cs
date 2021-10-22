@@ -59,12 +59,13 @@ class PlayerStats : MonoBehaviour
 
     public static void ResetKillCount()
     {
-        numOfKilledEnemies = 0;
+        NumOfKilledEnemies = 0;
     }
 
     public static void AddToKillCount()
     {
-        numOfKilledEnemies++;
+        NumOfKilledEnemies++;
+        Debug.Log(NumOfKilledEnemies);
     }
 
     // TODO add code for projectiles
