@@ -6,13 +6,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerMovement))]
 class PlayerStats : MonoBehaviour
 {
+    private static int numOfKilledEnemies;
+    public static int NumOfKilledEnemies { get; private set; }
+
     public int health; // Total amount of health left
     public int numOfHearts; // Max amount of hearts a player can have, should be 3
 
     public int keys; //number of keys the player has -A
     public int bossKeys; //number of bossKeys the player has -A
 
-    public int numOfKilledEnemies;
 
     public Image[] hearts; // all heart UI game objects go here
     public Sprite fullHeart; // sprite of full heart here
@@ -55,10 +57,20 @@ class PlayerStats : MonoBehaviour
         }
     }
 
+    public static void ResetKillCount()
+    {
+        numOfKilledEnemies = 0;
+    }
+
+    public static void AddToKillCount()
+    {
+        numOfKilledEnemies++;
+    }
+
     // TODO add code for projectiles
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyBullet")
         {
             health--;
         }

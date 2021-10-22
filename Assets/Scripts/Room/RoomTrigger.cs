@@ -17,14 +17,16 @@ public class RoomTrigger : MonoBehaviour
     [SerializeField]
     EnemyManager em;
 
-    PlayerStats player;
-
     int waveNum;
+    int totalWaves;
     bool hasStarted = false;
+
+    private bool noMoreWaves;
+    public bool NoMoreWaves { get; private set; }
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        totalWaves = GetTotalWaves();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +34,8 @@ public class RoomTrigger : MonoBehaviour
         if (other.transform.tag == "Player" && !hasStarted)
         {
             Debug.Log("player has entered a room");
-            player.numOfKilledEnemies = 0;
+            PlayerStats.ResetKillCount();
+
             hasStarted = true;
             /*
             * Start wave spawn 
@@ -45,5 +48,24 @@ public class RoomTrigger : MonoBehaviour
             }
             waveNum++;
         }
+    }
+
+    int GetTotalWaves()
+    {
+        int highestWaveCount = 0;
+        foreach (var spawnPoint in spawnPoints)
+        {
+            int waveCount = 0;
+            foreach (var wave in spawnPoint.GetComponent<RoomSpawnPoint>().listOfWaves)
+            {
+                waveCount++;
+            }
+
+            if (waveCount > highestWaveCount)
+            {
+                highestWaveCount = waveCount;
+            }
+        }
+        return highestWaveCount;
     }
 }
