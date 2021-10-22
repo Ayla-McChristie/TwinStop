@@ -25,9 +25,14 @@ public class RoomTrigger : MonoBehaviour
     private void Start()
     {
         totalWaves = GetTotalWaves();
+        Debug.Log($"total waves is {totalWaves}");
     }
     private void Update()
     {
+        if (waveNum >= totalWaves)
+        {
+            noMoreWaves = true;
+        }
         if (waveNum < totalWaves && EnemyManager.Instance.isInCombat == false && hasStarted) 
         {
             SpawnNextWave();

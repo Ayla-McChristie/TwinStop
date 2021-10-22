@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     #region Serialized Variables
     [SerializeField]
-    [Range(5f, 10f)]
+    [Range(5f, 30f)]
     float b_Speed = 10; //Bullet's Speed
     #endregion
     Vector3 direction;

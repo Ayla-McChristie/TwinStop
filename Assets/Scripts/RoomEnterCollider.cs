@@ -15,7 +15,7 @@ public class RoomEnterCollider : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            em.GetComponent<EnemyManager>().SpawnEnemies(0);
+            //em.GetComponent<EnemyManager>().SpawnEnemies(0);
         }
     }
 }

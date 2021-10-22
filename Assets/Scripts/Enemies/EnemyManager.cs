@@ -101,6 +101,7 @@ public class EnemyManager : MonoBehaviour
             GameObject e = Instantiate(go, spawnPoint);
 
         }
+        Debug.Log($"num of enemies in combat {numOfEnemiesInCombat}");
         isInCombat = true;
     }
     /*
@@ -109,7 +110,7 @@ public class EnemyManager : MonoBehaviour
     void CheckForCombat()
     {
         //Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
-        if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies && RoomTrigger.NoMoreWaves == true)
+        if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies)
         {
             isInCombat = false;
         }
