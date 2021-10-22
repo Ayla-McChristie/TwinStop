@@ -17,13 +17,14 @@ public class RoomTrigger : MonoBehaviour
     [SerializeField]
     EnemyManager em;
 
+    PlayerStats player;
+
     int waveNum;
     bool hasStarted = false;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,6 +32,7 @@ public class RoomTrigger : MonoBehaviour
         if (other.transform.tag == "Player" && !hasStarted)
         {
             Debug.Log("player has entered a room");
+            player.numOfKilledEnemies = 0;
             hasStarted = true;
             /*
             * Start wave spawn 

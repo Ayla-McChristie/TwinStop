@@ -12,6 +12,8 @@ class PlayerStats : MonoBehaviour
     public int keys; //number of keys the player has -A
     public int bossKeys; //number of bossKeys the player has -A
 
+    public int numOfKilledEnemies;
+
     public Image[] hearts; // all heart UI game objects go here
     public Sprite fullHeart; // sprite of full heart here
     public Sprite emptyHeart; // sprite of empty heart here
