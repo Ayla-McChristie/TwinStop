@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4520183046411284969}
   - component: {fileID: 4520183046411284974}
   - component: {fileID: 4520183046411284975}
+  - component: {fileID: 2315285332575327043}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Obstacle
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2338
+  m_VersionIndex: 2341
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -337,8 +338,21 @@ MeshCollider:
   m_GameObject: {fileID: 4520183046411284972}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &2315285332575327043
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4520183046411284972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0973415, y: 4.8605757, z: 1.9501033}
+  m_Center: {x: 1.1099691, y: 0, z: 1.1425798}

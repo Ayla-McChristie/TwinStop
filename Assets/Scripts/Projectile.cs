@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
     #region Serialized Variables
@@ -12,11 +13,14 @@ public class Projectile : MonoBehaviour
     #endregion
     Vector3 direction;
     string projectileUser;
+    Rigidbody rb;
+
     ObjectPool_Projectiles opP;
 
     void Start()
     {
         opP = new ObjectPool_Projectiles();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void SetUp(Vector3 direction, Vector3 position, string projectileUser)
@@ -43,7 +47,7 @@ public class Projectile : MonoBehaviour
         {
             //use unscaled delta time if unaffected by time stop
             //use delta time if affected by time stop
-            transform.position += direction * b_Speed * Time.deltaTime;
+            rb.velocity = direction * b_Speed;
         }
         else
         {

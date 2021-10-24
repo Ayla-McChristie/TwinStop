@@ -51,18 +51,11 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
-        mousePos = Input.mousePosition;
-         
-        mousePos.z = Vector3.Distance(Camera.main.transform.position, player.transform.position); //The distance between the camera and object
-        Vector3 objectPos = Camera.main.WorldToScreenPoint(player.transform.position);
-        mousePos.x -= player.transform.position.x;
-        mousePos.y -= player.transform.position.y;
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        //direction = GetMousePos() - player.transform.position;
-        //transform.forward = direction;
-        //player.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        direction = GetMousePos() - player.transform.position;
+        direction.y = 0;
+        transform.forward = direction;
+        
 
 
         //Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -86,17 +79,13 @@ public class GunControl : MonoBehaviour
 
     Vector3 GetMousePos()
     {
-        mousePos = Input.mousePosition;
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, player.transform.position.y));
-
-        return mouseWorld;
-        //var ray = cam.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
-        //{
-        //    return hitInfo.point;
-        //}
-        //else
-        //    return Vector3.zero;
+        var ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
+        {
+            return hitInfo.point;
+        }
+        else
+            return Vector3.zero;
     }
 
     void Shoot()
