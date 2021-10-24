@@ -10,9 +10,6 @@ public class SceneManagement : MonoBehaviour
 
     private void Awake()
     {
-        /*
-         * deletes this game object of one instance of time manager exists already -A
-         */
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
