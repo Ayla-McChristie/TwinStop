@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class Projectile : MonoBehaviour
 {
     #region Serialized Variables
@@ -40,11 +41,13 @@ public class Projectile : MonoBehaviour
     {
         if (projectileUser == "Player")
         {
-            transform.position += direction * b_Speed * Time.unscaledDeltaTime;
+            //use unscaled delta time if unaffected by time stop
+            //use delta time if affected by time stop
+            transform.position += direction * b_Speed * Time.deltaTime;
         }
         else
         {
-            transform.position += direction * b_Speed * Time.unscaledDeltaTime;
+            transform.position += direction * b_Speed * Time.deltaTime;
         }
 
         IgnoreProjectiles();
@@ -63,7 +66,6 @@ public class Projectile : MonoBehaviour
         //player bullet vs enemy
         if (projectileUser == "Player" && collision.transform.tag == "Enemy")
         {
-            opP.DeactivateProjectile(this.gameObject);
             Destroy(collision.gameObject);
             PlayerStats.AddToKillCount();
         }
@@ -71,9 +73,8 @@ public class Projectile : MonoBehaviour
         //enemy bullet vs player
         if (projectileUser == "Enemy" && collision.transform.tag == "Player")
         {
-            opP.DeactivateProjectile(this.gameObject);
+            //deal damage to player
         }
-
         opP.DeactivateProjectile(this.gameObject);
     }
 }

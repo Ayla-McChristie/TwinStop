@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField]
-    public float timeSlowDownRate = .5f;
+    private float timeSlowDownRate = .5f;
     [SerializeField]
-    public float timeSpeedUpRate = .5f;
+    private float timeSpeedUpRate = .5f;
     [SerializeField]
-    public float timeStopLength = 4;
+    private float timeStopLength = 4;
+    [SerializeField]
+    private float timeStopTimeScale = .1f;
+    [SerializeField]
+    private float MaxTimeValue = 4f;
 
     //REMOVE LATER - Just for showing off new Timestop
     [SerializeField]
@@ -28,7 +32,7 @@ public class TimeManager : MonoBehaviour
 
    
 
-    public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
+    //public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
     private float defaultFixedDeltaTime;
     [SerializeField] private bool isTimeStopped = false;
@@ -60,8 +64,8 @@ public class TimeManager : MonoBehaviour
     {
         defaultTimeScale = Time.timeScale;
         defaultFixedDeltaTime = Time.fixedDeltaTime;
-        timeValue = 4f; //This will (hopefully) give the player 4 seconds total of meter
-        coolDownValue = 4f;
+        timeValue = MaxTimeValue; //This will (hopefully) give the player 4 seconds total of meter
+        coolDownValue = MaxTimeValue;
 
         outtaTime = false;
         
@@ -112,11 +116,11 @@ public class TimeManager : MonoBehaviour
             outtaTime = true;
 
         }
-        if (coolDownValue >= 4f)
+        if (coolDownValue >= MaxTimeValue)
         {
             if (outtaTime)
             {
-                timeValue = 4f;
+                timeValue = MaxTimeValue;
             }
             outtaTime = false;
         }
@@ -128,11 +132,11 @@ public class TimeManager : MonoBehaviour
     void TimeStop()
     {
         //Debug.Log("Time has been stopped");
-        if (!outtaTime && Time.timeScale > .1f)
+        if (!outtaTime && Time.timeScale > timeStopTimeScale)
         {
             //Debug.Log("AYEAH");
             isTimeStopped = true;
-            Time.timeScale -= timeSlowDownRate;
+            Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
         }
         
     }
@@ -142,7 +146,7 @@ public class TimeManager : MonoBehaviour
     /// </summary>
     void Cooldown()
     {
-        if (coolDownValue < 4f && outtaTime)
+        if (coolDownValue < MaxTimeValue && outtaTime)
         {
             coolDownValue += Time.unscaledDeltaTime;
         }
@@ -155,7 +159,7 @@ public class TimeManager : MonoBehaviour
             TimeStop();
             
         }
-        if (!Input.GetKey(KeyCode.LeftShift))
+        else
         {
             //TimeStop();
             isTimeStopped = false;
@@ -173,18 +177,18 @@ public class TimeManager : MonoBehaviour
         //}
     }
 
-    void TimeLeft()
-    {
-        if (timeTillLength <= timeStopLength && isTimeStopped == true)
-        {
-            timeTillLength--;
-        }
+    //void TimeLeft()
+    //{
+    //    if (timeTillLength <= timeStopLength && isTimeStopped == true)
+    //    {
+    //        timeTillLength--;
+    //    }
 
-        if (timeTillLength <= 0)
-        {
-            EaseTimeToDefault();
-        }
-    }
+    //    if (timeTillLength <= 0)
+    //    {
+    //        EaseTimeToDefault();
+    //    }
+    //}
 
     /// <summary>
     /// Increments the timer for the time stop, decreasing while time stop is active and

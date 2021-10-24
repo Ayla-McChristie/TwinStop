@@ -66,7 +66,7 @@ class PlayerStats : MonoBehaviour
     public static void AddToKillCount()
     {
         NumOfKilledEnemies++;
-        Debug.Log(NumOfKilledEnemies);
+        //Debug.Log(NumOfKilledEnemies);
     }
 
     // TODO add code for projectiles
