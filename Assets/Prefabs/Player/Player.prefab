@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76daddd512bd7e04f95f795bbd229762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 7
 --- !u!114 &1104430885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26ef8de07fcaed488bd3a771566089f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0
+  fireRate: 0.1
   opP: {fileID: 0}
 --- !u!114 &1150680259
 MonoBehaviour:
@@ -152,8 +152,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  fullHeart: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  emptyHeart: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  fullHeart: {fileID: 21300000, guid: 8c696ef0a62bb7449b5768dccc4e6159, type: 3}
+  emptyHeart: {fileID: 21300000, guid: 600bea1ac3d5d8a4ea19651f90979dca, type: 3}
 --- !u!136 &6866728591994354203
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -215,7 +215,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeSpeedUpRate
-      value: 1.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
+      propertyPath: timeSlowDownRate
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9112385296984428243, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: m_RootOrder

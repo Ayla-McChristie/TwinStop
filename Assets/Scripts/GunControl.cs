@@ -10,6 +10,8 @@ public class GunControl : MonoBehaviour
 
     Camera cam;
     GameObject projectileStartPos;
+    GameObject player; 
+
     public ObjectPool_Projectiles opP;
 
     Vector3 direction;
@@ -28,6 +30,7 @@ public class GunControl : MonoBehaviour
         cam = Camera.main;
         coolDown = false;
         fireTimer = 0;
+        player = this.gameObject;
     }
 
     void Update()
@@ -48,9 +51,20 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
-        direction = GetMousePos() - transform.position;
-        direction.y = 0;
-        transform.forward = direction;
+        mousePos = Input.mousePosition;
+         
+        mousePos.z = Vector3.Distance(Camera.main.transform.position, player.transform.position); //The distance between the camera and object
+        Vector3 objectPos = Camera.main.WorldToScreenPoint(player.transform.position);
+        mousePos.x -= player.transform.position.x;
+        mousePos.y -= player.transform.position.y;
+        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        //direction = GetMousePos() - player.transform.position;
+        //transform.forward = direction;
+        //player.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+
         //Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
         //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         //float rayLength; // Length of line from Camera to nearest ground
@@ -72,13 +86,17 @@ public class GunControl : MonoBehaviour
 
     Vector3 GetMousePos()
     {
-        var ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
-        {
-            return hitInfo.point;
-        }
-        else
-            return Vector3.zero;
+        mousePos = Input.mousePosition;
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, player.transform.position.y));
+
+        return mouseWorld;
+        //var ray = cam.ScreenPointToRay(Input.mousePosition);
+        //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
+        //{
+        //    return hitInfo.point;
+        //}
+        //else
+        //    return Vector3.zero;
     }
 
     void Shoot()
