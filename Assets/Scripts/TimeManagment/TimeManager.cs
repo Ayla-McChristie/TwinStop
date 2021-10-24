@@ -132,7 +132,7 @@ public class TimeManager : MonoBehaviour
         {
             //Debug.Log("AYEAH");
             isTimeStopped = true;
-            Time.timeScale -= .006f;
+            Time.timeScale -= timeSlowDownRate;
         }
         
     }
@@ -222,8 +222,8 @@ public class TimeManager : MonoBehaviour
         if (Time.timeScale < 1f)
         {
             //Debug.Log("Time has started to revert back");
-            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime ;
-            Time.fixedDeltaTime = Time.timeScale * .02f * timeSpeedUpRate;
+            Time.timeScale += ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSpeedUpRate;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
         }
 
         // testing code

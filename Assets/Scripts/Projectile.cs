@@ -38,7 +38,15 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += direction * b_Speed * Time.deltaTime;
+        if (projectileUser == "Player")
+        {
+            transform.position += direction * b_Speed * Time.unscaledDeltaTime;
+        }
+        else
+        {
+            transform.position += direction * b_Speed * Time.unscaledDeltaTime;
+        }
+
         IgnoreProjectiles();
     }
 
@@ -66,10 +74,6 @@ public class Projectile : MonoBehaviour
             opP.DeactivateProjectile(this.gameObject);
         }
 
-        if (collision.transform.tag == "Obstacle")
-        {
-            opP.DeactivateProjectile(this.gameObject);
-        }
-
+        opP.DeactivateProjectile(this.gameObject);
     }
 }

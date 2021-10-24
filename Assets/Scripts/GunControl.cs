@@ -83,7 +83,7 @@ public class GunControl : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && !coolDown)
+        if (Input.GetMouseButton(0) && !coolDown)
         {
             //var ray = cam.ScreenPointToRay(Input.mousePosition);
             //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
