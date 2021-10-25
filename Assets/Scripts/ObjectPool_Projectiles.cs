@@ -1,38 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Pool
+{
+    public string name;
+    public GameObject prefab;
+    public int maxSize;
+
+    public Pool(string Name, GameObject Prefab, int PoolSize)
+    {
+        this.name = Name;
+        this.prefab = Prefab;
+        this.maxSize = PoolSize;
+    }
+}
+
 public class ObjectPool_Projectiles : MonoBehaviour
 {
-    [System.Serializable]
-    public class Pool
-    {
-        public string name;
-        public GameObject prefab;
-        public int maxSize;
-    }
     [SerializeField]
-    List<Pool> pool;
+    List<Pool> pools;
 
     Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    void Start()
+    private static ObjectPool_Projectiles _instance;
+    public static ObjectPool_Projectiles Instance { get { return _instance; } }
+
+    private void Awake()
     {
-        GameObject temp;
+        /*
+         * deletes this game object of one instance of time manager exists already -A
+         */
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        foreach(Pool p in pool)
-        {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-            for(int i = 0; i < p.maxSize; i++)
-            {
-                temp = Instantiate(p.prefab);
-                temp.SetActive(false);
-                objectPool.Enqueue(temp);
-            }
+    }
 
-            poolDictionary.Add(p.name, objectPool);
-        }
+    void Start()
+    {
+
+        //foreach(Pool p in pool)
+        //{
+        //    InstantiatePool(p.prefab, p.maxSize, p.name);
+        //}
     }
 
     public GameObject GetProjectile(string objectName)
@@ -47,5 +66,40 @@ public class ObjectPool_Projectiles : MonoBehaviour
     {
         ObjectType.SetActive(false);
         Rigidbody rb = ObjectType.GetComponent<Rigidbody>();
+    }
+
+    public void InstantiatePool(Pool pool)
+    {
+        CheckForInstance();
+        GameObject temp;
+        Queue<GameObject> objectPool = new Queue<GameObject>();
+
+        for (int i = 0; i < pool.maxSize; i++)
+        {
+            //make object
+            temp = Instantiate(pool.prefab);
+            //disable it
+            temp.SetActive(false);
+            //add it to the pool
+            objectPool.Enqueue(temp);
+        }
+        //add pool to the dictionary
+        poolDictionary.Add(pool.name, objectPool);
+        pools.Add(pool);
+    }
+
+    private void CheckForInstance()
+    {
+        if (Instance == null)
+        {
+            CreateObjectPoolInstance();
+        }
+    }
+
+    public static void CreateObjectPoolInstance()
+    {
+        GameObject opGameObject = new GameObject("ObjectPool");
+        opGameObject.AddComponent<ObjectPool_Projectiles>();
+        _instance = opGameObject.GetComponent<ObjectPool_Projectiles>();
     }
 }

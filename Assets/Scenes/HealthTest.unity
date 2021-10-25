@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 509329326}
   - component: {fileID: 509329325}
   - component: {fileID: 509329331}
+  - component: {fileID: 509329332}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -448,7 +449,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509329324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9476219ec6f8e9f409357ed7fea46b0a, type: 3}
   m_Name: 
@@ -461,6 +462,28 @@ MonoBehaviour:
   - {fileID: 1770477453}
   fullHeart: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   emptyHeart: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &509329332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509329324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a353f897e9bf7a044bdbd98d2b2bc28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  numOfHearts: 3
+  keys: 0
+  bossKeys: 0
+  hearts:
+  - {fileID: 160199009}
+  - {fileID: 1516996233}
+  - {fileID: 1770477453}
+  fullHeart: {fileID: 21300000, guid: 2e95bae23832157439cd054eb2b0aedb, type: 3}
+  emptyHeart: {fileID: 21300000, guid: 600bea1ac3d5d8a4ea19651f90979dca, type: 3}
 --- !u!1 &615763022
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +922,9 @@ MonoBehaviour:
   timeSlowDownRate: 0.005
   timeSpeedUpRate: 0.005
   timeStopLength: 10
-  timeTillLength: 10
+  timeStopTimeScale: 0.1
+  MaxTimeValue: 4
+  timeStopReadyIndicator: {fileID: 0}
   isTimeStopped: 0
 --- !u!4 &1914139210
 Transform:

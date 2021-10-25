@@ -8,11 +8,13 @@ public class GunControl : MonoBehaviour
     [Range(0f, 2f)]
     float fireRate = .5f;
 
-    Camera cam;
+    //this is where the bullet spawns
     GameObject projectileStartPos;
-    GameObject player; 
+    //this is a shortcut to the parent object but i probably dont need this
+    GameObject player;
 
-    public ObjectPool_Projectiles opP;
+    [SerializeField]
+    Pool bulletPool;
 
     Vector3 direction;
     Vector3 mousePos;
@@ -20,17 +22,17 @@ public class GunControl : MonoBehaviour
 
     GameObject obj;
 
-    string projectileType;
     bool coolDown;
     float fireTimer;
     void Start()
     {
+        player = this.gameObject;
+        ObjectPool_Projectiles.Instance.InstantiatePool(bulletPool);
+
         projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;
-        projectileType = "PlayerBullet";
-        cam = Camera.main;
+
         coolDown = false;
         fireTimer = 0;
-        player = this.gameObject;
     }
 
     void Update()
@@ -79,7 +81,7 @@ public class GunControl : MonoBehaviour
 
     Vector3 GetMousePos()
     {
-        var ray = cam.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
         {
             return hitInfo.point;
@@ -100,7 +102,7 @@ public class GunControl : MonoBehaviour
             //    targetLoc = targetLoc.normalized;
             //}
             direction = direction.normalized;
-            obj = opP.GetProjectile(projectileType);
+            obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }

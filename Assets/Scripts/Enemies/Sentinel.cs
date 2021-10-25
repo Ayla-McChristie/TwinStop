@@ -29,6 +29,7 @@ public class Sentinel : Enemy
     float fovDist = 100.0f;
     public float maxDist = 10f;
     public float minDist = 5f;
+
     string projectileType = "EnemyProjectile";
 
     bool coolDown;
@@ -74,7 +75,7 @@ public class Sentinel : Enemy
         {
             Vector3 projectileDir = target.transform.position - this.transform.position; //the direction of projectile is heading 
             projectileDir = projectileDir.normalized; 
-            projectile = oP.GetProjectile(projectileType); //Getting the projectile gameobject
+            projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
             projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user
             coolDown = true; //Space out when the enemy can shoot again
         }

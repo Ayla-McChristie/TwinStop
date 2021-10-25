@@ -7,7 +7,10 @@ public class TimedEnemySpawer : EnemyManager
     bool onCooldown = true;
     [SerializeField]
     float coolDownTime = 2f;
+    [SerializeField]
+    GameObject EnemyType;
     float currentCoolDown = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,7 @@ public class TimedEnemySpawer : EnemyManager
             /*
              * TODO Make it so the timed spawner can spawn at a designated spawn point or spawn points
              */
-            this.Spawn();
+            this.Spawn(EnemyType);
             this.onCooldown = true;
         }
         else

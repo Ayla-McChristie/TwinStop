@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     protected float Speed;
     Vector3 acceleration;
     Vector3 velocity;
-    protected ObjectPool_Projectiles oP;
     //stationary is used for enemy types who like to keep their distance
     bool stationary;
 
@@ -38,7 +37,6 @@ public class Enemy : MonoBehaviour
         {
             target = GameObject.FindGameObjectWithTag("Player");
         }
-        oP = GameObject.Find("ObjectPool").GetComponent<ObjectPool_Projectiles>();
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -83,11 +81,10 @@ public class Enemy : MonoBehaviour
      */
     void Die()
     {
-        this.enabled = false;
         /*
          * Should replace this with object pooling instead of destruction
          */
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)

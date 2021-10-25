@@ -10,16 +10,18 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     [Range(5f, 30f)]
     float b_Speed = 10; //Bullet's Speed
+    [SerializeField]
+    GameObject ExplosionPrefab;
     #endregion
     Vector3 direction;
     string projectileUser;
     Rigidbody rb;
 
-    ObjectPool_Projectiles opP;
+    //ObjectPool_Projectiles opP;
 
     void Start()
     {
-        opP = new ObjectPool_Projectiles();
+        //opP = new ObjectPool_Projectiles();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -79,6 +81,12 @@ public class Projectile : MonoBehaviour
         {
             //deal damage to player
         }
-        opP.DeactivateProjectile(this.gameObject);
+
+        if (ExplosionPrefab != null)
+        {
+            var hitEffect = Instantiate(ExplosionPrefab, this.transform.position, this.transform.rotation);
+        }
+
+        this.gameObject.SetActive(false);
     }
 }

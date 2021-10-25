@@ -30,7 +30,7 @@ public class Door : MonoBehaviour
     }
     void Start()
     {
-        this.doorCollider = this.gameObject.GetComponent<MeshCollider>();
+        this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
         this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
 

@@ -7,20 +7,21 @@ public class EnemyManager : MonoBehaviour
     private static EnemyManager _instance;
     public static EnemyManager Instance { get { return _instance; } }
 
-    [System.Serializable]
-    public class RoomDetail
-    {
-        public int roomNum;
-        public List<GameObject> listOfEnemies;
-        public Transform[] SpawnLoc;
-    }
+    //[System.Serializable]
+    //public class RoomDetail
+    //{
+    //    public int roomNum;
+    //    public List<GameObject> listOfEnemies;
+    //    public Transform[] SpawnLoc;
+    //}
     //[SerializeField]
     //private GameObject basicEnemy;
+    //[SerializeField]
+    //List<RoomDetail> roomDetailTemp;
+    //List<RoomDetail> roomDetail;
+
     [SerializeField]
-    List<RoomDetail> roomDetailTemp;
-    List<RoomDetail> roomDetail;
-    public GameObject basicEnemy;
-    public ObjectPool_Projectiles o;
+    List<Pool> enemyPools;
 
     //lets us know if were in combat or not. Should probably be move to the room manager
     public bool isInCombat;
@@ -40,55 +41,45 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        roomDetail = new List<RoomDetail>();
-        foreach (RoomDetail r in roomDetailTemp)
+        foreach (var p in enemyPools)
         {
-            roomDetail.Add(r);
+            ObjectPool_Projectiles.Instance.InstantiatePool(p);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //TestSpawn();
         //TestInCombat();
         CheckForCombat();
     }
 
-    void TestSpawn()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Spawn();
-        }
-    }
-
-    public void Spawn()
+    protected void Spawn(GameObject go)
     {
         /*
          * TODO Pull from object pool instead of making new entities
          */
-        GameObject e = Instantiate(basicEnemy, this.transform);
+        go = ObjectPool_Projectiles.Instance.GetProjectile(go.name);
     }
 
-    public void SpawnEnemies(int room)
-    {
-        foreach (RoomDetail r in roomDetail)
-        {
-            if (r.roomNum == room)
-            {
-                numOfEnemiesInCombat = r.listOfEnemies.Count;
-                for (int i = 0; i < r.listOfEnemies.Count; i++)
-                {
-                    GameObject enemy = o.GetProjectile(r.listOfEnemies[i].gameObject.name);
-                    enemy.transform.position = r.SpawnLoc[i].position;
-                }
-            }
-        }
+    //public void SpawnEnemies(int room)
+    //{
+    //    foreach (RoomDetail r in roomDetail)
+    //    {
+    //        if (r.roomNum == room)
+    //        {
+    //            numOfEnemiesInCombat = r.listOfEnemies.Count;
+    //            for (int i = 0; i < r.listOfEnemies.Count; i++)
+    //            {
+    //                GameObject enemy = o.GetProjectile(r.listOfEnemies[i].gameObject.name);
+    //                enemy.transform.position = r.SpawnLoc[i].position;
+    //            }
+    //        }
+    //    }
 
-        //lets us know combat has started
-        isInCombat = true;
-    }
+    //    //lets us know combat has started
+    //    isInCombat = true;
+    //}
     public void SpawnEnemies(List<GameObject> listOfEnemies, Transform spawnPoint)
     {
         numOfEnemiesInCombat += listOfEnemies.Count;
@@ -98,7 +89,7 @@ public class EnemyManager : MonoBehaviour
             /*
              * rn we create new enemies but i need to make it use object pool
              */
-            GameObject e = Instantiate(go, spawnPoint);
+            GameObject e = ObjectPool_Projectiles.Instance.GetProjectile(go.name);
 
         }
         Debug.Log($"num of enemies in combat {numOfEnemiesInCombat}");
