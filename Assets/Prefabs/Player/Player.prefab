@@ -131,7 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.1
-  opP: {fileID: 0}
+  bulletPool:
+    name: PlayerBullet
+    prefab: {fileID: 1840432582817397467, guid: 14899a0c8f180d44387a6f02eb22bd0c, type: 3}
+    maxSize: 50
 --- !u!114 &1150680259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +213,10 @@ PrefabInstance:
       value: TimeManager
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
+      propertyPath: MaxTimeValue
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeTillLength
       value: 0
       objectReference: {fileID: 0}
@@ -219,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeSlowDownRate
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9112385296984428243, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: m_RootOrder

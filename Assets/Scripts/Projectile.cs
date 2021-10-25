@@ -32,6 +32,7 @@ public class Projectile : MonoBehaviour
         this.projectileUser = projectileUser;
         transform.forward = direction;
         IgnoreCollision(projectileUser);
+        IgnoreProjectiles();
     }
 
     void IgnoreCollision(string user)
@@ -56,7 +57,7 @@ public class Projectile : MonoBehaviour
             transform.position += direction * b_Speed * Time.deltaTime;
         }
 
-        IgnoreProjectiles();
+        
     }
 
     void IgnoreProjectiles()
@@ -82,6 +83,9 @@ public class Projectile : MonoBehaviour
             //deal damage to player
         }
 
+        /*
+         * If we have an explosion prefab, use it
+         */
         if (ExplosionPrefab != null)
         {
             var hitEffect = Instantiate(ExplosionPrefab, this.transform.position, this.transform.rotation);

@@ -42,7 +42,11 @@ public class GunControl : MonoBehaviour
 
         if (coolDown)
         {
-            fireTimer += Time.deltaTime;
+            //this means our shooting cooldown is affected by time slow
+            //fireTimer += Time.deltaTime;
+            //this could be fun maybe?
+            fireTimer += Time.unscaledDeltaTime;
+
             if (fireTimer >= fireRate)
             {
                 fireTimer = 0;
