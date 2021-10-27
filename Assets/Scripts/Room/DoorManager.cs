@@ -9,6 +9,7 @@ public class DoorManager : MonoBehaviour
      */
     private static DoorManager _instance;
     public static DoorManager Instance { get { return _instance; } }
+
     [SerializeField]
     public EnemyManager enemyManager;
     /*
