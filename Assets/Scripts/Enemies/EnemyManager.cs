@@ -107,7 +107,7 @@ public class EnemyManager : MonoBehaviour
     void CheckForCombat()
     {
         //Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
-        if (numOfEnemiesInCombat <= playerStats.NumOfKilledEnemies)
+        if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies)
         {
             numOfEnemiesInCombat = 0;
             isInCombat = false;

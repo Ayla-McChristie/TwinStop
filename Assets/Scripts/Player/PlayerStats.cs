@@ -7,8 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerMovement))]
 class PlayerStats : MonoBehaviour
 {
-    private int numOfKilledEnemies;
-    public int NumOfKilledEnemies { get; private set; }
+    private static int numOfKilledEnemies;
+    public static int NumOfKilledEnemies { get; private set; }
 
     public int health; // Total amount of health left
     public int numOfHearts; // Max amount of hearts a player can have, should be 3
