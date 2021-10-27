@@ -20,7 +20,7 @@ public class RoomTrigger : MonoBehaviour
     bool hasStarted = false;
 
     private bool noMoreWaves;
-    public static bool NoMoreWaves { get; private set; }
+    public bool NoMoreWaves { get; private set; }
 
     private void Start()
     {

@@ -20,12 +20,17 @@ public class EnemyManager : MonoBehaviour
     //List<RoomDetail> roomDetailTemp;
     //List<RoomDetail> roomDetail;
 
+
     [SerializeField]
     List<Pool> enemyPools;
+
+    PlayerStats playerStats;
 
     //lets us know if were in combat or not. Should probably be move to the room manager
     public bool isInCombat;
     private int numOfEnemiesInCombat;
+
+
 
     private void Awake()
     {
@@ -41,6 +46,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         foreach (var p in enemyPools)
         {
             ObjectPool_Projectiles.Instance.InstantiatePool(p);
@@ -101,7 +107,7 @@ public class EnemyManager : MonoBehaviour
     void CheckForCombat()
     {
         //Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
-        if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies)
+        if (numOfEnemiesInCombat <= playerStats.NumOfKilledEnemies)
         {
             numOfEnemiesInCombat = 0;
             isInCombat = false;
