@@ -24,6 +24,9 @@ public class GunControl : MonoBehaviour
 
     bool coolDown;
     float fireTimer;
+
+    //Turned on during special scenes like door transitions
+    bool freezeFire;
     void Start()
     {
         player = this.gameObject;

@@ -15,9 +15,11 @@ public class DoorTrigger : MonoBehaviour
     [SerializeField]
     GameObject roomCenter;
 
-    GameObject cameraFollowMe;
+    GameObject cameraFollowMe, player, putPlayerHere;
 
-    FollowPlayer followPlayerScript; 
+    FollowPlayer followPlayerScript;
+
+    PlayerMovement playerMovementScript;
 
     private void Awake()
     {
@@ -28,6 +30,12 @@ public class DoorTrigger : MonoBehaviour
     {
        cameraFollowMe = GameObject.FindWithTag("CamFollow");
        followPlayerScript = cameraFollowMe.GetComponent<FollowPlayer>();
+
+       player = GameObject.FindWithTag("Player");
+       playerMovementScript = player.GetComponent<PlayerMovement>();
+
+        putPlayerHere = this.GetComponent<GameObject>();
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -38,6 +46,7 @@ public class DoorTrigger : MonoBehaviour
             if (targetDoor.IsLocked == false)
             {
                 targetDoor.OpenDoor();
+                playerMovementScript.StartDoorTransition(putPlayerHere.transform.position);
                 
 
                 //Debug.Log("Door Opened");
