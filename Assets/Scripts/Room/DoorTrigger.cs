@@ -15,10 +15,13 @@ public class DoorTrigger : MonoBehaviour
     [SerializeField]
     GameObject roomCenter;
 
-    GameObject cameraFollowMe, player, putPlayerHere;
+    [SerializeField]
+    GameObject cameraFollowMe, player, putPlayerHere, thisGameObject;
 
+    [SerializeField]
     FollowPlayer followPlayerScript;
 
+    [SerializeField]
     PlayerMovement playerMovementScript;
 
     private void Awake()
@@ -34,7 +37,14 @@ public class DoorTrigger : MonoBehaviour
        player = GameObject.FindWithTag("Player");
        playerMovementScript = player.GetComponent<PlayerMovement>();
 
-        putPlayerHere = this.GetComponent<GameObject>();
+       thisGameObject = this.gameObject;
+
+        //List<GameObject> children = new List<GameObject>();
+
+        //children.Add(thisGameObject.GetComponentsInChildren<GameObject>()[0]);
+
+        //putPlayerHere = GameObject.Find("PutPlayerHere");
+        //Debug.Log(thisGameObject.GetComponentInChildren<GameObject>().ToString());
 
     }
 

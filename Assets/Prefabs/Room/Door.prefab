@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536943983136613939}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 11.929429}
+  m_LocalPosition: {x: -0, y: -0, z: 12.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8043755383070181341}
@@ -859,6 +859,12 @@ MonoBehaviour:
   Door: {fileID: 3796230493018893810}
   amIALargeRoom: 0
   roomCenter: {fileID: 0}
+  cameraFollowMe: {fileID: 0}
+  player: {fileID: 0}
+  putPlayerHere: {fileID: 0}
+  thisGameObject: {fileID: 0}
+  followPlayerScript: {fileID: 0}
+  playerMovementScript: {fileID: 0}
 --- !u!1 &5112814389441371102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,6 +1238,12 @@ MonoBehaviour:
   Door: {fileID: 3796230493018893810}
   amIALargeRoom: 0
   roomCenter: {fileID: 0}
+  cameraFollowMe: {fileID: 0}
+  player: {fileID: 0}
+  putPlayerHere: {fileID: 0}
+  thisGameObject: {fileID: 0}
+  followPlayerScript: {fileID: 0}
+  playerMovementScript: {fileID: 0}
 --- !u!1 &7013161116233169318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7013161116233169318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.45}
+  m_LocalPosition: {x: 0, y: 0, z: -4.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3796230493671170243}

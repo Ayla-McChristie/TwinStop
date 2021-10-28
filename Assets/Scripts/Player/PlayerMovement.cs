@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera mainCamera;
 
     //Turns true when special scenes happen like a door transition
+    [SerializeField]
     private bool freezeMovement;
 
     Animator anim;
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
+
+        currentMoveToTarget = this.transform.position;
     }
 
     // Update is called once per frame
