@@ -37,6 +37,8 @@ public class TimeManager : MonoBehaviour
     private float defaultFixedDeltaTime;
     [SerializeField] private bool isTimeStopped = false;
 
+    public TimeBar timeBar; // need this to be able to move the time bar. -Steve
+
     /*
      * singleton to ensure we only have 1 time manager -A
      */
@@ -66,7 +68,7 @@ public class TimeManager : MonoBehaviour
         defaultFixedDeltaTime = Time.fixedDeltaTime;
         timeValue = MaxTimeValue; //This will (hopefully) give the player 4 seconds total of meter
         coolDownValue = MaxTimeValue;
-
+        timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
         
     }
@@ -157,6 +159,7 @@ public class TimeManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             TimeStop();
+            timeBar.TimeSet(timeValue);
             
         }
         else
