@@ -12,6 +12,7 @@ class PlayerStats : MonoBehaviour
 
     public int health; // Total amount of health left
     public int numOfHearts; // Max amount of hearts a player can have, should be 3
+    bool isInvincible;
 
     public int keys; //number of keys the player has -A
     public int bossKeys; //number of bossKeys the player has -A
@@ -75,18 +76,13 @@ class PlayerStats : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyBullet")
         {
-            //health--;
+            if (!isInvincible)
+            {
+                isInvincible = true;
+                health--;
+            }
         }
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "EnemyBullet")
-        {
-            health--;
-        }
-    }
-
     void PlayerDead()
     {
         FindObjectOfType<SceneManagement>().LoadCurrentLevel();

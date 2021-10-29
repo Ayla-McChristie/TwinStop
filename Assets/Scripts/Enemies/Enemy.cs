@@ -97,10 +97,7 @@ public class Enemy : MonoBehaviour
              */
 
             //put code for enemy to do damage to player here
-            if (!attackCooldown)
-            {
-                collision.gameObject.GetComponent<PlayerStats>().health--;
-            }
+            PlayerStats.AddToKillCount();
             this.Die();
         }
 

@@ -40,7 +40,11 @@ public class Projectile : MonoBehaviour
         if (user == "Player")
             Physics.IgnoreCollision(GameObject.FindWithTag("Player").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
         else if (user == "Enemy")
-            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+            foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
+            {
+                Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+            }
+        
     }
 
     // Update is called once per frame
@@ -55,7 +59,7 @@ public class Projectile : MonoBehaviour
         else
         {
             //transform.position += direction * b_Speed * Time.deltaTime;
-            rb.velocity = direction * b_Speed;
+            //rb.velocity = direction * b_Speed;
         }
 
         

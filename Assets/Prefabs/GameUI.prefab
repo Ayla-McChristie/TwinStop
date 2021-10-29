@@ -488,6 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3750259978235079954}
   - component: {fileID: 9002571132370229321}
+  - component: {fileID: 6048074343053321156}
   m_Layer: 5
   m_Name: TimeBar
   m_TagString: Untagged
@@ -567,3 +568,16 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6048074343053321156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5536429750486953270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437d837b2813a4e4cb632b5e8f95e120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 9002571132370229321}

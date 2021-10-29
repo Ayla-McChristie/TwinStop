@@ -95,14 +95,14 @@ public class TimeManager : MonoBehaviour
         //Debug.Log(isTimeStopped);
 
         //REMOVE LATER -just for demonstration purposes -Ryan
-        if(outtaTime)
-        {
-            timeStopReadyIndicator.gameObject.SetActive(false);
-        }
-        else
-        {
-            timeStopReadyIndicator.gameObject.SetActive(true);
-        }  
+        //if(outtaTime)
+        //{
+        //    //timeStopReadyIndicator.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    //timeStopReadyIndicator.gameObject.SetActive(true);
+        //}  
     }
 
     /// <summary>

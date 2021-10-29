@@ -56,6 +56,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     public GameObject GetProjectile(string objectName)
     {
+        Debug.Log("hi");
         GameObject objectSpawn = poolDictionary[objectName].Dequeue();
         objectSpawn.SetActive(true);
         poolDictionary[objectName].Enqueue(objectSpawn);

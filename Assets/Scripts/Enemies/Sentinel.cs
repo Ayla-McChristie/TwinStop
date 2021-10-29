@@ -80,16 +80,17 @@ public class Sentinel : Enemy
             projectile.transform.position = projectileStart.transform.position;
             if (GetPredictedDir(target.transform.position, this.transform.position, target.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))
             {
-                projectileDir = direction * projectile.GetComponent<Projectile>().b_Speed;
+                projectile.GetComponent<Rigidbody>().velocity = direction * projectile.GetComponent<Projectile>().b_Speed;
             }
             else
             {
-                projectileDir = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
+                projectile.GetComponent<Rigidbody>().velocity = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
             }
             coolDown = true; //Space out when the enemy can shoot again
-            projectileDir.y = 0;
-            projectileDir = projectileDir.normalized;
-            projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user          
+            Debug.Log(projectile.transform.position);
+            //projectileDir.y = 0;
+            //projectileDir = projectileDir.normalized;
+            //projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user          
         }
     }
 
