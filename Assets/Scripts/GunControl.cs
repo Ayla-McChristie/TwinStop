@@ -7,6 +7,10 @@ public class GunControl : MonoBehaviour
     [SerializeField]
     [Range(0f, 2f)]
     float fireRate = .5f;
+    [SerializeField]
+    [Tooltip("Changes how far the bullets are spread. 0 means no spread")]
+    [Range(0f, 1f)]
+    float spreadModifier = .2f;
 
     //this is where the bullet spawns
     GameObject projectileStartPos;
@@ -41,7 +45,8 @@ public class GunControl : MonoBehaviour
     void Update()
     {
         Aim();
-        Shoot();
+        //Shoot();
+        SpreadShoot();
 
         if (coolDown)
         {
@@ -111,6 +116,20 @@ public class GunControl : MonoBehaviour
             direction = direction.normalized;
             var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
+            coolDown = true;
+        }
+    }
+
+    void SpreadShoot()
+    {
+        if (Input.GetMouseButton(0) && !coolDown)
+        {
+            //float offset = (float)Random.Range(-maxSpread, maxSpread);
+
+            Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
+
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
     }
