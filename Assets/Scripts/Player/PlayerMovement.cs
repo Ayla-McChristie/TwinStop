@@ -11,12 +11,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 moveVelocity;
 
-    private Vector3 currentMoveToTarget;
+    private  Vector3 currentMoveToTarget;
 
     private Camera mainCamera;
 
+    private GunControl gunControlScript;
+
     //Turns true when special scenes happen like a door transition
-    [SerializeField]
     private bool freezeMovement;
 
     Animator anim;
@@ -34,7 +35,9 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         freezeMovement = false;
 
-        currentMoveToTarget = this.transform.position;
+        gunControlScript = this.GetComponent<GunControl>();
+
+        //currentMoveToTarget = this.transform.position;
     }
 
     // Update is called once per frame
@@ -88,9 +91,12 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="moveTo"></param>
     public void StartDoorTransition(Vector3 moveTo)
     {
-        Freeze();
-        currentMoveToTarget = moveTo;
-        
+        if (!freezeMovement)
+        {
+            Freeze();
+            currentMoveToTarget = moveTo;
+        }
+       
     }
 
     /// <summary>
@@ -100,10 +106,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.transform.position != currentMoveToTarget)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 20 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 2 * Time.deltaTime);
         }
         else
         {
+            //currentMoveToTarget = this.transform.position;
             UnFreeze();
         }
     }
@@ -113,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Freeze()
     {
+        gunControlScript.FrezeFire();
         freezeMovement = true;
     }
 
@@ -121,6 +129,21 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void UnFreeze()
     {
+        gunControlScript.UnFrezeFire();
         freezeMovement = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("TransitionTrigger"))
+        {
+            Debug.Log("Duh?");
+            if (freezeMovement)
+            {
+                currentMoveToTarget = this.transform.position;
+                UnFreeze();
+
+            }
+        }
     }
 }

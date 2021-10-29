@@ -36,6 +36,7 @@ public class GunControl : MonoBehaviour
 
         coolDown = false;
         fireTimer = 0;
+        freezeFire = false;
     }
 
     void Update()
@@ -99,7 +100,7 @@ public class GunControl : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButton(0) && !coolDown)
+        if (Input.GetMouseButton(0) && !coolDown && !freezeFire)
         {
             //var ray = cam.ScreenPointToRay(Input.mousePosition);
             //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
@@ -109,9 +110,24 @@ public class GunControl : MonoBehaviour
             //    targetLoc = targetLoc.normalized;
             //}
             direction = direction.normalized;
-            obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
+    }
+
+    /// <summary>
+    /// Freezes firing during transitions
+    /// </summary>
+    public void FrezeFire()
+    {
+        freezeFire = true;
+    }
+    /// <summary>
+    /// UnFreezes firing during transitions
+    /// </summary>
+    public void UnFrezeFire()
+    {
+        freezeFire = false;
     }
 }

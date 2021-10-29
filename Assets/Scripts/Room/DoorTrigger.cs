@@ -16,7 +16,9 @@ public class DoorTrigger : MonoBehaviour
     GameObject roomCenter;
 
     [SerializeField]
-    GameObject cameraFollowMe, player, putPlayerHere, thisGameObject;
+    GameObject putPlayerHere;
+
+    GameObject cameraFollowMe, player;
 
     [SerializeField]
     FollowPlayer followPlayerScript;
@@ -37,7 +39,6 @@ public class DoorTrigger : MonoBehaviour
        player = GameObject.FindWithTag("Player");
        playerMovementScript = player.GetComponent<PlayerMovement>();
 
-       thisGameObject = this.gameObject;
 
         //List<GameObject> children = new List<GameObject>();
 
@@ -50,12 +51,13 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player" && DoorManager.Instance.enemyManager.isInCombat == false) //
+        if (other.transform.tag == "Player" && EnemyManager.Instance.isInCombat == false) //
         {
             
             if (targetDoor.IsLocked == false)
             {
                 targetDoor.OpenDoor();
+                Debug.Log(putPlayerHere.transform.position);
                 playerMovementScript.StartDoorTransition(putPlayerHere.transform.position);
                 
 
