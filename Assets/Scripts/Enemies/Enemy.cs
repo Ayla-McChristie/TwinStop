@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
-    protected enum State { Attacking, MoveToTarget, ChangePosition }
+    
     /* 
      * Attributes 
      */
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     protected GameObject target;
     public float Health { get; set; }
     protected float Damage;
-
+    protected NavMeshAgent agent;
 
     /*
      * Methods
@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
             target = GameObject.FindGameObjectWithTag("Player");
         }
         rigidbody = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     public virtual void FixedUpdate()
