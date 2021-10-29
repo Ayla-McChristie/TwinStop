@@ -52,7 +52,7 @@ class PlayerStats : MonoBehaviour
             }
         }
 
-        Debug.Log(health);
+        //Debug.Log(health);
         if (health <= 0)
         {
             PlayerDead();

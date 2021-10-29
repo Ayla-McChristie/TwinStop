@@ -37,7 +37,7 @@ public class Charger : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        Debug.Log(Health);
+        //Debug.Log(Health);
         switch (state)
         {
             case State.Charge:
