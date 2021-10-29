@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.transform.position != currentMoveToTarget)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 2 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 9 * Time.deltaTime);
         }
         else
         {
