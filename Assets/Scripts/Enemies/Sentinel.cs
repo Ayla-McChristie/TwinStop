@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Sentinel : Enemy
 {
+    protected enum State { Attacking, MoveToTarget}
     [SerializeField]
     public float speed = 3;
     [SerializeField]
@@ -23,7 +24,7 @@ public class Sentinel : Enemy
 
     Vector3 moveDir;
     Vector3 destination; //the distance between destinated location to this gameobject
-    Vector3 dist2Target; //distance between this gameobject and the target
+    Vector3 projectileDir;
     float fireTimer = 0;
     float waitTimer = 0;
     float fovDist = 100.0f;
@@ -63,8 +64,10 @@ public class Sentinel : Enemy
                 AttackTarget();
                 AttackCoolDown();
                 MoveAround();
+                this.transform.LookAt(target.transform.position);
                 break;
             case State.MoveToTarget:
+                MoveToTarget();
                 break;
         }
     }
@@ -73,13 +76,59 @@ public class Sentinel : Enemy
     {
         if(!coolDown)
         {
-            Vector3 projectileDir = target.transform.position - this.transform.position; //the direction of projectile is heading 
-            projectileDir = projectileDir.normalized; 
             projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
-            projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user
+            projectile.transform.position = projectileStart.transform.position;
+            if (GetPredictedDir(target.transform.position, this.transform.position, target.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))
+            {
+                projectileDir = direction * projectile.GetComponent<Projectile>().b_Speed;
+            }
+            else
+            {
+                projectileDir = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
+            }
             coolDown = true; //Space out when the enemy can shoot again
+            projectileDir.y = 0;
+            projectileDir = projectileDir.normalized;
+            projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user          
         }
     }
+
+    bool GetPredictedDir(Vector3 targetPos, Vector3 shooterPos, Vector3 targetV, float b_Speed, out Vector3 result)
+    {
+        var targetToShooter = targetPos - shooterPos;
+        var distance = targetToShooter.magnitude;
+        var angle = Vector3.Angle(targetPos, targetV) * Mathf.Deg2Rad;
+
+        var speedTar = targetV.magnitude;
+        var r = speedTar / b_Speed;
+        if (SolveQuadratic(1 - r * r, 2 * r * distance * Mathf.Cos(angle), -(distance * distance), out var root1, out var root2) == 0)
+        {
+            result = Vector3.zero;
+            return false;
+        }
+        var projectedDist = Mathf.Max(root1, root2);
+        var t = projectedDist / b_Speed;
+        var c = targetPos + targetV * t;
+        result = (c - shooterPos).normalized;
+        return true;
+    }
+
+    int SolveQuadratic(float a, float b, float c, out float root1, out float root2)
+    {
+        var discriminant = b * b - 4 * a * c;
+        if (discriminant < 0)
+        {
+            root1 = Mathf.Infinity;
+            root2 = -root1;
+            return 0;
+        }
+
+        root1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
+        root2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
+
+        return discriminant > 0 ? 2 : 1;
+    }
+
 
     void AttackCoolDown() //timer for when the enemy can shoot again
     {
@@ -99,13 +148,21 @@ public class Sentinel : Enemy
         if (!waitToMove)
         {
             destination = moveDir - this.transform.position;
-            if(destination.magnitude <= 1f)
+            if (destination.magnitude <= 1f)
             {
                 moveDir = MoveBasedOnLocation();
-                waitToMove = true;
             }
             else
-                this.transform.position = Vector3.MoveTowards(this.transform.position, moveDir, speed * Time.deltaTime);
+            {
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(moveDir, out hit, 1.0f, NavMesh.AllAreas))
+                {
+                    agent.SetDestination(hit.position);
+                    waitToMove = true;
+                }
+                else
+                    destination = this.transform.position;
+            }
         }
         else
         {
@@ -160,7 +217,6 @@ public class Sentinel : Enemy
 
     bool CanSeeTarget()
     {
-        Debug.Log(target);
         Vector3 direction = target.transform.position - this.transform.position;
         float angle = Vector3.Angle(direction, this.transform.position);
 
@@ -169,6 +225,11 @@ public class Sentinel : Enemy
                             && hit.collider.gameObject.tag == "Player")
             return true;
         return false;
+    }
+
+    void MoveToTarget()
+    {
+        agent.SetDestination(target.transform.position);
     }
 
     protected override void OnCollisionEnter(Collision collision)

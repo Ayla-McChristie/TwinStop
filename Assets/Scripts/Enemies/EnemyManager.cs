@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour
              * rn we create new enemies but i need to make it use object pool
              */
             GameObject e = ObjectPool_Projectiles.Instance.GetProjectile(go.name);
-
+            e.transform.position = spawnPoint.position;
         }
         Debug.Log($"num of enemies in combat {numOfEnemiesInCombat}");
         isInCombat = true;
