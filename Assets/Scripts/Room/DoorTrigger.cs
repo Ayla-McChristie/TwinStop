@@ -56,6 +56,7 @@ public class DoorTrigger : MonoBehaviour
             if (targetDoor.IsLocked == false)
             {
                 targetDoor.OpenDoor();
+                Debug.Log(putPlayerHere.transform.position);
                 playerMovementScript.StartDoorTransition(putPlayerHere.transform.position);
                 
 
