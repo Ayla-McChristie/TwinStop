@@ -11,6 +11,9 @@ public class Door : MonoBehaviour
     public bool isBossDoor = false;
     [SerializeField]
     public bool IsLocked = false;
+
+    [SerializeField]
+    GameObject doorModels;
     public bool IsOpen { get; set; }
 
     Collider doorCollider;
@@ -31,7 +34,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
-        this.renderer = this.gameObject.GetComponent<MeshRenderer>();
+        //this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
 
         //cam = GameObject.Find("2Dcam");
@@ -45,7 +48,8 @@ public class Door : MonoBehaviour
         if (this.IsLocked == false)
         {
             this.IsOpen = true;
-            this.renderer.enabled = false;
+            //this.renderer.enabled = false;
+            this.doorModels.SetActive(false);
             this.doorCollider.enabled = false;
         }
     }
@@ -55,7 +59,8 @@ public class Door : MonoBehaviour
     public void CloseDoor()
     {
         this.IsOpen = false;
-        this.renderer.enabled = true;
+        //this.renderer.enabled = true;
+        this.doorModels.SetActive(true);
         this.doorCollider.enabled = true;
     }
     /*

@@ -11,12 +11,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveInput;
     private Vector3 moveVelocity;
 
-    public Vector3 currentMoveToTarget;
+    private  Vector3 currentMoveToTarget;
 
     private Camera mainCamera;
 
+    private GunControl gunControlScript;
+
     //Turns true when special scenes happen like a door transition
-    [SerializeField]
     private bool freezeMovement;
 
     Animator anim;
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
+
+        gunControlScript = this.GetComponent<GunControl>();
 
         //currentMoveToTarget = this.transform.position;
     }
@@ -117,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Freeze()
     {
+        gunControlScript.FrezeFire();
         freezeMovement = true;
     }
 
@@ -125,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void UnFreeze()
     {
+        gunControlScript.UnFrezeFire();
         freezeMovement = false;
     }
 
