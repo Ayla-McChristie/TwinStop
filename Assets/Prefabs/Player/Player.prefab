@@ -131,10 +131,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.1
+  spreadModifier: 0.2
   bulletPool:
-    name: PlayerBullet
+    name: 
     prefab: {fileID: 1840432582817397467, guid: 14899a0c8f180d44387a6f02eb22bd0c, type: 3}
-    maxSize: 50
+    maxSize: 100
 --- !u!114 &1150680259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7558818735376984281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.016, y: 0.44, z: 0.662}
+  m_LocalPosition: {x: -0.016, y: 0.779, z: 0.662}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4901428594880704888}
