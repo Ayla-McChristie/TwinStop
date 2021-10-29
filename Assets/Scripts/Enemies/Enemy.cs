@@ -96,7 +96,8 @@ public class Enemy : MonoBehaviour
              */
 
             //put code for enemy to do damage to player here
-            //this.Die();
+            collision.gameObject.GetComponent<PlayerStats>().health--;
+            this.Die();
         }
 
         if (collision.transform.tag == "PlayerBullet")
