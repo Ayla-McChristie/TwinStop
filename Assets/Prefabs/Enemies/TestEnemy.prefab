@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 37233595769985301}
   - component: {fileID: 37233595769985306}
   - component: {fileID: 37233595769985307}
-  - component: {fileID: 37233595769985304}
   - component: {fileID: 5329857438951655045}
   - component: {fileID: 37233595769985305}
+  - component: {fileID: 7039050560465850406}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 37233595769985310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37233595769985310}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 9024716141790812113, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
 --- !u!23 &37233595769985307
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4094b835d7bab634fa9765a2bf715e7b, type: 2}
+  - {fileID: 2100000, guid: 12a34d29e7d75ce42b892abf3f53821b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &37233595769985304
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37233595769985310}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5329857438951655045
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,6 +113,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a75e1584923746bfc7884f62a1fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   health: 10
   damage: 1
+--- !u!136 &7039050560465850406
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37233595769985310}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31948295
+  m_Height: 0.7791647
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0.011080822}
