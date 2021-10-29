@@ -50,7 +50,7 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player" && DoorManager.Instance.enemyManager.isInCombat == false) //
+        if (other.transform.tag == "Player" && EnemyManager.Instance.isInCombat == false) //
         {
             
             if (targetDoor.IsLocked == false)

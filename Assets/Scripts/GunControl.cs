@@ -109,7 +109,7 @@ public class GunControl : MonoBehaviour
             //    targetLoc = targetLoc.normalized;
             //}
             direction = direction.normalized;
-            obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }

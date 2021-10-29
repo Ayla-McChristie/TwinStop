@@ -77,8 +77,9 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         //Debug.Log(timeValue);
-        Debug.Log(coolDownValue);
+        //Debug.Log(coolDownValue);
         //Debug.Log(isTimeStopped);
+        //Debug.Log(Time.timeScale);
         //TimeLeft();
         FreezeTime();
 
@@ -101,7 +102,7 @@ public class TimeManager : MonoBehaviour
         else
         {
             timeStopReadyIndicator.gameObject.SetActive(true);
-        }
+        }  
     }
 
     /// <summary>
@@ -139,6 +140,7 @@ public class TimeManager : MonoBehaviour
             //Debug.Log("AYEAH");
             isTimeStopped = true;
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
         }
         
     }
