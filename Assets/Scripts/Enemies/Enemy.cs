@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     protected GameObject target;
     public float Health { get; set; }
     protected float Damage;
+    bool attackCooldown = false;
     protected NavMeshAgent agent;
 
     /*
@@ -96,7 +97,10 @@ public class Enemy : MonoBehaviour
              */
 
             //put code for enemy to do damage to player here
-            collision.gameObject.GetComponent<PlayerStats>().health--;
+            if (!attackCooldown)
+            {
+                collision.gameObject.GetComponent<PlayerStats>().health--;
+            }
             this.Die();
         }
 

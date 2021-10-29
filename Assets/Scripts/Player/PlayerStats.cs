@@ -75,7 +75,7 @@ class PlayerStats : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyBullet")
         {
-            health--;
+            //health--;
         }
     }
 
