@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     #region Serialized Variables
     [SerializeField]
     [Range(5f, 30f)]
-    float b_Speed = 10; //Bullet's Speed
+    public float b_Speed = 10; //Bullet's Speed
     [SerializeField]
     GameObject ExplosionPrefab;
     #endregion
@@ -90,7 +90,7 @@ public class Projectile : MonoBehaviour
         {
             var hitEffect = Instantiate(ExplosionPrefab, this.transform.position, this.transform.rotation);
         }
-
+        Debug.Log(collision.transform.name);
         this.gameObject.SetActive(false);
     }
 }

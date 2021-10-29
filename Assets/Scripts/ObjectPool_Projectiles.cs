@@ -48,10 +48,10 @@ public class ObjectPool_Projectiles : MonoBehaviour
     void Start()
     {
 
-        //foreach(Pool p in pool)
-        //{
-        //    InstantiatePool(p.prefab, p.maxSize, p.name);
-        //}
+        foreach (Pool p in pools)
+        {
+            InstantiatePool(p);
+        }
     }
 
     public GameObject GetProjectile(string objectName)
@@ -85,7 +85,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
         }
         //add pool to the dictionary
         poolDictionary.Add(pool.name, objectPool);
-        pools.Add(pool);
+        //pools.Add(pool);
     }
 
     private void CheckForInstance()
