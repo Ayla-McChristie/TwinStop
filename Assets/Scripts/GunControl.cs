@@ -7,6 +7,10 @@ public class GunControl : MonoBehaviour
     [SerializeField]
     [Range(0f, 2f)]
     float fireRate = .5f;
+    [SerializeField]
+    [Tooltip("Changes how far the bullets are spread. 0 means no spread")]
+    [Range(0f, 1f)]
+    float spreadModifier = .2f;
 
     //this is where the bullet spawns
     GameObject projectileStartPos;
@@ -36,12 +40,14 @@ public class GunControl : MonoBehaviour
 
         coolDown = false;
         fireTimer = 0;
+        freezeFire = false;
     }
 
     void Update()
     {
         Aim();
-        Shoot();
+        //Shoot();
+        SpreadShoot();
 
         if (coolDown)
         {
@@ -99,7 +105,7 @@ public class GunControl : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButton(0) && !coolDown)
+        if (Input.GetMouseButton(0) && !coolDown && !freezeFire)
         {
             //var ray = cam.ScreenPointToRay(Input.mousePosition);
             //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
@@ -111,6 +117,35 @@ public class GunControl : MonoBehaviour
             direction = direction.normalized;
             var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
+            coolDown = true;
+        }
+    }
+
+    /// <summary>
+    /// Freezes firing during transitions
+    /// </summary>
+    public void FrezeFire()
+    {
+        freezeFire = true;
+    }
+    /// <summary>
+    /// UnFreezes firing during transitions
+    /// </summary>
+    public void UnFrezeFire()
+    {
+        freezeFire = false;
+    }
+    
+    void SpreadShoot()
+    {
+        if (Input.GetMouseButton(0) && !coolDown)
+        {
+            //float offset = (float)Random.Range(-maxSpread, maxSpread);
+
+            Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
+
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
     }
