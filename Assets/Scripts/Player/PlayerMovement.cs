@@ -128,14 +128,16 @@ public class PlayerMovement : MonoBehaviour
         freezeMovement = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.CompareTag("TransitionTrigger"))
+        if (other.gameObject.CompareTag("TransitionTrigger"))
         {
-            if(freezeMovement)
+            Debug.Log("Duh?");
+            if (freezeMovement)
             {
                 currentMoveToTarget = this.transform.position;
                 UnFreeze();
+
             }
         }
     }
