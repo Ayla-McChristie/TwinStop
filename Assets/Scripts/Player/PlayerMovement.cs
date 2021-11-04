@@ -48,16 +48,21 @@ public class PlayerMovement : MonoBehaviour
             moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
             moveVelocity = moveInput.normalized * moveSpeed;
 
-            if (Input.GetKey(KeyCode.W))
-                anim.SetTrigger(moveFwd);
-            else if (Input.GetKey(KeyCode.S))
-                anim.SetTrigger(moveBack);
-            else if (Input.GetKey(KeyCode.A))
-                anim.SetTrigger(leftStrafe);
-            else if (Input.GetKey(KeyCode.D))
-                anim.SetTrigger(rightStrafe);
-            else
-                anim.SetTrigger(idle);
+            float velocityZ = Vector3.Dot(moveInput.normalized, transform.forward);
+            float velocityX = Vector3.Dot(moveInput.normalized, transform.right);
+
+            anim.SetFloat("VelocityZ",velocityZ, 0.1f, Time.deltaTime);
+            anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+            //if (Input.GetKey(KeyCode.W))
+            //    anim.SetTrigger(moveFwd);
+            //else if (Input.GetKey(KeyCode.S))
+            //    anim.SetTrigger(moveBack);
+            //else if (Input.GetKey(KeyCode.A))
+            //    anim.SetTrigger(leftStrafe);
+            //else if (Input.GetKey(KeyCode.D))
+            //    anim.SetTrigger(rightStrafe);
+            //else
+            //    anim.SetTrigger(idle);
         }
         else
         {
