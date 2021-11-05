@@ -10,8 +10,6 @@ public class DoorManager : MonoBehaviour
     private static DoorManager _instance;
     public static DoorManager Instance { get { return _instance; } }
 
-    [SerializeField]
-    public EnemyManager enemyManager;
     /*
      * here is where the non singleton stuff starts -A
      */
@@ -27,9 +25,8 @@ public class DoorManager : MonoBehaviour
      */
     public static void CreateDoorManager()
     {
-        GameObject dmGameObject = new GameObject("DoorManager");
-        dmGameObject.AddComponent<DoorManager>();
-        DoorManager._instance = dmGameObject.GetComponent<DoorManager>();
-        _instance.enemyManager = (EnemyManager)GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
+        GameObject DoorManagerGO = new GameObject("DoorManager");
+        DoorManagerGO.AddComponent<DoorManager>();
+        DoorManager._instance = DoorManagerGO.GetComponent<DoorManager>();
     }
 }
