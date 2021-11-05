@@ -35,7 +35,7 @@ public class TimeManager : MonoBehaviour
     //public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
     private float defaultFixedDeltaTime;
-    [SerializeField] private bool isTimeStopped = false;
+    [SerializeField] public bool isTimeStopped = false;
 
     public TimeBar timeBar; // need this to be able to move the time bar. -Steve
 

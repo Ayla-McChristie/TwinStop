@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private  Vector3 currentMoveToTarget;
 
     private Camera mainCamera;
-    private AudioSource audioS; 
+
     private GunControl gunControlScript;
 
     //Turns true when special scenes happen like a door transition
@@ -35,8 +35,6 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         freezeMovement = false;
 
-        audioS = GetComponent<AudioSource>();
-
         gunControlScript = this.GetComponent<GunControl>();
 
         //currentMoveToTarget = this.transform.position;
@@ -50,23 +48,16 @@ public class PlayerMovement : MonoBehaviour
             moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
             moveVelocity = (moveInput.normalized * moveSpeed)/Time.timeScale;
 
-            float velocityZ = Vector3.Dot(moveInput.normalized, transform.forward);
-            float velocityX = Vector3.Dot(moveInput.normalized, transform.right);
-
-            anim.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
-
-            anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
-
-            //if (Input.GetKey(KeyCode.W))
-            //    anim.SetTrigger(moveFwd);
-            //else if (Input.GetKey(KeyCode.S))
-            //    anim.SetTrigger(moveBack);
-            //else if (Input.GetKey(KeyCode.A))
-            //    anim.SetTrigger(leftStrafe);
-            //else if (Input.GetKey(KeyCode.D))
-            //    anim.SetTrigger(rightStrafe);
-            //else
-            //    anim.SetTrigger(idle);
+            if (Input.GetKey(KeyCode.W))
+                anim.SetTrigger(moveFwd);
+            else if (Input.GetKey(KeyCode.S))
+                anim.SetTrigger(moveBack);
+            else if (Input.GetKey(KeyCode.A))
+                anim.SetTrigger(leftStrafe);
+            else if (Input.GetKey(KeyCode.D))
+                anim.SetTrigger(rightStrafe);
+            else
+                anim.SetTrigger(idle);
         }
         else
         {
@@ -140,11 +131,6 @@ public class PlayerMovement : MonoBehaviour
     {
         gunControlScript.UnFrezeFire();
         freezeMovement = false;
-    }
-
-    public void Step()
-    {
-        audioS.Play();
     }
 
     private void OnTriggerEnter(Collider other)

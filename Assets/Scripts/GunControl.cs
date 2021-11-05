@@ -34,7 +34,6 @@ public class GunControl : MonoBehaviour
     void Start()
     {
         player = this.gameObject;
-        ObjectPool_Projectiles.CreateObjectPoolInstance();
         ObjectPool_Projectiles.Instance.InstantiatePool(bulletPool);
 
         projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;
@@ -116,7 +115,7 @@ public class GunControl : MonoBehaviour
             //    targetLoc = targetLoc.normalized;
             //}
             direction = direction.normalized;
-            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
@@ -145,7 +144,7 @@ public class GunControl : MonoBehaviour
 
             Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
 
-            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
