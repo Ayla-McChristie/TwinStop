@@ -175,6 +175,7 @@ public class TimeManager : MonoBehaviour
             //TimeStop();
             TimeStopPPOveraly.SetActive(false);
             isTimeStopped = false;
+            timeBar.TimeSet(timeValue);
         }
         //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
         //{
