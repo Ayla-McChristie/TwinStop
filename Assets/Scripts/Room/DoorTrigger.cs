@@ -48,7 +48,6 @@ public class DoorTrigger : MonoBehaviour
         //Debug.Log(thisGameObject.GetComponentInChildren<GameObject>().ToString());
 
     }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Player" && EnemyManager.Instance.isInCombat == false) //
