@@ -6,13 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class Pool
 {
-    public string name;
     public GameObject prefab;
     public int maxSize;
 
-    public Pool(string Name, GameObject Prefab, int PoolSize)
+    public Pool(GameObject Prefab, int PoolSize)
     {
-        this.name = Name;
         this.prefab = Prefab;
         this.maxSize = PoolSize;
     }
@@ -56,7 +54,6 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     public GameObject GetProjectile(string objectName)
     {
-        Debug.Log("hi");
         GameObject objectSpawn = poolDictionary[objectName].Dequeue();
         objectSpawn.SetActive(true);
         poolDictionary[objectName].Enqueue(objectSpawn);
@@ -71,9 +68,10 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     public void InstantiatePool(Pool pool)
     {
-        CheckForInstance();
+        //CheckForInstance();
         GameObject temp;
         Queue<GameObject> objectPool = new Queue<GameObject>();
+        string poolName = pool.prefab.name;
 
         for (int i = 0; i < pool.maxSize; i++)
         {
@@ -85,7 +83,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
             objectPool.Enqueue(temp);
         }
         //add pool to the dictionary
-        poolDictionary.Add(pool.name, objectPool);
+        poolDictionary.Add(poolName, objectPool);
         //pools.Add(pool);
     }
 

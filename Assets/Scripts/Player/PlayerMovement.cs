@@ -14,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private  Vector3 currentMoveToTarget;
 
     private Camera mainCamera;
-
+    private AudioSource audioS; 
     private GunControl gunControlScript;
-    AudioSource audioS;
+
     //Turns true when special scenes happen like a door transition
     private bool freezeMovement;
 
@@ -34,7 +34,9 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
+
         audioS = GetComponent<AudioSource>();
+
         gunControlScript = this.GetComponent<GunControl>();
 
         //currentMoveToTarget = this.transform.position;
@@ -138,6 +140,11 @@ public class PlayerMovement : MonoBehaviour
     {
         gunControlScript.UnFrezeFire();
         freezeMovement = false;
+    }
+
+    public void Step()
+    {
+        audioS.Play();
     }
 
     private void OnTriggerEnter(Collider other)

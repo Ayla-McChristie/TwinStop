@@ -59,7 +59,7 @@ public class RoomTrigger : MonoBehaviour
             Debug.Log("player has entered a room");
             PlayerStats.ResetKillCount();
 
-            RoomManager.Instance.SetCurrentRoom(this);
+            RoomManager.Instance.SetCurrentRoom(this); 
 
             StartCoroutine("DelaySpawnForParticles", longestDelay);
             
