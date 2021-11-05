@@ -1815,6 +1815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   numOfHearts: 3
+  invicibilityDuration: 1
   keys: 0
   bossKeys: 0
   hearts:
@@ -1823,6 +1824,8 @@ MonoBehaviour:
   - {fileID: 0}
   fullHeart: {fileID: 21300000, guid: 2e95bae23832157439cd054eb2b0aedb, type: 3}
   emptyHeart: {fileID: 21300000, guid: 600bea1ac3d5d8a4ea19651f90979dca, type: 3}
+  flashIntensity: 50
+  flashDuration: 1
 --- !u!114 &2505359911109289590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4331,7 +4334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 120486585779821539, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: MaxTimeValue
