@@ -51,5 +51,11 @@ public class Health : MonoBehaviour
         {
             health--;
         }
-    }   
+
+        if(other.gameObject.tag == "HealthPickUp")
+        {
+            health++;
+        }
+
+    } 
 }
