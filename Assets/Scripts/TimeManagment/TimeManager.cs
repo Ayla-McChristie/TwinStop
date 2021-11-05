@@ -17,8 +17,8 @@ public class TimeManager : MonoBehaviour
     private float MaxTimeValue = 4f;
 
     //REMOVE LATER - Just for showing off new Timestop
-    [SerializeField]
-    public Image timeStopReadyIndicator;
+    //[SerializeField]
+    //public Image timeStopReadyIndicator;
      
     //The timer variable for the time stop
     float timeValue;
@@ -29,6 +29,10 @@ public class TimeManager : MonoBehaviour
     //Keeps track of when the timer times out, turns true when the timer runs out and false after
     //the cooldown
     bool outtaTime;
+
+    //The Timestop PostProcessing Overlay
+    [SerializeField]
+    GameObject TimeStopPPOveraly;
 
    
 
@@ -70,6 +74,8 @@ public class TimeManager : MonoBehaviour
         coolDownValue = MaxTimeValue;
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
+
+        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");
         
     }
 
@@ -86,8 +92,6 @@ public class TimeManager : MonoBehaviour
         Cooldown();
 
         EaseTimeToDefault();
-
-        //Cooldown();
         
         Timer();
         AmIOuttaTime();
@@ -116,6 +120,7 @@ public class TimeManager : MonoBehaviour
             {
                 coolDownValue = 0;
             }
+            
             outtaTime = true;
 
         }
@@ -137,6 +142,7 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale)
         {
+            TimeStopPPOveraly.SetActive(true);
             //Debug.Log("AYEAH");
             isTimeStopped = true;
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
@@ -167,6 +173,7 @@ public class TimeManager : MonoBehaviour
         else
         {
             //TimeStop();
+            TimeStopPPOveraly.SetActive(false);
             isTimeStopped = false;
         }
         //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
