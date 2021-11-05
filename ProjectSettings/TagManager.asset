@@ -3,18 +3,28 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Obstacle
+  - PlayerBullet
+  - Enemy
+  - EnemyManager
+  - CamFollow
+  - EnemyBullet
+  - TransitionTrigger
+  - KeyPickUp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerBullet
+  - EnemyBullet
+  - Enemy
+
   - 
   - 
   - 
