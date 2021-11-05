@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         if(!freezeMovement)
         {
             moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            moveVelocity = moveInput.normalized * moveSpeed;
+            moveVelocity = (moveInput.normalized * moveSpeed)/Time.timeScale;
 
             if (Input.GetKey(KeyCode.W))
                 anim.SetTrigger(moveFwd);

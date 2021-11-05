@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
         else
         {
             //transform.position += direction * b_Speed * Time.deltaTime;
-            //rb.velocity = direction * b_Speed;
+            rb.velocity = direction * b_Speed;
         }
 
         
