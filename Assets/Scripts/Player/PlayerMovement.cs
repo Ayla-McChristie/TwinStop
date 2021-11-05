@@ -22,12 +22,6 @@ public class PlayerMovement : MonoBehaviour
 
     Animator anim;
 
-    int moveFwd = Animator.StringToHash("Forward Ani");
-    int moveBack = Animator.StringToHash("Backward Ani");
-    int idle = Animator.StringToHash("Idle");
-    int rightStrafe = Animator.StringToHash("RightStrafe");
-    int leftStrafe = Animator.StringToHash("LeftStrafe");
-
     private void Start()
     {
         this.playerRigidbody = GetComponent<Rigidbody>();
@@ -48,16 +42,11 @@ public class PlayerMovement : MonoBehaviour
             moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
             moveVelocity = (moveInput.normalized * moveSpeed)/Time.timeScale;
 
-            if (Input.GetKey(KeyCode.W))
-                anim.SetTrigger(moveFwd);
-            else if (Input.GetKey(KeyCode.S))
-                anim.SetTrigger(moveBack);
-            else if (Input.GetKey(KeyCode.A))
-                anim.SetTrigger(leftStrafe);
-            else if (Input.GetKey(KeyCode.D))
-                anim.SetTrigger(rightStrafe);
-            else
-                anim.SetTrigger(idle);
+            float velocityX = Vector3.Dot(moveInput.normalized, transform.right);
+            float velocityZ = Vector3.Dot(moveInput.normalized, transform.forward);
+
+            anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+            anim.SetFloat("VelocityZ", velocityZ,0.1f, Time.deltaTime);
         }
         else
         {
@@ -131,6 +120,11 @@ public class PlayerMovement : MonoBehaviour
     {
         gunControlScript.UnFrezeFire();
         freezeMovement = false;
+    }
+
+    public void Step()
+    {
+
     }
 
     private void OnTriggerEnter(Collider other)
