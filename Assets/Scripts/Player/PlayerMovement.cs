@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
-        //audioS = GetComponent<AudioSource>();
+        playerFootStep = GetComponent<AudioSource>();
         gunControlScript = this.GetComponent<GunControl>();
 
         //currentMoveToTarget = this.transform.position;
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Step()
     {
-        //audioS.Play();
+        playerFootStep.Play();
     }
 
     private void OnTriggerEnter(Collider other)

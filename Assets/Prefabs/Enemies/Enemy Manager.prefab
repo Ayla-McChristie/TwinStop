@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPools:
-  - name: TestEnemy
-    prefab: {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
-    maxSize: 50
-  - name: SentinelTest
-    prefab: {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
-    maxSize: 50
+  - prefab: {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
+    maxSize: 100
+  - prefab: {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+    maxSize: 100
+  - prefab: {fileID: 6211878323032143346, guid: 963a321cb03299b4caf961b2742d09f9, type: 3}
+    maxSize: 100
   isInCombat: 0

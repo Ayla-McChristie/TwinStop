@@ -6,13 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class Pool
 {
-    public string name;
     public GameObject prefab;
     public int maxSize;
 
-    public Pool(string Name, GameObject Prefab, int PoolSize)
+    public Pool(GameObject Prefab, int PoolSize)
     {
-        this.name = Name;
         this.prefab = Prefab;
         this.maxSize = PoolSize;
     }
@@ -42,12 +40,10 @@ public class ObjectPool_Projectiles : MonoBehaviour
             _instance = this;
         }
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
     }
 
     void Start()
     {
-
         foreach (Pool p in pools)
         {
             InstantiatePool(p);
@@ -71,7 +67,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     public void InstantiatePool(Pool pool)
     {
-        CheckForInstance();
+        //CheckForInstance();s
         GameObject temp;
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
@@ -85,7 +81,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
             objectPool.Enqueue(temp);
         }
         //add pool to the dictionary
-        poolDictionary.Add(pool.name, objectPool);
+        poolDictionary.Add(pool.prefab.name, objectPool);
         //pools.Add(pool);
     }
 
