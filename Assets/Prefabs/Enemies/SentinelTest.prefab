@@ -213,6 +213,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1587090509596471974}
     m_Modifications:
+    - target: {fileID: 937627813639765336, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.007
+      objectReference: {fileID: 0}
     - target: {fileID: 2683839958581348751, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -223,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683839958581348751, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2683839958581348751, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
       propertyPath: m_LocalPosition.z
@@ -257,9 +261,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3498067784015914516, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.27699998
+      objectReference: {fileID: 0}
     - target: {fileID: 4267553529175486605, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
       propertyPath: m_Name
       value: vfx_Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222665799863862838, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0069999695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa523681be3b7ab47868e52bc8da1344, type: 3}

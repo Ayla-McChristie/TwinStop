@@ -65,7 +65,7 @@ public class RoomTrigger : MonoBehaviour
         {
             roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles(); 
         }
-            yield return new WaitForSeconds(longestDelay);
+        yield return new WaitForSeconds(longestDelay);
         hasStarted = true;
         NoMoreWaves = false;
 

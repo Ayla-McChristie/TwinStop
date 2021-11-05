@@ -15,11 +15,11 @@ public class PlayDuringCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EnemyManager.Instance.isInCombat == true && !ps.isPlaying)
+        if (EnemyManager.Instance.isInCombat && !ps.isPlaying)
         {
             ps.Play();
         }
-        else
+        else if(!EnemyManager.Instance.isInCombat)
         {
             ps.Stop();
         }
