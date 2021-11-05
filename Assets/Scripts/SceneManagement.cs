@@ -30,6 +30,11 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void LoadCertainScene()
+    {
+
+    }
+
     public void QuitGame()
     {
         Application.Quit();
