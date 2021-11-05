@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     /*
      * Methods
      */
-
+    AudioSource deathSound;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         }
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        deathSound = GetComponent<AudioSource>();
     }
 
     public virtual void FixedUpdate()
@@ -103,6 +104,7 @@ public class Enemy : MonoBehaviour
 
         if (collision.transform.tag == "PlayerBullet")
         {
+            deathSound.Play();
             this.Die();
         }
     }
