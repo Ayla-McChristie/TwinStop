@@ -15,9 +15,7 @@ public class Door : MonoBehaviour
     [SerializeField]
     GameObject doorModels;
     public bool IsOpen { get; set; }
-    AudioSource[] audioS;
-    AudioSource doorOpenSound;
-    AudioSource doorCloseSound;
+
     Collider doorCollider;
     Renderer renderer;
 
@@ -38,9 +36,7 @@ public class Door : MonoBehaviour
         this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
         //this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
-        audioS = GetComponents<AudioSource>();
-        doorOpenSound = audioS[0];
-        doorCloseSound = audioS[1];
+
         //cam = GameObject.Find("2Dcam");
     }
 
@@ -55,7 +51,6 @@ public class Door : MonoBehaviour
             //this.renderer.enabled = false;
             this.doorModels.SetActive(false);
             this.doorCollider.enabled = false;
-            doorOpenSound.Play();
         }
     }
     /*
@@ -67,7 +62,6 @@ public class Door : MonoBehaviour
         //this.renderer.enabled = true;
         this.doorModels.SetActive(true);
         this.doorCollider.enabled = true;
-        doorCloseSound.Play();
     }
     /*
      * Unlocks the door. -A
