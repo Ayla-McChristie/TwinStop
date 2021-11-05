@@ -34,6 +34,7 @@ public class GunControl : MonoBehaviour
     void Start()
     {
         player = this.gameObject;
+        ObjectPool_Projectiles.CreateObjectPoolInstance();
         ObjectPool_Projectiles.Instance.InstantiatePool(bulletPool);
 
         projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;

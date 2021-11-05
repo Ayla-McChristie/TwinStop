@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private  Vector3 currentMoveToTarget;
 
     private Camera mainCamera;
-
+    AudioSource playerFootStep;
     private GunControl gunControlScript;
 
     //Turns true when special scenes happen like a door transition
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
-
+        //audioS = GetComponent<AudioSource>();
         gunControlScript = this.GetComponent<GunControl>();
 
         //currentMoveToTarget = this.transform.position;
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             float velocityZ = Vector3.Dot(moveInput.normalized, transform.forward);
 
             anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
-            anim.SetFloat("VelocityZ", velocityZ,0.1f, Time.deltaTime);
+            anim.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
         }
         else
         {
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Step()
     {
-
+        //audioS.Play();
     }
 
     private void OnTriggerEnter(Collider other)
