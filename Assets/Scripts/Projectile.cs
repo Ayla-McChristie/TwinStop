@@ -16,13 +16,14 @@ public class Projectile : MonoBehaviour
     Vector3 direction;
     string projectileUser;
     Rigidbody rb;
-
+    AudioSource projectileSound;
     //ObjectPool_Projectiles opP;
 
     void Start()
     {
         //opP = new ObjectPool_Projectiles();
         rb = GetComponent<Rigidbody>();
+        //projectileSound = GetComponent<AudioSource>();
     }
 
     public void SetUp(Vector3 direction, Vector3 position, string projectileUser)
@@ -31,6 +32,7 @@ public class Projectile : MonoBehaviour
         this.transform.position = position;
         this.projectileUser = projectileUser;
         transform.forward = direction;
+        //projectileSound.Play();
         //IgnoreCollision(projectileUser);
         //IgnoreProjectiles();
     }
