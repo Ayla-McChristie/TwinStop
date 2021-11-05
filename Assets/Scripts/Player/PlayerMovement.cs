@@ -34,10 +34,9 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
-<<<<<<< Updated upstream
+
         audioS = GetComponent<AudioSource>();
-=======
->>>>>>> Stashed changes
+
         gunControlScript = this.GetComponent<GunControl>();
 
         //currentMoveToTarget = this.transform.position;
@@ -49,30 +48,13 @@ public class PlayerMovement : MonoBehaviour
         if(!freezeMovement)
         {
             moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-<<<<<<< Updated upstream
             moveVelocity = (moveInput.normalized * moveSpeed)/Time.timeScale;
-
-            if (Input.GetKey(KeyCode.W))
-                anim.SetTrigger(moveFwd);
-            else if (Input.GetKey(KeyCode.S))
-                anim.SetTrigger(moveBack);
-            else if (Input.GetKey(KeyCode.A))
-                anim.SetTrigger(leftStrafe);
-            else if (Input.GetKey(KeyCode.D))
-                anim.SetTrigger(rightStrafe);
-            else
-                anim.SetTrigger(idle);
-=======
-            moveVelocity = moveInput.normalized * moveSpeed;
 
             float velocityZ = Vector3.Dot(moveInput.normalized, transform.forward);
             float velocityX = Vector3.Dot(moveInput.normalized, transform.right);
-<<<<<<< Updated upstream
-            anim.SetFloat("VelocityZ",velocityZ, 0.1f, Time.deltaTime);
-=======
 
             anim.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
->>>>>>> Stashed changes
+
             anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
 
             //if (Input.GetKey(KeyCode.W))
@@ -85,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
             //    anim.SetTrigger(rightStrafe);
             //else
             //    anim.SetTrigger(idle);
->>>>>>> Stashed changes
         }
         else
         {
