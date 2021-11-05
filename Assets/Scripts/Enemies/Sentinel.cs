@@ -77,14 +77,16 @@ public class Sentinel : Enemy
         if(!coolDown)
         {
             projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
-            projectile.transform.position = projectileStart.transform.position;
+            //projectile.transform.position = projectileStart.transform.position;
             if (GetPredictedDir(target.transform.position, this.transform.position, target.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))
             {
-                projectile.GetComponent<Rigidbody>().velocity = direction * projectile.GetComponent<Projectile>().b_Speed;
+                //projectile.GetComponent<Rigidbody>().velocity = direction * projectile.GetComponent<Projectile>().b_Speed;
+                projectile.GetComponent<Projectile>().SetUp(direction, projectileStart.transform.position, "Enemy");
             }
             else
             {
-                projectile.GetComponent<Rigidbody>().velocity = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
+                //projectile.GetComponent<Rigidbody>().velocity = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
+                projectile.GetComponent<Projectile>().SetUp((target.transform.position - this.transform.position), projectileStart.transform.position, "Enemy");
             }
             coolDown = true; //Space out when the enemy can shoot again
             Debug.Log(projectile.transform.position);

@@ -31,21 +31,21 @@ public class Projectile : MonoBehaviour
         this.transform.position = position;
         this.projectileUser = projectileUser;
         transform.forward = direction;
-        IgnoreCollision(projectileUser);
-        IgnoreProjectiles();
+        //IgnoreCollision(projectileUser);
+        //IgnoreProjectiles();
     }
 
-    void IgnoreCollision(string user)
-    {
-        if (user == "Player")
-            Physics.IgnoreCollision(GameObject.FindWithTag("Player").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-        else if (user == "Enemy")
-            foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
-            {
-                Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-            }
+    //void IgnoreCollision(string user)
+    //{
+    //    if (user == "Player")
+    //        Physics.IgnoreCollision(GameObject.FindWithTag("Player").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    //    else if (user == "Enemy")
+    //        foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
+    //        {
+    //            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    //        }
         
-    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -65,18 +65,18 @@ public class Projectile : MonoBehaviour
         
     }
 
-    void IgnoreProjectiles()
-    {
-        if (GameObject.FindWithTag(gameObject.transform.tag))
-            foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
-            {
-                Physics.IgnoreCollision(item.GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-            }
-        //    if (GameObject.FindWithTag("PlayerBullet"))
-        //        Physics.IgnoreCollision(GameObject.FindWithTag("PlayerBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-        //    if (GameObject.FindWithTag("EnemyBullet"))
-        //        Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-    }
+    //void IgnoreProjectiles()
+    //{
+    //    if (GameObject.FindWithTag(gameObject.transform.tag))
+    //        foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
+    //        {
+    //            Physics.IgnoreCollision(item.GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    //        }
+    //    //    if (GameObject.FindWithTag("PlayerBullet"))
+    //    //        Physics.IgnoreCollision(GameObject.FindWithTag("PlayerBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    //    //    if (GameObject.FindWithTag("EnemyBullet"))
+    //    //        Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
