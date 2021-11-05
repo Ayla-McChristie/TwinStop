@@ -20,6 +20,10 @@ public class RoomManager : MonoBehaviour
             Destroy(this);
         }
     }
+    private void Start()
+    {
+        CurrentRoom = GameObject.Find("RoomTrigger").GetComponent<RoomTrigger>(); 
+    }
 
     // Update is called once per frame
     void Update()

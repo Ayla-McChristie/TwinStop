@@ -47,9 +47,12 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        foreach (var p in enemyPools)
+        if (ObjectPool_Projectiles.Instance != null)
         {
-            ObjectPool_Projectiles.Instance.InstantiatePool(p);
+            foreach (var p in enemyPools)
+            {
+                ObjectPool_Projectiles.Instance.InstantiatePool(p);
+            }
         }
     }
 

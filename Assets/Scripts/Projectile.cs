@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
     {
         //opP = new ObjectPool_Projectiles();
         rb = GetComponent<Rigidbody>();
-        //projectileSound = GetComponent<AudioSource>();
+        projectileSound = GetComponent<AudioSource>();
     }
 
     public void SetUp(Vector3 direction, Vector3 position, string projectileUser)
@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
         {
             //use unscaled delta time if unaffected by time stop
             //use delta time if affected by time stop
-            rb.velocity = direction * b_Speed;
+            rb.velocity = (direction * b_Speed)/Time.timeScale;
         }
         else
         {
