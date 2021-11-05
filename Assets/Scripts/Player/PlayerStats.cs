@@ -6,113 +6,57 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMovement))]
-class PlayerStats : MonoBehaviour, IDamageFlash
+class PlayerStats : MonoBehaviour
 {
-    /*
-     * Kill Variables
-     */
     private static int numOfKilledEnemies;
     public static int NumOfKilledEnemies { get; private set; }
 
-    /*
-     * Health Variables
-     */
-    public int health = 3;
-    // Total amount of health left
-    public int Health
-    {
-        get => health;
-        set => health = value;
-    } 
+    public int health; // Total amount of health left
     public int numOfHearts; // Max amount of hearts a player can have, should be 3
+    bool isInvincible;
 
-    /*
-     * Invinciblity Variables
-     */
-    private bool isInvincible;
-    private float invincibilityTimer;
-    public float invicibilityDuration;
-
-
-    /*
-     * Key Variables
-     */
     public int keys; //number of keys the player has -A
     public int bossKeys; //number of bossKeys the player has -A
 
-    /*
-     * UI Variables
-     */
     public Image[] hearts; // all heart UI game objects go here
     public Sprite fullHeart; // sprite of full heart here
     public Sprite emptyHeart; // sprite of empty heart here
 
-    /*
-     * HitFlash Variables
-     */
-    public SkinnedMeshRenderer FlashRenderer { get; set; }
-    public float flashIntensity;
-    public float FlashIntensity
-    {
-        get => flashIntensity;
-        set => flashIntensity = value;
-    }
-    public float flashDuration;
-    public float FlashDuration 
-    {
-        get => flashDuration;
-        set => flashDuration = value;
-    }
-    public float FlashTimer { get; set; }
+    public float hitFlashIntensity;
+    public float hitFlashDuration;
+    float flashTimer;
 
-    private void Start()
-    {
-        FlashRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-    }
     void Update()
     {
         UpdateHearts();
-        TestHurt();
-        FlashCoolDown();
-        InvincibilityCoolDown();
+
         //Debug.Log(health);
-    }
-    void InvincibilityCoolDown()
-    {
-        if (!isInvincible)
+        if (health <= 0)
         {
-            FlashTimer -= Time.unscaledTime;
-            float lerp = Mathf.Clamp(invincibilityTimer, 0, invicibilityDuration);
-            if (invincibilityTimer <= 0)
-            {
-                isInvincible = false;
-            }
+            PlayerDead();
         }
     }
-    void FlashCoolDown()
-    {
-        FlashTimer -= Time.unscaledTime;
-        float lerp = Mathf.Clamp01(FlashTimer / FlashDuration);
-        float intesity = (lerp * FlashIntensity) + 1.0f;
-        FlashRenderer.material.color = Color.white * intesity;
-    }
+
     public static void ResetKillCount()
     {
         NumOfKilledEnemies = 0;
     }
+
     public static void AddToKillCount()
     {
         NumOfKilledEnemies++;
         //Debug.Log(NumOfKilledEnemies);
     }
+
+    // TODO add code for projectiles
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyBullet")
         {
             if (!isInvincible)
             {
-                TakeDamage();
                 isInvincible = true;
+                health--;
             }
         }
 
@@ -120,7 +64,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         // Code for Health Pick Up
         if(other.gameObject.tag == "HealthPickUp")
         {
-            Health++;
+            health++;
             Destroy(other.gameObject);
         }
 
@@ -131,35 +75,22 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             Destroy(other.gameObject);
             Debug.Log("Key is now 1");
         }
-    }
-    public void TakeDamage()
-    {
-        TakeDamage(1);
-    }
-    public void TakeDamage(int damageAmount)
-    {
-        Health -= damageAmount;
-        if (Health <= 0)
-        {
-            PlayerDead();
-        }
-        isInvincible = true;
-        invincibilityTimer = invicibilityDuration;
-        FlashTimer = FlashDuration;
+
+
     }
     void UpdateHearts()
     {
         // Health Lock
-        if (Health > numOfHearts)
+        if (health > numOfHearts)
         {
-            Health = numOfHearts; // this makes sure that players can never go over the set amount of hearts
+            health = numOfHearts; // this makes sure that players can never go over the set amount of hearts
 
         }
 
         // system for turning full hearts to empty hearts
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < Health)
+            if (i < health)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -182,12 +113,5 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     void PlayerDead()
     {
         FindObjectOfType<SceneManagement>().LoadCurrentLevel();
-    }
-    void TestHurt()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            this.TakeDamage();
-        }
     }
 }

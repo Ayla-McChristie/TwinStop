@@ -30,8 +30,6 @@ public class EnemyManager : MonoBehaviour
     public bool isInCombat;
     private int numOfEnemiesInCombat;
 
-
-
     private void Awake()
     {
         if (_instance == null)
