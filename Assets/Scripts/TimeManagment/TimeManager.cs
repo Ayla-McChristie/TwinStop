@@ -17,8 +17,8 @@ public class TimeManager : MonoBehaviour
     private float MaxTimeValue = 4f;
 
     //REMOVE LATER - Just for showing off new Timestop
-    [SerializeField]
-    public Image timeStopReadyIndicator;
+    //[SerializeField]
+    //public Image timeStopReadyIndicator;
      
     //The timer variable for the time stop
     float timeValue;
@@ -31,6 +31,7 @@ public class TimeManager : MonoBehaviour
     bool outtaTime;
 
     //The Timestop PostProcessing Overlay
+    [SerializeField]
     GameObject TimeStopPPOveraly;
 
    
@@ -74,7 +75,7 @@ public class TimeManager : MonoBehaviour
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
 
-        TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");
+        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");
         
     }
 
