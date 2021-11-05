@@ -10,8 +10,9 @@ public class DropPickUp : MonoBehaviour
     {
         if(other.gameObject.tag == "PlayerBullet")
         {
+            Destroy(this.gameObject); 
             Instantiate(GameObject, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-            Destroy(this.gameObject);
+               
         }
     }
 
