@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class RoomTrigger : MonoBehaviour
 {
-    public class RoomDetail
-    {
-        public int roomNum;
-        public List<GameObject> listOfEnemies;
-        public Transform[] SpawnLoc;
-    }
-
     [SerializeField]
     List<GameObject> spawnPoints;
     //enemy manager should make itself
@@ -18,20 +11,31 @@ public class RoomTrigger : MonoBehaviour
     int waveNum;
     int totalWaves;
     bool hasStarted = false;
+    float longestDelay = 0;
 
-    private bool noMoreWaves;
     public bool NoMoreWaves { get; private set; }
 
     private void Start()
     {
         totalWaves = GetTotalWaves();
-        Debug.Log($"total waves is {totalWaves}");
+        //Debug.Log($"total waves is {totalWaves}");
+        foreach (var roomSpawn in spawnPoints)
+        {
+            //roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
+            foreach (var item in roomSpawn.GetComponentsInChildren<ParticleSystem>())
+            {
+                if (item.startDelay > longestDelay)
+                {
+                    longestDelay = item.startDelay;
+                }
+            }
+        }
     }
     private void Update()
     {
         if (waveNum >= totalWaves)
         {
-            noMoreWaves = true;
+            NoMoreWaves = true;
         }
         if (waveNum < totalWaves && EnemyManager.Instance.isInCombat == false && hasStarted) 
         {
@@ -47,12 +51,24 @@ public class RoomTrigger : MonoBehaviour
             Debug.Log("player has entered a room");
             PlayerStats.ResetKillCount();
 
-            hasStarted = true;
-            NoMoreWaves = false;
+            StartCoroutine("DelaySpawnForParticles", longestDelay);
+            
             /*
             * Start wave spawn 
             */
         }
+    }
+
+    IEnumerator DelaySpawnForParticles(float longestDelay)
+    {
+        foreach (var roomSpawn in spawnPoints)
+        {
+            roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles(); 
+        }
+            yield return new WaitForSeconds(longestDelay);
+        hasStarted = true;
+        NoMoreWaves = false;
+
     }
 
     void SpawnNextWave()

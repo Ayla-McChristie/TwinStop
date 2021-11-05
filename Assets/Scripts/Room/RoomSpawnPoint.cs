@@ -14,8 +14,32 @@ public class RoomSpawnPoint : MonoBehaviour
         public List<GameObject> WaveList;
     }
 
+    GameObject spawnParticles;
     private void Start()
     {
         //List<WaveListWrapper> listOfWaves = new List<WaveListWrapper>();
+        foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
+        {
+            item.Stop();
+        }
+    }
+
+    public void PlaySpawnParticles()
+    {
+        foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
+        {
+            item.Play();
+        }
+    }
+
+    private void Update()
+    {
+        if (((RoomTrigger)GetComponentInParent<RoomTrigger>()).NoMoreWaves == true)
+        {
+            foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
+            {
+                item.Stop();
+            }
+        }
     }
 }
