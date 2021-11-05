@@ -32363,7 +32363,7 @@ GameObject:
   - component: {fileID: 963838316}
   - component: {fileID: 963838318}
   - component: {fileID: 963838317}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38672,7 +38672,7 @@ GameObject:
   - component: {fileID: 1176745452}
   - component: {fileID: 1176745454}
   - component: {fileID: 1176745453}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -38822,8 +38822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 0}
-  isGlobal: 1
+  sharedProfile: {fileID: 11400000, guid: dac0b8b9cbc2ad84e94e29485a550440, type: 2}
+  isGlobal: 0
   blendDistance: 0
   weight: 1
   priority: 0
@@ -81285,8 +81285,9 @@ GameObject:
   - component: {fileID: 2032891836}
   - component: {fileID: 2032891835}
   - component: {fileID: 2032891838}
-  m_Layer: 0
-  m_Name: CM vcam1
+  - component: {fileID: 2032891839}
+  m_Layer: 10
+  m_Name: TopDownCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81377,6 +81378,23 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 540756090}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &2032891839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032891834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: dac0b8b9cbc2ad84e94e29485a550440, type: 2}
 --- !u!43 &2033830919
 Mesh:
   m_ObjectHideFlags: 0
