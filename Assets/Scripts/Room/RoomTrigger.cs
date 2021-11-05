@@ -15,6 +15,14 @@ public class RoomTrigger : MonoBehaviour
 
     public bool NoMoreWaves { get; private set; }
 
+    private void Awake()
+    {
+        if (RoomManager.Instance == null)
+        {
+            RoomManager.CreateRoomManager();
+        }
+    }
+
     private void Start()
     {
         totalWaves = GetTotalWaves();
@@ -50,6 +58,8 @@ public class RoomTrigger : MonoBehaviour
         {
             Debug.Log("player has entered a room");
             PlayerStats.ResetKillCount();
+
+            RoomManager.Instance.SetCurrentRoom(this);
 
             StartCoroutine("DelaySpawnForParticles", longestDelay);
             
