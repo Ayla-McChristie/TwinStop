@@ -82,6 +82,24 @@ class PlayerStats : MonoBehaviour
                 health--;
             }
         }
+
+        // Coded this before I know one was already made for keys. Mine works and is tested -Steven
+        // Code for Health Pick Up
+        if(other.gameObject.tag == "HealthPickUp")
+        {
+            health++;
+            Destroy(other.gameObject);
+        }
+
+        // ! Code for Key pickup
+        if(other.gameObject.tag == "KeyPickUp")
+        {
+            keys++;
+            Destroy(other.gameObject);
+            Debug.Log("Key is now 1");
+        }
+
+
     }
     void PlayerDead()
     {
