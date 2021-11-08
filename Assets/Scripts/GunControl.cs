@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class GunControl : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class GunControl : MonoBehaviour
     GameObject projectileStartPos;
     //this is a shortcut to the parent object but i probably dont need this
     GameObject player;
+
+    private PlayerActionControls playerActionControls;
 
     [SerializeField]
     Pool bulletPool;
@@ -34,7 +38,6 @@ public class GunControl : MonoBehaviour
     void Start()
     {
         player = this.gameObject;
-        ObjectPool_Projectiles.CreateObjectPoolInstance();
         ObjectPool_Projectiles.Instance.InstantiatePool(bulletPool);
 
         projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;
@@ -42,6 +45,9 @@ public class GunControl : MonoBehaviour
         coolDown = false;
         fireTimer = 0;
         freezeFire = false;
+
+        //i think this is technical debt but i dunno
+        playerActionControls = new PlayerActionControls();
     }
 
     void Update()
@@ -67,30 +73,20 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
+        var input = playerActionControls.Player.Aim.ReadValue<Vector2>();
+        Vector3 vNewInput = new Vector3(input.x, input.y, 0.0f);
 
-        direction = GetMousePos() - player.transform.position;
-        direction.y = 0;
-        transform.forward = direction;
-        
+        var angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, angle, 0);
+
+        //var aimPos = playerActionControls.Player.Aim.ReadValue<Vector2>();
+        //var aimWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(aimPos.x, aimPos.y, player.transform.position.y));
 
 
-        //Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
-        //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        //float rayLength; // Length of line from Camera to nearest ground
+        //direction = aimWorldPos - player.transform.position;
+        //direction.y = 0;
+        //transform.forward = direction;
 
-        //if (groundPlane.Raycast(cameraRay, out rayLength))
-        //{
-        //    Vector3 pointToLook = cameraRay.GetPoint(rayLength) - this.transform.position;
-        //    pointToLook = new Vector3(pointToLook.x, this.transform.position.y, pointToLook.z);
-        //    Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
-        //    this.transform.LookAt(pointToLook);
-        //    pointToLook.y = 0;
-        //    direction = pointToLook;
-
-        //    //var rotation = Quaternion.LookRotation(pointToLook);
-        //    //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed*Time.deltaTime);
-
-        //}
     }
 
     Vector3 GetMousePos()
@@ -116,7 +112,7 @@ public class GunControl : MonoBehaviour
             //    targetLoc = targetLoc.normalized;
             //}
             direction = direction.normalized;
-            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
@@ -139,15 +135,17 @@ public class GunControl : MonoBehaviour
     
     void SpreadShoot()
     {
-        if (Input.GetMouseButton(0) && !coolDown)
-        {
-            //float offset = (float)Random.Range(-maxSpread, maxSpread);
+        //float offset = (float)Random.Range(-maxSpread, maxSpread);
 
-            Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
+        Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
 
-            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
-            obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
-            coolDown = true;
-        }
+        var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
+        obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
+        coolDown = true;
+    }
+
+    public void OnFire()
+    {
+        SpreadShoot();
     }
 }

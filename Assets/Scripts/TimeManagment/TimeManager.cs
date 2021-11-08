@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class TimeManager : MonoBehaviour
 {
@@ -33,8 +34,6 @@ public class TimeManager : MonoBehaviour
     //The Timestop PostProcessing Overlay
     [SerializeField]
     GameObject TimeStopPPOveraly;
-
-   
 
     //public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
@@ -164,19 +163,19 @@ public class TimeManager : MonoBehaviour
 
     void FreezeTime()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            TimeStop();
-            timeBar.TimeSet(timeValue);
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    //TimeStop();
+        //    //timeBar.TimeSet(timeValue);
             
-        }
-        else
-        {
+        //}
+        //else
+        //{
             //TimeStop();
             TimeStopPPOveraly.SetActive(false);
             isTimeStopped = false;
             timeBar.TimeSet(timeValue);
-        }
+        //}
         //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
         //{
         //    isTimeStopped = false;
@@ -242,20 +241,11 @@ public class TimeManager : MonoBehaviour
             Time.timeScale += ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSpeedUpRate;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
+    }
 
-        // testing code
-        /*for (int i = 0; i < 1f; i++)
-        {
-            if (Time.timeScale < 1f)
-            {
-            Debug.Log("Time has started to revert back");
-            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-            }
-
-            Debug.Log("Time is back to normal");
-        }*/
-
-
+    public void OnTimeStop(InputValue input)
+    {
+        TimeStop();
+        timeBar.TimeSet(timeValue);
     }
 }
