@@ -74,8 +74,7 @@ public class TimeManager : MonoBehaviour
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
 
-        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");
-        
+        TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
     }
 
     // Update is called once per frame

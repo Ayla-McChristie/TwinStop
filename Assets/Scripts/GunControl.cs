@@ -13,6 +13,10 @@ public class GunControl : MonoBehaviour
     [Tooltip("Changes how far the bullets are spread. 0 means no spread")]
     [Range(0f, 1f)]
     float spreadModifier = .2f;
+    [SerializeField]
+    private float controllerDeadzone = 0.1f;
+    [SerializeField]
+    float rotationSmoothing = 1000f;
 
     //this is where the bullet spawns
     GameObject projectileStartPos;
@@ -20,6 +24,7 @@ public class GunControl : MonoBehaviour
     GameObject player;
 
     private PlayerActionControls playerActionControls;
+    private PlayerInput playerInput;
 
     [SerializeField]
     Pool bulletPool;
@@ -33,6 +38,23 @@ public class GunControl : MonoBehaviour
     bool coolDown;
     float fireTimer;
 
+    bool isGamepad;
+    bool isAttacking = false;
+
+    private void Awake()
+    {
+        playerActionControls = new PlayerActionControls();
+    }
+
+    private void OnEnable()
+    {
+        playerActionControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerActionControls.Disable();
+    }
     //Turned on during special scenes like door transitions
     bool freezeFire;
     void Start()
@@ -45,9 +67,6 @@ public class GunControl : MonoBehaviour
         coolDown = false;
         fireTimer = 0;
         freezeFire = false;
-
-        //i think this is technical debt but i dunno
-        playerActionControls = new PlayerActionControls();
     }
 
     void Update()
@@ -73,11 +92,34 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
-        var input = playerActionControls.Player.Aim.ReadValue<Vector2>();
-        Vector3 vNewInput = new Vector3(input.x, input.y, 0.0f);
+        var aim = playerActionControls.Player.Aim.ReadValue<Vector2>();
+        if (isGamepad)
+        {
+            if (Mathf.Abs(aim.x)>controllerDeadzone||Mathf.Abs(aim.y)>controllerDeadzone)
+            {
+                Vector3 direction = Vector3.right * aim.x + Vector3.forward * aim.y;
 
-        var angle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, angle, 0);
+                if (direction.sqrMagnitude > 0.0f)
+                {
+                    Quaternion newRot = Quaternion.LookRotation(direction, Vector3.up);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, rotationSmoothing * Time.unscaledDeltaTime);
+                }
+            }
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(aim);
+            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+            float rayDistance;
+
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                Vector3 point = ray.GetPoint(rayDistance);
+                LookAt(point);
+            }
+        }
+        
 
         //var aimPos = playerActionControls.Player.Aim.ReadValue<Vector2>();
         //var aimWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(aimPos.x, aimPos.y, player.transform.position.y));
@@ -87,6 +129,12 @@ public class GunControl : MonoBehaviour
         //direction.y = 0;
         //transform.forward = direction;
 
+    }
+
+    private void LookAt(Vector3 point)
+    {
+        Vector3 heightCorrectPoint = new Vector3(point.x, transform.position.y, point.z);
+        transform.LookAt(heightCorrectPoint);
     }
 
     Vector3 GetMousePos()
@@ -136,16 +184,26 @@ public class GunControl : MonoBehaviour
     void SpreadShoot()
     {
         //float offset = (float)Random.Range(-maxSpread, maxSpread);
+        if (isAttacking && !coolDown)
+        {
+            Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
 
-        Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
-
-        var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
-        obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
-        coolDown = true;
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
+            obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
+            coolDown = true;
+        }    
     }
 
-    public void OnFire()
+    public void OnFire(CallbackContext context)
     {
-        SpreadShoot();
+        if (context.performed)
+            isAttacking = true;
+        if (context.canceled)
+            isAttacking = false;
+    }
+
+    public void OnDeviceChange(PlayerInput pi)
+    {
+        isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
 }
