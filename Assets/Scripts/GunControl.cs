@@ -109,7 +109,7 @@ public class GunControl : MonoBehaviour
         else
         {
             Ray ray = Camera.main.ScreenPointToRay(aim);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+            Plane groundPlane = new Plane(Vector3.up, player.transform.position);
 
             float rayDistance;
 

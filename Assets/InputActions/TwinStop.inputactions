@@ -15,17 +15,17 @@
                 },
                 {
                     "name": "TimeStop",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "63a08f0c-cd78-46d2-875e-9bfebd9f87fa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Fire",
                     "type": "PassThrough",
                     "id": "21ef6305-f5d6-4f6d-bb0a-fba9f3b402a6",
-                    "expectedControlType": "DiscreteButton",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
                 },
