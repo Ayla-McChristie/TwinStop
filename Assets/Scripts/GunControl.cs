@@ -116,7 +116,7 @@ public class GunControl : MonoBehaviour
             //    targetLoc = targetLoc.normalized;
             //}
             direction = direction.normalized;
-            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
             obj.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
@@ -145,7 +145,7 @@ public class GunControl : MonoBehaviour
 
             Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
 
-            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.name);
+            var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }
