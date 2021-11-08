@@ -75,7 +75,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     void Update()
     {
         UpdateHearts();
-        TestHurt();
         FlashCoolDown();
         InvincibilityCoolDown();
         //Debug.Log(health);
@@ -185,12 +184,5 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     void PlayerDead()
     {
         FindObjectOfType<SceneManagement>().LoadCurrentLevel();
-    }
-    void TestHurt()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            this.TakeDamage();
-        }
     }
 }

@@ -67,7 +67,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     public void InstantiatePool(Pool pool)
     {
-        //CheckForInstance();s
+        CreateObjectPoolInstance();
         GameObject temp;
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
@@ -85,18 +85,13 @@ public class ObjectPool_Projectiles : MonoBehaviour
         //pools.Add(pool);
     }
 
-    private void CheckForInstance()
+    public static void CreateObjectPoolInstance()
     {
         if (Instance == null)
         {
-            CreateObjectPoolInstance();
+            GameObject opGameObject = new GameObject("ObjectPool");
+            opGameObject.AddComponent<ObjectPool_Projectiles>();
+            _instance = opGameObject.GetComponent<ObjectPool_Projectiles>();
         }
-    }
-
-    public static void CreateObjectPoolInstance()
-    {
-        GameObject opGameObject = new GameObject("ObjectPool");
-        opGameObject.AddComponent<ObjectPool_Projectiles>();
-        _instance = opGameObject.GetComponent<ObjectPool_Projectiles>();
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System;
 
 public class TimeManager : MonoBehaviour
 {
@@ -33,8 +35,7 @@ public class TimeManager : MonoBehaviour
     //The Timestop PostProcessing Overlay
     [SerializeField]
     GameObject TimeStopPPOveraly;
-
-   
+    private PlayerActionControls playerActionControls;
 
     //public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
     private float defaultTimeScale;
@@ -62,7 +63,16 @@ public class TimeManager : MonoBehaviour
         {
             _instance = this;
         }
+        playerActionControls = new PlayerActionControls();
 
+    }
+    private void OnEnable()
+    {
+        playerActionControls.Enable();
+    }
+    private void OnDisable()
+    {
+        playerActionControls.Disable();
     }
 
     // Start is called before the first frame update
@@ -75,8 +85,7 @@ public class TimeManager : MonoBehaviour
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
 
-        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");
-        
+        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
     }
 
     // Update is called once per frame
@@ -107,6 +116,45 @@ public class TimeManager : MonoBehaviour
         //{
         //    //timeStopReadyIndicator.gameObject.SetActive(true);
         //}  
+    }
+    /// <summary>
+    /// Increments the timer for the time stop, decreasing while time stop is active and
+    /// refilling it when it's not
+    /// </summary>
+    private void Timer()
+    {
+        if (isTimeStopped && !outtaTime)
+        {
+            timeValue -= Time.unscaledDeltaTime;
+
+        }
+        //else
+        //{
+        //    if (timeValue <= 0 && timeValue < .4f)
+        //    {
+        //        timeValue += Time.deltaTime;
+        //    }
+        //}
+    }
+    /*
+         * Method to gradually reset time to 1. may need to rename -A
+         */
+    private void EaseTimeToDefault()
+    {
+        //while (Time.timeScale < 1f)
+        //{
+        //    Debug.Log("Time has started to revert back");
+        //    Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
+        //    Time.fixedDeltaTime = Time.timeScale * .02f;
+        //}
+
+        // original code do not delete!
+        if (Time.timeScale < defaultTimeScale)
+        {
+            //Debug.Log("Time has started to revert back");
+            Time.timeScale += ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSpeedUpRate;
+            Time.fixedDeltaTime = Time.timeScale * .02f;
+        }
     }
 
     /// <summary>
@@ -140,11 +188,10 @@ public class TimeManager : MonoBehaviour
     void TimeStop()
     {
         //Debug.Log("Time has been stopped");
-        if (!outtaTime && Time.timeScale > timeStopTimeScale)
+        if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped)
         {
             TimeStopPPOveraly.SetActive(true);
             //Debug.Log("AYEAH");
-            isTimeStopped = true;
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
@@ -164,98 +211,36 @@ public class TimeManager : MonoBehaviour
 
     void FreezeTime()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (isTimeStopped)
         {
             TimeStop();
             timeBar.TimeSet(timeValue);
-            
         }
         else
         {
             //TimeStop();
             TimeStopPPOveraly.SetActive(false);
-            isTimeStopped = false;
             timeBar.TimeSet(timeValue);
-        }
-        //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
-        //{
-        //    isTimeStopped = false;
-        //}
+            //}
+            //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
+            //{
+            //    isTimeStopped = false;
+            //}
 
-        //// code to undo the time pause if activated
-        //if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
-        //{
-        //    isTimeStopped = false;
-        //    EaseTimeToDefault();
-        //}
+            //// code to undo the time pause if activated
+            //if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
+            //{
+            //    isTimeStopped = false;
+            //    EaseTimeToDefault();
+            //}
+        }
     }
 
-    //void TimeLeft()
-    //{
-    //    if (timeTillLength <= timeStopLength && isTimeStopped == true)
-    //    {
-    //        timeTillLength--;
-    //    }
-
-    //    if (timeTillLength <= 0)
-    //    {
-    //        EaseTimeToDefault();
-    //    }
-    //}
-
-    /// <summary>
-    /// Increments the timer for the time stop, decreasing while time stop is active and
-    /// refilling it when it's not
-    /// </summary>
-    void Timer()
+    public void OnTimeStop(InputAction.CallbackContext context)
     {
-        if (isTimeStopped && !outtaTime)
-        {
-            timeValue -= Time.unscaledDeltaTime;
-            
-        }
-        //else
-        //{
-        //    if (timeValue <= 0 && timeValue < .4f)
-        //    {
-        //        timeValue += Time.deltaTime;
-        //    }
-        //}
-    }
-
-    /*
-     * Method to gradually reset time to 1. may need to rename -A
-     */
-    void EaseTimeToDefault()
-    {
-        //while (Time.timeScale < 1f)
-        //{
-        //    Debug.Log("Time has started to revert back");
-        //    Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
-        //    Time.fixedDeltaTime = Time.timeScale * .02f;
-        //}
-
-        // original code do not delete!
-        if (Time.timeScale < 1f)
-        {
-            //Debug.Log("Time has started to revert back");
-            Time.timeScale += ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSpeedUpRate;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-        }
-
-        // testing code
-        /*for (int i = 0; i < 1f; i++)
-        {
-            if (Time.timeScale < 1f)
-            {
-            Debug.Log("Time has started to revert back");
-            Time.timeScale += (1f / timeStopLength) * Time.unscaledDeltaTime;
-            Time.fixedDeltaTime = Time.timeScale * .02f;
-            }
-
-            Debug.Log("Time is back to normal");
-        }*/
-
-
+        if (context.performed)
+            isTimeStopped = true;
+        if (context.canceled)
+            isTimeStopped = false;
     }
 }

@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+
     private Rigidbody playerRigidbody;
+
+    //i think this is technical debt but im not sure at the moment
+    private PlayerActionControls playerActionControls;
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
@@ -22,9 +27,24 @@ public class PlayerMovement : MonoBehaviour
 
     Animator anim;
 
+    private void Awake()
+    {
+        playerActionControls = new PlayerActionControls();
+    }
+
+    private void OnEnable()
+    {
+        playerActionControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerActionControls.Disable();
+    }
+
     private void Start()
     {
-        this.playerRigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         anim = GetComponent<Animator>();
         freezeMovement = false;
@@ -39,11 +59,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(!freezeMovement)
         {
-            moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            moveVelocity = (moveInput.normalized * moveSpeed)/Time.timeScale;
+            var moveInput = playerActionControls.Player.Move.ReadValue<Vector2>();
+            Vector3 flattenedMoveInput = new Vector3(moveInput.x, 0, moveInput.y);
+            moveVelocity = (flattenedMoveInput.normalized * moveSpeed)/Time.timeScale;
 
-            float velocityX = Vector3.Dot(moveInput.normalized, transform.right);
-            float velocityZ = Vector3.Dot(moveInput.normalized, transform.forward);
+            float velocityX = Vector3.Dot(flattenedMoveInput.normalized, transform.right);
+            float velocityZ = Vector3.Dot(flattenedMoveInput.normalized, transform.forward);
 
             anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
             anim.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
@@ -136,8 +157,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 currentMoveToTarget = this.transform.position;
                 UnFreeze();
-
             }
         }
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        Vector2 inputVelocity = context.ReadValue<Vector2>();
+        inputVelocity.Normalize();
+        moveVelocity = (new Vector3(inputVelocity.x, 0, inputVelocity.y) * moveSpeed) / Time.timeScale;
     }
 }

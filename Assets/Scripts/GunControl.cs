@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class GunControl : MonoBehaviour
 {
@@ -11,11 +13,18 @@ public class GunControl : MonoBehaviour
     [Tooltip("Changes how far the bullets are spread. 0 means no spread")]
     [Range(0f, 1f)]
     float spreadModifier = .2f;
+    [SerializeField]
+    private float controllerDeadzone = 0.1f;
+    [SerializeField]
+    float rotationSmoothing = 1000f;
 
     //this is where the bullet spawns
     GameObject projectileStartPos;
     //this is a shortcut to the parent object but i probably dont need this
     GameObject player;
+
+    private PlayerActionControls playerActionControls;
+    private PlayerInput playerInput;
 
     [SerializeField]
     Pool bulletPool;
@@ -29,12 +38,28 @@ public class GunControl : MonoBehaviour
     bool coolDown;
     float fireTimer;
 
+    bool isGamepad;
+    bool isAttacking = false;
+
+    private void Awake()
+    {
+        playerActionControls = new PlayerActionControls();
+    }
+
+    private void OnEnable()
+    {
+        playerActionControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerActionControls.Disable();
+    }
     //Turned on during special scenes like door transitions
     bool freezeFire;
     void Start()
     {
         player = this.gameObject;
-        ObjectPool_Projectiles.CreateObjectPoolInstance();
         ObjectPool_Projectiles.Instance.InstantiatePool(bulletPool);
 
         projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;
@@ -67,30 +92,49 @@ public class GunControl : MonoBehaviour
 
     void Aim()
     {
+        var aim = playerActionControls.Player.Aim.ReadValue<Vector2>();
+        if (isGamepad)
+        {
+            if (Mathf.Abs(aim.x)>controllerDeadzone||Mathf.Abs(aim.y)>controllerDeadzone)
+            {
+                Vector3 direction = Vector3.right * aim.x + Vector3.forward * aim.y;
 
-        direction = GetMousePos() - player.transform.position;
-        direction.y = 0;
-        transform.forward = direction;
+                if (direction.sqrMagnitude > 0.0f)
+                {
+                    Quaternion newRot = Quaternion.LookRotation(direction, Vector3.up);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, newRot, rotationSmoothing * Time.unscaledDeltaTime);
+                }
+            }
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(aim);
+            Plane groundPlane = new Plane(Vector3.up, player.transform.position);
+
+            float rayDistance;
+
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                Vector3 point = ray.GetPoint(rayDistance);
+                LookAt(point);
+            }
+        }
         
 
+        //var aimPos = playerActionControls.Player.Aim.ReadValue<Vector2>();
+        //var aimWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(aimPos.x, aimPos.y, player.transform.position.y));
 
-        //Ray cameraRay = cam.ScreenPointToRay(Input.mousePosition);
-        //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        //float rayLength; // Length of line from Camera to nearest ground
 
-        //if (groundPlane.Raycast(cameraRay, out rayLength))
-        //{
-        //    Vector3 pointToLook = cameraRay.GetPoint(rayLength) - this.transform.position;
-        //    pointToLook = new Vector3(pointToLook.x, this.transform.position.y, pointToLook.z);
-        //    Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
-        //    this.transform.LookAt(pointToLook);
-        //    pointToLook.y = 0;
-        //    direction = pointToLook;
+        //direction = aimWorldPos - player.transform.position;
+        //direction.y = 0;
+        //transform.forward = direction;
 
-        //    //var rotation = Quaternion.LookRotation(pointToLook);
-        //    //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed*Time.deltaTime);
+    }
 
-        //}
+    private void LookAt(Vector3 point)
+    {
+        Vector3 heightCorrectPoint = new Vector3(point.x, transform.position.y, point.z);
+        transform.LookAt(heightCorrectPoint);
     }
 
     Vector3 GetMousePos()
@@ -139,15 +183,27 @@ public class GunControl : MonoBehaviour
     
     void SpreadShoot()
     {
-        if (Input.GetMouseButton(0) && !coolDown)
+        //float offset = (float)Random.Range(-maxSpread, maxSpread);
+        if (isAttacking && !coolDown)
         {
-            //float offset = (float)Random.Range(-maxSpread, maxSpread);
-
             Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
 
             var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
-        }
+        }    
+    }
+
+    public void OnFire(CallbackContext context)
+    {
+        if (context.performed)
+            isAttacking = true;
+        if (context.canceled)
+            isAttacking = false;
+    }
+
+    public void OnDeviceChange(PlayerInput pi)
+    {
+        isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
 }
