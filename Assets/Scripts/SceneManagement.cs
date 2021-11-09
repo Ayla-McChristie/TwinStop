@@ -29,9 +29,10 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        Debug.Log("I'm changing levels");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log("I am switching levels");
+        Debug.Log("I have switch levels");
     }
 
     public void LoadCertainScene()
