@@ -18,6 +18,8 @@ public class SceneManagement : MonoBehaviour
         {
             _instance = this;
         }
+
+        //Debug.Log("Current Level " + SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadCurrentLevel()
@@ -27,7 +29,9 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("I am switching levels");
     }
 
     public void LoadCertainScene()

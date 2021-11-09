@@ -22,4 +22,9 @@ public class SetObjectActive : MonoBehaviour
             Destroy(this.gameObject); // destory current object
         }    
     }
+
+    void SetAObjectActive(GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+    }
 }
