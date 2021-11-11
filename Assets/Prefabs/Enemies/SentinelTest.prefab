@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587090509596471974}
   - component: {fileID: 1587090509596471961}
-  - component: {fileID: 1587090509596471960}
+  - component: {fileID: 1287707697211562276}
   - component: {fileID: 1587090509596471963}
   - component: {fileID: 8458139580497466650}
   - component: {fileID: 1587090509596471962}
@@ -78,7 +78,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587090509596471964}
   m_Mesh: {fileID: 9024716141790812113, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
---- !u!23 &1587090509596471960
+--- !u!23 &1287707697211562276
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,8 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8225a33d694544bbed57b45d3ce626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashIntensity: 50
+  flashDuration: 1
   speed: 3
-  health: 10
+  health: 4
   damage: 2
   attackRange: 2
   attackRate: 1
