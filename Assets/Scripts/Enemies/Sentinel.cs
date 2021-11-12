@@ -8,9 +8,9 @@ public class Sentinel : Enemy
     [SerializeField]
     public float speed = 3;
     [SerializeField]
-    public float health = 10;
+    public int health = 10;
     [SerializeField]
-    public float damage = 2;
+    public int damage = 2;
     [SerializeField]
     public float attackRange = 2;
     [SerializeField]
@@ -237,8 +237,6 @@ public class Sentinel : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
-
-
         base.OnCollisionEnter(collision);   
     }
 }

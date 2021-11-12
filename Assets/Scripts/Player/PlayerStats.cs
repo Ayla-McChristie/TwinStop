@@ -17,9 +17,9 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     /*
      * Health Variables
      */
-    public int health = 3;
+    public float health = 3;
     // Total amount of health left
-    public int Health
+    public float Health
     {
         get => health;
         set => health = value;
@@ -51,21 +51,19 @@ class PlayerStats : MonoBehaviour, IDamageFlash
      * HitFlash Variables
      */
     public SkinnedMeshRenderer FlashRenderer { get; set; }
-    public float flashIntensity;
+    public float flashIntensity = 50;
     public float FlashIntensity
     {
         get => flashIntensity;
         set => flashIntensity = value;
     }
-    public float flashDuration;
+    public float flashDuration = 1;
     public float FlashDuration
     {
         get => flashDuration;
         set => flashDuration = value;
     }
     public float FlashTimer { get; set; }
-    Color hitColor = Color.red;
-    Color defaultColor = Color.white;
 
     public bool isDead = false;
     private void Start()
@@ -135,7 +133,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     {
         TakeDamage(1);
     }
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         if (!isInvincible)
         {

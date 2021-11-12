@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageFlash
 {
-    
+
     /* 
      * Attributes 
      */
@@ -27,9 +27,27 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent agent;
 
     /*
+     * HitFlash Variables
+     */
+    public SkinnedMeshRenderer FlashRenderer { get; set; }
+    public MeshRenderer Mesh { get; set; }
+    public float flashIntensity;
+    public float FlashIntensity
+    {
+        get => flashIntensity;
+        set => flashIntensity = value;
+    }
+    public float flashDuration;
+    public float FlashDuration
+    {
+        get => flashDuration;
+        set => flashDuration = value;
+    }
+    public float FlashTimer { get; set; }
+
+    /*
      * Methods
      */
-
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -39,10 +57,16 @@ public class Enemy : MonoBehaviour
         }
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        Mesh = GetComponent<MeshRenderer>();
     }
-
     public virtual void FixedUpdate()
     {
+        if (this.Health <= 0)
+        {
+            this.Die();
+        }
+        FlashCoolDown();
+
         velocity += acceleration;
         velocity.Normalize();
         velocity *= this.Speed;
@@ -55,11 +79,6 @@ public class Enemy : MonoBehaviour
         acceleration *= 0;
 
         this.transform.LookAt(target.transform);
-    }
-
-    protected void TakeDamage(float damageAmmount)
-    {
-        this.Health -= damageAmmount;
     }
 
     public void AddForce(Vector3 force)
@@ -77,14 +96,34 @@ public class Enemy : MonoBehaviour
 
         AddForce(steer);
     }
+    void FlashCoolDown()
+    {
+        FlashTimer -= Time.deltaTime;
+        float lerp = Mathf.Clamp01(FlashTimer / FlashDuration);
+        float intesity = (lerp * FlashIntensity) + 1.0f;
+        Mesh.material.color = Color.white * intesity;
+    }
+    public void TakeDamage()
+    {
+        TakeDamage(1);
+    }
+    public void TakeDamage(float damageAmount)
+    {
+        Health -= damageAmount;
+        FlashTimer = FlashDuration;
+        if (Health <= 0)
+        {
+            Die();
+        }
+    }
+
     /*
      * When ever death conditions are met we run this to disable the enemy
      */
     void Die()
     {
-        /*
-         * Should replace this with object pooling instead of destruction
-         */
+        //put code for enemy to do damage to player here
+        PlayerStats.AddToKillCount();
         this.gameObject.SetActive(false);
     }
 
@@ -96,14 +135,12 @@ public class Enemy : MonoBehaviour
              * TODO add enemy attack 
              */
 
-            //put code for enemy to do damage to player here
-            PlayerStats.AddToKillCount();
-            this.Die();
+            //this.TakeDamage();
         }
 
         if (collision.transform.tag == "PlayerBullet")
         {
-            this.Die();
+            this.TakeDamage();
         }
     }
 }

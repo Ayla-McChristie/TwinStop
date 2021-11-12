@@ -82,18 +82,6 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //player bullet vs enemy
-        if (projectileUser == "Player" && collision.transform.tag == "Enemy")
-        {
-            Destroy(collision.gameObject);
-            PlayerStats.AddToKillCount();
-        }
-
-        //enemy bullet vs player
-        if (projectileUser == "Enemy" && collision.transform.tag == "Player")
-        {
-            //deal damage to player
-        }
 
         /*
          * If we have an explosion prefab, use it
