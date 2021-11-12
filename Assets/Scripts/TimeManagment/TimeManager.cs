@@ -191,7 +191,7 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped)
         {
-            //Debug.Log("AYEAH");
+
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
@@ -205,6 +205,7 @@ public class TimeManager : MonoBehaviour
     {
         if (coolDownValue < MaxTimeValue && outtaTime)
         {
+            ppController.timeStopOn = false;
             coolDownValue += Time.unscaledDeltaTime;
         }
     }
@@ -213,13 +214,14 @@ public class TimeManager : MonoBehaviour
     {
         if (isTimeStopped)
         {
+            ppController.timeStopOn = true;
             TimeStop();
             timeBar.TimeSet(timeValue);
         }
         else
         {
             //TimeStop();
-
+            ppController.timeStopOn = false;
             timeBar.TimeSet(timeValue);
             //}
             //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
