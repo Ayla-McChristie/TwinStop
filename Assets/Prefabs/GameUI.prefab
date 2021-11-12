@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8215230091295054118}
   - component: {fileID: 4524833787018248813}
   - component: {fileID: 7956686509755221051}
+  - component: {fileID: 5998669393377569433}
   - component: {fileID: 3089049519770957269}
   m_Layer: 5
   m_Name: Fade2Black
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5998669393377569433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746470664040590857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca9dc3753456b84d9b1a77842e62045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &3089049519770957269
 Animator:
   serializedVersion: 3

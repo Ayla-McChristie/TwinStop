@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     PlayerStats playerStats;
+    ScreenFade fade;
     Animator anim;
     float animationTime = 0;
     float time2Reset = 0;
@@ -13,6 +14,7 @@ public class PlayerDeath : MonoBehaviour
     {
         playerStats = this.gameObject.GetComponent<PlayerStats>();
         anim = this.GetComponent<Animator>();
+        fade = GameObject.Find("GameUI").GetComponentInChildren<ScreenFade>();
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class PlayerDeath : MonoBehaviour
         {
             if(time2Reset >= animationTime)
             {
-                FindObjectOfType<SceneManagement>().LoadCurrentLevel();
+                fade.ChangeScene(true);
             }
             else
             {

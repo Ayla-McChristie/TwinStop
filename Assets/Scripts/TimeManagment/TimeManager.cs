@@ -43,7 +43,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] public bool isTimeStopped = false;
 
     public TimeBar timeBar; // need this to be able to move the time bar. -Steve
-
+    private AudioSource audio;
     /*
      * singleton to ensure we only have 1 time manager -A
      */
@@ -84,7 +84,7 @@ public class TimeManager : MonoBehaviour
         coolDownValue = MaxTimeValue;
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
-
+        audio = GetComponent<AudioSource>();
         //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
     }
 
@@ -239,7 +239,10 @@ public class TimeManager : MonoBehaviour
     public void OnTimeStop(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             isTimeStopped = true;
+            audio.Play();
+        }
         if (context.canceled)
             isTimeStopped = false;
     }

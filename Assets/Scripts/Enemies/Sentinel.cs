@@ -74,7 +74,7 @@ public class Sentinel : Enemy
 
     void AttackTarget()
     {
-        if(!coolDown)
+        if(!coolDown && !target.GetComponent<PlayerStats>().isDead)
         {
             projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
             //projectile.transform.position = projectileStart.transform.position;

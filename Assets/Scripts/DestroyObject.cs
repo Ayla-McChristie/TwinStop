@@ -10,8 +10,8 @@ public class DestroyObject : MonoBehaviour
 
     void Start()
     {
-        ps = GetComponentInChildren<ParticleSystem>();
-        ps.Stop();
+        //ps = GetComponentInChildren<ParticleSystem>();
+        //ps.Stop();
     }
 
    void OnCollisionEnter(Collision other) 
