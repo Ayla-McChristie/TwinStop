@@ -71,9 +71,12 @@ public class GunControl : MonoBehaviour
 
     void Update()
     {
-        Aim();
-        //Shoot();
-        SpreadShoot();
+        if (!freezeFire)
+        {
+            Aim();
+            //Shoot();
+            SpreadShoot();
+        }
 
         if (coolDown)
         {
@@ -150,7 +153,7 @@ public class GunControl : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButton(0) && !coolDown && !freezeFire)
+        if (Input.GetMouseButton(0) && !coolDown)
         {
             //var ray = cam.ScreenPointToRay(Input.mousePosition);
             //if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
@@ -189,6 +192,7 @@ public class GunControl : MonoBehaviour
             Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
 
             var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
+            obj.GetComponent<AudioSource>().Play();
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
         }    

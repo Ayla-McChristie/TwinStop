@@ -65,7 +65,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     }
     public float FlashTimer { get; set; }
 
-
+    public bool isDead = false;
     private void Start()
     {
         FlashRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
@@ -118,15 +118,15 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         if (other.gameObject.tag == "HealthPickUp")
         {
             Health++;
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
 
         // ! Code for Key pickup
         if (other.gameObject.tag == "KeyPickUp")
         {
             keys++;
-            Destroy(other.gameObject);
-            Debug.Log("Key is now 1");
+            //Destroy(other.gameObject);
+            //Debug.Log("Key is now 1");
         }
     }
     public void TakeDamage()
@@ -181,6 +181,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
 
     void PlayerDead()
     {
-        FindObjectOfType<SceneManagement>().LoadCurrentLevel();
+        isDead = true;
     }
 }

@@ -9,18 +9,45 @@ public class Key : MonoBehaviour
     [SerializeField]
     IKeyType keyType;
 
+    AudioSource audio;
+    AudioClip clip;
+
+    bool isPickedUp;
+
+    float clipLength;
+    float clipTimer;
+    private void Start()
+    {
+        isPickedUp = false;
+        audio = GetComponent<AudioSource>();
+        clip = audio.clip;
+    }
+
+    void Update()
+    {
+        if (isPickedUp)
+        {
+            if (clipTimer >= clipLength)
+                this.gameObject.SetActive(false);
+            else
+                clipTimer += Time.deltaTime;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Player")
         {
             PlayerStats ps = other.GetComponent<PlayerStats>();
-
+            audio.Play();
+            isPickedUp = true;
+            clipLength = clip.length;
             ps.keys++;
 
             /*
              * technical debt. this should use the object pool system but this will work for now -A
              */
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }
