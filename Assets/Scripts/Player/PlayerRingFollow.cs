@@ -22,6 +22,10 @@ public class PlayerRingFollow : MonoBehaviour
         position.x = player.transform.position.x;
         position.y = player.transform.position.z;
 
+        position.x += 6.5f * Time.deltaTime;
+        position.y += 6.5f * Time.deltaTime;
+
+
         rTransform.anchoredPosition = position;
 
     }
