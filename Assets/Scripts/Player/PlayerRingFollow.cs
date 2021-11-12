@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerRingFollow : MonoBehaviour
 {
+    [SerializeField]
     GameObject player;
     RectTransform rTransform;
     // Start is called before the first frame update
@@ -16,7 +17,12 @@ public class PlayerRingFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position.x = 1; 
+        Vector2 position = rTransform.anchoredPosition;
+
+        position.x = player.transform.position.x;
+        position.y = player.transform.position.z;
+
+        rTransform.anchoredPosition = position;
 
     }
 }
