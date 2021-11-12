@@ -10,6 +10,7 @@ public class LaunchSurvey : MonoBehaviour
         {
             Application.OpenURL("https://forms.gle/kBV7V9E4rwAWQdBq9");
             Debug.Log("this worked");
+            other.gameObject.GetComponent<PlayerStats>().TakeDamage(3);
         }
     }
 }

@@ -19,6 +19,7 @@ public class PlayerRingFollow : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rTransform = GetComponent<RectTransform>();
+        //gameCam = Camera.Main;
         canvasRTransform = GameObject.Find("GameUI").GetComponent<RectTransform>();
         //gameCam = GameObject.FindGameObjectWithTag("MainCam");
     }
