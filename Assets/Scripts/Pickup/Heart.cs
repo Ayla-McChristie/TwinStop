@@ -2,27 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Heart : MonoBehaviour
 {
-    enum IKeyType {RoomKey, BossKey}
-
-    [SerializeField]
-    IKeyType keyType;
-
     AudioSource audio;
     AudioClip clip;
-
     bool isPickedUp;
-
     float clipLength;
     float clipTimer;
-    private void Start()
+
+    // Start is called before the first frame update
+    void Start()
     {
-        isPickedUp = false;
         audio = GetComponent<AudioSource>();
+        isPickedUp = false;
         clip = audio.clip;
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (isPickedUp)
@@ -38,16 +34,9 @@ public class Key : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            PlayerStats ps = other.GetComponent<PlayerStats>();
             audio.Play();
             isPickedUp = true;
             clipLength = clip.length;
-            ps.keys++;
-
-            /*
-             * technical debt. this should use the object pool system but this will work for now -A
-             */
-            //Destroy(this.gameObject);
         }
     }
 }

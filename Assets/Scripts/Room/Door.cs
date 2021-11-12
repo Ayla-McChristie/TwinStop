@@ -38,9 +38,9 @@ public class Door : MonoBehaviour
         this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
         //this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
-        //doorSounds = GetComponents<AudioSource>();
-        //doorOpenSound = doorSounds[0];
-        //doorCloseSound = doorSounds[1];
+        doorSounds = GetComponents<AudioSource>();
+        doorOpenSound = doorSounds[0];
+        doorCloseSound = doorSounds[1];
         //cam = GameObject.Find("2Dcam");
     }
 
@@ -52,7 +52,7 @@ public class Door : MonoBehaviour
         if (this.IsLocked == false)
         {
             this.IsOpen = true;
-            //doorOpenSound.Play();
+            doorOpenSound.Play();
             //this.renderer.enabled = false;
             this.doorModels.SetActive(false);
             this.doorCollider.enabled = false;
@@ -64,7 +64,7 @@ public class Door : MonoBehaviour
     public void CloseDoor()
     {
         this.IsOpen = false;
-        //doorCloseSound.Play();
+        doorCloseSound.Play();
         //this.renderer.enabled = true;
         this.doorModels.SetActive(true);
         this.doorCollider.enabled = true;

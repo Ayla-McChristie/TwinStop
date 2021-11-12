@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private GunControl gunControlScript;
 
     //Turns true when special scenes happen like a door transition
-    private bool freezeMovement;
+    public bool freezeMovement;
 
     Animator anim;
 
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!freezeMovement)
+        if(!freezeMovement && !GetComponent<PlayerStats>().isDead)
         {
             var moveInput = playerActionControls.Player.Move.ReadValue<Vector2>();
             Vector3 flattenedMoveInput = new Vector3(moveInput.x, 0, moveInput.y);
@@ -68,6 +68,11 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
             anim.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
+        }
+        else if (GetComponent<PlayerStats>().isDead)
+        {
+            gunControlScript.FrezeFire();
+            moveVelocity = Vector3.zero;
         }
         else
         {
@@ -152,7 +157,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("TransitionTrigger"))
         {
-            Debug.Log("Duh?");
             if (freezeMovement)
             {
                 currentMoveToTarget = this.transform.position;
