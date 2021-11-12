@@ -9,6 +9,7 @@ public class LaunchSurvey : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             Application.OpenURL("https://forms.gle/kBV7V9E4rwAWQdBq9");
+            Debug.Log("this worked");
         }
     }
 }
