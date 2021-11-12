@@ -44,7 +44,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] public bool isTimeStopped = false;
 
     public TimeBar timeBar; // need this to be able to move the time bar. -Steve
-
+    private AudioSource audio;
     /*
      * singleton to ensure we only have 1 time manager -A
      */
@@ -85,8 +85,12 @@ public class TimeManager : MonoBehaviour
         coolDownValue = MaxTimeValue;
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
+        audio = GetComponent<AudioSource>();
+        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
+
 
         //GameObject.Find("Player" = this.GetComponent<PostProcessingController>();    
+
     }
 
     // Update is called once per frame
@@ -191,7 +195,7 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped)
         {
-            //Debug.Log("AYEAH");
+
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
@@ -205,6 +209,7 @@ public class TimeManager : MonoBehaviour
     {
         if (coolDownValue < MaxTimeValue && outtaTime)
         {
+            ppController.timeStopOn = false;
             coolDownValue += Time.unscaledDeltaTime;
         }
     }
@@ -213,13 +218,14 @@ public class TimeManager : MonoBehaviour
     {
         if (isTimeStopped)
         {
+            ppController.timeStopOn = true;
             TimeStop();
             timeBar.TimeSet(timeValue);
         }
         else
         {
             //TimeStop();
-
+            ppController.timeStopOn = false;
             timeBar.TimeSet(timeValue);
             //}
             //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
@@ -239,7 +245,10 @@ public class TimeManager : MonoBehaviour
     public void OnTimeStop(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             isTimeStopped = true;
+            audio.Play();
+        }
         if (context.canceled)
             isTimeStopped = false;
     }

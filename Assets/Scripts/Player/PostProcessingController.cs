@@ -7,24 +7,24 @@ public class PostProcessingController : MonoBehaviour
 {
     [SerializeField]
     Volume TimeStopPostProcessingScript;
-    public bool timeStopFadingIn, timeStopFadingOut;
+    public bool timeStopOn;
 
     // Start is called before the first frame update
     void Start()
     {
-        timeStopFadingIn = timeStopFadingOut = false;
+        timeStopOn = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timeStopFadingIn)
+        if (timeStopOn)
         {
-            FadeIn(TimeStopPostProcessingScript, timeStopFadingOut);
+            FadeIn(TimeStopPostProcessingScript);
         }
-        if (timeStopFadingOut)
+        if (!timeStopOn)
         {
-            FadeOut(TimeStopPostProcessingScript, timeStopFadingOut);
+            FadeOut(TimeStopPostProcessingScript);
         }
 
     }
@@ -33,15 +33,11 @@ public class PostProcessingController : MonoBehaviour
     /// Fades in the passed in post processing effect
     /// </summary>
     /// <param name="ppToFadeIn"></param>
-    void FadeIn(Volume ppToFadeIn, bool fadeInBool)
+    void FadeIn(Volume ppToFadeIn)
     {
         if(ppToFadeIn.weight < 1)
         {
             ppToFadeIn.weight += .01f;
-        }
-        else
-        {
-            fadeInBool = false;
         }
     }
 
@@ -49,15 +45,11 @@ public class PostProcessingController : MonoBehaviour
     /// Fades out the passed in post processing effect
     /// </summary>
     /// <param name="ppToFadeIn"></param>
-    void FadeOut(Volume ppToFadeOut, bool fadeOutBool)
+    void FadeOut(Volume ppToFadeOut)
     {
         if (ppToFadeOut.weight > 0)
         {
             ppToFadeOut.weight -= .01f;
-        }
-        else
-        {
-            fadeOutBool = false;
         }
     }
 }
