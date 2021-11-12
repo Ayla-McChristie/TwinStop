@@ -37,7 +37,7 @@ public class PostProcessingController : MonoBehaviour
     {
         if(ppToFadeIn.weight < 1)
         {
-            //ppToFadeIn.weight += .01f;
+            ppToFadeIn.weight += .01f;
         }
         else
         {
@@ -53,7 +53,7 @@ public class PostProcessingController : MonoBehaviour
     {
         if (ppToFadeOut.weight > 0)
         {
-            //ppToFadeOut.weight -= .01f;
+            ppToFadeOut.weight -= .01f;
         }
         else
         {
