@@ -33,8 +33,9 @@ public class TimeManager : MonoBehaviour
     bool outtaTime;
 
     //The Timestop PostProcessing Overlay
-    [SerializeField]
-    GameObject TimeStopPPOveraly;
+
+    public PostProcessingController ppController;
+
     private PlayerActionControls playerActionControls;
 
     //public float timeTillLength = 0; // this is used in EaseTimeToDefault() to run the while statement until it reaches timeStopLength;
@@ -85,7 +86,7 @@ public class TimeManager : MonoBehaviour
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
 
-        //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
+        //GameObject.Find("Player" = this.GetComponent<PostProcessingController>();    
     }
 
     // Update is called once per frame
@@ -190,7 +191,6 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped)
         {
-            TimeStopPPOveraly.SetActive(true);
             //Debug.Log("AYEAH");
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
             Time.fixedDeltaTime = Time.timeScale * .02f;
@@ -219,7 +219,7 @@ public class TimeManager : MonoBehaviour
         else
         {
             //TimeStop();
-            TimeStopPPOveraly.SetActive(false);
+
             timeBar.TimeSet(timeValue);
             //}
             //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
