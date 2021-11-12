@@ -46,7 +46,7 @@ MonoBehaviour:
   isGlobal: 1
   priority: 2
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: a1f0ccb7d7a0cf64da824e4449fc579e, type: 2}
 --- !u!1 &1825894009
 GameObject:
@@ -2154,7 +2154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74df40ee1547eac4e9ab64bfdfc52892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeStopPostProcessingScript: {fileID: 0}
+  TimeStopPostProcessingScript: {fileID: 1277988545}
+  timeStopFadingIn: 0
+  timeStopFadingOut: 0
 --- !u!1 &3400851848345185285
 GameObject:
   m_ObjectHideFlags: 0
@@ -4656,6 +4658,10 @@ PrefabInstance:
       propertyPath: MaxTimeValue
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
+      propertyPath: ppController
+      value: 
+      objectReference: {fileID: 1257041210}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeSpeedUpRate
       value: 1
