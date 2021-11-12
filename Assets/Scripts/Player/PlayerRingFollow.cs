@@ -27,21 +27,16 @@ public class PlayerRingFollow : MonoBehaviour
     void Update()
     {
         TrackPlayer();
+        RotateWithPlayer();
 
     }
 
+    /// <summary>
+    /// Moves the ring's position to keep it on the player at all times
+    /// </summary>
     void TrackPlayer()
     {
-        //Vector2 position = rTransform.TransformPoint(rTransform.anchoredPosition);
-
-        //position.x = player.transform.position.x;
-        //position.y = player.transform.position.z;
-
-        //position.x += 6.5f * Time.deltaTime;
-        //position.y += 6.5f * Time.deltaTime;
-
-
-        //rTransform.anchoredPosition = position;
+        //thank you this person https://gist.github.com/unitycoder/54f4be0324cccb649eff
 
         Vector2 ViewportPosition = gameCam.WorldToViewportPoint(player.transform.position);
 
@@ -51,5 +46,14 @@ public class PlayerRingFollow : MonoBehaviour
 
         rTransform.anchoredPosition = WorldObject_ScreenPosition;
 
+    }
+   
+    /// <summary>
+    /// Rotates the ring with the player
+    /// </summary>
+    void RotateWithPlayer()
+    {
+        //I cannot tell you why multiplying the rotation by -1 makes this work but it does. Rotating stuff in unity is hard -Ryan
+        rTransform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, player.transform.eulerAngles.y * -1);
     }
 }
