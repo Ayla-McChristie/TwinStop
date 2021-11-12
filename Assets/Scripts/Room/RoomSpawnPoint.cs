@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class RoomSpawnPoint : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip spawnCircle;
+
     [SerializeField]
     public List<WaveListWrapper> listOfWaves;
 
     //this is because unity doesnt serialized nested lists without it
     [System.Serializable]
+
+ 
+
     public class WaveListWrapper
     {
         public List<GameObject> WaveList;
@@ -17,6 +23,8 @@ public class RoomSpawnPoint : MonoBehaviour
     GameObject spawnParticles;
     private void Start()
     {
+        audioSource.GetComponent<AudioSource>();
+
         //List<WaveListWrapper> listOfWaves = new List<WaveListWrapper>();
         foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
         {
@@ -28,6 +36,7 @@ public class RoomSpawnPoint : MonoBehaviour
     {
         foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
         {
+            audioSource.PlayOneShot(spawnCircle);
             item.Play();
         }
     }
