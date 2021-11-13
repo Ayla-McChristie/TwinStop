@@ -7,6 +7,10 @@ public class SetObjectActive : MonoBehaviour
  // This code is to be used for the tutorial level to active the time mechanic - Steven
 
     public GameObject[] ActivateGameObjects;
+
+    TimeManager timeManagerScript;
+
+
     // Set the number of game obects you want activated here
     // then drag their game object into the field - Steven
 
@@ -19,6 +23,11 @@ public class SetObjectActive : MonoBehaviour
             {
                 gb.SetActive(true);
             }
+
+            //easiest way to find the time manager script ig lol -Ryan
+            timeManagerScript = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+            timeManagerScript.hasTimeCrystal = true;
+
             Destroy(this.gameObject); // destory current object
         }    
     }

@@ -32,6 +32,9 @@ public class TimeManager : MonoBehaviour
     //the cooldown
     bool outtaTime;
 
+    //Turned true when player gets time crystal
+    public bool hasTimeCrystal;
+
     //The Timestop PostProcessing Overlay
 
     public PostProcessingController ppController;
@@ -86,6 +89,8 @@ public class TimeManager : MonoBehaviour
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
         audio = GetComponent<AudioSource>();
+
+        //Debug.Log("Has time cystal:" + hasTimeCrystal);
         //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
 
 
@@ -128,7 +133,7 @@ public class TimeManager : MonoBehaviour
     /// </summary>
     private void Timer()
     {
-        if (isTimeStopped && !outtaTime)
+        if (isTimeStopped && !outtaTime && hasTimeCrystal)
         {
             timeValue -= Time.unscaledDeltaTime;
 
@@ -193,7 +198,7 @@ public class TimeManager : MonoBehaviour
     void TimeStop()
     {
         //Debug.Log("Time has been stopped");
-        if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped)
+        if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped && hasTimeCrystal)
         {
 
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
@@ -216,7 +221,7 @@ public class TimeManager : MonoBehaviour
 
     void FreezeTime()
     {
-        if (isTimeStopped)
+        if (isTimeStopped && hasTimeCrystal)
         {
             ppController.timeStopOn = true;
             TimeStop();
