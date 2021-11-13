@@ -35,9 +35,9 @@ public class SceneManagement : MonoBehaviour
         Debug.Log("I have switch levels");
     }
 
-    public void LoadCertainScene()
+    public void LoadCertainScene(int sceneIndex)
     {
-
+        SceneManager.LoadSceneAsync(sceneIndex);
     }
 
     public void QuitGame()
