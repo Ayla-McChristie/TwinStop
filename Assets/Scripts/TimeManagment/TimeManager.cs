@@ -159,7 +159,7 @@ public class TimeManager : MonoBehaviour
         //}
 
         // original code do not delete!
-        if (Time.timeScale < defaultTimeScale)
+        if (Time.timeScale < 1f)
         {
             //Debug.Log("Time has started to revert back");
             Time.timeScale += ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSpeedUpRate;

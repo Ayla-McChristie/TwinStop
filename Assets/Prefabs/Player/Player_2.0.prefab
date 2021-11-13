@@ -1979,7 +1979,19 @@ MonoBehaviour:
     m_ActionId: d0dba3b2-dc85-4182-8c35-4bc8503a116f
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3316261490732560778}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 11f68836-2ddd-482e-9f17-cd97b9f4a865
     m_ActionName: Player/Aim[/Mouse/position,/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
