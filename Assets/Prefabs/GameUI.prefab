@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 653816986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1866, y: 1.1866, z: 1.1866}
+  m_LocalScale: {x: 1.1866, y: 0.5, z: 1.1866}
   m_Children: []
   m_Father: {fileID: 4671271067399826145}
   m_RootOrder: 5
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.060544547, b: 0.3679245, a: 0.77254903}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -110,7 +110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8215230091295054118
 RectTransform:
   m_ObjectHideFlags: 0
