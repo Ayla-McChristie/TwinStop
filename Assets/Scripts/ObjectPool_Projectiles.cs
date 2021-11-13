@@ -44,10 +44,10 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     void Start()
     {
-        foreach (Pool p in pools)
-        {
-            InstantiatePool(p);
-        }
+        //foreach (Pool p in pools)
+        //{
+        //    InstantiatePool(p);
+        //}
     }
 
     public GameObject GetProjectile(string objectName)
@@ -70,7 +70,7 @@ public class ObjectPool_Projectiles : MonoBehaviour
         CreateObjectPoolInstance();
         GameObject temp;
         Queue<GameObject> objectPool = new Queue<GameObject>();
-
+        Debug.Log("Hsss");
         for (int i = 0; i < pool.maxSize; i++)
         {
             //make object

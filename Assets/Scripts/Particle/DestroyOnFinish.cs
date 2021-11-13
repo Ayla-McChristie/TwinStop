@@ -5,13 +5,12 @@ using UnityEngine;
 public class DestroyOnFinish : MonoBehaviour
 {
     AudioSource audioSource;
-    public AudioClip spellImpact;
     ParticleSystem ps;
     // Start is called before the first frame update
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
-        audioSource.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
 

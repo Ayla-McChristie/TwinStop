@@ -118,7 +118,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         if (other.gameObject.tag == "HealthPickUp")
         {
             Health++;
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
 
         // ! Code for Key pickup

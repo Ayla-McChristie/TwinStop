@@ -37,6 +37,7 @@ public class Heart : MonoBehaviour
             audio.Play();
             isPickedUp = true;
             clipLength = clip.length;
+            other.GetComponent<PlayerStats>().Health++;
         }
     }
 }

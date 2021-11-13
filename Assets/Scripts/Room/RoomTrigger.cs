@@ -13,6 +13,8 @@ public class RoomTrigger : MonoBehaviour
     bool hasStarted = false;
     float longestDelay = 0;
 
+    AudioSource audio;
+
     public bool NoMoreWaves { get; private set; }
 
     private void Awake()
@@ -25,8 +27,9 @@ public class RoomTrigger : MonoBehaviour
 
     private void Start()
     {
+        NoMoreWaves = false;
         totalWaves = GetTotalWaves();
-        //Debug.Log($"total waves is {totalWaves}");
+        audio = GetComponent<AudioSource>();
         foreach (var roomSpawn in spawnPoints)
         {
             //roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
@@ -58,7 +61,7 @@ public class RoomTrigger : MonoBehaviour
         {
             Debug.Log("player has entered a room");
             PlayerStats.ResetKillCount();
-
+            audio.Play();
             RoomManager.Instance.SetCurrentRoom(this);
 
             StartCoroutine("DelaySpawnForParticles", longestDelay);

@@ -40,7 +40,8 @@ public class DropPickUp : MonoBehaviour
         {
             isBroken = true;
             crateBreak.Play();
-            Instantiate(GameObject, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+            if (GameObject != null)
+                Instantiate(GameObject, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
             this.gameObject.GetComponent<BoxCollider>().enabled = !this.gameObject.GetComponent<BoxCollider>().enabled;
         }
     }
