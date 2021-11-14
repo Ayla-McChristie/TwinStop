@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerActionControls = new PlayerActionControls();
+        
     }
 
     private void OnEnable()
