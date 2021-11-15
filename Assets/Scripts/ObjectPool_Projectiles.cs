@@ -52,7 +52,6 @@ public class ObjectPool_Projectiles : MonoBehaviour
 
     public GameObject GetProjectile(string objectName)
     {
-        Debug.Log("hi");
         GameObject objectSpawn = poolDictionary[objectName].Dequeue();
         objectSpawn.SetActive(true);
         poolDictionary[objectName].Enqueue(objectSpawn);
@@ -70,7 +69,6 @@ public class ObjectPool_Projectiles : MonoBehaviour
         CreateObjectPoolInstance();
         GameObject temp;
         Queue<GameObject> objectPool = new Queue<GameObject>();
-        Debug.Log("Hsss");
         for (int i = 0; i < pool.maxSize; i++)
         {
             //make object

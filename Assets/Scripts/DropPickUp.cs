@@ -22,7 +22,6 @@ public class DropPickUp : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isBroken);
         if (isBroken)
         {
             

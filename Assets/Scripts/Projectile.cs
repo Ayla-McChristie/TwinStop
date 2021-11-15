@@ -90,7 +90,6 @@ public class Projectile : MonoBehaviour
         {
             var hitEffect = Instantiate(ExplosionPrefab, this.transform.position, this.transform.rotation);
         }
-        Debug.Log(collision.transform.name);
         this.gameObject.SetActive(false);
     }
 }

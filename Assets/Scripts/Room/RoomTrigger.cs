@@ -59,7 +59,6 @@ public class RoomTrigger : MonoBehaviour
     {
         if (other.transform.tag == "Player" && !hasStarted)
         {
-            Debug.Log("player has entered a room");
             PlayerStats.ResetKillCount();
             audio.Play();
             RoomManager.Instance.SetCurrentRoom(this);
@@ -88,7 +87,6 @@ public class RoomTrigger : MonoBehaviour
     {
         foreach (var item in spawnPoints)
         {
-            Debug.Log("Spawning enemies");
             var temp = item.GetComponent<RoomSpawnPoint>();
             EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
         }

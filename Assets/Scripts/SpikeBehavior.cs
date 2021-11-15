@@ -8,7 +8,7 @@ public class SpikeBehavior : MonoBehaviour
     [SerializeField] private float SpikeTrapTime = 2000;
 
     void Start() {
-        Debug.Log("Im working");
+
     }
 
     // Update is called once per frame

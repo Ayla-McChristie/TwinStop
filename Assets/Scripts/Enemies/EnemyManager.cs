@@ -101,7 +101,6 @@ public class EnemyManager : MonoBehaviour
             GameObject e = ObjectPool_Projectiles.Instance.GetProjectile(go.name);
             e.transform.position = spawnPoint.position;
         }
-        Debug.Log($"num of enemies in combat {numOfEnemiesInCombat}");
         isInCombat = true;
     }
     /*

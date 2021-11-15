@@ -31,7 +31,6 @@ public class Door : MonoBehaviour
             DoorManager.CreateDoorManager();
         }
         DoorManager.Instance.doors.Add(this);
-        Debug.Log("added door to door manager");
     }
     void Start()
     {
