@@ -17,7 +17,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     /*
      * Health Variables
      */
-    public float health = 3;
+    public float health = 6;
     // Total amount of health left
     public float Health
     {
