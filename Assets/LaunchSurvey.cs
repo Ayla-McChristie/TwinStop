@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LaunchSurvey : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
+
     void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Player")
@@ -13,7 +15,7 @@ public class LaunchSurvey : MonoBehaviour
             other.gameObject.GetComponent<PlayerStats>().TakeDamage(3);
 
             SceneManagement sceneScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
-            sceneScript.LoadCertainScene(0);
+            sceneScript.LoadCertainScene(sceneName);
         }
     }
 
@@ -26,7 +28,7 @@ public class LaunchSurvey : MonoBehaviour
             other.gameObject.GetComponent<PlayerStats>().TakeDamage(3);
 
             SceneManagement sceneScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
-            sceneScript.LoadCertainScene(0);
+            sceneScript.LoadCertainScene(sceneName);
         }
     }
 }

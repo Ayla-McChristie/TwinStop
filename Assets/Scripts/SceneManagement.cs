@@ -18,8 +18,6 @@ public class SceneManagement : MonoBehaviour
         {
             _instance = this;
         }
-
-        //Debug.Log("Current Level " + SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadCurrentLevel()
@@ -29,15 +27,12 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        Debug.Log("I'm changing levels");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log("I have switch levels");
     }
 
-    public void LoadCertainScene(int sceneIndex)
+    public void LoadCertainScene(string sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneIndex);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()

@@ -248,7 +248,7 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
                     ""id"": ""205cfe37-1855-4b0f-88ee-b4883084c7ae"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""Cancel"",
@@ -585,6 +585,17 @@ public class @PlayerActionControls : IInputActionCollection, IDisposable
                     ""id"": ""9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c27a2f9f-52ea-4b1e-ac49-67c5e6cc9929"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Submit"",

@@ -21,7 +21,7 @@ public class SceneChangeDoor : MonoBehaviour
         {
 
             SceneManagement sceneScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
-            sceneScript.LoadCertainScene(2);
+            sceneScript.LoadNextLevel();
         }
     }
 }
