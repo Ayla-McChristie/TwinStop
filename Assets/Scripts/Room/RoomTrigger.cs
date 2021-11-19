@@ -88,7 +88,10 @@ public class RoomTrigger : MonoBehaviour
         foreach (var item in spawnPoints)
         {
             var temp = item.GetComponent<RoomSpawnPoint>();
-            EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+            if(temp.listOfWaves.Count-1 >= waveNum)
+            {
+               EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+            }
         }
         waveNum++;
     }

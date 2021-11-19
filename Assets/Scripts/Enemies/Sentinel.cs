@@ -89,7 +89,7 @@ public class Sentinel : Enemy
                 projectile.GetComponent<Projectile>().SetUp((target.transform.position - this.transform.position), projectileStart.transform.position, "Enemy");
             }
             coolDown = true; //Space out when the enemy can shoot again
-            Debug.Log(projectile.transform.position);
+            //Debug.Log(projectile.transform.position);
             //projectileDir.y = 0;
             //projectileDir = projectileDir.normalized;
             //projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user          
