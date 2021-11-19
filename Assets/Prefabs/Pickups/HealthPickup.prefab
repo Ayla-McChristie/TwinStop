@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: -1243316123175123793}
   - component: {fileID: 2061873636382828081}
   - component: {fileID: -4821472585459798776}
-  m_Layer: 0
+  - component: {fileID: 1519263953}
+  m_Layer: 11
   m_Name: HealthPickup
   m_TagString: HealthPickUp
   m_Icon: {fileID: 0}
@@ -52,9 +53,9 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518406599468056530}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7e48a25af23c29043b26be272ff10d7f, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.017802132
   m_Height: 0.015082097
   m_Direction: 1
@@ -66,12 +67,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518406599468056530}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
+  m_Material: {fileID: 13400000, guid: 7e48a25af23c29043b26be272ff10d7f, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.015604267, y: 0.015082093, z: 0.01761536}
-  m_Center: {x: -0.0000004684925, y: -0.00017112255, z: 0.004771293}
+  m_Size: {x: 0.02560427, y: 0.0250821, z: 0.00807278}
+  m_Center: {x: -0.00000046868809, y: -0.00017112288, z: 0}
 --- !u!82 &-1243316123175123793
 AudioSource:
   m_ObjectHideFlags: 0
@@ -176,7 +177,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518406599468056530}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -196,6 +197,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1090972029c76d54d915c3011f43f271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1519263953
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518406599468056530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0078021334
+  m_Height: 0.015082097
+  m_Direction: 1
+  m_Center: {x: -0.00000046868809, y: -0.00017112288, z: 0}
 --- !u!114 &8523330691092107122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8367798cf0153bf48b29bd8b5317acde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
+  rotationSpeed: {x: 0, y: 10, z: 0}
 --- !u!1001 &3679082132020038143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279,6 +294,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ce603b08477a25d45b075fe1c7d82cf6, type: 3}
       propertyPath: m_Name
       value: LP_Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce603b08477a25d45b075fe1c7d82cf6, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce603b08477a25d45b075fe1c7d82cf6, type: 3}
