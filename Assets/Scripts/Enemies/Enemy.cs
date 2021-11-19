@@ -66,18 +66,6 @@ public class Enemy : MonoBehaviour, IDamageFlash
             this.Die();
         }
         FlashCoolDown();
-
-        velocity += acceleration;
-        velocity.Normalize();
-        velocity *= this.Speed;
-
-        if (!stationary)
-        {
-            rigidbody.velocity = velocity;
-        }
-
-        acceleration *= 0;
-
         this.transform.LookAt(target.transform);
     }
 

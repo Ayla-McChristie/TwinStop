@@ -47,7 +47,11 @@ public class TimeManager : MonoBehaviour
     [SerializeField] public bool isTimeStopped = false;
 
     public TimeBar timeBar; // need this to be able to move the time bar. -Steve
-    private AudioSource audio;
+    private AudioSource[] audio;
+    AudioSource slowTimeEnter;
+    AudioSource slowTimeExit;
+    bool timeEnterIsPlayed;
+    bool timeExitIsPlayed;
     /*
      * singleton to ensure we only have 1 time manager -A
      */
@@ -88,8 +92,11 @@ public class TimeManager : MonoBehaviour
         coolDownValue = MaxTimeValue;
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
         outtaTime = false;
-        audio = GetComponent<AudioSource>();
-
+        audio = GetComponents<AudioSource>();
+        slowTimeEnter = audio[0];
+        slowTimeExit = audio[1];
+        timeEnterIsPlayed = true;
+        timeExitIsPlayed = true;
         //Debug.Log("Has time cystal:" + hasTimeCrystal);
         //TimeStopPPOveraly = GameObject.FindWithTag("TimeStopPP");      
 
@@ -175,7 +182,8 @@ public class TimeManager : MonoBehaviour
         if (timeValue <= 0)
         {
             if (!outtaTime)
-            {
+            { 
+                PlaySlowTimeExit();
                 coolDownValue = 0;
             }
             
@@ -226,10 +234,12 @@ public class TimeManager : MonoBehaviour
             ppController.timeStopOn = true;
             TimeStop();
             timeBar.TimeSet(timeValue);
+            PlaySlowTimeEnter();
         }
-        else
+        else 
         {
             //TimeStop();
+            PlaySlowTimeExit();
             ppController.timeStopOn = false;
             if(timeBar != null)
             {
@@ -255,12 +265,36 @@ public class TimeManager : MonoBehaviour
         if (context.performed)
         {
             isTimeStopped = true;
-            if (audio != null)
+        }
+        if (context.canceled && hasTimeCrystal)
+        {
+            timeEnterIsPlayed = false;
+            isTimeStopped = false;
+            timeExitIsPlayed = false;
+        }
+    }
+
+    void PlaySlowTimeEnter()
+    {
+        if(slowTimeEnter != null)
+        {
+            if (!slowTimeEnter.isPlaying && !timeEnterIsPlayed)
             {
-                audio.Play();
+                slowTimeEnter.PlayOneShot(slowTimeEnter.clip);
+                timeEnterIsPlayed = true;
             }
         }
-        if (context.canceled)
-            isTimeStopped = false;
+    }
+
+    void PlaySlowTimeExit()
+    {
+        if(slowTimeExit != null)
+        {
+            if (!slowTimeExit.isPlaying && !timeExitIsPlayed)
+            {
+                slowTimeExit.PlayOneShot(slowTimeExit.clip);
+                timeExitIsPlayed = true;
+            }
+        }
     }
 }
