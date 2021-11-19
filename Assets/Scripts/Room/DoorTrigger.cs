@@ -86,7 +86,7 @@ public class DoorTrigger : MonoBehaviour
             followPlayerScript.Move(roomCenter);
             if(amIALargeRoom)
             {
-                followPlayerScript.doIFollow = !followPlayerScript.doIFollow;
+                followPlayerScript.doIFollow = !(followPlayerScript.doIFollow);
             }
             //Debug.Log("Door Closed");
 
