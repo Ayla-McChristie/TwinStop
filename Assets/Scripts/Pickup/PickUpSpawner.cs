@@ -18,6 +18,7 @@ public class PickUpSpawner : MonoBehaviour
     List<Pool> pickupPools;
     int currentPickUp;
     bool onCooldown = false;
+    bool hasFired = false;
     float timeStamp;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,10 @@ public class PickUpSpawner : MonoBehaviour
         {
             if (pool.prefab != null)
             {
-                ObjectPool_Projectiles.Instance.InstantiatePool(pool);
+                if (!ObjectPool_Projectiles.Instance.CheckIfDictionaryHasValue(pool))
+                {
+                    ObjectPool_Projectiles.Instance.InstantiatePool(pool);
+                }
             }
         }
     }
@@ -38,14 +42,18 @@ public class PickUpSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ReleasePickUps();
+        if (hasFired)
+        {
+            ReleasePickUps();
+        }
     }
 
     void ReleasePickUps()
     {
-        if (Time.time >= timeStamp && currentPickUp <= pickupsToSpawn.Count)
+        if (Time.time >= timeStamp && currentPickUp <= pickupsToSpawn.Count - 1)
         {
             GameObject temp = ObjectPool_Projectiles.Instance.GetProjectile(pickupsToSpawn[currentPickUp].name);
+            temp.transform.position = this.transform.position;
             currentPickUp++;
             if (temp.GetComponent<Rigidbody>() != null)
             {
@@ -75,5 +83,10 @@ public class PickUpSpawner : MonoBehaviour
         {
             return -temp;
         }
+    }
+
+    public void StartSpawn()
+    {
+        this.hasFired = true;
     }
 }
