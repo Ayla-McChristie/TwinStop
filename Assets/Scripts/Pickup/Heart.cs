@@ -30,14 +30,14 @@ public class Heart : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Player")
         {
             audio.Play();
             isPickedUp = true;
             clipLength = clip.length;
-            other.GetComponent<PlayerStats>().Health++;
+            other.gameObject.GetComponent<PlayerStats>().Health++;
         }
     }
 }
