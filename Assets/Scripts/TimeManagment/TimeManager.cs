@@ -123,16 +123,7 @@ public class TimeManager : MonoBehaviour
         AmIOuttaTime();
         //Debug.Log(Time.timeScale);
         //Debug.Log(isTimeStopped);
-
-        //REMOVE LATER -just for demonstration purposes -Ryan
-        //if(outtaTime)
-        //{
-        //    //timeStopReadyIndicator.gameObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    //timeStopReadyIndicator.gameObject.SetActive(true);
-        //}  
+        timeBar.TimeSet(timeValue);      
     }
     /// <summary>
     /// Increments the timer for the time stop, decreasing while time stop is active and
@@ -233,7 +224,6 @@ public class TimeManager : MonoBehaviour
         {
             ppController.timeStopOn = true;
             TimeStop();
-            timeBar.TimeSet(timeValue);
             PlaySlowTimeEnter();
         }
         else 
@@ -241,22 +231,10 @@ public class TimeManager : MonoBehaviour
             //TimeStop();
             PlaySlowTimeExit();
             ppController.timeStopOn = false;
-            if(timeBar != null)
+            if (timeValue < MaxTimeValue)
             {
-                timeBar.TimeSet(timeValue);
+                this.timeValue += .002f;
             }
-            //}
-            //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
-            //{
-            //    isTimeStopped = false;
-            //}
-
-            //// code to undo the time pause if activated
-            //if (Input.GetKeyDown(KeyCode.E) && isTimeStopped == true)
-            //{
-            //    isTimeStopped = false;
-            //    EaseTimeToDefault();
-            //}
         }
     }
 
