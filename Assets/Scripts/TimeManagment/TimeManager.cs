@@ -231,7 +231,10 @@ public class TimeManager : MonoBehaviour
         {
             //TimeStop();
             ppController.timeStopOn = false;
-            timeBar.TimeSet(timeValue);
+            if(timeBar != null)
+            {
+                timeBar.TimeSet(timeValue);
+            }
             //}
             //if (!Input.GetKeyDown(KeyCode.LeftShift) && !outtaTime)
             //{

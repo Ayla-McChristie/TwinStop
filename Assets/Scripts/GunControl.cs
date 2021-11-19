@@ -190,7 +190,10 @@ public class GunControl : MonoBehaviour
         if (isAttacking && !coolDown)
         {
             Vector3 target = transform.forward + new Vector3(Random.Range(-spreadModifier, spreadModifier), 0, Random.Range(-spreadModifier, spreadModifier));
-
+            if (ObjectPool_Projectiles.Instance == false)
+            {
+                ObjectPool_Projectiles.CreateObjectPoolInstance();
+            }
             var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
             obj.GetComponent<AudioSource>().Play();
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -99,7 +100,14 @@ public class EnemyManager : MonoBehaviour
              * rn we create new enemies but i need to make it use object pool
              */
             GameObject e = ObjectPool_Projectiles.Instance.GetProjectile(go.name);
-            e.transform.position = spawnPoint.position;
+            if (e.GetComponent<NavMeshAgent>() != null)
+            {
+                e.GetComponent<NavMeshAgent>().Warp(spawnPoint.position);
+            }
+            else
+            {
+                e.transform.position = spawnPoint.position;
+            }
         }
         isInCombat = true;
     }
