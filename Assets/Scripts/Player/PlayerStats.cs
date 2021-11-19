@@ -24,7 +24,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         get => health;
         set => health = value;
     }
-    public int numOfHearts; // Max amount of hearts a player can have, should be 3
+    public int numOfHearts; // Max amount of hearts a player can have, should be 6
 
     /*
      * Invinciblity Variables
@@ -43,9 +43,10 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     /*
      * UI Variables
      */
-    public Image[] hearts; // all heart UI game objects go here
-    public Sprite fullHeart; // sprite of full heart here
-    public Sprite emptyHeart; // sprite of empty heart here
+    public GameObject[] hearts;
+    //public Image[] hearts; // all heart UI game objects go here
+    //public Sprite fullHeart; // sprite of full heart here
+    //public Sprite emptyHeart; // sprite of empty heart here
 
     /*
      * HitFlash Variables
@@ -161,21 +162,39 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         {
             if (i < Health)
             {
-                hearts[i].sprite = fullHeart;
+                hearts[i].SetActive(true);
             }
             else
             {
-                hearts[i].sprite = emptyHeart;
+                hearts[i].SetActive(false);
             }
 
             if (i < numOfHearts)
             {
-                hearts[i].enabled = true;
+                //hearts[i].SetActive(true);
             }
             else
             {
-                hearts[i].enabled = false;
+                hearts[i].SetActive(false);
             }
+
+            //if (i < Health)
+            //{
+            //    hearts[i].sprite = fullHeart;
+            //}
+            //else
+            //{
+            //    hearts[i].sprite = emptyHeart;
+            //}
+
+            //if (i < numOfHearts)
+            //{
+            //    hearts[i].enabled = true;
+            //}
+            //else
+            //{
+            //    hearts[i].enabled = false;
+            //}
         }
     }
 
