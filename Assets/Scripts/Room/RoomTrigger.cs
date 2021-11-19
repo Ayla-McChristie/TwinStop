@@ -30,6 +30,13 @@ public class RoomTrigger : MonoBehaviour
         NoMoreWaves = false;
         totalWaves = GetTotalWaves();
         audio = GetComponent<AudioSource>();
+        foreach (var childObject in GetComponentsInChildren<RoomSpawnPoint>())
+        {
+            if (!spawnPoints.Contains(childObject.gameObject))
+            {
+                spawnPoints.Add(childObject.gameObject);
+            }
+        }
         foreach (var roomSpawn in spawnPoints)
         {
             //roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();

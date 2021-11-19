@@ -19,9 +19,12 @@ public class PlayDuringCombat : MonoBehaviour
         {
             ps.Play();
         }
-        // else if(!EnemyManager.Instance.isInCombat && RoomManager.Instance.CurrentRoom.NoMoreWaves)
-        // {
-        //     ps.Stop();
-        // }
+        if (RoomManager.Instance.CurrentRoom != null)
+        {
+            if (!EnemyManager.Instance.isInCombat && RoomManager.Instance.CurrentRoom.NoMoreWaves)
+            {
+                ps.Stop();
+            }
+        }
     }
 }
