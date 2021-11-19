@@ -45,6 +45,7 @@ public class Sentinel : Enemy
         this.Speed = speed;
         this.Damage = damage;
         base.Start();
+        Debug.Log(this.transform.position.ToString());
     }
 
     // Update is called once per frame
