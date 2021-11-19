@@ -23,7 +23,7 @@ public class BasicEnemy : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        this.Seek(target.transform.position);
+        agent.SetDestination(target.transform.position);
         base.FixedUpdate();
     }
 }

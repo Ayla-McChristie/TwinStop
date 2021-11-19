@@ -68,7 +68,7 @@ public class Charger : Enemy
         Vector3 distance = target.transform.position - this.transform.position;
         this.agent.SetDestination(target.transform.position);
         //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(target.transform.position), Time.deltaTime * rotSpeed);
-        this.transform.LookAt(target.transform.position);
+        //this.transform.LookAt(target.transform.position);
     }
 
     protected override void OnCollisionEnter(Collision collision)
