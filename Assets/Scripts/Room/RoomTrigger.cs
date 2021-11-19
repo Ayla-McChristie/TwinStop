@@ -33,11 +33,14 @@ public class RoomTrigger : MonoBehaviour
         foreach (var roomSpawn in spawnPoints)
         {
             //roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
-            foreach (var item in roomSpawn.GetComponentsInChildren<ParticleSystem>())
+            if (roomSpawn != null)
             {
-                if (item.startDelay > longestDelay)
+                foreach (var item in roomSpawn.GetComponentsInChildren<ParticleSystem>())
                 {
-                    longestDelay = item.startDelay;
+                    if (item.startDelay > longestDelay)
+                    {
+                        longestDelay = item.startDelay;
+                    }
                 }
             }
         }
@@ -60,7 +63,10 @@ public class RoomTrigger : MonoBehaviour
         if (other.transform.tag == "Player" && !hasStarted)
         {
             PlayerStats.ResetKillCount();
-            audio.Play();
+            if (audio != null)
+            {
+                audio.Play();
+            }
             RoomManager.Instance.SetCurrentRoom(this);
 
             StartCoroutine("DelaySpawnForParticles", longestDelay);
@@ -75,7 +81,10 @@ public class RoomTrigger : MonoBehaviour
     {
         foreach (var roomSpawn in spawnPoints)
         {
-            roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles(); 
+            if (roomSpawn != null)
+            {
+                roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles(); 
+            }
         }
         yield return new WaitForSeconds(longestDelay);
         hasStarted = true;
@@ -87,10 +96,13 @@ public class RoomTrigger : MonoBehaviour
     {
         foreach (var item in spawnPoints)
         {
-            var temp = item.GetComponent<RoomSpawnPoint>();
-            if(temp.listOfWaves.Count-1 >= waveNum)
+            if (item != null)
             {
-               EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+                var temp = item.GetComponent<RoomSpawnPoint>();
+                if(temp.listOfWaves.Count-1 >= waveNum)
+                {
+                   EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+                }
             }
         }
         waveNum++;
@@ -101,15 +113,19 @@ public class RoomTrigger : MonoBehaviour
         int highestWaveCount = 0;
         foreach (var spawnPoint in spawnPoints)
         {
-            int waveCount = 0;
-            foreach (var wave in spawnPoint.GetComponent<RoomSpawnPoint>().listOfWaves)
+            if(spawnPoint != null)
             {
-                waveCount++;
-            }
+                int waveCount = 0;
+                foreach (var wave in spawnPoint.GetComponent<RoomSpawnPoint>().listOfWaves)
+                {
+                    waveCount++;
+                }
 
-            if (waveCount > highestWaveCount)
-            {
-                highestWaveCount = waveCount;
+                if (waveCount > highestWaveCount)
+                {
+                    highestWaveCount = waveCount;
+                }
+
             }
         }
         return highestWaveCount;
