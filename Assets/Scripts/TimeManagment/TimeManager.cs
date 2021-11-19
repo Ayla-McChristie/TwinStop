@@ -255,7 +255,10 @@ public class TimeManager : MonoBehaviour
         if (context.performed)
         {
             isTimeStopped = true;
-            audio.Play();
+            if (audio != null)
+            {
+                audio.Play();
+            }
         }
         if (context.canceled)
             isTimeStopped = false;

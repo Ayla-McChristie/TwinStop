@@ -34,12 +34,15 @@ public class Key : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.transform.tag == "Player")
         {
-            PlayerStats ps = other.GetComponent<PlayerStats>();
-            audio.Play();
+            PlayerStats ps = other.gameObject.GetComponent<PlayerStats>();
+            if(audio != null)
+            {
+                audio.Play();
+            }
             isPickedUp = true;
             clipLength = clip.length;
             ps.keys++;
