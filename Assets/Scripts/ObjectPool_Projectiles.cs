@@ -92,4 +92,18 @@ public class ObjectPool_Projectiles : MonoBehaviour
             _instance = opGameObject.GetComponent<ObjectPool_Projectiles>();
         }
     }
+
+    public bool CheckIfDictionaryHasValue(string name)
+    {
+        return poolDictionary.ContainsKey(name);
+    }
+
+    public bool CheckIfDictionaryHasValue(GameObject go)
+    {
+        return poolDictionary.ContainsKey(go.name);
+    }
+    public bool CheckIfDictionaryHasValue(Pool pool)
+    {
+        return poolDictionary.ContainsKey(pool.prefab.name);
+    }
 }

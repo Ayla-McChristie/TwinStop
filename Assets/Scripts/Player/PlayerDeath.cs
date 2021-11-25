@@ -22,6 +22,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if (playerStats.isDead)
         {
+            this.GetComponent<Collider>().enabled = false;
             DeathAnimation();
             AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
             foreach(AnimationClip clip in clips)

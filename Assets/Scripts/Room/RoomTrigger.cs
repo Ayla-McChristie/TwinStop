@@ -6,7 +6,8 @@ public class RoomTrigger : MonoBehaviour
 {
     [SerializeField]
     List<GameObject> spawnPoints;
-    //enemy manager should make itself
+    [SerializeField]
+    GameObject PickUpSpawner;
 
     int waveNum;
     int totalWaves;
@@ -30,6 +31,7 @@ public class RoomTrigger : MonoBehaviour
         NoMoreWaves = false;
         totalWaves = GetTotalWaves();
         audio = GetComponent<AudioSource>();
+        //adds un listed spawns to list
         foreach (var childObject in GetComponentsInChildren<RoomSpawnPoint>())
         {
             if (!spawnPoints.Contains(childObject.gameObject))
@@ -37,6 +39,7 @@ public class RoomTrigger : MonoBehaviour
                 spawnPoints.Add(childObject.gameObject);
             }
         }
+        //Read our spawnpoints
         foreach (var roomSpawn in spawnPoints)
         {
             //roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
@@ -52,6 +55,7 @@ public class RoomTrigger : MonoBehaviour
             }
         }
     }
+
     private void Update()
     {
         if (waveNum >= totalWaves)
@@ -63,6 +67,17 @@ public class RoomTrigger : MonoBehaviour
             PlayerStats.ResetKillCount();
             SpawnNextWave();
         }
+
+        //checks if we should spawn pick ups
+        if (PickUpSpawner != null)
+        {
+            if (NoMoreWaves == true && EnemyManager.Instance.isInCombat == false && hasStarted)
+            {
+                PickUpSpawner temp = PickUpSpawner.GetComponent<PickUpSpawner>();
+                temp.StartSpawn();
+            }
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

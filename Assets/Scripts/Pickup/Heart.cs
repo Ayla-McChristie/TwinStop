@@ -34,10 +34,11 @@ public class Heart : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
+
+            other.gameObject.GetComponent<PlayerStats>().Health++;
             audio.Play();
             isPickedUp = true;
             clipLength = clip.length;
-            other.gameObject.GetComponent<PlayerStats>().Health++;
         }
     }
 }
