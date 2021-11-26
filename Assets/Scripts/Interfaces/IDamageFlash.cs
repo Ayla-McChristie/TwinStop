@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IDamageFlash : IDamagable
 {
-    SkinnedMeshRenderer FlashRenderer { get; set; }
-    public float FlashIntensity { get; set; }
+    Renderer FlashRenderer { get; set; }
+    Material HurtMat { get; }
     public float FlashDuration { get; set; }
     float FlashTimer { get; set; }
 }

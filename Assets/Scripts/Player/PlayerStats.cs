@@ -51,13 +51,10 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     /*
      * HitFlash Variables
      */
-    public SkinnedMeshRenderer FlashRenderer { get; set; }
-    public float flashIntensity = 50;
-    public float FlashIntensity
-    {
-        get => flashIntensity;
-        set => flashIntensity = value;
-    }
+    public Renderer FlashRenderer { get; set; }
+    public Material defaultMat;
+    public Material hurtMat;
+    public Material HurtMat { get => hurtMat; }
     public float flashDuration = 1;
     public float FlashDuration
     {
@@ -69,7 +66,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     public bool isDead = false;
     private void Start()
     {
-        FlashRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        FlashRenderer = GetComponentInChildren<Renderer>();
+        defaultMat = FlashRenderer.material;
     }
     void Update()
     {
@@ -92,8 +90,15 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     {
         FlashTimer -= Time.deltaTime;
         float lerp = Mathf.Clamp01(FlashTimer / FlashDuration);
-        float intesity = (lerp * FlashIntensity) + 1.0f;
-        FlashRenderer.material.color = Color.white * intesity;   
+
+        if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
+        {
+            FlashRenderer.material = HurtMat;
+        }
+        else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
+        {
+            FlashRenderer.material = defaultMat;
+        }
     }
     public static void ResetKillCount()
     {

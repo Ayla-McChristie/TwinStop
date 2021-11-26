@@ -29,14 +29,10 @@ public class Enemy : MonoBehaviour, IDamageFlash
     /*
      * HitFlash Variables
      */
-    public SkinnedMeshRenderer FlashRenderer { get; set; }
-    public MeshRenderer Mesh { get; set; }
-    public float flashIntensity;
-    public float FlashIntensity
-    {
-        get => flashIntensity;
-        set => flashIntensity = value;
-    }
+    public Renderer FlashRenderer { get; set; }
+    public Material hurtMat;
+    public Material HurtMat { get => hurtMat; }
+    private Material defaultMat;
     public float flashDuration;
     public float FlashDuration
     {
@@ -57,7 +53,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
         }
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        Mesh = GetComponent<MeshRenderer>();
+        FlashRenderer = GetComponent<Renderer>();
+        defaultMat = FlashRenderer.material;
     }
     public virtual void FixedUpdate()
     {
@@ -88,8 +85,15 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         FlashTimer -= Time.deltaTime;
         float lerp = Mathf.Clamp01(FlashTimer / FlashDuration);
-        float intesity = (lerp * FlashIntensity) + 1.0f;
-        Mesh.material.color = Color.white * intesity;
+
+        if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
+        {
+            FlashRenderer.material = HurtMat;
+        }
+        else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
+        {
+            FlashRenderer.material = defaultMat;
+        }
     }
     public void TakeDamage()
     {
