@@ -34,13 +34,12 @@ public class GunControl : MonoBehaviour
     Vector3 targetLoc;
 
     GameObject obj;
-
+    GameObject uiCursor;
     bool coolDown;
     float fireTimer;
-
+    float fireRateModifier;
     bool isGamepad;
     bool isAttacking = false;
-
     private void Awake()
     {
         playerActionControls = new PlayerActionControls();
@@ -61,9 +60,9 @@ public class GunControl : MonoBehaviour
     {
         player = this.gameObject;
         ObjectPool_Projectiles.Instance.InstantiatePool(bulletPool);
-
+        uiCursor = GameObject.Find("Cursor");
         projectileStartPos = this.gameObject.transform.GetChild(0).gameObject;
-
+        fireRateModifier = 1f;
         coolDown = false;
         fireTimer = 0;
         freezeFire = false;
@@ -81,7 +80,7 @@ public class GunControl : MonoBehaviour
         if (coolDown)
         {
             //this means our shooting cooldown is affected by time slow
-            fireTimer += Time.unscaledDeltaTime;
+            fireTimer += Time.unscaledDeltaTime * fireRateModifier;
             //this could be fun maybe? just need to get the bullets to not explode on one another
             //fireTimer += Time.unscaledDeltaTime;
 
@@ -91,6 +90,14 @@ public class GunControl : MonoBehaviour
                 coolDown = false;
             }
         }
+    }
+
+    public void GetTimeSlow(bool isTimeSlowed)
+    {
+        if (isTimeSlowed)
+            fireRateModifier = 0.5f;
+        else
+            fireRateModifier = 1f;
     }
 
     void Aim()
@@ -198,7 +205,15 @@ public class GunControl : MonoBehaviour
             obj.GetComponent<AudioSource>().Play();
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
             coolDown = true;
-        }    
+            if(spreadModifier <= .2f)
+                spreadModifier += 0.02f;
+            uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, true);
+        }
+        else if (!isAttacking)
+        {
+            spreadModifier = 0;
+            uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, false);
+        }
     }
 
     public void OnFire(CallbackContext context)

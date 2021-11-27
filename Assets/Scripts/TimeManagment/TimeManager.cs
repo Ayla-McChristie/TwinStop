@@ -123,7 +123,16 @@ public class TimeManager : MonoBehaviour
         AmIOuttaTime();
         //Debug.Log(Time.timeScale);
         //Debug.Log(isTimeStopped);
-        timeBar.TimeSet(timeValue);      
+        timeBar.TimeSet(timeValue);
+        SetTimeSlow();
+    }
+
+    void SetTimeSlow()
+    {
+        if(isTimeStopped && hasTimeCrystal)
+            this.GetComponentInParent<GunControl>().GetTimeSlow(true);
+        else if (!isTimeStopped)
+            this.GetComponentInParent<GunControl>().GetTimeSlow(false);
     }
     /// <summary>
     /// Increments the timer for the time stop, decreasing while time stop is active and
