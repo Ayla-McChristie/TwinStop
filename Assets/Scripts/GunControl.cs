@@ -207,7 +207,10 @@ public class GunControl : MonoBehaviour
             coolDown = true;
             if(spreadModifier <= .2f)
                 spreadModifier += 0.02f;
-            uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, true);
+            if (uiCursor != null)
+            {
+                uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, true);
+            }
         }
         else if (!isAttacking)
         {
