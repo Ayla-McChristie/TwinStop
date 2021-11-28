@@ -14,9 +14,10 @@ public class PlayerRingFollow : MonoBehaviour
      RectTransform canvasRTransform;
 
     Image myImage;
-
-    Color defaultColor, newActiveColor, cantMoveColor, firingColor, timeStopColor;
-
+    [ColorUsage(true, true)]
+    [SerializeField]
+    Color defaultColor, cantMoveColor, firingColor, timeStopColor;
+    Color newActiveColor;
     PlayerMovement pmScript;
     GunControl gcScript;
     TimeManager tmScript;
@@ -28,10 +29,10 @@ public class PlayerRingFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        defaultColor = new Color(0, 15, 94);
-        cantMoveColor = new Color(145, 145, 145);
-        firingColor = new Color(0, 91, 90);
-        timeStopColor = new Color(1, 147, 1);
+        //defaultColor = new Color(0, 15, 94);
+        //cantMoveColor = new Color(145, 145, 145);
+        //firingColor = new Color(0, 91, 90);
+        //timeStopColor = new Color(1, 147, 1);
 
         isChangingColors = false;
         myImage = this.GetComponent<Image>();
@@ -64,11 +65,11 @@ public class PlayerRingFollow : MonoBehaviour
         }
         if (pmScript.freezeMovement)
         {
-            NewActiveColor(Color.gray);
+            NewActiveColor(cantMoveColor);
         }
         if(tmScript.isTimeStopped)
         {
-            NewActiveColor(Color.magenta);
+            NewActiveColor(timeStopColor);
         }
 
         Debug.Log("Is time stopped: " + tmScript.ToString());
