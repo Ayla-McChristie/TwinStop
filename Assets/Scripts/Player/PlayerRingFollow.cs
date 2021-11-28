@@ -15,6 +15,11 @@ public class PlayerRingFollow : MonoBehaviour
 
     Image myImage;
 
+    Color defaultColor, newActiveColor, cantMoveColor, firingColor, timeStopColor;
+
+    PlayerMovement pmScript;
+    GunControl gcScript;
+
     bool isChangingColors;
 
 
@@ -22,13 +27,28 @@ public class PlayerRingFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        defaultColor = new Color(0, 15, 94);
+        cantMoveColor = new Color(145, 145, 145);
+        firingColor = new Color(173, 216, 230);
+        timeStopColor = new Color(91, 84, 81);
+
+
+
+
+
         isChangingColors = false;
         myImage = this.GetComponent<Image>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
+
+        pmScript = player.GetComponent<PlayerMovement>();
+        gcScript = player.GetComponent<GunControl>();
+
         rTransform = GetComponent<RectTransform>();
         //gameCam = Camera.Main;
         canvasRTransform = GameObject.Find("GameUI").GetComponent<RectTransform>();
         //gameCam = GameObject.FindGameObjectWithTag("MainCam");
+
+        defaultColor = myImage.color;
     }
 
     // Update is called once per frame
@@ -36,6 +56,20 @@ public class PlayerRingFollow : MonoBehaviour
     {
         TrackPlayer();
         RotateWithPlayer();
+
+        if (gcScript.isAttacking)
+        {
+            NewActiveColor(firingColor);
+        }
+        else
+        {
+            NewActiveColor(defaultColor);
+        }
+
+        if (isChangingColors)
+        {
+            ChangeColor();
+        }
 
     }
 
@@ -71,22 +105,40 @@ public class PlayerRingFollow : MonoBehaviour
     /// <param name="red"></param>
     /// <param name="blue"></param>
     /// <param name="green"></param>
-    void ChangeColor(float red, float green, float blue)
+    void ChangeColor()
     {
-        float newRed = myImage.color.r - red;
-        float newGreen = myImage.color.g - green;
-        float newBlue = myImage.color.b - blue;
+        float newRed = newActiveColor.r - myImage.color.r;
+        float newGreen = newActiveColor.g - myImage.color.g ;
+        float newBlue = newActiveColor.b - myImage.color.b ;
 
         Color newColor = new Color(newRed, newGreen, newBlue);
 
         if (newColor == myImage.color)
         {
             isChangingColors = false;
+            Debug.Log("NewColor = my color");
         }
         else
         {
            myImage.color = newColor;
         }
         
+    }
+
+    /// <summary>
+    /// sets the new active color for the ring to change to
+    /// </summary>
+    /// <param name="red"></param>
+    /// <param name="green"></param>
+    /// <param name="blue"></param>
+    void NewActiveColor(Color newColor)
+    {
+        newActiveColor = newColor;
+        isChangingColors = true;
+    }
+
+    void ResetColor()
+    {
+        myImage.color = defaultColor;
     }
 }
