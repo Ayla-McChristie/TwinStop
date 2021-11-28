@@ -39,7 +39,8 @@ public class GunControl : MonoBehaviour
     float fireTimer;
     float fireRateModifier;
     bool isGamepad;
-    bool isAttacking = false;
+
+    public bool isAttacking = false;
     private void Awake()
     {
         playerActionControls = new PlayerActionControls();
