@@ -52,6 +52,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     /*
      * HitFlash Variables
      */
+    PostProcessingController ppController;
     public Renderer FlashRenderer { get; set; }
     public Material defaultMat;
     public Material hurtMat;
@@ -70,6 +71,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     private void Start()
     {
         FlashRenderer = GetComponentInChildren<Renderer>();
+        ppController = GetComponent<PostProcessingController>();
         defaultMat = FlashRenderer.material;
     }
     void Update()
@@ -150,6 +152,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             isInvincible = true;
             invincibilityTimer = Time.time + invicibilityDuration;
             FlashTimer = FlashDuration;
+            ppController.ActivateHurtVignette();
             if (CameraShake.Instance != null)
             {
                 CameraShake.Instance.ShakeCam(cShakeIntensity, cShakeTime);
