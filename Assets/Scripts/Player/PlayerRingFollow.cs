@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerRingFollow : MonoBehaviour
 {
     [SerializeField]
-    GameObject player;
+    GameObject player, timeManagerObject;
     [SerializeField]
     Camera gameCam;
     RectTransform rTransform;
@@ -19,6 +19,7 @@ public class PlayerRingFollow : MonoBehaviour
 
     PlayerMovement pmScript;
     GunControl gcScript;
+    TimeManager tmScript;
 
     bool isChangingColors;
 
@@ -29,19 +30,18 @@ public class PlayerRingFollow : MonoBehaviour
     {
         defaultColor = new Color(0, 15, 94);
         cantMoveColor = new Color(145, 145, 145);
-        firingColor = new Color(173, 216, 230);
-        timeStopColor = new Color(91, 84, 81);
-
-
-
-
+        firingColor = new Color(0, 91, 90);
+        timeStopColor = new Color(1, 147, 1);
 
         isChangingColors = false;
         myImage = this.GetComponent<Image>();
         //player = GameObject.FindGameObjectWithTag("Player");
+        timeManagerObject = GameObject.FindGameObjectWithTag("TimeManager");
+
 
         pmScript = player.GetComponent<PlayerMovement>();
         gcScript = player.GetComponent<GunControl>();
+        tmScript = timeManagerObject.GetComponent<TimeManager>();
 
         rTransform = GetComponent<RectTransform>();
         //gameCam = Camera.Main;
@@ -57,18 +57,30 @@ public class PlayerRingFollow : MonoBehaviour
         TrackPlayer();
         RotateWithPlayer();
 
+        ResetColor();
         if (gcScript.isAttacking)
         {
             NewActiveColor(firingColor);
         }
-        else
+        if (pmScript.freezeMovement)
         {
-            NewActiveColor(defaultColor);
+            NewActiveColor(Color.gray);
         }
+        if(tmScript.isTimeStopped)
+        {
+            NewActiveColor(Color.magenta);
+        }
+
+        Debug.Log("Is time stopped: " + tmScript.ToString());
+        
 
         if (isChangingColors)
         {
             ChangeColor();
+        }
+        else
+        {
+            ResetColor();
         }
 
     }
@@ -107,20 +119,13 @@ public class PlayerRingFollow : MonoBehaviour
     /// <param name="green"></param>
     void ChangeColor()
     {
-        float newRed = newActiveColor.r - myImage.color.r;
-        float newGreen = newActiveColor.g - myImage.color.g ;
-        float newBlue = newActiveColor.b - myImage.color.b ;
-
-        Color newColor = new Color(newRed, newGreen, newBlue);
-
-        if (newColor == myImage.color)
+        if (Color.Equals(myImage.color, newActiveColor))
         {
             isChangingColors = false;
-            Debug.Log("NewColor = my color");
         }
         else
         {
-           myImage.color = newColor;
+            myImage.color = Color.Lerp(myImage.color, newActiveColor, .2f); ;
         }
         
     }
@@ -139,6 +144,7 @@ public class PlayerRingFollow : MonoBehaviour
 
     void ResetColor()
     {
-        myImage.color = defaultColor;
+        myImage.color = Color.Lerp(myImage.color, defaultColor, .2f);
+        isChangingColors = false;
     }
 }
