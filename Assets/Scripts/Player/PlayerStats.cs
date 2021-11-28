@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -62,6 +63,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         set => flashDuration = value;
     }
     public float FlashTimer { get; set; }
+    public float cShakeIntensity;
+    public float cShakeTime;
 
     public bool isDead = false;
     private void Start()
@@ -147,6 +150,10 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             isInvincible = true;
             invincibilityTimer = Time.time + invicibilityDuration;
             FlashTimer = FlashDuration;
+            if (CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeCam(cShakeIntensity, cShakeTime);
+            }
         }
         if (Health <= 0)
         {
@@ -202,7 +209,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             //}
         }
     }
-
     void PlayerDead()
     {
         isDead = true;
