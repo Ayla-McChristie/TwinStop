@@ -1242,7 +1242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6404460857304854663}
   - component: {fileID: 8268924900616544066}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Hurt Vignette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2163,6 +2163,7 @@ MonoBehaviour:
   bulletPool:
     prefab: {fileID: 1840432582817397467, guid: 14899a0c8f180d44387a6f02eb22bd0c, type: 3}
     maxSize: 100
+  isAttacking: 0
 --- !u!114 &2505359911109289591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2220,6 +2221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeStopPostProcessingScript: {fileID: 1277988545}
+  hurtVignette: {fileID: 8268924900616544066}
   timeStopOn: 0
 --- !u!1 &3400851848345185285
 GameObject:

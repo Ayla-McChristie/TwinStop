@@ -108,11 +108,6 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(timeValue);
-        //Debug.Log(coolDownValue);
-        //Debug.Log(isTimeStopped);
-        //Debug.Log(Time.timeScale);
-        //TimeLeft();
         FreezeTime();
 
         Cooldown();
@@ -121,8 +116,6 @@ public class TimeManager : MonoBehaviour
         
         Timer();
         AmIOuttaTime();
-        //Debug.Log(Time.timeScale);
-        //Debug.Log(isTimeStopped);
         timeBar.TimeSet(timeValue);
         SetTimeSlow();
     }
@@ -208,7 +201,6 @@ public class TimeManager : MonoBehaviour
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped && hasTimeCrystal)
         {
-
             Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
