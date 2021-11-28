@@ -13,10 +13,17 @@ public class PlayerRingFollow : MonoBehaviour
     [SerializeField]
      RectTransform canvasRTransform;
 
+    Image myImage;
+
+    bool isChangingColors;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        isChangingColors = false;
+        myImage = this.GetComponent<Image>();
         player = GameObject.FindGameObjectWithTag("Player");
         rTransform = GetComponent<RectTransform>();
         //gameCam = Camera.Main;
@@ -56,5 +63,30 @@ public class PlayerRingFollow : MonoBehaviour
     {
         //I cannot tell you why multiplying the rotation by -1 makes this work but it does. Rotating stuff in unity is hard -Ryan
         rTransform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, player.transform.eulerAngles.y * -1);
+    }
+
+    /// <summary>
+    /// Dynamically changes the ring color gradually to the passed in rgb values
+    /// </summary>
+    /// <param name="red"></param>
+    /// <param name="blue"></param>
+    /// <param name="green"></param>
+    void ChangeColor(float red, float green, float blue)
+    {
+        float newRed = myImage.color.r - red;
+        float newGreen = myImage.color.g - green;
+        float newBlue = myImage.color.b - blue;
+
+        Color newColor = new Color(newRed, newGreen, newBlue);
+
+        if (newColor == myImage.color)
+        {
+            isChangingColors = false;
+        }
+        else
+        {
+           myImage.color = newColor;
+        }
+        
     }
 }
