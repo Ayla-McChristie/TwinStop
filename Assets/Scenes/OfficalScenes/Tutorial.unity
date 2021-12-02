@@ -28546,7 +28546,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-58200
+  m_Name: pb_Mesh-5594
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -51171,6 +51171,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 77490547}
     m_Modifications:
+    - target: {fileID: 920193383609680501, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 920193383609680501, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1204486244364128789, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: listOfWaves.Array.size
       value: 2
@@ -51265,7 +51273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648906, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.971001
+      value: 5.97
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648906, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -51273,7 +51281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648906, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.0103326
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648906, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51304,12 +51312,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648914, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204486244711648914, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_Name
       value: LongHallWayTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648915, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648917, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_Mesh
@@ -51381,7 +51393,7 @@ PrefabInstance:
       objectReference: {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
     - target: {fileID: 1204486246202233620, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 1204486246202233620, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -51389,7 +51401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204486246202233620, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.37
+      value: 6.84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
@@ -65735,7 +65747,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.777027, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
