@@ -32,4 +32,13 @@ public class SpikeBehavior : MonoBehaviour
     {
         transform.GetComponent<Animator>().Play("MoveSpike");
     }
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.transform.tag == "Player")
+        {
+            Debug.Log("I hit the player");
+            other.gameObject.GetComponent<PlayerStats>().Health--;
+        }    
+    }
 }
