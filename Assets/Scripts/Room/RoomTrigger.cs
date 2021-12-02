@@ -91,28 +91,35 @@ public class RoomTrigger : MonoBehaviour
             }
             RoomManager.Instance.SetCurrentRoom(this);
 
-            StartCoroutine("DelaySpawnForParticles", longestDelay);
-            
+            foreach (var roomSpawn in spawnPoints)
+            {
+                if (roomSpawn != null)
+                {
+                    roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
+                }
+            }
             /*
             * Start wave spawn 
             */
+            hasStarted = true;
+            NoMoreWaves = false;
         }
     }
 
-    IEnumerator DelaySpawnForParticles(float longestDelay)
-    {
-        foreach (var roomSpawn in spawnPoints)
-        {
-            if (roomSpawn != null)
-            {
-                roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles(); 
-            }
-        }
-        yield return new WaitForSeconds(longestDelay);
-        hasStarted = true;
-        NoMoreWaves = false;
+    //IEnumerator DelaySpawnForParticles(float longestDelay)
+    //{
+    //    //foreach (var roomSpawn in spawnPoints)
+    //    //{
+    //    //    if (roomSpawn != null)
+    //    //    {
+    //    //        roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles(); 
+    //    //    }
+    //    //}
+    //    yield return new WaitForSeconds(longestDelay);
+    //    //hasStarted = true;
+    //    //NoMoreWaves = false;
 
-    }
+    //}
 
     void SpawnNextWave()
     {
@@ -123,7 +130,14 @@ public class RoomTrigger : MonoBehaviour
                 var temp = item.GetComponent<RoomSpawnPoint>();
                 if(temp.listOfWaves.Count-1 >= waveNum)
                 {
-                   EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+                    if (waveNum == 0)
+                    {
+                        EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform, longestDelay);
+                    }
+                    else
+                    {
+                        EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+                    }
                 }
             }
         }

@@ -11,8 +11,6 @@ public class RoomSpawnPoint : MonoBehaviour
     //this is because unity doesnt serialized nested lists without it
     [System.Serializable]
 
- 
-
     public class WaveListWrapper
     {
         public List<GameObject> WaveList;

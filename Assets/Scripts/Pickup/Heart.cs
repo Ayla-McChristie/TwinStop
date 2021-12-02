@@ -32,10 +32,8 @@ public class Heart : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" && isPickedUp == false)
         {
-
-            other.gameObject.GetComponent<PlayerStats>().Health++;
             audio.Play();
             isPickedUp = true;
             clipLength = clip.length;

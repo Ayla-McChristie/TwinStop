@@ -29,6 +29,8 @@ public class EnemyManager : MonoBehaviour
 
     //lets us know if were in combat or not. Should probably be move to the room manager
     public bool isInCombat;
+    //this is technical debt for sure but we only have 2 weeks and im tired -Aidan
+    bool combatOverride;
     private int numOfEnemiesInCombat;
 
 
@@ -66,30 +68,8 @@ public class EnemyManager : MonoBehaviour
 
     protected void Spawn(GameObject go)
     {
-        /*
-         * TODO Pull from object pool instead of making new entities
-         */
         go = ObjectPool_Projectiles.Instance.GetProjectile(go.name);
     }
-
-    //public void SpawnEnemies(int room)
-    //{
-    //    foreach (RoomDetail r in roomDetail)
-    //    {
-    //        if (r.roomNum == room)
-    //        {
-    //            numOfEnemiesInCombat = r.listOfEnemies.Count;
-    //            for (int i = 0; i < r.listOfEnemies.Count; i++)
-    //            {
-    //                GameObject enemy = o.GetProjectile(r.listOfEnemies[i].gameObject.name);
-    //                enemy.transform.position = r.SpawnLoc[i].position;
-    //            }
-    //        }
-    //    }
-
-    //    //lets us know combat has started
-    //    isInCombat = true;
-    //}
     public void SpawnEnemies(List<GameObject> listOfEnemies, Transform spawnPoint)
     {
         numOfEnemiesInCombat += listOfEnemies.Count;
@@ -110,6 +90,18 @@ public class EnemyManager : MonoBehaviour
             }
         }
         isInCombat = true;
+        combatOverride = false;
+    }
+    public void SpawnEnemies(List<GameObject> listOfEnemies, Transform spawnPoint, float WaitTime)
+    {           
+        isInCombat = true;
+        combatOverride = true;
+        StartCoroutine(DelaySpawnForTime(listOfEnemies, spawnPoint, WaitTime));
+    }
+    IEnumerator DelaySpawnForTime(List<GameObject> listOfEnemies, Transform spawnPoint, float WaitTime)
+    {
+        yield return new WaitForSeconds(WaitTime);
+        SpawnEnemies(listOfEnemies, spawnPoint);
     }
     /*
      * Runs in update and will tell us when combat is over by turning isInCombat to false
@@ -117,13 +109,18 @@ public class EnemyManager : MonoBehaviour
     void CheckForCombat()
     {
         //Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
-        if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies)
+        if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies && combatOverride == false)
         {
             numOfEnemiesInCombat = 0;
             isInCombat = false;
         }
     }
 
+    public void StartCombatOverride()
+    {
+        isInCombat = true;
+
+    }
     /*
      * this should probably just call a method from the door manager that lets us lock and unlock all the doors
      */
@@ -138,4 +135,5 @@ public class EnemyManager : MonoBehaviour
             isInCombat = false;
         }
     }
+
 }
