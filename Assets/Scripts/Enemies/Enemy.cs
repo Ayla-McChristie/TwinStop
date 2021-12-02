@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
             this.Die();
         }
         FlashCoolDown();
-        this.transform.LookAt(target.transform);
+        //this.transform.LookAt(target.transform);
     }
 
     public void AddForce(Vector3 force)

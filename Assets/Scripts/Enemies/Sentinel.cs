@@ -15,12 +15,20 @@ public class Sentinel : Enemy
     public float attackRange = 2;
     [SerializeField]
     public float attackRate = 1;
+    [SerializeField]
+    bool projectiles3 = true;
+    [SerializeField]
+    bool projectiles4 = false;
+    [SerializeField]
+    bool projectiles5 = false;
+
     public LayerMask mask;
     State state;
     protected float moveRange = 5f;
 
-    GameObject projectileStart;
+    List<Transform> projectileStartPos;
     GameObject projectile;
+
 
     Vector3 moveDir;
     Vector3 destination; //the distance between destinated location to this gameobject
@@ -39,13 +47,47 @@ public class Sentinel : Enemy
     public override void Start()
     {
         moveDir = new Vector3(Random.Range(this.transform.position.x, this.transform.position.x), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z));
-        projectileStart = this.gameObject.transform.GetChild(0).gameObject;
         state = State.Attacking;
         this.Health = health;
         this.Speed = speed;
         this.Damage = damage;
+        projectileStartPos = new List<Transform>();
+        CheckProjectileSet();
         base.Start();
-        Debug.Log(this.transform.position.ToString());
+    }
+
+    void CheckProjectileSet()
+    {
+        int count;
+        if (projectiles3)
+        {
+            this.transform.Find("projectiles3").gameObject.SetActive(true);
+            count = this.transform.Find("projectiles3").childCount;
+            SetShootAspect(count, this.transform.Find("projectiles3"));
+        }
+        else if (projectiles4)
+        {
+            this.transform.Find("projectiles4").gameObject.SetActive(true);
+            count = this.transform.Find("projectiles4").childCount;
+            SetShootAspect(count, this.transform.Find("projectiles4"));
+        }
+        else if (projectiles5)
+        {
+            this.transform.Find("projectiles5").gameObject.SetActive(true);
+            count = this.transform.Find("projectiles5").childCount;
+            SetShootAspect(count, this.transform.Find("projectiles5"));
+        }
+    }
+
+    void SetShootAspect(int count, Transform projectileSet)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            if (projectileSet.GetChild(i).name == "projectileStart")
+            {
+                projectileStartPos.Add(projectileSet.GetChild(i));
+            }
+        }
     }
 
     // Update is called once per frame
@@ -77,23 +119,29 @@ public class Sentinel : Enemy
     {
         if(!coolDown && !target.GetComponent<PlayerStats>().isDead)
         {
-            projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
-            //projectile.transform.position = projectileStart.transform.position;
-            if (GetPredictedDir(target.transform.position, this.transform.position, target.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))
+            for(int i = 0; i < projectileStartPos.Count; i++)
             {
-                //projectile.GetComponent<Rigidbody>().velocity = direction * projectile.GetComponent<Projectile>().b_Speed;
-                projectile.GetComponent<Projectile>().SetUp(direction, projectileStart.transform.position, "Enemy");
+                projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
+                projectile.GetComponent<Projectile>().SetUp(projectileStartPos[i].forward, projectileStartPos[i].position, "Enemy");
+                //projectile.transform.position = projectileStart.transform.position;
+                //if (GetPredictedDir(target.transform.position, this.transform.position, target.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))
+                //{
+                //    //projectile.GetComponent<Rigidbody>().velocity = direction * projectile.GetComponent<Projectile>().b_Speed;
+                //    projectile.GetComponent<Projectile>().SetUp(direction, projectileStartPos[i].position, "Enemy");
+                //}
+                //else
+                //{
+                //    //projectile.GetComponent<Rigidbody>().velocity = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
+                //    projectile.GetComponent<Projectile>().SetUp((target.transform.position - this.transform.position), projectileStartPos[i].position, "Enemy");
+                //}
+                //Space out when the enemy can shoot again
+                //Debug.Log(projectile.transform.position);
+                //projectileDir.y = 0;
+                //projectileDir = projectileDir.normalized;
+                //projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user          
+
             }
-            else
-            {
-                //projectile.GetComponent<Rigidbody>().velocity = (target.transform.position- this.transform.position) * projectile.GetComponent<Projectile>().b_Speed;
-                projectile.GetComponent<Projectile>().SetUp((target.transform.position - this.transform.position), projectileStart.transform.position, "Enemy");
-            }
-            coolDown = true; //Space out when the enemy can shoot again
-            //Debug.Log(projectile.transform.position);
-            //projectileDir.y = 0;
-            //projectileDir = projectileDir.normalized;
-            //projectile.GetComponent<Projectile>().SetUp(projectileDir, this.transform.position, this.gameObject.tag); //Activating projectile with it's direction, starting position, and the tag of the user          
+            coolDown = true;
         }
     }
 
