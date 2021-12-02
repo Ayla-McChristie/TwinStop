@@ -383,7 +383,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 8183811251509430881}
-    m_RemovedComponents: []
+    - target: {fileID: 8271693826898301805, guid: f9bcc0daca25d024ba413d4be830f251, type: 3}
+      propertyPath: reticle
+      value: 
+      objectReference: {fileID: 2800000, guid: 6e2518686757f5e428977ba7c46ee037, type: 3}
+    - target: {fileID: 8341853014643948196, guid: f9bcc0daca25d024ba413d4be830f251, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2649443109269643879, guid: f9bcc0daca25d024ba413d4be830f251, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9bcc0daca25d024ba413d4be830f251, type: 3}
 --- !u!224 &3549131932652511660 stripped
 RectTransform:

@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
         transform.forward = direction;
         //projectileSound.Play();
         //IgnoreCollision(projectileUser);
-        //IgnoreProjectiles();
+        IgnoreProjectiles();
     }
 
     //void IgnoreCollision(string user)
@@ -67,22 +67,22 @@ public class Projectile : MonoBehaviour
         
     }
 
-    //void IgnoreProjectiles()
-    //{
-    //    if (GameObject.FindWithTag(gameObject.transform.tag))
-    //        foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
-    //        {
-    //            Physics.IgnoreCollision(item.GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-    //        }
-    //    //    if (GameObject.FindWithTag("PlayerBullet"))
-    //    //        Physics.IgnoreCollision(GameObject.FindWithTag("PlayerBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-    //    //    if (GameObject.FindWithTag("EnemyBullet"))
-    //    //        Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-    //}
+    void IgnoreProjectiles()
+    {
+        if (GameObject.FindWithTag(gameObject.transform.tag))
+            foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
+            {
+                Physics.IgnoreCollision(item.GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+            }
+        //    if (GameObject.FindWithTag("PlayerBullet"))
+        //        Physics.IgnoreCollision(GameObject.FindWithTag("PlayerBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+        //    if (GameObject.FindWithTag("EnemyBullet"))
+        //        Physics.IgnoreCollision(GameObject.FindWithTag("EnemyBullet").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        Debug.Log(collision.gameObject.name);
         /*
          * If we have an explosion prefab, use it
          */
