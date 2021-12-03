@@ -6600,7 +6600,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-156960
+  m_Name: pb_Mesh-1282172
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21327,7 +21327,7 @@ PrefabInstance:
     - target: {fileID: 3796230493671170240, guid: 078ac1cac3a2869458873e4fde761025, type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 831911486}
+      objectReference: {fileID: 462909085}
     - target: {fileID: 3796230493671170240, guid: 078ac1cac3a2869458873e4fde761025, type: 3}
       propertyPath: roomCenter
       value: 
@@ -21425,6 +21425,11 @@ PrefabInstance:
 --- !u!4 &462909084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3796230493018893821, guid: 078ac1cac3a2869458873e4fde761025, type: 3}
+  m_PrefabInstance: {fileID: 462909083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &462909085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3796230493018893810, guid: 078ac1cac3a2869458873e4fde761025, type: 3}
   m_PrefabInstance: {fileID: 462909083}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &471352198
@@ -24690,7 +24695,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-156910
+  m_Name: pb_Mesh-1282122
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33595,7 +33600,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-156932
+  m_Name: pb_Mesh-1282144
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -86538,7 +86543,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7767527, y: 1}
+    m_SensorSize: {x: 1.7776026, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
