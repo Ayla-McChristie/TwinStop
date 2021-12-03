@@ -45,6 +45,7 @@ public class Charger : Enemy
                 GetTarget();
                 break;
         }
+        base.FixedUpdate();
     }
 
     void GetTarget()
