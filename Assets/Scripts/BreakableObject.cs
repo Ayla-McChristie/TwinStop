@@ -58,7 +58,7 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "PlayerBullet")
+        if (other.gameObject.tag == "PlayerBullet" || other.gameObject.tag == "EnemyBullet")
         {
             this.TakeDamage();
             crateBreak.Play();
