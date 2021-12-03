@@ -10,14 +10,14 @@ public class ReticleCursor : MonoBehaviour
     bool isFiring;
     bool underScale;
     bool atScale;
-    
+    GunControl gun;
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.SetCursor(reticle, new Vector2(reticle.width/2, reticle.height/2), CursorMode.Auto);
+        gun = GameObject.FindGameObjectWithTag("Player").GetComponent<GunControl>();
     }
-
     public void GetSpreadModifier(float spreadMod, bool isfiring)
     {
         reticleAdjuster = spreadMod;

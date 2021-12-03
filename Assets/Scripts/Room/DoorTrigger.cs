@@ -20,10 +20,7 @@ public class DoorTrigger : MonoBehaviour
 
     GameObject cameraFollowMe, player;
 
-    [SerializeField]
     FollowPlayer followPlayerScript;
-
-    [SerializeField]
     PlayerMovement playerMovementScript;
 
     private void Awake()
@@ -86,7 +83,11 @@ public class DoorTrigger : MonoBehaviour
             followPlayerScript.Move(roomCenter);
             if(amIALargeRoom)
             {
-                followPlayerScript.doIFollow = !(followPlayerScript.doIFollow);
+                followPlayerScript.doIFollow = true;
+            }
+            else
+            {
+                followPlayerScript.doIFollow = false;
             }
             //Debug.Log("Door Closed");
 

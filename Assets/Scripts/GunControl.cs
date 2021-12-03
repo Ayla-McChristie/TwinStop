@@ -18,6 +18,7 @@ public class GunControl : MonoBehaviour
     [SerializeField]
     float rotationSmoothing = 1000f;
 
+    public float SpreadModifier { get { return spreadModifier; } }
     //this is where the bullet spawns
     GameObject projectileStartPos;
     //this is a shortcut to the parent object but i probably dont need this
