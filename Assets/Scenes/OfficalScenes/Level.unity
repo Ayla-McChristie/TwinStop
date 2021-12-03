@@ -38109,7 +38109,7 @@ PrefabInstance:
     - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: listOfWaves.Array.data[0].WaveList.Array.data[0]
       value: 
-      objectReference: {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+      objectReference: {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
     - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: listOfWaves.Array.data[0].WaveList.Array.data[1]
       value: 
@@ -41382,7 +41382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648914, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648915, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: spawnPoints.Array.data[1]
@@ -45239,7 +45239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfWaves:
   - WaveList:
-    - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
+    - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
   - WaveList:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
 --- !u!4 &1239113523
@@ -45972,7 +45972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688203597817817904, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: -5.54
       objectReference: {fileID: 0}
     - target: {fileID: 2688203597817817904, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -45980,7 +45980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688203597817817904, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.88
+      value: 34.69
       objectReference: {fileID: 0}
     - target: {fileID: 2688203597817817904, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
       propertyPath: m_LocalRotation.w
