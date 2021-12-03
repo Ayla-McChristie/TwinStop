@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
     public Material HurtMat { get => hurtMat; }
-    private Material defaultMat;
+    protected Material defaultMat;
     public float flashDuration;
     public float FlashDuration
     {
