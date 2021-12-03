@@ -20,7 +20,7 @@ public class CameraShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shakeTimer>0)
+        if (shakeTimer > 0)
         {
             shakeTimer -= Time.deltaTime;
             CinemachineBasicMultiChannelPerlin perlin = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -30,6 +30,10 @@ public class CameraShake : MonoBehaviour
             }
 
             //perlin.m_AmplitudeGain = Mathf.Lerp(startingIntesity, 0f, (1 -(shakeTimer / shakeTimerTotal)));
+        }
+        else if (vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain > 0)
+        {
+            vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0f;
         }
     }
     public void ShakeCam(float intensity, float time)

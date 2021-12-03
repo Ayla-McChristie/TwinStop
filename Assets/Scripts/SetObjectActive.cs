@@ -10,7 +10,13 @@ public class SetObjectActive : MonoBehaviour
 
     TimeManager timeManagerScript;
 
-
+    private void Start()
+    {
+        foreach (GameObject item in ActivateGameObjects)
+        {
+                item.SetActive(false);
+        }
+    }
     // Set the number of game obects you want activated here
     // then drag their game object into the field - Steven
 
