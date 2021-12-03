@@ -24,7 +24,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     public float Health
     {
         get => health;
-        set => health = value;
+        private set => health = value;
     }
     public int numOfHearts; // Max amount of hearts a player can have, should be 6
 
