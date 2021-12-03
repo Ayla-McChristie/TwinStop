@@ -183,7 +183,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         {
             hearts[(int)(Health - 1)].SetActive(true);
         }
-        lastHealth = Health;
+        lastHealth = Health; 
+
         //// system for turning full hearts to empty hearts
         //for (int i = 0; i < hearts.Length; i++)
         //{
