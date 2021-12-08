@@ -16,11 +16,11 @@ public class Cannon_SentryTurret : Enemy
     GameObject projectile;
     public GameObject projectileStartPos;
     bool coolDown;
-    float fovDist = 100.0f;
+
     float fireTimer = 0;
     float projectileSpeed = 12;
     string projectileType;
-    public LayerMask mask;
+
     State state;
     // Start is called before the first frame update
     public override void Start()

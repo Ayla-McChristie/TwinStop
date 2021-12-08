@@ -22,7 +22,7 @@ public class Sentinel : Enemy
     [SerializeField]
     bool projectiles5 = false;
 
-    public LayerMask mask;
+
     State state;
     protected float moveRange = 5f;
 
@@ -35,7 +35,6 @@ public class Sentinel : Enemy
     Vector3 projectileDir;
     float fireTimer = 0;
     float waitTimer = 0;
-    float fovDist = 100.0f;
     public float maxDist = 10f;
     public float minDist = 5f;
 

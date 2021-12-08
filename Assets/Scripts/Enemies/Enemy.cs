@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
     bool attackCooldown = false;
     protected NavMeshAgent agent;
 
+    public LayerMask mask;
+    protected float fovDist = 100.0f;
     /*
      * HitFlash Variables
      */
@@ -63,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
             this.Die();
         }
         FlashCoolDown();
-        //this.transform.LookAt(target.transform);
+
     }
 
     public void AddForce(Vector3 force)
@@ -134,5 +136,17 @@ public class Enemy : MonoBehaviour, IDamageFlash
         {
             this.TakeDamage();
         }
+    }
+
+    bool CanSeeTarget()
+    {
+        Vector3 direction = target.transform.position - this.transform.position;
+        float angle = Vector3.Angle(direction, this.transform.position);
+
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, direction, out hit, fovDist, mask)
+                            && hit.collider.gameObject.tag == "Player")
+            return true;
+        return false;
     }
 }
