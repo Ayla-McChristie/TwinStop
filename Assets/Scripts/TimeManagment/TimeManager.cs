@@ -116,7 +116,14 @@ public class TimeManager : MonoBehaviour
         
         Timer();
         AmIOuttaTime();
-        timeBar.TimeSet(timeValue);
+        if (outtaTime)
+        {
+            timeBar.TimeSet(coolDownValue);
+        }
+        else
+        {
+            timeBar.TimeSet(timeValue);
+        }
         SetTimeSlow();
     }
 

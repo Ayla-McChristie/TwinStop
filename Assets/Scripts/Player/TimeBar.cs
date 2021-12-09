@@ -5,16 +5,30 @@ using UnityEngine.UI;
 
 public class TimeBar : MonoBehaviour
 {
-    public Slider slider;
+    float timeBarMax;
+    float timeBarValue;
+    Material material;
+
+    private void Start()
+    {
+        material = this.GetComponent<Renderer>().material;
+    }
 
     public void SetMaxTime(float time)
     {
-        slider.maxValue = time; // sets the max value of the slider
-        slider.value = time; // current amount of time available
+        timeBarMax = time;
+        timeBarValue = time;
+        //slider.maxValue = time; // sets the max value of the slider
+        //slider.value = time; // current amount of time available
     }
 
     public void TimeSet(float time)
     {
-        slider.value = time;
+        timeBarValue = time;
+        float temp = Mathf.Lerp(-1.5f, 5.84f, Mathf.InverseLerp(0, timeBarMax, timeBarValue));
+        if (material != null)
+        {
+            material.SetFloat("CuttOffHeight", temp);
+        }
     }
 }
