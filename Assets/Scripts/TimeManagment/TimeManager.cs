@@ -207,8 +207,8 @@ public class TimeManager : MonoBehaviour
     {
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped && hasTimeCrystal)
-        {
-            Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
+        {           
+            Time.timeScale = Mathf.Clamp01(Time.timeScale - ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate);
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
         

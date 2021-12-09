@@ -22,7 +22,7 @@ public class CameraShake : MonoBehaviour
     {
         if (shakeTimer > 0)
         {
-            shakeTimer -= Time.deltaTime;
+            shakeTimer -= Time.unscaledDeltaTime;
             CinemachineBasicMultiChannelPerlin perlin = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             if (shakeTimer <= 0)
             {

@@ -30,17 +30,21 @@ public class RoomSpawnPoint : MonoBehaviour
     {
         foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
         {
-            item.Play();
+            ParticleSystem.EmissionModule em = item.emission;
+            if (!item.isPlaying)
+            {
+                item.Play();
+            }
         }
     }
 
     private void Update()
     {
-        if (((RoomTrigger)GetComponentInParent<RoomTrigger>()).NoMoreWaves == true)
+        foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
         {
-            foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
+            if(item.time > item.main.duration)
             {
-                item.Stop();
+                item.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
         }
     }

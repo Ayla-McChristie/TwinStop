@@ -25,7 +25,7 @@ public class TimeBar : MonoBehaviour
     public void TimeSet(float time)
     {
         timeBarValue = time;
-        float temp = Mathf.Lerp(-1.5f, 5.84f, Mathf.InverseLerp(0, timeBarMax, timeBarValue));
+        float temp = Mathf.Lerp(-0.5f, 5.84f, Mathf.InverseLerp(0, timeBarMax, timeBarValue));
         if (material != null)
         {
             material.SetFloat("CuttOffHeight", temp);
