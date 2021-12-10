@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: {x: 0, y: 0, z: 0}
+  isTimeBased: 0
 --- !u!114 &494849772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26,6 +27,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: {x: 0, y: 0, z: 0}
+  isTimeBased: 0
 --- !u!114 &110812728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,6 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: {x: 0, y: 0, z: 0}
+  isTimeBased: 0
 --- !u!1 &7109802664691183177
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +58,7 @@ GameObject:
   - component: {fileID: 1020591362}
   m_Layer: 11
   m_Name: Key
-  m_TagString: Untagged
+  m_TagString: KeyPickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8367798cf0153bf48b29bd8b5317acde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: {x: 5, y: 0, z: 0}
+  rotationSpeed: {x: 10, y: 0, z: 0}
+  isTimeBased: 1
 --- !u!1001 &8987398221789833459
 PrefabInstance:
   m_ObjectHideFlags: 0

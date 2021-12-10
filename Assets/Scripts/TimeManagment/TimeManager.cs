@@ -17,6 +17,8 @@ public class TimeManager : MonoBehaviour
     private float timeStopTimeScale = .1f;
     [SerializeField]
     private float MaxTimeValue = 4f;
+    [SerializeField]
+    private float TimeRecoveryRate = 1.5f;
 
     //REMOVE LATER - Just for showing off new Timestop
     //[SerializeField]
@@ -116,7 +118,14 @@ public class TimeManager : MonoBehaviour
         
         Timer();
         AmIOuttaTime();
-        timeBar.TimeSet(timeValue);
+        if (outtaTime)
+        {
+            timeBar.TimeSet(coolDownValue);
+        }
+        else
+        {
+            timeBar.TimeSet(timeValue);
+        }
         SetTimeSlow();
     }
 
@@ -200,8 +209,8 @@ public class TimeManager : MonoBehaviour
     {
         //Debug.Log("Time has been stopped");
         if (!outtaTime && Time.timeScale > timeStopTimeScale && isTimeStopped && hasTimeCrystal)
-        {
-            Time.timeScale -= ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate;
+        {           
+            Time.timeScale = Mathf.Clamp01(Time.timeScale - ((1f / timeStopLength) * Time.unscaledDeltaTime) * timeSlowDownRate);
             Time.fixedDeltaTime = Time.timeScale * .02f;
         }
         
@@ -215,7 +224,7 @@ public class TimeManager : MonoBehaviour
         if (coolDownValue < MaxTimeValue && outtaTime)
         {
             ppController.timeStopOn = false;
-            coolDownValue += Time.unscaledDeltaTime;
+            coolDownValue += Time.unscaledDeltaTime/(TimeRecoveryRate/2f);
         }
     }
 
@@ -234,22 +243,25 @@ public class TimeManager : MonoBehaviour
             ppController.timeStopOn = false;
             if (timeValue < MaxTimeValue)
             {
-                this.timeValue += .002f;
+                this.timeValue += Time.unscaledDeltaTime/TimeRecoveryRate;
             }
         }
     }
 
     public void OnTimeStop(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (hasTimeCrystal)
         {
-            isTimeStopped = true;
-        }
-        if (context.canceled && hasTimeCrystal)
-        {
-            timeEnterIsPlayed = false;
-            isTimeStopped = false;
-            timeExitIsPlayed = false;
+            if (context.performed)
+            {
+                isTimeStopped = true;
+            }
+            if (context.canceled && hasTimeCrystal)
+            {
+                timeEnterIsPlayed = false;
+                isTimeStopped = false;
+                timeExitIsPlayed = false;
+            }
         }
     }
 

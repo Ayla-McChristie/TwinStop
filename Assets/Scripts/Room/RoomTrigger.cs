@@ -12,7 +12,7 @@ public class RoomTrigger : MonoBehaviour
     int waveNum;
     int totalWaves;
     bool hasStarted = false;
-    float longestDelay = 0;
+    float longestDelay = 1f;
 
     AudioSource audio;
 
@@ -40,20 +40,6 @@ public class RoomTrigger : MonoBehaviour
             }
         }
         //Read our spawnpoints
-        foreach (var roomSpawn in spawnPoints)
-        {
-            //roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
-            if (roomSpawn != null)
-            {
-                foreach (var item in roomSpawn.GetComponentsInChildren<ParticleSystem>())
-                {
-                    if (item.startDelay > longestDelay)
-                    {
-                        longestDelay = item.startDelay;
-                    }
-                }
-            }
-        }
     }
 
     private void Update()
@@ -91,18 +77,23 @@ public class RoomTrigger : MonoBehaviour
             }
             RoomManager.Instance.SetCurrentRoom(this);
 
-            foreach (var roomSpawn in spawnPoints)
-            {
-                if (roomSpawn != null)
-                {
-                    roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
-                }
-            }
+            //PlayParticles();
             /*
             * Start wave spawn 
             */
             hasStarted = true;
             NoMoreWaves = false;
+        }
+    }
+
+    void PlayParticles()
+    {
+        foreach (var roomSpawn in spawnPoints)
+        {
+            if (roomSpawn != null)
+            {
+                roomSpawn.GetComponent<RoomSpawnPoint>().PlaySpawnParticles();
+            }
         }
     }
 
@@ -130,13 +121,10 @@ public class RoomTrigger : MonoBehaviour
                 var temp = item.GetComponent<RoomSpawnPoint>();
                 if(temp.listOfWaves.Count-1 >= waveNum)
                 {
-                    if (waveNum == 0)
+                    if (!(temp.listOfWaves[waveNum].WaveList.Count == 0))
                     {
                         EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform, longestDelay);
-                    }
-                    else
-                    {
-                        EnemyManager.Instance.SpawnEnemies(temp.listOfWaves[waveNum].WaveList, item.transform);
+                        temp.PlaySpawnParticles();
                     }
                 }
             }

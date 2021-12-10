@@ -52,7 +52,7 @@ public class DoorTrigger : MonoBehaviour
             
             if (targetDoor.IsLocked == false)
             {
-                targetDoor.OpenDoor();
+                //targetDoor.OpenDoor();
                 playerMovementScript.StartDoorTransition(putPlayerHere.transform.position);
                 
 
@@ -79,7 +79,7 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            targetDoor.CloseDoor();
+            //targetDoor.CloseDoor();
             followPlayerScript.Move(roomCenter);
             if(amIALargeRoom)
             {

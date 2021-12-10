@@ -21,6 +21,8 @@ public class Door : MonoBehaviour
     Collider doorCollider;
     Renderer renderer;
 
+    bool doorOverride;
+
     private void Awake()
     {
         /*
@@ -41,6 +43,31 @@ public class Door : MonoBehaviour
         doorOpenSound = doorSounds[0];
         doorCloseSound = doorSounds[1];
         //cam = GameObject.Find("2Dcam");
+    }
+    private void Update()
+    {
+        if (!EnemyManager.Instance.isInCombat && !this.IsOpen && !doorOverride)
+        {
+            if (!IsLocked)
+            {
+                OpenDoor();
+            }
+        }
+        if (EnemyManager.Instance.isInCombat && this.IsOpen && doorOverride)
+        {
+            CloseDoor();
+        }
+        if (RoomManager.Instance.CurrentRoom != null)
+        {
+            if (!RoomManager.Instance.CurrentRoom.NoMoreWaves)
+            {
+                doorOverride = true;
+            }
+            else
+            {
+                doorOverride = false;
+            }
+        }
     }
 
     /*

@@ -19,7 +19,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
      * Health Variables
      */
     public float health = 6;
-    float lastHealth;
     // Total amount of health left
     public float Health
     {
@@ -46,6 +45,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
      * UI Variables
      */
     public GameObject[] hearts;
+    public GameObject[] keysList;
     //public Image[] hearts; // all heart UI game objects go here
     //public Sprite fullHeart; // sprite of full heart here
     //public Sprite emptyHeart; // sprite of empty heart here
@@ -75,13 +75,16 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         FlashRenderer = GetComponentInChildren<Renderer>();
         ppController = GetComponent<PostProcessingController>();
         defaultMat = FlashRenderer.material;
-        lastHealth = Health;
+        UpdateHearts();
+        UpdateKeys();
     }
     void Update()
     {
         //UpdateHearts();
         FlashCoolDown();
         InvincibilityCoolDown();
+        UpdateHearts();
+        UpdateKeys();
         //Debug.Log(health);
     }
     void InvincibilityCoolDown()
@@ -133,7 +136,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         if (other.gameObject.tag == "HealthPickUp")
         {
             Health++;
-            UpdateHearts();
         }
 
         // ! Code for Key pickup
@@ -176,38 +178,24 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             Health = numOfHearts; // this makes sure that players can never go over the set amount of hearts
 
         }
-       
-        if (Health < lastHealth)
-        {
-            hearts[(int)(lastHealth - 1)].SetActive(false);
-        }
-        if (Health > lastHealth)
-        {
-            hearts[(int)(Health - 1)].SetActive(true);
-        }
-        lastHealth = Health; 
 
-        //// system for turning full hearts to empty hearts
-        //for (int i = 0; i < hearts.Length; i++)
-        //{
-        //    if (i <= Health)
-        //    {
-        //        hearts[i].SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        hearts[i].SetActive(false);
-        //    }
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].SetActive((i < health));
+        }    
+    }
+    void UpdateKeys()
+    {
+        if (keys > keysList.Length)
+        {
+            keys = keysList.Length; // this makes sure that players can never go over the set amount of hearts
+        }
 
-        //    if (i < numOfHearts)
-        //    {
-        //        hearts[i].SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        hearts[i].SetActive(false);
-        //    }         
-        //}
+        for (int i = 0; i < keysList.Length; i++)
+        {
+            keysList[i].SetActive((i < keys));
+
+        }
     }
     void PlayerDead()
     {
