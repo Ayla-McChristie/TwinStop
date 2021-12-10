@@ -17,6 +17,8 @@ public class TimeManager : MonoBehaviour
     private float timeStopTimeScale = .1f;
     [SerializeField]
     private float MaxTimeValue = 4f;
+    [SerializeField]
+    private float TimeRecoveryRate = 1.5f;
 
     //REMOVE LATER - Just for showing off new Timestop
     //[SerializeField]
@@ -222,7 +224,7 @@ public class TimeManager : MonoBehaviour
         if (coolDownValue < MaxTimeValue && outtaTime)
         {
             ppController.timeStopOn = false;
-            coolDownValue += Time.unscaledDeltaTime;
+            coolDownValue += Time.unscaledDeltaTime/(TimeRecoveryRate/2f);
         }
     }
 
@@ -241,7 +243,7 @@ public class TimeManager : MonoBehaviour
             ppController.timeStopOn = false;
             if (timeValue < MaxTimeValue)
             {
-                this.timeValue += .002f;
+                this.timeValue += Time.unscaledDeltaTime/TimeRecoveryRate;
             }
         }
     }
