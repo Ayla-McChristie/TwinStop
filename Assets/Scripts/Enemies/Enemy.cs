@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected float Speed;
     Vector3 acceleration;
     Vector3 velocity;
-    AudioSource deathSound;
+    protected AudioSource deathSound;
     AudioClip deathClip;
     float clipTimer;
     bool audioPlayed;

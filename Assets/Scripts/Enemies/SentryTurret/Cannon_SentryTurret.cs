@@ -33,22 +33,27 @@ public class Cannon_SentryTurret : Enemy
         defaultMat = FlashRenderer.material;
         projectileType = "EnemyProjectile";
         rigidbody = GetComponent<Rigidbody>();
+        deathSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        switch (state)
+        if (!isDead)
         {
-            case State.Offline:
-                if (CanSeeTarget())
-                    state = State.Attack;
-                break;
-            case State.Attack:
-                AttackTarget();
-                AttackCoolDown();
-                this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
-                break;  
+            DeathSoundClipTime();
+            if (CanSeeTarget())
+                state = State.Attack;
+            switch (state)
+            {
+                case State.Offline:
+                    break;
+                case State.Attack:
+                    AttackTarget();
+                    AttackCoolDown();
+                    this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
+                    break;  
+            }
         }
     }
     
