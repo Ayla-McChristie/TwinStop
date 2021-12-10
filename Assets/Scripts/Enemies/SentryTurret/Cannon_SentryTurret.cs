@@ -39,6 +39,7 @@ public class Cannon_SentryTurret : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (!isDead)
         {
             DeathSoundClipTime();

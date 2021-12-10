@@ -27,7 +27,7 @@ public class BasicEnemy : Enemy
         if (!isDead)
         {
             agent.SetDestination(target.transform.position);
-            base.FixedUpdate();
         }
+        base.FixedUpdate();
     }
 }

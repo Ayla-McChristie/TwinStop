@@ -108,11 +108,17 @@ public class EnemyManager : MonoBehaviour
      */
     void CheckForCombat()
     {
-        //Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
+        Debug.Log($"there are {numOfEnemiesInCombat} enemies in combat");
+        Debug.Log($"Player has killed {PlayerStats.NumOfKilledEnemies} enemies");
         if (numOfEnemiesInCombat <= PlayerStats.NumOfKilledEnemies && combatOverride == false)
         {
             numOfEnemiesInCombat = 0;
             isInCombat = false;
+            Debug.Log("we are in combat");
+        }
+        else
+        {
+            Debug.Log("no combat");
         }
     }
 

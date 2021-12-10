@@ -92,7 +92,7 @@ public class Sentinel : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, transform.forward * fovDist, Color.red, 1, true); Debug.Log(state);
+        Debug.DrawRay(transform.position, transform.forward * fovDist, Color.red, 1, true); //Debug.Log(state);
         DeathSoundClipTime();
         if (!isDead)
         {
@@ -114,6 +114,7 @@ public class Sentinel : Enemy
             }
             this.transform.LookAt(target.transform.position);
         }
+        base.FixedUpdate();
     }
 
     void AttackTarget()

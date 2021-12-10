@@ -60,8 +60,8 @@ public class Charger : Enemy
             if (CanSeeTarget())
                 state = State.Charge;
             CheckIfPlayerIsBehind();
-            base.FixedUpdate();
         }
+        base.FixedUpdate();
         DeathSoundClipTime();
     }
 

@@ -60,6 +60,10 @@ public class Enemy : MonoBehaviour, IDamageFlash
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         FlashRenderer = GetComponent<Renderer>();
+        if (FlashRenderer == null)
+        {
+            FlashRenderer = this.gameObject.transform.parent.gameObject.GetComponentInChildren<Renderer>();
+        }
         defaultMat = FlashRenderer.material;
         deathSound = GetComponent<AudioSource>();
         deathClip = deathSound.clip;
@@ -67,9 +71,10 @@ public class Enemy : MonoBehaviour, IDamageFlash
     }
     public virtual void FixedUpdate()
     {
-        if (this.Health <= 0)
+        if (this.Health <= 0 && this.isDead == false)
         {
             this.Die();
+            this.isDead = true;
         }
         FlashCoolDown();
         DeathSoundClipTime();
@@ -112,11 +117,6 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         Health -= damageAmount;
         FlashTimer = FlashDuration;
-        if (this.Health <= 0)
-        {
-            Die();
-            isDead = true;
-        }
     }
 
     protected void DeathSoundClipTime()
