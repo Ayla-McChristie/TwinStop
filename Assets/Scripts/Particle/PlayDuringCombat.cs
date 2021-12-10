@@ -4,26 +4,64 @@ using UnityEngine;
 
 public class PlayDuringCombat : MonoBehaviour
 {
-    ParticleSystem ps;
+    ParticleSystem[] ps;
+    [SerializeField]
+    bool playDuringCombat;
     // Start is called before the first frame update
     void Start()
     {
-        ps = GetComponentInChildren<ParticleSystem>();
-        ps.Stop();
+        ps = GetComponentsInChildren<ParticleSystem>();
+        foreach (var item in ps)
+        {
+            item.Stop();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (EnemyManager.Instance.isInCombat && !ps.isPlaying)
+        if (playDuringCombat)
         {
-            ps.Play();
+            DuringCombat();
         }
-        if (RoomManager.Instance.CurrentRoom != null)
+        else
         {
-            if (!EnemyManager.Instance.isInCombat && RoomManager.Instance.CurrentRoom.NoMoreWaves)
+            OutsideCombat();
+        }
+    }
+
+    void DuringCombat()
+    {
+        foreach (var item in ps)
+        {
+            if (EnemyManager.Instance.isInCombat && !item.isPlaying)
             {
-                ps.Stop();
+                item.Play();
+            }
+            if (RoomManager.Instance.CurrentRoom != null)
+            {
+                if (!EnemyManager.Instance.isInCombat && RoomManager.Instance.CurrentRoom.NoMoreWaves)
+                {
+                    item.Stop();
+                }
+            }
+        }
+    }
+
+    void OutsideCombat()
+    {
+        foreach (var item in ps)
+        {
+            if (!EnemyManager.Instance.isInCombat && !item.isPlaying)
+            {
+                item.Play();
+            }
+            if (RoomManager.Instance.CurrentRoom != null)
+            {
+                if (EnemyManager.Instance.isInCombat && !RoomManager.Instance.CurrentRoom.NoMoreWaves)
+                {
+                    item.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                }
             }
         }
     }
