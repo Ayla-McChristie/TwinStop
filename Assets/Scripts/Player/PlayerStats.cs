@@ -74,14 +74,16 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         FlashRenderer = GetComponentInChildren<Renderer>();
         ppController = GetComponent<PostProcessingController>();
         defaultMat = FlashRenderer.material;
-        //UpdateHearts();
-        //UpdateKeys();
+        UpdateHearts();
+        UpdateKeys();
     }
     void Update()
     {
         //UpdateHearts();
         FlashCoolDown();
         InvincibilityCoolDown();
+        UpdateHearts();
+        UpdateKeys();
         //Debug.Log(health);
     }
     void InvincibilityCoolDown()
@@ -132,14 +134,12 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         if (other.gameObject.tag == "HealthPickUp")
         {
             Health++;
-            UpdateHearts();
         }
 
         // ! Code for Key pickup
         if (other.gameObject.tag == "KeyPickUp")
         {
             keys++;
-            UpdateKeys();
             //Destroy(other.gameObject);
             //Debug.Log("Key is now 1");
         }
@@ -191,7 +191,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
 
         for (int i = 0; i < keysList.Length; i++)
         {
-            hearts[i].SetActive((i < keys));
+            keysList[i].SetActive((i < keys));
 
         }
     }

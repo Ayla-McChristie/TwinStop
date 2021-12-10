@@ -38,14 +38,12 @@ public class Key : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            PlayerStats ps = other.gameObject.GetComponent<PlayerStats>();
             if(audio != null)
             {
                 audio.Play();
             }
             isPickedUp = true;
             clipLength = clip.length;
-            ps.keys++;
 
             /*
              * technical debt. this should use the object pool system but this will work for now -A

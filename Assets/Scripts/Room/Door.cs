@@ -57,14 +57,16 @@ public class Door : MonoBehaviour
         {
             CloseDoor();
         }
-
-        if (!RoomManager.Instance.CurrentRoom.NoMoreWaves)
+        if (RoomManager.Instance.CurrentRoom != null)
         {
-            doorOverride = true;
-        }
-        else
-        {
-            doorOverride = false;
+            if (!RoomManager.Instance.CurrentRoom.NoMoreWaves)
+            {
+                doorOverride = true;
+            }
+            else
+            {
+                doorOverride = false;
+            }
         }
     }
 
