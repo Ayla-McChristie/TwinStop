@@ -74,7 +74,10 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
             {
                 if (ItemToSpawn != null)
                     Instantiate(ItemToSpawn, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-                this.gameObject.GetComponent<BoxCollider>().enabled = !this.gameObject.GetComponent<BoxCollider>().enabled;
+                foreach (var item in this.gameObject.GetComponents<BoxCollider>())
+                {
+                    item.enabled = false;
+                }
             }
         }
     }
