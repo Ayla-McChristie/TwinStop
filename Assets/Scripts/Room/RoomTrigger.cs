@@ -12,7 +12,7 @@ public class RoomTrigger : MonoBehaviour
     int waveNum;
     int totalWaves;
     bool hasStarted = false;
-    float longestDelay = 1f;
+    float longestDelay = 2.5f;
 
     AudioSource audio;
 
