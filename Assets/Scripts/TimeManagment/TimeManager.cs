@@ -248,15 +248,18 @@ public class TimeManager : MonoBehaviour
 
     public void OnTimeStop(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (hasTimeCrystal)
         {
-            isTimeStopped = true;
-        }
-        if (context.canceled && hasTimeCrystal)
-        {
-            timeEnterIsPlayed = false;
-            isTimeStopped = false;
-            timeExitIsPlayed = false;
+            if (context.performed)
+            {
+                isTimeStopped = true;
+            }
+            if (context.canceled && hasTimeCrystal)
+            {
+                timeEnterIsPlayed = false;
+                isTimeStopped = false;
+                timeExitIsPlayed = false;
+            }
         }
     }
 
