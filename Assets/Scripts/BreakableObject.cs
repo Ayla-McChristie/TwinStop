@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class BreakableObject : MonoBehaviour, IDamageFlash
 {
-    [SerializeField] private GameObject GameObject;
+    [SerializeField] private GameObject ItemToSpawn;
 
     AudioSource crateBreak;
     AudioClip clip;
@@ -37,6 +40,10 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
         crateBreak = GetComponent<AudioSource>();
         clip = GetComponent<AudioSource>().clip;
         renderer = GetComponent<Renderer>();
+        if (renderer == null)
+        {
+            renderer = GetComponentInChildren<Renderer>();
+        }
         defaultMat = renderer.material;
 
         isBroken = false;
@@ -60,12 +67,13 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
     {
         if (other.gameObject.tag == "PlayerBullet" || other.gameObject.tag == "EnemyBullet")
         {
+            Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
             this.TakeDamage();
             crateBreak.Play();
             if (this.Health <= 0)
             {
-                if (GameObject != null)
-                    Instantiate(GameObject, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                if (ItemToSpawn != null)
+                    Instantiate(ItemToSpawn, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
                 this.gameObject.GetComponent<BoxCollider>().enabled = !this.gameObject.GetComponent<BoxCollider>().enabled;
             }
         }
