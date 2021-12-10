@@ -23,7 +23,11 @@ public class BasicEnemy : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        agent.SetDestination(target.transform.position);
-        base.FixedUpdate();
+        DeathSoundClipTime();
+        if (!isDead)
+        {
+            agent.SetDestination(target.transform.position);
+            base.FixedUpdate();
+        }
     }
 }

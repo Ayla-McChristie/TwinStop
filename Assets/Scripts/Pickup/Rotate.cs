@@ -8,7 +8,18 @@ public class Rotate : MonoBehaviour
     Vector3 rotationSpeed;
     [SerializeField]
     bool isTimeBased;
-
+    AudioSource wallMove;
+    TimeManager time;
+    private void Start()
+    {
+        wallMove = GetComponent<AudioSource>();
+        if (wallMove != null && !wallMove.Equals(null))
+        {
+            wallMove.Play();
+            wallMove.pitch = 2f;
+        }
+        time = GameObject.Find("Player_2.0").GetComponentInChildren<TimeManager>();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -19,6 +30,13 @@ public class Rotate : MonoBehaviour
         else
         {
             this.transform.Rotate(rotationSpeed);
+        }
+        if (wallMove != null && !wallMove.Equals(null))
+        {
+            if (time.isTimeStopped)
+                wallMove.pitch = 0.5f;
+            else
+                wallMove.pitch = 2f;
         }
     }
 }

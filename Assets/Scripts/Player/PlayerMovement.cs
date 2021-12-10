@@ -79,8 +79,6 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayerToTarget();
         }
-        
-        
         //this.playerRigidbody.MovePosition(playerRigidbody.position + (moveVelocity * Time.unscaledDeltaTime));
 
         //Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);

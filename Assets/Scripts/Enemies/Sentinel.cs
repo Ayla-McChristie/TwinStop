@@ -46,7 +46,7 @@ public class Sentinel : Enemy
     public override void Start()
     {
         moveDir = new Vector3(Random.Range(this.transform.position.x, this.transform.position.x), this.transform.position.y, Random.Range(this.transform.position.z, this.transform.position.z));
-        state = State.Attacking;
+        state = State.MoveToTarget;
         this.Health = health;
         this.Speed = speed;
         this.Damage = damage;
@@ -93,24 +93,26 @@ public class Sentinel : Enemy
     public override void FixedUpdate()
     {
         Debug.DrawRay(transform.position, transform.forward * fovDist, Color.red, 1, true); Debug.Log(state);
-
-        if (!CanSeeTarget())
-            state = State.MoveToTarget;
-        else if (CanSeeTarget())
-            state = State.Attacking;
-
-        Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-        switch (state)
+        DeathSoundClipTime();
+        if (!isDead)
         {
-            case State.Attacking:
-                AttackTarget();
-                AttackCoolDown();
-                MoveAround();
-                this.transform.LookAt(target.transform.position);
-                break;
-            case State.MoveToTarget:
-                MoveToTarget();
-                break;
+            if (!CanSeeTarget())
+                state = State.MoveToTarget;
+            else if (CanSeeTarget())
+                state = State.Attacking;
+            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+            switch (state)
+            {
+                case State.Attacking:
+                    AttackTarget();
+                    AttackCoolDown();
+                    MoveAround();
+                    break;
+                case State.MoveToTarget:
+                    MoveToTarget();
+                    break;
+            }
+            this.transform.LookAt(target.transform.position);
         }
     }
 
@@ -272,7 +274,7 @@ public class Sentinel : Enemy
         float angle = Vector3.Angle(direction, this.transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, direction, out hit, fovDist, mask) 
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, fovDist, mask) 
                             && hit.collider.gameObject.tag == "Player")
             return true;
         return false;

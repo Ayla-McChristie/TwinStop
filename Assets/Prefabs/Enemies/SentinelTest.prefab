@@ -90,7 +90,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587090509596471964}
-  m_LocalRotation: {x: -0.49116087, y: -0, z: -0, w: 0.87106895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -100,7 +100,7 @@ Transform:
   - {fileID: 7743479636602806618}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -58.834, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1587090509596471961
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -177,6 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8225a33d694544bbed57b45d3ce626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 72
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.2
   speed: 3
@@ -187,9 +190,6 @@ MonoBehaviour:
   projectiles3: 1
   projectiles4: 0
   projectiles5: 0
-  mask:
-    serializedVersion: 2
-    m_Bits: 72
   maxDist: 5
   minDist: 3
 --- !u!54 &1587090509596471965
@@ -227,7 +227,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.86
-  m_BaseOffset: 0.4
+  m_BaseOffset: 0.3414183
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!82 &822872912000437557
@@ -240,9 +240,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e59a4b54d88a08c4d8f8416da322ff05, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fdb6b2a20d3dd3f45886fc2e312329cc, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.341
   m_Pitch: 1
   Loop: 0
   Mute: 0

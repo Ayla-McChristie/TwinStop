@@ -49,7 +49,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     //public Image[] hearts; // all heart UI game objects go here
     //public Sprite fullHeart; // sprite of full heart here
     //public Sprite emptyHeart; // sprite of empty heart here
-
+    [SerializeField]
+    AudioSource playerHit;
     /*
      * HitFlash Variables
      */
@@ -123,6 +124,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             if (!isInvincible)
             {
                 TakeDamage();
+                playerHit.Play();
             }
         }
 

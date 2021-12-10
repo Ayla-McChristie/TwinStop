@@ -34,6 +34,7 @@ public class GunControl : MonoBehaviour
     Vector3 mousePos;
     Vector3 targetLoc;
 
+    Animator anim;
     GameObject obj;
     GameObject uiCursor;
     bool coolDown;
@@ -68,6 +69,7 @@ public class GunControl : MonoBehaviour
         coolDown = false;
         fireTimer = 0;
         freezeFire = false;
+        anim = this.GetComponent<Animator>();
     }
 
     void Update()
@@ -213,6 +215,7 @@ public class GunControl : MonoBehaviour
             {
                 uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, true);
             }
+            anim.SetBool("isFiring", true);
         }
         else if (!isAttacking)
         {
@@ -226,7 +229,10 @@ public class GunControl : MonoBehaviour
         if (context.performed)
             isAttacking = true;
         if (context.canceled)
+        {
             isAttacking = false;
+            anim.SetBool("isFiring", false);
+        }
     }
 
     public void OnDeviceChange(PlayerInput pi)

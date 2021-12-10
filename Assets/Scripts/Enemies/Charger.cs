@@ -17,9 +17,13 @@ public class Charger : Enemy
     [SerializeField]
     float stallTime = 2;
 
+    AudioClip shieldHitSound;
+    AudioSource[] sounds;
+
     State state;
     float timer;
     Vector3 targetDis;
+    Vector3 hitPos;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -28,7 +32,8 @@ public class Charger : Enemy
         this.Damage = damage;
         //this.agent.speed = speed;
         rigidbody = GetComponent<Rigidbody>();
-
+        sounds = GetComponents<AudioSource>();
+        shieldHitSound = sounds[1].clip;
         state = State.Charge;
         base.Start();
     }
@@ -36,26 +41,28 @@ public class Charger : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        targetDis = (new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z) - this.transform.position).normalized;
-        switch (state)
+        if (!isDead)
         {
-            case State.Charge:
-                ChargeTowards();
-                break;
-            case State.stall:
-                GetTarget();
-                break;
-            case State.Rotate:
-                RotateToPlayer();
-                break;
+            targetDis = (new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z) - this.transform.position).normalized;
+            switch (state)
+            {
+                case State.Charge:
+                    ChargeTowards();
+                    break;
+                //case State.stall:
+                //    Stall();
+                    //break;
+                case State.Rotate:
+                    RotateToPlayer();
+                    break;
+            }
+            Debug.Log(Health);
+            if (CanSeeTarget())
+                state = State.Charge;
+            CheckIfPlayerIsBehind();
+            base.FixedUpdate();
         }
-
-        if (CanSeeTarget())
-            state = State.Charge;
-        CheckIfPlayerIsBehind();
-        Debug.DrawRay(transform.position, transform.forward * fovDist, Color.red, 1, true);
-        Debug.Log(state);
-        base.FixedUpdate();
+        DeathSoundClipTime();
     }
 
     void CheckIfPlayerIsBehind()
@@ -68,17 +75,16 @@ public class Charger : Enemy
 
     void RotateToPlayer()
     {
-        agent.isStopped = true;
         Quaternion rot2Target = Quaternion.LookRotation(target.transform.position - this.transform.position);
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, rot2Target, rotSpeed * Time.deltaTime);
     }
 
-    void GetTarget()
+    void Stall()
     {
         if (timer >= stallTime)
         {
             timer = 0;
-            state = State.Charge;
+            state = State.Rotate;
         }
         else
             timer += Time.deltaTime;
@@ -91,7 +97,6 @@ public class Charger : Enemy
 
     void ChargeTowards()
     {
-        agent.isStopped = false;
         this.agent.SetDestination(target.transform.position); 
     }
 
@@ -106,7 +111,7 @@ public class Charger : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        //if (collision.transform.tag == "Player")
-        //    state = State.stall;
+        if (collision.transform.tag == "PlayerBullet")
+            sounds[1].PlayOneShot(shieldHitSound);
     }
 }

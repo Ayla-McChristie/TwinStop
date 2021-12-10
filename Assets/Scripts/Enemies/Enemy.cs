@@ -15,6 +15,10 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected float Speed;
     Vector3 acceleration;
     Vector3 velocity;
+    AudioSource deathSound;
+    AudioClip deathClip;
+    float clipTimer;
+    bool audioPlayed;
     //stationary is used for enemy types who like to keep their distance
     bool stationary;
 
@@ -25,7 +29,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected float Damage;
     bool attackCooldown = false;
     protected NavMeshAgent agent;
-
+    protected bool isDead = false;
     public LayerMask mask;
     protected float fovDist = 100.0f;
     /*
@@ -57,6 +61,9 @@ public class Enemy : MonoBehaviour, IDamageFlash
         agent = GetComponent<NavMeshAgent>();
         FlashRenderer = GetComponent<Renderer>();
         defaultMat = FlashRenderer.material;
+        deathSound = GetComponent<AudioSource>();
+        deathClip = deathSound.clip;
+        clipTimer = 0;
     }
     public virtual void FixedUpdate()
     {
@@ -65,7 +72,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
             this.Die();
         }
         FlashCoolDown();
-
+        DeathSoundClipTime();
     }
 
     public void AddForce(Vector3 force)
@@ -105,12 +112,31 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         Health -= damageAmount;
         FlashTimer = FlashDuration;
-        if (Health <= 0)
+        if (this.Health <= 0)
         {
             Die();
+            isDead = true;
         }
     }
 
+    protected void DeathSoundClipTime()
+    {
+        if (Health <= 0)
+        {
+            clipTimer += Time.deltaTime;
+            if (clipTimer >= deathClip.length)
+                this.gameObject.SetActive(false);
+        }
+    }
+
+    void PlayDeathSound()
+    {
+        if (!audioPlayed)
+        {
+            deathSound.Play();
+            audioPlayed = true;
+        }
+    }
     /*
      * When ever death conditions are met we run this to disable the enemy
      */
@@ -118,7 +144,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         //put code for enemy to do damage to player here
         PlayerStats.AddToKillCount();
-        this.gameObject.SetActive(false);
+        PlayDeathSound();
+
     }
 
     protected virtual void OnCollisionEnter(Collision collision)

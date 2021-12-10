@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class ChargerWeakpoint : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    AudioSource damage;
+    private void Start()
     {
-        Debug.Log(true);
-        if(other.gameObject.transform.tag == "PlayerBullet")
+        damage = GetComponent<AudioSource>();
+    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.transform.tag == "PlayerBullet")
+    //    {
+    //        this.gameObject.GetComponentInParent<Charger>().DamageTaken(1);
+    //        damage.Play();
+    //    }
+    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "PlayerBullet")
+        {
             this.gameObject.GetComponentInParent<Charger>().DamageTaken(1);
+            damage.PlayOneShot(damage.clip);
+        }
     }
 }
