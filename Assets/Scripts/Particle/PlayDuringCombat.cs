@@ -52,7 +52,7 @@ public class PlayDuringCombat : MonoBehaviour
     {
         foreach (var item in ps)
         {
-            if (!EnemyManager.Instance.isInCombat && !item.isPlaying)
+            if (!EnemyManager.Instance.isInCombat && !item.isPlaying && !(this.transform.parent.gameObject.GetComponent<Door>().IsLocked))
             {
                 item.Play();
             }

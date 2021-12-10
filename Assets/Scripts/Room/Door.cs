@@ -48,7 +48,10 @@ public class Door : MonoBehaviour
     {
         if (!EnemyManager.Instance.isInCombat && !this.IsOpen && !doorOverride)
         {
-            OpenDoor();
+            if (!IsLocked)
+            {
+                OpenDoor();
+            }
         }
         if (EnemyManager.Instance.isInCombat && this.IsOpen && doorOverride)
         {
