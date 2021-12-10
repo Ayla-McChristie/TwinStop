@@ -1278,7 +1278,7 @@ MonoBehaviour:
   isGlobal: 1
   priority: 3
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: 1f0eeb9c742dcfe45adf71286cbec382, type: 2}
 --- !u!1 &2064217243047970071
 GameObject:
@@ -2188,6 +2188,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  keysList: []
   defaultMat: {fileID: 0}
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.3
@@ -4821,17 +4822,13 @@ PrefabInstance:
       value: TimeManager
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
-      propertyPath: MaxTimeValue
-      value: 7
+      propertyPath: timeBar
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: ppController
       value: 
       objectReference: {fileID: 1257041210}
-    - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
-      propertyPath: hasTimeCrystal
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeSpeedUpRate
       value: 1
