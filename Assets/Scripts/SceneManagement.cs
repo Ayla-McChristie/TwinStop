@@ -8,6 +8,8 @@ public class SceneManagement : MonoBehaviour
     private static SceneManagement _instance;
     public static SceneManagement Instance { get { return _instance; } }
 
+    public string SceneNameToLoad;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
