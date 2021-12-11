@@ -65,10 +65,17 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
     }
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "PlayerBullet" || other.gameObject.tag == "EnemyBullet")
+        if (other.gameObject.tag == "PlayerBullet" || other.gameObject.tag == "EnemyBullet" || other.gameObject.GetComponent<Charger>() != null)
         {
             Physics.IgnoreCollision(other.gameObject.GetComponent<Collider>(), this.GetComponent<Collider>());
-            this.TakeDamage();
+            if (other.gameObject.GetComponent<Charger>() != null)
+            {
+                this.TakeDamage(5);
+            }
+            else
+            {
+                this.TakeDamage();
+            }
             crateBreak.Play();
             if (this.Health <= 0)
             {
