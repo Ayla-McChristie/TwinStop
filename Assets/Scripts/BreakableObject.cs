@@ -11,6 +11,7 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
 
     AudioSource crateBreak;
     AudioClip clip;
+    ParticleSystem ps;
     bool isBroken;
 
     float clipLength;
@@ -37,6 +38,9 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
     // Start is called before the first frame update
     void Start()
     {
+        ps = GetComponentInChildren<ParticleSystem>();
+        ps.Stop();
+        ps.Clear();
         crateBreak = GetComponent<AudioSource>();
         clip = GetComponent<AudioSource>().clip;
         renderer = GetComponent<Renderer>();
@@ -56,7 +60,7 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
         if (isBroken)
         {
             clipLength = clip.length;
-            if (clipTimer >= clipLength)
+            if (clipTimer >= clipLength && !ps.isPlaying)
                 Destroy(this.gameObject);
             else
                 clipTimer += Time.deltaTime;
@@ -77,11 +81,16 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
                 this.TakeDamage();
             }
             crateBreak.Play();
+
             if (this.Health <= 0)
             {
                 if (ItemToSpawn != null)
                     Instantiate(ItemToSpawn, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
                 foreach (var item in this.gameObject.GetComponents<BoxCollider>())
+                {
+                    item.enabled = false;
+                }
+                foreach (var item in this.gameObject.GetComponents<Renderer>())
                 {
                     item.enabled = false;
                 }
@@ -99,6 +108,7 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
         if (Health <= 0)
         {
             this.isBroken = true;
+            ps.Play();
         }
     }
     void FlashCoolDown()
