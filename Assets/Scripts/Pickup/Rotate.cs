@@ -25,11 +25,11 @@ public class Rotate : MonoBehaviour
     {
         if (isTimeBased)
         {
-            this.transform.Rotate(rotationSpeed * Time.timeScale);
+            this.transform.Rotate(rotationSpeed * Time.timeScale, Space.Self);
         }
         else
         {
-            this.transform.Rotate(rotationSpeed);
+            this.transform.Rotate(rotationSpeed, Space.Self);
         }
         if (wallMove != null && !wallMove.Equals(null))
         {
