@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestroyObject : MonoBehaviour
 {
 
-    ParticleSystem ps; // Was trying to be cool and have the enemy spawn particle effect to play but it wont work
+    public ParticleSystem ps; // Was trying to be cool and have the enemy spawn particle effect to play but it wont work
     public GameObject GameObject;
 
     void Start()
@@ -19,9 +19,9 @@ public class DestroyObject : MonoBehaviour
        if (other.transform.tag == "Player")
         {
             Debug.Log("I detect a player");
-            //ps.Play();
+            ps.Play();
             Destroy(GameObject);
-            //ps.Stop();
+            ps.Stop();
         }   
 
         Destroy(this.gameObject);
