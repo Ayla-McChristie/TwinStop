@@ -9,6 +9,13 @@ public class ChargerWeakpoint : MonoBehaviour
     {
         damage = GetComponent<AudioSource>();
     }
+
+    private void Update()
+    {
+        if (TimeManager.Instance.isTimeStopped)
+            damage.pitch = .5f;
+        damage.pitch = 1;
+    }
     //private void OnTriggerEnter(Collider other)
     //{
     //    if(other.gameObject.transform.tag == "PlayerBullet")

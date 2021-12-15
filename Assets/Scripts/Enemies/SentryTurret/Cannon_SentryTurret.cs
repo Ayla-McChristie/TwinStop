@@ -42,17 +42,19 @@ public class Cannon_SentryTurret : Enemy
         base.FixedUpdate();
         if (!isDead)
         {
+            this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
             DeathSoundClipTime();
             if (CanSeeTarget())
                 state = State.Attack;
+            else
+                state = State.Offline;
             switch (state)
             {
                 case State.Offline:
                     break;
                 case State.Attack:
                     AttackTarget();
-                    AttackCoolDown();
-                    this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
+                    AttackCoolDown();     
                     break;  
             }
         }

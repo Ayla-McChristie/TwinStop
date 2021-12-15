@@ -18,6 +18,7 @@ public class BasicEnemy : Enemy
         this.Health = health;
         this.Speed = speed;
         this.Damage = damage;
+        deathSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

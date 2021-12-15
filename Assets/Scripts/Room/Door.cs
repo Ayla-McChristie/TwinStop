@@ -18,6 +18,7 @@ public class Door : MonoBehaviour
     AudioSource[] doorSounds;
     AudioSource doorOpenSound;
     AudioSource doorCloseSound;
+    AudioSource hitDoorSound;
     Collider doorCollider;
     Renderer renderer;
 
@@ -42,6 +43,7 @@ public class Door : MonoBehaviour
         doorSounds = GetComponents<AudioSource>();
         doorOpenSound = doorSounds[0];
         doorCloseSound = doorSounds[1];
+        hitDoorSound = doorSounds[2];
         //cam = GameObject.Find("2Dcam");
     }
     private void Update()
@@ -108,5 +110,10 @@ public class Door : MonoBehaviour
     public void LockDoor()
     {
         this.IsLocked = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        hitDoorSound.PlayOneShot(hitDoorSound.clip);
     }
 }

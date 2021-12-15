@@ -51,6 +51,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     //public Sprite emptyHeart; // sprite of empty heart here
     [SerializeField]
     AudioSource playerHit;
+    [SerializeField]
+    AudioSource playerDead;
     /*
      * HitFlash Variables
      */
@@ -200,5 +202,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     void PlayerDead()
     {
         isDead = true;
+        playerDead.PlayOneShot(playerDead.clip);
     }
 }

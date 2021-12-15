@@ -52,6 +52,7 @@ public class Sentinel : Enemy
         this.Damage = damage;
         projectileStartPos = new List<Transform>();
         CheckProjectileSet();
+        deathSound = GetComponent<AudioSource>();
         base.Start();
     }
 

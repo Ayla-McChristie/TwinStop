@@ -18,6 +18,7 @@ public class Charger : Enemy
     float stallTime = 2;
 
     AudioClip shieldHitSound;
+    AudioClip moveSound;
     AudioSource[] sounds;
 
     State state;
@@ -34,7 +35,9 @@ public class Charger : Enemy
         rigidbody = GetComponent<Rigidbody>();
         sounds = GetComponents<AudioSource>();
         shieldHitSound = sounds[1].clip;
+        moveSound = sounds[2].clip;
         state = State.Charge;
+        deathSound = GetComponent<AudioSource>();
         base.Start();
     }
 
@@ -43,6 +46,7 @@ public class Charger : Enemy
     {
         if (!isDead)
         {
+            SlowSound();
             targetDis = (new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z) - this.transform.position).normalized;
             switch (state)
             {
@@ -60,9 +64,25 @@ public class Charger : Enemy
             if (CanSeeTarget())
                 state = State.Charge;
             CheckIfPlayerIsBehind();
+            if (!sounds[2].isPlaying)
+                sounds[2].PlayOneShot(moveSound);
         }
         base.FixedUpdate();
         DeathSoundClipTime();
+    }
+
+    void SlowSound()
+    {
+        if (TimeManager.Instance.isTimeStopped)
+        {
+            foreach (AudioSource a in sounds)
+                a.pitch = .5f;
+        }
+        else
+        {
+            foreach (AudioSource a in sounds)
+                a.pitch = 1f;
+        }
     }
 
     void CheckIfPlayerIsBehind()
@@ -97,7 +117,8 @@ public class Charger : Enemy
 
     void ChargeTowards()
     {
-        this.agent.SetDestination(target.transform.position); 
+        this.agent.SetDestination(target.transform.position);
+
     }
 
     bool CanSeeTarget()

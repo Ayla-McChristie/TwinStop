@@ -65,9 +65,6 @@ public class Enemy : MonoBehaviour, IDamageFlash
             FlashRenderer = this.gameObject.transform.parent.gameObject.GetComponentInChildren<Renderer>();
         }
         defaultMat = FlashRenderer.material;
-        deathSound = GetComponent<AudioSource>();
-        deathClip = deathSound.clip;
-        clipTimer = 0;
     }
     public virtual void FixedUpdate()
     {
@@ -124,7 +121,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
         if (Health <= 0)
         {
             clipTimer += Time.deltaTime;
-            if (clipTimer >= deathClip.length)
+            if (clipTimer >= deathSound.clip.length)
                 this.gameObject.SetActive(false);
         }
     }
