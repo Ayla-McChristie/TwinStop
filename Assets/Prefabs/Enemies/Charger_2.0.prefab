@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 3084616153781422633}
   - component: {fileID: 5671109653144250592}
   - component: {fileID: 1308109835962543815}
+  - component: {fileID: 2405198526719924432}
   m_Layer: 0
   m_Name: Charger_2.0
   m_TagString: Untagged
@@ -762,6 +763,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &2405198526719924432
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267827995045671363}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4916115, y: 1.3854029, z: 2.374411}
+  m_Center: {x: -0.120788574, y: 0.19270146, z: 0.8142412}
 --- !u!1 &354562290030767170
 GameObject:
   m_ObjectHideFlags: 0
