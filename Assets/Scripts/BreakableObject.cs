@@ -90,7 +90,13 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
                 {
                     item.enabled = false;
                 }
+
                 foreach (var item in this.gameObject.GetComponents<Renderer>())
+                {
+                    item.enabled = false;
+                }
+
+                foreach (var item in this.gameObject.GetComponentsInChildren<Renderer>())
                 {
                     item.enabled = false;
                 }
