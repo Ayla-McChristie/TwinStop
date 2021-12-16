@@ -153,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void UnFreeze()
     {
+        moveVelocity = new Vector3(0, 0, 0);
         gunControlScript.UnFrezeFire();
         tmScript.hasTimeCrystal = true;
         freezeMovement = false;
