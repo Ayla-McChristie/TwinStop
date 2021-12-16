@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     AudioSource playerFootStep;
     private GunControl gunControlScript;
 
+    private GameObject TimeManager;
+
+    TimeManager tmScript;
+
     //Turns true when special scenes happen like a door transition
     public bool freezeMovement;
 
@@ -51,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
         freezeMovement = false;
         playerFootStep = GetComponent<AudioSource>();
         gunControlScript = this.GetComponent<GunControl>();
+
+        TimeManager = GameObject.FindGameObjectWithTag("TimeManager");
+        tmScript = TimeManager.GetComponent<TimeManager>();
 
         //currentMoveToTarget = this.transform.position;
     }
@@ -120,7 +127,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.transform.position != currentMoveToTarget)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 9 * Time.deltaTime);
+            
+            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 1f);
         }
         else
         {
@@ -135,6 +143,8 @@ public class PlayerMovement : MonoBehaviour
     void Freeze()
     {
         gunControlScript.FrezeFire();
+        moveVelocity = new Vector3(0, 0, 0);
+        tmScript.HardTimeReset();
         freezeMovement = true;
     }
 
@@ -143,7 +153,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void UnFreeze()
     {
+        moveVelocity = new Vector3(0, 0, 0);
         gunControlScript.UnFrezeFire();
+        tmScript.ReturnToNormalAfterTransition();
         freezeMovement = false;
     }
 
