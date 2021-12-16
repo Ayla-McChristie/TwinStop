@@ -208,6 +208,12 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void ReturnToNormalAfterTransition()
+    {
+        hasTimeCrystal = true;
+        isTimeStopped = false;
+    }
+
     /*
      * this is the method used for the time stop mechanic -A
      */
