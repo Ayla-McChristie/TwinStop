@@ -19,6 +19,7 @@ public class Charger : Enemy
 
     AudioClip shieldHitSound;
     AudioClip moveSound;
+    AudioClip wallImpactSound;
     AudioSource[] sounds;
 
     State state;
@@ -38,6 +39,7 @@ public class Charger : Enemy
         moveSound = sounds[2].clip;
         state = State.Charge;
         deathSound = GetComponent<AudioSource>();
+        wallImpactSound = sounds[3].clip;
         base.Start();
     }
 
@@ -134,5 +136,7 @@ public class Charger : Enemy
     {
         if (collision.transform.tag == "PlayerBullet")
             sounds[1].PlayOneShot(shieldHitSound);
+        else
+            sounds[3].PlayOneShot(wallImpactSound);
     }
 }

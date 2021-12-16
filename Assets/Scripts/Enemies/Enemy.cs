@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     Vector3 velocity;
     protected AudioSource deathSound;
     AudioClip deathClip;
-    float clipTimer;
+    protected float clipTimer;
     bool audioPlayed;
     //stationary is used for enemy types who like to keep their distance
     bool stationary;
@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
         FlashTimer = FlashDuration;
     }
 
-    protected void DeathSoundClipTime()
+    protected virtual void DeathSoundClipTime()
     {
         if (Health <= 0)
         {

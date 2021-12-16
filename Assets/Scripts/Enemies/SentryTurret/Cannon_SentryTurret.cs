@@ -69,6 +69,20 @@ public class Cannon_SentryTurret : Enemy
         return false;
     }
 
+    protected override void DeathSoundClipTime()
+    {
+        if (Health <= 0)
+        {
+            clipTimer += Time.deltaTime;
+            if (clipTimer >= deathSound.clip.length)
+            {
+                this.transform.parent.GetComponent<BoxCollider>().enabled = false;
+                this.gameObject.SetActive(false);
+
+            }
+        }
+    }
+
     void AttackTarget()
     {
         if (!coolDown && !target.GetComponent<PlayerStats>().isDead)
