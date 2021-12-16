@@ -22,6 +22,10 @@ public class PlayerMovement : MonoBehaviour
     AudioSource playerFootStep;
     private GunControl gunControlScript;
 
+    private GameObject TimeManager;
+
+    TimeManager tmScript;
+
     //Turns true when special scenes happen like a door transition
     public bool freezeMovement;
 
@@ -51,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
         freezeMovement = false;
         playerFootStep = GetComponent<AudioSource>();
         gunControlScript = this.GetComponent<GunControl>();
+
+        TimeManager = GameObject.FindGameObjectWithTag("TimeManager");
+        tmScript = TimeManager.GetComponent<TimeManager>();
 
         //currentMoveToTarget = this.transform.position;
     }
@@ -135,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
     void Freeze()
     {
         gunControlScript.FrezeFire();
+        tmScript.hasTimeCrystal = false;
         freezeMovement = true;
     }
 
@@ -144,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
     void UnFreeze()
     {
         gunControlScript.UnFrezeFire();
+        tmScript.hasTimeCrystal = true;
         freezeMovement = false;
     }
 
