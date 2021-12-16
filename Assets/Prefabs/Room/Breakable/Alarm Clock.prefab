@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: vfx_WoodChips
       objectReference: {fileID: 0}
+    - target: {fileID: 6669178218324352583, guid: abfc3eaee8726474c90da7c42ec60070, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5591290641051094240, guid: 5315df55020e3a24780c2bf6dedde2a5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abfc3eaee8726474c90da7c42ec60070, type: 3}
 --- !u!1001 &1353873972924556587
@@ -297,3 +301,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c5370bf6fdcef7c4381f4d3545d697c3, type: 3}
   m_PrefabInstance: {fileID: 1353873972924556587}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8182702954042534418
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1532160974846280384}
+    m_Modifications:
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985760150177302812, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893592682520969696, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
+      propertyPath: m_Name
+      value: vfx_MetalChips
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f88ad7fe7549fdc4d8507826a37cdea5, type: 3}
