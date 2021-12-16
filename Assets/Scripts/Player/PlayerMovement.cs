@@ -127,7 +127,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.transform.position != currentMoveToTarget)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 9 * Time.deltaTime);
+            
+            this.transform.position = Vector3.MoveTowards(this.transform.position, currentMoveToTarget, 1f);
         }
         else
         {
@@ -142,6 +143,7 @@ public class PlayerMovement : MonoBehaviour
     void Freeze()
     {
         gunControlScript.FrezeFire();
+        moveVelocity = new Vector3(0, 0, 0);
         tmScript.HardTimeReset();
         freezeMovement = true;
     }
