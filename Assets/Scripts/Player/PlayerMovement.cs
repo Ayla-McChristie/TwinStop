@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
     void Freeze()
     {
         gunControlScript.FrezeFire();
-        tmScript.hasTimeCrystal = false;
+        tmScript.HardTimeReset();
         freezeMovement = true;
     }
 

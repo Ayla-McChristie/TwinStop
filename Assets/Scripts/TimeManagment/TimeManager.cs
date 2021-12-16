@@ -202,6 +202,12 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    public void HardTimeReset()
+    {
+        hasTimeCrystal = false;
+        Time.timeScale = 1f;
+    }
+
     /*
      * this is the method used for the time stop mechanic -A
      */
