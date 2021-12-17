@@ -90,9 +90,20 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
                 {
                     item.enabled = false;
                 }
+
                 foreach (var item in this.gameObject.GetComponents<Renderer>())
                 {
                     item.enabled = false;
+                }
+
+                foreach (var item in this.gameObject.GetComponentsInChildren<Renderer>())
+                {
+                    item.enabled = false;
+                }
+
+                foreach (ParticleSystem item in this.gameObject.GetComponentsInChildren<ParticleSystem>())
+                {
+                    item.GetComponent<Renderer>().enabled = true;
                 }
             }
         }
@@ -108,7 +119,10 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
         if (Health <= 0)
         {
             this.isBroken = true;
-            ps.Play();
+            foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>())
+            {
+                ps.Play();
+            }
         }
     }
     void FlashCoolDown()

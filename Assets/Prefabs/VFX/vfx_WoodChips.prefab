@@ -198,9 +198,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 5
-      minScalar: 5
+      minMaxState: 3
+      scalar: 4
+      minScalar: 5.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4849,7 +4849,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 459ae37e7efe79849a7a56b51940a4a0, type: 2}
+  - {fileID: 2100000, guid: 4adaf70be4815764587e96205a1da289, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4890,8 +4890,8 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 7629811779324647873, guid: 66f774fe25bbc604aa6886d2037f9da7, type: 3}
-  m_Mesh1: {fileID: 8342159127421523248, guid: 66f774fe25bbc604aa6886d2037f9da7, type: 3}
-  m_Mesh2: {fileID: 3680687292192122401, guid: 66f774fe25bbc604aa6886d2037f9da7, type: 3}
-  m_Mesh3: {fileID: 0}
+  m_Mesh: {fileID: 7629811779324647873, guid: 5315df55020e3a24780c2bf6dedde2a5, type: 3}
+  m_Mesh1: {fileID: 8342159127421523248, guid: 5315df55020e3a24780c2bf6dedde2a5, type: 3}
+  m_Mesh2: {fileID: 3680687292192122401, guid: 5315df55020e3a24780c2bf6dedde2a5, type: 3}
+  m_Mesh3: {fileID: 2272001217198551621, guid: 5315df55020e3a24780c2bf6dedde2a5, type: 3}
   m_MaskInteraction: 0
