@@ -2561,6 +2561,7 @@ GameObject:
   - component: {fileID: 2036100091012598332}
   - component: {fileID: 4671689560956865563}
   - component: {fileID: 8327860778903206412}
+  - component: {fileID: 7522232764909398614}
   m_Layer: 0
   m_Name: BigCharger
   m_TagString: Enemy
@@ -3154,6 +3155,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4916115, y: 1.3854029, z: 2.374411}
   m_Center: {x: -0.120788574, y: 0.19270146, z: 0.8142412}
+--- !u!33 &7522232764909398614
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856366389884605215}
+  m_Mesh: {fileID: -1365249285986396884, guid: 4800e5b96f09f174488135a586119333, type: 3}
 --- !u!1 &6011427183578294421
 GameObject:
   m_ObjectHideFlags: 0

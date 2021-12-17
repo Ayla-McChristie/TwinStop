@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 5671109653144250592}
   - component: {fileID: 1308109835962543815}
   - component: {fileID: 2405198526719924432}
+  - component: {fileID: 1511785893123470042}
   m_Layer: 0
   m_Name: Charger_2.0
   m_TagString: Enemy
@@ -776,6 +777,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.9683647, y: 1.3854029, z: 1.9269125}
   m_Center: {x: 0.02781105, y: 0.19270146, z: 0.5904919}
+--- !u!33 &1511785893123470042
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267827995045671363}
+  m_Mesh: {fileID: -1365249285986396884, guid: 4800e5b96f09f174488135a586119333, type: 3}
 --- !u!1 &354562290030767170
 GameObject:
   m_ObjectHideFlags: 0
