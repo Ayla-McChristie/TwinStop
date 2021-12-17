@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected NavMeshAgent agent;
     protected bool isDead = false;
     public LayerMask mask;
-    protected float fovDist = 100.0f;
+    protected float fovDist = 200.0f;
     /*
      * HitFlash Variables
      */

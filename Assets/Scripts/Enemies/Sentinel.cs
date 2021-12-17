@@ -21,8 +21,8 @@ public class Sentinel : Enemy
     bool projectiles4 = false;
     [SerializeField]
     bool projectiles5 = false;
-
-
+    [SerializeField]
+    float projectileSpeed = 6;
     State state;
     protected float moveRange = 5f;
 
@@ -125,6 +125,7 @@ public class Sentinel : Enemy
             for(int i = 0; i < projectileStartPos.Count; i++)
             {
                 projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
+                projectile.GetComponent<Projectile>().b_Speed = projectileSpeed;
                 projectile.GetComponent<Projectile>().SetUp(projectileStartPos[i].forward, projectileStartPos[i].position, "Enemy");
                 //projectile.transform.position = projectileStart.transform.position;
                 //if (GetPredictedDir(target.transform.position, this.transform.position, target.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))

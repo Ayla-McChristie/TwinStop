@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2405198526719924432}
   m_Layer: 0
   m_Name: Charger_2.0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,7 +350,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4808de43808ab0747b1ce6ca4680b039, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -774,8 +774,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.4916115, y: 1.3854029, z: 2.374411}
-  m_Center: {x: -0.120788574, y: 0.19270146, z: 0.8142412}
+  m_Size: {x: 1.9683647, y: 1.3854029, z: 1.9269125}
+  m_Center: {x: 0.02781105, y: 0.19270146, z: 0.5904919}
 --- !u!1 &354562290030767170
 GameObject:
   m_ObjectHideFlags: 0
