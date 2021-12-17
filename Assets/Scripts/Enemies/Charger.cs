@@ -66,8 +66,6 @@ public class Charger : Enemy
             if (CanSeeTarget())
                 state = State.Charge;
             CheckIfPlayerIsBehind();
-            if (!sounds[2].isPlaying)
-                sounds[2].PlayOneShot(moveSound);
         }
         base.FixedUpdate();
         DeathSoundClipTime();
