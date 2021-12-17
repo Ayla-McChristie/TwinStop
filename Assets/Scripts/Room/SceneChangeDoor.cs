@@ -5,6 +5,9 @@ using UnityEngine;
 public class SceneChangeDoor : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    //yes this is lazy i know sorry its late - Ryan
+    public bool goToCredits;
     void Start()
     {
         
@@ -19,9 +22,17 @@ public class SceneChangeDoor : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
             SceneManagement sceneScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
-            sceneScript.LoadNextLevel();
+            if (goToCredits)
+            {
+                sceneScript.LoadCertainScene("Credits");
+            }
+            else
+            {
+                
+                sceneScript.LoadNextLevel();
+            }
+            
         }
     }
 }
