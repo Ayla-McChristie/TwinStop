@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6391306531892256573}
   - component: {fileID: 8141282835461294901}
   - component: {fileID: -5058565877669151957}
+  - component: {fileID: 3817667165812077817}
   m_Layer: 7
   m_Name: PlayerProjectile
   m_TagString: PlayerBullet
@@ -101,7 +102,7 @@ SphereCollider:
   m_GameObject: {fileID: 1840432582817397467}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -5114,6 +5115,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &3817667165812077817
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840432582817397467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.50000006
+  m_Height: 2.7215629
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.29818466, z: 0}
 --- !u!1 &2586140080094171483
 GameObject:
   m_ObjectHideFlags: 0
