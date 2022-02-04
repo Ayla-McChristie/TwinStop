@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ScreenFade : MonoBehaviour
 {
     Animator anim;
@@ -25,8 +24,8 @@ public class ScreenFade : MonoBehaviour
         {
             anim.SetBool("FadeOut", true);
             animTimer += Time.deltaTime;
-            if(animTimer >= _clip.length)
-                FindObjectOfType<SceneManagement>().LoadCurrentLevel();
+            if (animTimer >= _clip.length)
+                FindObjectOfType<SceneManagement>().LoadCertainScene(SceneManagement.Instance.sceneName);
         }
     }
 

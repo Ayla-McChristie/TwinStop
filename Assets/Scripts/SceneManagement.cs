@@ -9,7 +9,7 @@ public class SceneManagement : MonoBehaviour
     public static SceneManagement Instance { get { return _instance; } }
 
     public string SceneNameToLoad;
-
+    public string sceneName;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -20,6 +20,7 @@ public class SceneManagement : MonoBehaviour
         {
             _instance = this;
         }
+        sceneName = SceneManager.GetActiveScene().name;
     }
 
     public void LoadCurrentLevel()
@@ -34,7 +35,9 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadCertainScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(4);
+        LoadManager.sceneInd = sceneName;
     }
 
     public void QuitGame()
