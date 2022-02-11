@@ -220,7 +220,11 @@ public class GunControl : MonoBehaviour
         else if (!isAttacking)
         {
             spreadModifier = 0;
-            uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, false);
+            if (uiCursor != null)
+            {
+                uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, false);
+
+            }
         }
     }
 
