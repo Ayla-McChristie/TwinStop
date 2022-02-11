@@ -204,13 +204,13 @@ public class TimeManager : MonoBehaviour
 
     public void HardTimeReset()
     {
-        hasTimeCrystal = false;
+        //hasTimeCrystal = false;
         Time.timeScale = 1f;
     }
 
     public void ReturnToNormalAfterTransition()
     {
-        hasTimeCrystal = true;
+        //hasTimeCrystal = true;
         isTimeStopped = false;
     }
 
