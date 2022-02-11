@@ -27,5 +27,6 @@ public class PlayAnimTrigger : MonoBehaviour
         {
             directors[i].Play();
         }
+        this.gameObject.SetActive(false);
     }
 }
