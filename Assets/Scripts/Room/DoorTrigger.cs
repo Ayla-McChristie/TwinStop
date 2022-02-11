@@ -53,9 +53,13 @@ public class DoorTrigger : MonoBehaviour
             if (targetDoor.IsLocked == false)
             {
                 //targetDoor.OpenDoor();
+                //followPlayerScript.Move(roomCenter);
+                if (!followPlayerScript.safetyBuffer)
+                {
+                    followPlayerScript.safetyBuffer = true;
+                }
                 playerMovementScript.StartDoorTransition(putPlayerHere.transform.position);
-                
-
+                followPlayerScript.doIFollow = true;
                 //Debug.Log("Door Opened");
             }
             else
@@ -77,20 +81,30 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (!followPlayerScript.safetyBuffer)
         {
-            //targetDoor.CloseDoor();
-            followPlayerScript.Move(roomCenter);
-            if(amIALargeRoom)
+            if (other.transform.tag == "Player")
             {
-                followPlayerScript.doIFollow = true;
-            }
-            else
-            {
-                followPlayerScript.doIFollow = false;
-            }
-            //Debug.Log("Door Closed");
+                //targetDoor.CloseDoor();
+                //followPlayerScript.Move(roomCenter);
+                if(amIALargeRoom)
+                {
+                    followPlayerScript.doIFollow = true;
+                }
+                else
+                {
+                    followPlayerScript.doIFollow = false;
 
+                    followPlayerScript.Move(roomCenter);
+                }
+                //Debug.Log("Door Closed");
+
+            }
+
+        }
+        else
+        {
+            followPlayerScript.safetyBuffer = !followPlayerScript.safetyBuffer;
         }
     }
 }

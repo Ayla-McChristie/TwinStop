@@ -5,6 +5,8 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public bool doIFollow, needToMove;
+    //this is a dumb idea to make the jank camera system work - Aidan
+    public bool safetyBuffer = false;
 
     GameObject currentTarget;
 
@@ -23,20 +25,27 @@ public class FollowPlayer : MonoBehaviour
         {
             this.transform.position = player.transform.position;
         }
-
         if(needToMove)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, currentTarget.transform.position, 50 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, currentTarget.transform.position, 100 * Time.deltaTime);
             if (this.transform.position == currentTarget.transform.position)
             {
                 needToMove = false;
             }
+            
         }
     }
 
     public void Move(GameObject newTarget)
     {
-        currentTarget = newTarget;
-        needToMove = true;
+        if (safetyBuffer)
+        {
+            safetyBuffer = !safetyBuffer;
+        }
+        else
+        {
+            currentTarget = newTarget;
+            needToMove = true;
+        }
     }
 }
