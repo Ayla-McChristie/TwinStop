@@ -28,6 +28,17 @@ public class SceneManagement : MonoBehaviour
             _instance = this;
         }
         sceneName = SceneManager.GetActiveScene().name;
+        FindLoadScreenItems();
+    }
+
+    void FindLoadScreenItems()
+    {
+        if (uiCanvas == null)
+            uiCanvas = GameObject.Find("GameUI");
+        if (loadCanvas == null)
+            loadCanvas = GameObject.Find("LoadSceneCanvas");
+        if (loadCanvas != null)
+            loadCanvas.SetActive(false);
     }
 
     public void LoadCurrentLevel()
@@ -43,13 +54,9 @@ public class SceneManagement : MonoBehaviour
     public void LoadCertainScene(string sceneName)
     {
         loadCanvas.SetActive(true);
-        loadCam.SetActive(true);
-        if (uiCanvas != null)
-            uiCanvas.SetActive(false);
-
-        //SceneManager.LoadScene(sceneName);
-        //SceneManager.LoadScene(4);
-        //LoadManager.sceneInd = sceneName;
+        if (loadCam != null)
+            loadCam.SetActive(true);
+        uiCanvas.SetActive(false);
         StartCoroutine(LoadAsync(sceneName));
     }
 
