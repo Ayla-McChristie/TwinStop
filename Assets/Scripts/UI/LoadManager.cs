@@ -14,7 +14,7 @@ public class LoadManager : MonoBehaviour
         {
             sceneInd = "Tutorial";
         }
-        StartCoroutine(LoadAsync(sceneInd));
+        //StartCoroutine(LoadAsync(sceneInd));
         Debug.Log(sceneInd);
     }
 
