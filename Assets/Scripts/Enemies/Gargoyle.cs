@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Gargoyle : Enemy
 {
-    protected enum State {Active, DeActive }
+    protected enum State {Active, DeActive,Attack }
     State state;
 
     [SerializeField]
@@ -14,19 +14,19 @@ public class Gargoyle : Enemy
     [SerializeField]
     public int damage = 1;
 
-    Vector3 oldPosition;
+    Vector3 destination;
     NavMeshPath path;
-
+    float recalculatePathTime;
+    int index = 1;
+    bool collideWithPlayer;
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
+        this.Health = health;
         state = State.DeActive;
-        this.agent.speed = agent.speed / Time.deltaTime;
-        //this.agent.acceleration = agent.acceleration / Time.deltaTime;
-        this.agent.angularSpeed = agent.angularSpeed / Time.deltaTime;
         path = new NavMeshPath();
-        oldPosition = target.transform.position;
+        deathSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,6 +35,9 @@ public class Gargoyle : Enemy
         CalculatePath();
         SwitchState();
         CheckTimeIsStopped();
+        DeathSoundClipTime();
+        //Distance2Player();
+        base.FixedUpdate();
     }
 
     void SwitchState()
@@ -43,6 +46,9 @@ public class Gargoyle : Enemy
         {
             case State.Active:
                 GoTowardsPlayer();
+                break;
+            case State.Attack:
+                AttackTemp();
                 break;
             case State.DeActive:
                 break;
@@ -54,17 +60,37 @@ public class Gargoyle : Enemy
         if (!TimeManager.Instance.isTimeStopped)
         {
             state = State.DeActive;
-            agent.isStopped = true;
+            agent.isStopped = true;Debug.Log("Time Is Not Stopped");
             return;
         }
-        state = State.Active;
+        state = State.Active; Debug.Log("Time Is Stopped");
         agent.isStopped = false;
+    }
+
+    void AttackTemp()
+    {
+        //this.transform.Rotate(Vector3.right * Time.unscaledDeltaTime *100);
+    }
+
+    void Distance2Player()
+    {
+        destination = target.transform.position - this.transform.position;
+        if (destination.magnitude < 2f)
+            state = State.Attack;
+
     }
 
     void GoTowardsPlayer()
     {
-        for (int i = 0; i < path.corners.Length; i++)
-            Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+        if (index >= path.corners.Length)
+            return;
+        float distance = Vector3.Distance(this.transform.position, path.corners[index]);
+        if(distance < 1f)
+        {
+            index++;
+            return;
+        }
+        this.transform.position = Vector3.MoveTowards(this.transform.position, path.corners[index], agent.speed / 50);
     }
 
     void TurnToPlayer()
@@ -76,12 +102,22 @@ public class Gargoyle : Enemy
 
     void CalculatePath()
     {
-        if (oldPosition == target.transform.position)
-        {
-            oldPosition = target.transform.position;
-            path.ClearCorners();
-            return;
-        }
         NavMesh.CalculatePath(this.transform.position, target.transform.position, NavMesh.AllAreas, path);
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        if (TimeManager.Instance.isTimeStopped)
+        {
+            base.OnCollisionEnter(collision); Debug.Log("Hit");
+
+        }
+        if (collision.transform.tag == "Player")
+            collideWithPlayer = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        collideWithPlayer = false;
     }
 }
