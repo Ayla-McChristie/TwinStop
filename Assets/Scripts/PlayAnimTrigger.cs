@@ -23,10 +23,13 @@ public class PlayAnimTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        for (int i = 0; i < directors.Count; i++)
+        if (other.gameObject.CompareTag("Player"))
         {
-            directors[i].Play();
+            for (int i = 0; i < directors.Count; i++)
+            {
+                directors[i].Play();
+            }
+            this.gameObject.SetActive(false);
         }
-        this.gameObject.SetActive(false);
     }
 }

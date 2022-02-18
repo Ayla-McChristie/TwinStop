@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class SceneManagement : MonoBehaviour
 {
     private static SceneManagement _instance;
@@ -10,6 +10,13 @@ public class SceneManagement : MonoBehaviour
 
     public string SceneNameToLoad;
     public string sceneName;
+
+    public Text text;
+    public GameObject uiCanvas;
+    public GameObject loadCanvas;
+    public GameObject loadCam;
+
+    float loadProgress;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -21,6 +28,17 @@ public class SceneManagement : MonoBehaviour
             _instance = this;
         }
         sceneName = SceneManager.GetActiveScene().name;
+        FindLoadScreenItems();
+    }
+
+    void FindLoadScreenItems()
+    {
+        if (uiCanvas == null)
+            uiCanvas = GameObject.Find("GameUI");
+        if (loadCanvas == null)
+            loadCanvas = GameObject.Find("LoadSceneCanvas");
+        if (loadCanvas != null)
+            loadCanvas.SetActive(false);
     }
 
     public void LoadCurrentLevel()
@@ -35,14 +53,28 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadCertainScene(string sceneName)
     {
-        //SceneManager.LoadScene(sceneName);
-        SceneManager.LoadScene(4);
-        LoadManager.sceneInd = sceneName;
+        loadCanvas.SetActive(true);
+        if (loadCam != null)
+            loadCam.SetActive(true);
+        uiCanvas.SetActive(false);
+        StartCoroutine(LoadAsync(sceneName));
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator LoadAsync(string sceneIndex)
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneIndex);
+
+        while (!op.isDone)
+        {
+            loadProgress = Mathf.Clamp01(op.progress / .9f);
+            text.text = loadProgress * 100f + "%";
+            yield return null;
+        }
     }
 }
 

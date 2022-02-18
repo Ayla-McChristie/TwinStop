@@ -120,6 +120,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         if (Health <= 0)
         {
+            if (deathSound == null)
+                return;
             clipTimer += Time.deltaTime;
             if (clipTimer >= deathSound.clip.length)
                 this.gameObject.SetActive(false);
@@ -130,6 +132,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         if (!audioPlayed)
         {
+            if (deathSound == null)
+                return;
             deathSound.Play();
             audioPlayed = true;
         }

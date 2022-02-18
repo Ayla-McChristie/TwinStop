@@ -8,6 +8,7 @@ public class ScreenFade : MonoBehaviour
     AnimationClip _clip;
     GameObject player;
     bool playerDead;
+    bool sceneChange;
     float animTimer;
     void Start()
     {
@@ -24,8 +25,11 @@ public class ScreenFade : MonoBehaviour
         {
             anim.SetBool("FadeOut", true);
             animTimer += Time.deltaTime;
-            if (animTimer >= _clip.length)
+            if (animTimer >= _clip.length && sceneChange == false)
+            {
                 FindObjectOfType<SceneManagement>().LoadCertainScene(SceneManagement.Instance.sceneName);
+                sceneChange = true;
+            }
         }
     }
 

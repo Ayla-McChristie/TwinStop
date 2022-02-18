@@ -54,6 +54,8 @@ public class TimeManager : MonoBehaviour
     AudioSource slowTimeExit;
     bool timeEnterIsPlayed;
     bool timeExitIsPlayed;
+
+    PlayerStats pStats;
     /*
      * singleton to ensure we only have 1 time manager -A
      */
@@ -74,7 +76,7 @@ public class TimeManager : MonoBehaviour
             _instance = this;
         }
         playerActionControls = new PlayerActionControls();
-
+        pStats = GameObject.Find("Player_2.0").GetComponent<PlayerStats>();
     }
     private void OnEnable()
     {
@@ -262,6 +264,8 @@ public class TimeManager : MonoBehaviour
 
     public void OnTimeStop(InputAction.CallbackContext context)
     {
+        if (pStats.isDead)
+            return;
         if (hasTimeCrystal)
         {
             if (context.performed)

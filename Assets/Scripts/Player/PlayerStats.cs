@@ -124,6 +124,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     }
     void OnCollisionEnter(Collision other)
     {
+        if ((other.gameObject.name == "Gargoyle" || other.gameObject.name == "Test_Gargoyle") && !TimeManager.Instance.isTimeStopped)
+            return;
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyBullet")
         {
             if (!isInvincible)
