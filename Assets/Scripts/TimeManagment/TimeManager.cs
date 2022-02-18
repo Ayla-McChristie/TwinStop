@@ -264,7 +264,9 @@ public class TimeManager : MonoBehaviour
 
     public void OnTimeStop(InputAction.CallbackContext context)
     {
-        if (hasTimeCrystal && !pStats.isDead)
+        if (pStats.isDead)
+            return;
+        if (hasTimeCrystal)
         {
             if (context.performed)
             {
