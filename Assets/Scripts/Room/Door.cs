@@ -19,6 +19,8 @@ public class Door : MonoBehaviour
     AudioSource doorOpenSound;
     AudioSource doorCloseSound;
     AudioSource hitDoorSound;
+    Animator Animator;
+
     Collider doorCollider;
     Renderer renderer;
 
@@ -38,6 +40,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
+        this.Animator = this.GetComponent<Animator>();
         //this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
         doorSounds = GetComponents<AudioSource>();
@@ -81,9 +84,17 @@ public class Door : MonoBehaviour
         {
             this.IsOpen = true;
             doorOpenSound.Play();
-            //this.renderer.enabled = false;
-            this.doorModels.SetActive(false);
-            this.doorCollider.enabled = false;
+
+            if (Animator != null)
+            {
+                //Animator.Play("OpenDoor", 0, 0.0f);
+                Animator.SetBool("IsOpen", true);
+            }
+            else
+            {
+                this.doorModels.SetActive(false);
+                this.doorCollider.enabled = false;
+            }
         }
     }
     /*
@@ -93,9 +104,17 @@ public class Door : MonoBehaviour
     {
         this.IsOpen = false;
         doorCloseSound.Play();
-        //this.renderer.enabled = true;
-        this.doorModels.SetActive(true);
-        this.doorCollider.enabled = true;
+
+        if (Animator != null)
+        {
+            //Animator.Play("CloseDoor", 0, 0.0f);
+            Animator.SetBool("IsOpen", false);
+        }
+        else
+        {
+            this.doorModels.SetActive(true);
+            this.doorCollider.enabled = true;
+        }
     }
     /*
      * Unlocks the door. -A
