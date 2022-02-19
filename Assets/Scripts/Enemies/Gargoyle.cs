@@ -108,10 +108,8 @@ public class Gargoyle : Enemy
     protected override void OnCollisionEnter(Collision collision)
     {
         if (TimeManager.Instance.isTimeStopped)
-        {
-            base.OnCollisionEnter(collision); Debug.Log("Hit");
+            base.OnCollisionEnter(collision);
 
-        }
         if (collision.transform.tag == "Player")
             collideWithPlayer = true;
     }

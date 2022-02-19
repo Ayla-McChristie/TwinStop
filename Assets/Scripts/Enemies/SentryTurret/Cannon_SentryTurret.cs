@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cannon_SentryTurret : Enemy
 {
-    protected enum State {Offline, Attack }
+    protected enum State {Offline, Attack, Online }
     [SerializeField]
     public int health = 10;
     [SerializeField]
@@ -15,7 +15,9 @@ public class Cannon_SentryTurret : Enemy
     Vector3 playerDir;
     GameObject projectile;
     public GameObject projectileStartPos;
+    public GameObject RoomTrigger;
     bool coolDown;
+    bool playerEnterRoom;
 
     float fireTimer = 0;
     float projectileSpeed = 12;
@@ -34,30 +36,56 @@ public class Cannon_SentryTurret : Enemy
         projectileType = "EnemyProjectile";
         rigidbody = GetComponent<Rigidbody>();
         deathSound = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        if (isDead)
+            return;
         base.FixedUpdate();
-        if (!isDead)
+        DeathSoundClipTime();
+        SeeTargetState();
+        SwitchState();
+    }
+
+    void DetectPlayerEnterRoom()
+    {
+        if (target.transform.position == RoomTrigger.transform.position)
+            state = State.Online;
+    }
+
+    void SeeTargetState()
+    {
+        if (CanSeeTarget())
+            state = State.Attack;
+    }
+
+    void SwitchState()
+    {
+        switch (state)
         {
-            this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
-            DeathSoundClipTime();
-            if (CanSeeTarget())
-                state = State.Attack;
-            else
-                state = State.Offline;
-            switch (state)
-            {
-                case State.Offline:
-                    break;
-                case State.Attack:
-                    AttackTarget();
-                    AttackCoolDown();     
-                    break;  
-            }
+            case State.Online:
+                SearchForPlayer();
+                break;
+            case State.Offline:
+                SeeTargetState();
+                break;
+            case State.Attack:
+                this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
+                AttackTarget();
+                AttackCoolDown();     
+                break;  
         }
+    }
+
+    void SearchForPlayer()
+    {
+        if(this.transform.rotation.y >= this.transform.rotation.y + 90f)
+            this.transform.RotateAround(transform.position, transform.up, Time.deltaTime);
+        if (this.transform.rotation.y <= this.transform.rotation.y - 90f)
+            this.transform.RotateAround(transform.position, -1*transform.up, Time.deltaTime);
     }
     
     bool CanSeeTarget()
@@ -135,14 +163,13 @@ public class Cannon_SentryTurret : Enemy
 
     void AttackCoolDown() //timer for when the enemy can shoot again
     {
-        if (coolDown)
+        if (!coolDown)
+            return;
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= attackRate)
         {
-            fireTimer += Time.deltaTime;
-            if (fireTimer >= attackRate)
-            {
-                fireTimer = 0;
-                coolDown = false;
-            }
+            fireTimer = 0;
+            coolDown = false;
         }
     }
 

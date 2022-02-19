@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
     /* 
      * Attributes 
      */
-
+     //Player's State Script To Get TakeDamage()
+    PlayerStats pStats;
     //movement
     protected Rigidbody rigidbody;
     protected float Speed;
@@ -53,6 +54,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     // Start is called before the first frame update
     public virtual void Start()
     {
+        pStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         if (target == null)
         {
             target = GameObject.FindGameObjectWithTag("Player");
@@ -153,11 +155,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         if (collision.transform.tag == "Player")
         {
-            /*
-             * TODO add enemy attack 
-             */
-
-            //this.TakeDamage();
+            pStats.TakeDamage();
         }
 
         if (collision.transform.tag == "PlayerBullet")
@@ -176,5 +174,10 @@ public class Enemy : MonoBehaviour, IDamageFlash
                             && hit.collider.gameObject.tag == "Player")
             return true;
         return false;
+    }
+
+    protected void DamagePlayer()
+    {
+        pStats.TakeDamage();
     }
 }
