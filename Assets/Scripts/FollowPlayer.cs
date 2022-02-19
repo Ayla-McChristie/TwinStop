@@ -15,7 +15,9 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        doIFollow = false;
+        /*doIFollow = false; 
+        I think we can keep this off since each rooms decides if this 
+        is true or false - Steve*/
     }
 
     // Update is called once per frame
