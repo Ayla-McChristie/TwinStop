@@ -17,7 +17,7 @@ public class Cannon_SentryTurret : Enemy
     public GameObject projectileStartPos;
     public GameObject RoomTrigger;
     bool coolDown;
-    bool playerEnterRoom;
+    public bool playerEnterRoom;
 
     float fireTimer = 0;
     float projectileSpeed = 12;
@@ -36,7 +36,6 @@ public class Cannon_SentryTurret : Enemy
         projectileType = "EnemyProjectile";
         rigidbody = GetComponent<Rigidbody>();
         deathSound = GetComponent<AudioSource>();
-        
     }
 
     // Update is called once per frame
@@ -47,12 +46,13 @@ public class Cannon_SentryTurret : Enemy
         base.FixedUpdate();
         DeathSoundClipTime();
         SeeTargetState();
-        SwitchState();
+        SwitchState();Debug.Log(state);
+        DetectPlayerEnterRoom();
     }
 
     void DetectPlayerEnterRoom()
     {
-        if (target.transform.position == RoomTrigger.transform.position)
+        if (RoomTrigger.GetComponent<SentryTrigger>().isTriggered)
             state = State.Online;
     }
 
