@@ -13,14 +13,16 @@ public class Cannon_SentryTurret : Enemy
     public float attackRate = 1;
 
     Vector3 playerDir;
+
     GameObject projectile;
     public GameObject projectileStartPos;
     public GameObject RoomTrigger;
+
     bool coolDown;
-    public bool playerEnterRoom;
 
     float fireTimer = 0;
     float projectileSpeed = 12;
+
     string projectileType;
 
     State state;
@@ -45,9 +47,7 @@ public class Cannon_SentryTurret : Enemy
             return;
         base.FixedUpdate();
         DeathSoundClipTime();
-        SeeTargetState();
-        SwitchState();Debug.Log(state);
-        DetectPlayerEnterRoom();
+        SwitchState();
     }
 
     void DetectPlayerEnterRoom()
@@ -59,7 +59,11 @@ public class Cannon_SentryTurret : Enemy
     void SeeTargetState()
     {
         if (CanSeeTarget())
+        {
             state = State.Attack;
+            return;
+        }
+        state = State.Online;
     }
 
     void SwitchState()
@@ -67,29 +71,22 @@ public class Cannon_SentryTurret : Enemy
         switch (state)
         {
             case State.Online:
-                SearchForPlayer();
-                break;
-            case State.Offline:
                 SeeTargetState();
                 break;
+            case State.Offline:
+                DetectPlayerEnterRoom();
+                break;
             case State.Attack:
-                this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
+                SeeTargetState();
                 AttackTarget();
                 AttackCoolDown();     
                 break;  
         }
     }
-
-    void SearchForPlayer()
-    {
-        if(this.transform.rotation.y >= this.transform.rotation.y + 90f)
-            this.transform.RotateAround(transform.position, transform.up, Time.deltaTime);
-        if (this.transform.rotation.y <= this.transform.rotation.y - 90f)
-            this.transform.RotateAround(transform.position, -1*transform.up, Time.deltaTime);
-    }
     
     bool CanSeeTarget()
     {
+        this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
         RaycastHit hit;
         if (Physics.Raycast(this.transform.position, transform.forward, out hit, fovDist, mask)
                             && hit.collider.gameObject.tag == "Player")
