@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
 
     [SerializeField]
     GameObject doorModels;
+    [SerializeField]
+    GameObject lockModels;
     public bool IsOpen { get; set; }
     AudioSource[] doorSounds;
     AudioSource doorOpenSound;
@@ -36,9 +38,17 @@ public class Door : MonoBehaviour
             DoorManager.CreateDoorManager();
         }
         DoorManager.Instance.doors.Add(this);
+        if (this.IsLocked)
+        {
+            lockModels.GetComponent<Animator>().SetBool("IsLocked", true);
+        }
     }
     void Start()
     {
+        //if (this.IsLocked == false)
+        //{
+        //    lockModels.SetActive(false);
+        //}
         this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
         this.Animator = this.GetComponent<Animator>();
         //this.renderer = this.gameObject.GetComponent<MeshRenderer>();
@@ -72,7 +82,7 @@ public class Door : MonoBehaviour
             {
                 doorOverride = false;
             }
-        }
+        }   
     }
 
     /*
@@ -122,6 +132,11 @@ public class Door : MonoBehaviour
     public void UnlockDoor()
     {
         this.IsLocked = false;
+
+        if (Animator != null)
+        {
+            lockModels.GetComponent<Animator>().SetBool("IsLocked", false);
+        }
     }
     /*
      * Locks the door. Locked doors can only be opened if the player has keys -A
@@ -129,6 +144,11 @@ public class Door : MonoBehaviour
     public void LockDoor()
     {
         this.IsLocked = true;
+
+        if (Animator != null)
+        {
+            Animator.SetBool("IsLocked", true);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

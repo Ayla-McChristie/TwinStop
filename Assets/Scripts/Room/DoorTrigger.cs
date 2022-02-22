@@ -69,7 +69,7 @@ public class DoorTrigger : MonoBehaviour
                 if (ps.keys >= 1)
                 {
                     ps.keys--;
-                    targetDoor.IsLocked = false;
+                    targetDoor.UnlockDoor();
                     /*
                      * play really cool animation here
                      */
