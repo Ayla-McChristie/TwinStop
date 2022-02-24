@@ -33,7 +33,10 @@ public class Cannon_SentryTurret : Enemy
         target = GameObject.FindGameObjectWithTag("Player");
         this.Health = health;
         this.Damage = damage;
-        this.FlashRenderer = this.transform.GetComponent<Renderer>();
+        if (this.transform.GetChild(0).GetComponent<Renderer>() == null)
+            this.FlashRenderer = this.transform.GetComponent<Renderer>();
+        else 
+            this.FlashRenderer = this.transform.GetChild(0).GetComponent<Renderer>();
         defaultMat = FlashRenderer.material;
         projectileType = "EnemyProjectile";
         rigidbody = GetComponent<Rigidbody>();
@@ -103,7 +106,10 @@ public class Cannon_SentryTurret : Enemy
             clipTimer += Time.deltaTime;
             if (clipTimer >= deathSound.clip.length)
             {
-                this.transform.GetComponent<Collider>().enabled = false;
+                if(this.transform.parent != null)
+                    this.gameObject.transform.parent.GetComponent<Collider>().enabled = false;
+                else
+                    this.transform.GetComponent<Collider>().enabled = false;
                 this.gameObject.SetActive(false);
 
             }
