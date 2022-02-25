@@ -14,14 +14,15 @@ public class Bridge : MonoBehaviour
         amIUp = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PutBridgeDown()
     {
-        
+        amIUp = false;
+        Animator.SetBool("IsUp", false);
     }
 
-    public void BridgeUpOrDown(bool upOrDown)
+    public void PutBridgeUp()
     {
-        Animator.SetBool("IsUp", upOrDown);
+        amIUp = true;
+        Animator.SetBool("IsUp", true);
     }
 }
