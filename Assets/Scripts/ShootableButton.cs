@@ -20,7 +20,7 @@ public class ShootableButton : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-
+            Debug.Log("Hit");
         }
     }
 }
