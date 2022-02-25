@@ -60,10 +60,10 @@ public class Gargoyle : Enemy
         if (!TimeManager.Instance.isTimeStopped)
         {
             state = State.DeActive;
-            agent.isStopped = true;Debug.Log("Time Is Not Stopped");
+            agent.isStopped = true;
             return;
         }
-        state = State.Active; Debug.Log("Time Is Stopped");
+        state = State.Active;
         agent.isStopped = false;
     }
 

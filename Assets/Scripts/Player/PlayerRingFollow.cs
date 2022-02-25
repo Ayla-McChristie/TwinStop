@@ -39,6 +39,8 @@ public class PlayerRingFollow : MonoBehaviour
         //player = GameObject.FindGameObjectWithTag("Player");
         timeManagerObject = GameObject.FindGameObjectWithTag("TimeManager");
 
+        if (player == null)
+            player = GameObject.Find("Player_2.0");
 
         pmScript = player.GetComponent<PlayerMovement>();
         gcScript = player.GetComponent<GunControl>();
