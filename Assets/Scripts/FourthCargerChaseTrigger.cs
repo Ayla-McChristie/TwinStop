@@ -10,11 +10,17 @@ public class FourthCargerChaseTrigger : MonoBehaviour
     [SerializeField]
     GameObject Bridge;
 
+    GameObject Player;
+    PlayerStats PlayerStatsScript;
+
     Bridge BridgeBridgeScript;
     // Start is called before the first frame update
     void Start()
     {
         BridgeBridgeScript = Bridge.GetComponent<Bridge>();
+
+        Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerStatsScript = Player.GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -31,6 +37,7 @@ public class FourthCargerChaseTrigger : MonoBehaviour
             if (BridgeBridgeScript.amIUp)
             {
                 Animator.SetBool("IsBridgeUp", false);
+                PlayerStatsScript.TakeDamage(6);
             }
             else
             {
