@@ -27,7 +27,7 @@ public class ShootableButton : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            
+            MyBridgeScript.BridgeUpOrDown(!MyBridgeScript.amIUp);
         }
     }
 }
