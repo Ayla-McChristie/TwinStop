@@ -35,7 +35,7 @@ public class Turtle : Enemy
         base.FixedUpdate();
         SwitchState();
         FreezeNavMeshAgent();
-        DeathSoundClipTime();
+        DeathSoundClipTime();Debug.Log(Health);
     }
 
     void SwitchState()

@@ -46,13 +46,18 @@ public class Cannon_SentryTurret : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        DeadState();
+        base.FixedUpdate();
+        SwitchState();
+    }
+
+    void DeadState()
+    {
         if (isDead)
         {
             DeathSoundClipTime();
             return;
         }
-        base.FixedUpdate();
-        SwitchState();
     }
 
     void DetectPlayerEnterRoom()

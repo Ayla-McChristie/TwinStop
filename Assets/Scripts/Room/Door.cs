@@ -21,12 +21,16 @@ public class Door : MonoBehaviour
     AudioSource doorOpenSound;
     AudioSource doorCloseSound;
     AudioSource hitDoorSound;
+    AudioSource lockBreakSound;
     Animator Animator;
+    AnimationClip[] lockClip;
 
     Collider doorCollider;
     Renderer renderer;
 
     bool doorOverride;
+    bool isLockGone;
+    float clipTime;
 
     private void Awake()
     {
@@ -51,12 +55,15 @@ public class Door : MonoBehaviour
         //}
         this.doorCollider = this.gameObject.GetComponent<BoxCollider>();
         this.Animator = this.GetComponent<Animator>();
+        //lockClip = lockModels.GetComponent<Animator>().runtimeAnimatorController.animationClips;
         //this.renderer = this.gameObject.GetComponent<MeshRenderer>();
         IsOpen = false;
         doorSounds = GetComponents<AudioSource>();
         doorOpenSound = doorSounds[0];
         doorCloseSound = doorSounds[1];
         hitDoorSound = doorSounds[2];
+        if(this.transform.Find("Locks") != null)
+            lockBreakSound = this.transform.Find("Locks").GetComponent<AudioSource>();
         //cam = GameObject.Find("2Dcam");
     }
     private void Update()
@@ -82,7 +89,15 @@ public class Door : MonoBehaviour
             {
                 doorOverride = false;
             }
-        }   
+        }
+        //if (!lockModels.GetComponent<Animator>().GetBool("IsLocked"))
+        //{
+        //    clipTime += Time.deltaTime;
+        //    if (clipTime >= lockClip[0].length)
+        //    {
+        //        this.IsLocked = false;
+        //    }
+        //}
     }
 
     /*
@@ -136,6 +151,7 @@ public class Door : MonoBehaviour
         if (Animator != null)
         {
             lockModels.GetComponent<Animator>().SetBool("IsLocked", false);
+            lockBreakSound.Play();
         }
     }
     /*
