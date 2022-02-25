@@ -192,6 +192,7 @@ MonoBehaviour:
   projectiles4: 0
   projectiles5: 0
   projectileSpeed: 6
+  flashrender: {fileID: 2317502389523457761}
   maxDist: 5
   minDist: 3
 --- !u!54 &1587090509596471965
@@ -791,6 +792,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: dd216f41ff2ef9a4da42e9a46a8b3945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
+--- !u!23 &2317502389523457761 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2901276231176581679, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
+  m_PrefabInstance: {fileID: 606309715617141966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1144110036298445605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}

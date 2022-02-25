@@ -29,6 +29,8 @@ public class Sentinel : Enemy
     List<Transform> projectileStartPos;
     GameObject projectile;
 
+    [SerializeField]
+    Renderer flashrender;
 
     Vector3 moveDir;
     Vector3 destination; //the distance between destinated location to this gameobject
@@ -54,6 +56,7 @@ public class Sentinel : Enemy
         CheckProjectileSet();
         deathSound = GetComponent<AudioSource>();
         base.Start();
+        FlashRenderer = flashrender;
     }
 
     void CheckProjectileSet()

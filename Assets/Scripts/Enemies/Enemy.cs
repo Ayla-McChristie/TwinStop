@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     /*
      * HitFlash Variables
      */
+    [SerializeField]
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
     public Material HurtMat { get => hurtMat; }
@@ -64,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
         FlashRenderer = GetComponent<Renderer>();
         if (FlashRenderer == null || FlashRenderer.enabled == false)
         {
-            FlashRenderer = this.gameObject.transform.parent.gameObject.GetComponentInChildren<Renderer>();
+                FlashRenderer = this.GetComponentInChildren<Renderer>();
         }
         defaultMat = FlashRenderer.material;
     }
