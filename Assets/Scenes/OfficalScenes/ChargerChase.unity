@@ -24721,6 +24721,7 @@ GameObject:
   - component: {fileID: 969220326}
   - component: {fileID: 969220325}
   - component: {fileID: 969220324}
+  - component: {fileID: 969220331}
   m_Layer: 0
   m_Name: Charger_bridge_check
   m_TagString: Untagged
@@ -25044,12 +25045,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969220323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 184.87, y: -3.57, z: 16.52}
+  m_LocalPosition: {x: 184.87, y: -3.196, z: 16.52}
   m_LocalScale: {x: 0.8487, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 54
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &969220331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969220323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ba1c2d209c2584a8ad2c4067d9201e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1063775033}
+  Bridge: {fileID: 1490843541}
 --- !u!1 &987914889
 GameObject:
   m_ObjectHideFlags: 0
@@ -28825,6 +28840,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: fourth_chearger
       objectReference: {fileID: 0}
+    - target: {fileID: 267827995045671363, guid: 7c00afdb042ea154b8c3a77c9973848b, type: 3}
+      propertyPath: m_TagString
+      value: FourthCharger
+      objectReference: {fileID: 0}
+    - target: {fileID: 1308109835962543815, guid: 7c00afdb042ea154b8c3a77c9973848b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 60624e0fed4fbc043b7d888c1ec4952f, type: 2}
     - target: {fileID: 6729801168655801392, guid: 7c00afdb042ea154b8c3a77c9973848b, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -28851,11 +28874,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8593601764987628376, guid: 7c00afdb042ea154b8c3a77c9973848b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 168.71
+      value: 186.75
       objectReference: {fileID: 0}
     - target: {fileID: 8593601764987628376, guid: 7c00afdb042ea154b8c3a77c9973848b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.91
+      value: -7.97
       objectReference: {fileID: 0}
     - target: {fileID: 8593601764987628376, guid: 7c00afdb042ea154b8c3a77c9973848b, type: 3}
       propertyPath: m_LocalPosition.z
