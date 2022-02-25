@@ -15,4 +15,12 @@ public class ShootableButton : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerBullet"))
+        {
+
+        }
+    }
 }
