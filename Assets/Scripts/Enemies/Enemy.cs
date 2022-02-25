@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         FlashRenderer = GetComponent<Renderer>();
-        if (FlashRenderer == null)
+        if (FlashRenderer == null || FlashRenderer.enabled == false)
         {
             FlashRenderer = this.gameObject.transform.parent.gameObject.GetComponentInChildren<Renderer>();
         }
