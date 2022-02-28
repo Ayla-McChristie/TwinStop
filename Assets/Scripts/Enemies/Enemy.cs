@@ -71,6 +71,14 @@ public class Enemy : MonoBehaviour, IDamageFlash
     }
     public virtual void FixedUpdate()
     {
+        if (PauseScript.Instance.isPaused)
+        {
+            if (agent == null)
+                return;
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
+            return;
+        }
         if (this.Health <= 0 && this.isDead == false)
         {
             this.Die();

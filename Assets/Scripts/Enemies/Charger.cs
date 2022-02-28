@@ -24,6 +24,7 @@ public class Charger : Enemy
 
     State state;
     float timer;
+    float volumeVal;
     Vector3 targetDis;
     Vector3 hitPos;
     // Start is called before the first frame update
@@ -32,7 +33,6 @@ public class Charger : Enemy
         this.Speed = speed;
         this.Health = health;
         this.Damage = damage;
-        //this.agent.speed = speed;
         rigidbody = GetComponent<Rigidbody>();
         sounds = GetComponents<AudioSource>();
         shieldHitSound = sounds[1].clip;
@@ -40,12 +40,15 @@ public class Charger : Enemy
         state = State.Charge;
         deathSound = GetComponent<AudioSource>();
         wallImpactSound = sounds[3].clip;
+        volumeVal = sounds[2].volume;
+        sounds[2].Play();
         base.Start();
     }
 
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        PauseCase();
         if (!isDead)
         {
             SlowSound();
@@ -69,6 +72,22 @@ public class Charger : Enemy
         }
         base.FixedUpdate();
         DeathSoundClipTime();
+    }
+
+    void PauseCase()
+    {
+        if (PauseScript.Instance.isPaused)
+        {
+            agent.autoBraking = true;
+            sounds[2].Stop();
+            sounds[2].loop = false;
+            return;
+        }
+        sounds[2].Play();
+        sounds[2].loop = true;
+        agent.isStopped = false;
+        agent.autoBraking = false;
+        //sounds[2].volume = volumeVal;
     }
 
     void SlowSound()

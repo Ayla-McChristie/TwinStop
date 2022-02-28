@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Turns true when special scenes happen like a door transition
     public bool freezeMovement;
+    bool isMoving;
 
     Animator anim;
 
@@ -65,6 +66,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseScript.Instance.isPaused)
+        {
+            moveVelocity = Vector3.zero;
+            return;
+        }
+
         if(!freezeMovement && !GetComponent<PlayerStats>().isDead)
         {
             var moveInput = playerActionControls.Player.Move.ReadValue<Vector2>();
@@ -86,19 +93,19 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayerToTarget();
         }
-        //this.playerRigidbody.MovePosition(playerRigidbody.position + (moveVelocity * Time.unscaledDeltaTime));
 
-        //Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        //float rayLength; // Length of line from Camera to nearest ground
+        WalkingAndShootingAnim();
+    }
 
-        //if(groundPlane.Raycast(cameraRay, out rayLength))
-        //{
-        //    Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-        //    Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
-
-        //    transform.LookAt(pointToLook);
-        //}
+    void WalkingAndShootingAnim()
+    {
+        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)) ||
+            !(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)) && !Input.GetMouseButton(0))
+        {
+            anim.SetBool("isMoving", true);
+            return;
+        }
+        anim.SetBool("isMoving", false);
     }
 
     void FixedUpdate()
@@ -109,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Called by door triggers to move the player to the correct spot when they enter a door.
     /// </summary>
-    /// <param name="moveTo"></param>
+    /// <param name="moveTo"></param>w
     public void StartDoorTransition(Vector3 moveTo)
     {
         if (!freezeMovement)
@@ -181,5 +188,10 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputVelocity = context.ReadValue<Vector2>();
         inputVelocity.Normalize();
         moveVelocity = (new Vector3(inputVelocity.x, 0, inputVelocity.y) * moveSpeed) / Time.timeScale;
+
+        if (context.performed)
+            isMoving = true;
+        if(context.canceled)
+            isMoving = false;
     }
 }

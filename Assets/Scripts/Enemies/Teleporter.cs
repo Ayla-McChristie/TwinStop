@@ -105,7 +105,6 @@ public class Teleporter : Enemy
         switch (state)
         {
             case State.Attack:
-                CoolDown();
                 LookAtEnemy();
                 Fire();
                 break;
@@ -141,6 +140,8 @@ public class Teleporter : Enemy
 
     void Fire()
     {
+        if (PauseScript.Instance.isPaused)
+            return;
         if (!CoolDown())
             return;
         for(int i = 0; i < projectileStartPos.Count; i++)
@@ -159,6 +160,8 @@ public class Teleporter : Enemy
 
     void Teleport()
     {
+        if (PauseScript.Instance.isPaused)
+            return;
         Vector3 randomLoc = target.transform.position + Random.insideUnitSphere * rangeOfTeleport;
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomLoc, out hit, 10f, NavMesh.AllAreas))
@@ -197,6 +200,7 @@ public class Teleporter : Enemy
 
     bool CoolDown()
     {
+        
         if (attackCoolDown > attackRate)
             return true;
         attackCoolDown += Time.deltaTime;

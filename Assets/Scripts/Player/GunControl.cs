@@ -74,6 +74,8 @@ public class GunControl : MonoBehaviour
 
     void Update()
     {
+        if (PauseScript.Instance.isPaused)
+            return;
         if (!freezeFire)
         {
             Aim();
@@ -226,6 +228,7 @@ public class GunControl : MonoBehaviour
                 uiCursor.GetComponent<ReticleCursor>().GetSpreadModifier(spreadModifier, false);
 
             }
+            anim.SetBool("isFiring", false);
         }
     }
 
@@ -236,7 +239,7 @@ public class GunControl : MonoBehaviour
         if (context.canceled)
         {
             isAttacking = false;
-            anim.SetBool("isFiring", false);
+            
         }
     }
 

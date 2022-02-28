@@ -88,6 +88,11 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseScript.Instance.isPaused)
+        {
+            rb.velocity = Vector3.zero;
+            return;
+        }
         if (projectileUser == "Player")
         {
             //use unscaled delta time if unaffected by time stop

@@ -47,8 +47,8 @@ public class Cannon_SentryTurret : Enemy
     public override void FixedUpdate()
     {
         DeadState();
-        base.FixedUpdate();
         SwitchState();
+        base.FixedUpdate();
     }
 
     void DeadState()
@@ -62,6 +62,11 @@ public class Cannon_SentryTurret : Enemy
 
     void DetectPlayerEnterRoom()
     {
+        if(RoomTrigger == null)
+        {
+            state = State.Online;
+            return;
+        }
         if (RoomTrigger.GetComponent<SentryTrigger>().isTriggered)
             state = State.Online;
     }
@@ -173,6 +178,8 @@ public class Cannon_SentryTurret : Enemy
 
     void AttackCoolDown() //timer for when the enemy can shoot again
     {
+        if (PauseScript.Instance.isPaused)
+            return;
         if (!coolDown)
             return;
         fireTimer += Time.deltaTime;

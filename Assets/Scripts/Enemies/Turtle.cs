@@ -32,10 +32,10 @@ public class Turtle : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        base.FixedUpdate();
         SwitchState();
         FreezeNavMeshAgent();
-        DeathSoundClipTime();Debug.Log(Health);
+        DeathSoundClipTime();
+        base.FixedUpdate();
     }
 
     void SwitchState()
