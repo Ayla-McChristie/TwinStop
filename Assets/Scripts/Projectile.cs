@@ -26,6 +26,42 @@ public class Projectile : MonoBehaviour
         projectileSound = GetComponent<AudioSource>();
     }
 
+    private void OnEnable()
+    {
+        if (GetComponent<ParticleSystem>() != null)
+        {
+            this.GetComponent<ParticleSystem>().Play();
+        }
+        foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
+        {
+            if (item != null)
+            {
+                item.Play();
+            }
+        }
+        
+    }
+    private void OnDisable()
+    {
+        this.direction = Vector3.zero;
+        this.rb.velocity = Vector3.zero;
+        if (GetComponent<ParticleSystem>() != null)
+        {
+            this.GetComponent<ParticleSystem>().Stop();
+        }
+
+        foreach (ParticleSystem item in GetComponentsInChildren<ParticleSystem>())
+        {
+            item.Stop();
+        }
+        
+
+        TrailRenderer trail = GetComponentInChildren<TrailRenderer>();
+        if (trail != null)
+        {
+            GetComponentInChildren<TrailRenderer>().Clear();
+        }
+    }
     public void SetUp(Vector3 direction, Vector3 position, string projectileUser)
     {
         this.direction = direction;
@@ -34,7 +70,7 @@ public class Projectile : MonoBehaviour
         transform.forward = direction;
         //projectileSound.Play();
         //IgnoreCollision(projectileUser);
-        IgnoreProjectiles();
+        //IgnoreProjectiles();
     }
 
     //void IgnoreCollision(string user)
