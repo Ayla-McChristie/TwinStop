@@ -18,7 +18,7 @@ public class Rotate : MonoBehaviour
             wallMove.Play();
             wallMove.pitch = 2f;
         }
-        time = GameObject.Find("Player_2.0").GetComponentInChildren<TimeManager>();
+        time = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<TimeManager>();
     }
     // Update is called once per frame
     void FixedUpdate()

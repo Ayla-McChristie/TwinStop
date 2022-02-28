@@ -112,6 +112,18 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseScript.Instance.isPaused && Input.GetKey(KeyCode.Escape) && !Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isTimeStopped = false;Debug.Log("HI");
+            return;
+        }
+        if (PauseScript.Instance.isPaused && Input.GetKey(KeyCode.Escape) && Input.GetKey(KeyCode.LeftShift))
+        {
+            isTimeStopped = true;
+            return;
+        }
+        if (PauseScript.Instance.isPaused)
+            return;
         FreezeTime();
 
         Cooldown();
@@ -187,10 +199,10 @@ public class TimeManager : MonoBehaviour
         {
             if (!outtaTime)
             { 
-                PlaySlowTimeExit();
                 coolDownValue = 0;
             }
             
+            PlaySlowTimeExit();
             outtaTime = true;
 
         }
@@ -261,10 +273,12 @@ public class TimeManager : MonoBehaviour
             }
         }
     }
-
     public void OnTimeStop(InputAction.CallbackContext context)
     {
         if (pStats.isDead)
+            return;
+
+        if (PauseScript.Instance.isPaused)
             return;
         if (hasTimeCrystal)
         {
