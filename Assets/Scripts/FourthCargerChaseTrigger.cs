@@ -13,6 +13,12 @@ public class FourthCargerChaseTrigger : MonoBehaviour
     GameObject Player;
     PlayerStats PlayerStatsScript;
 
+    [SerializeField]
+    Door DoorScript;
+
+    [SerializeField]
+    Animator LocksAnimator;
+
     Bridge BridgeBridgeScript;
     // Start is called before the first frame update
     void Start()
@@ -37,11 +43,12 @@ public class FourthCargerChaseTrigger : MonoBehaviour
             if (BridgeBridgeScript.amIUp)
             {
                 Animator.SetBool("IsBridgeUp", false);
-                PlayerStatsScript.TakeDamage(6);
             }
             else
             {
                 Animator.SetBool("IsBridgeUp", true);
+                DoorScript.IsLocked = false;
+                LocksAnimator.SetBool("IsLocked", false);
             }
         }
     }
