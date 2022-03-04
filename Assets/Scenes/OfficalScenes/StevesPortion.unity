@@ -11530,6 +11530,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1374920744}
+    - target: {fileID: 3679262674753098453, guid: 2f53ac9ae9577484abe40685911def21, type: 3}
+      propertyPath: roomCenter
+      value: 
+      objectReference: {fileID: 556888630}
+    - target: {fileID: 3679262674753098453, guid: 2f53ac9ae9577484abe40685911def21, type: 3}
+      propertyPath: amIALargeRoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3796230493018893808, guid: 2f53ac9ae9577484abe40685911def21, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -11602,6 +11610,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3796230493671170240, guid: 2f53ac9ae9577484abe40685911def21, type: 3}
+      propertyPath: roomCenter
+      value: 
+      objectReference: {fileID: 109926230}
     - target: {fileID: 3796230493671170250, guid: 2f53ac9ae9577484abe40685911def21, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -35772,7 +35784,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1073976
+  m_Name: pb_Mesh-9496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -42252,7 +42264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648914, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1204486244711648915, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: spawnPoints.Array.data[1]
