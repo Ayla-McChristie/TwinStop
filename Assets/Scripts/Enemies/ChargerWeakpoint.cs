@@ -29,7 +29,7 @@ public class ChargerWeakpoint : MonoBehaviour
         if (collision.transform.tag == "PlayerBullet")
         {
             this.gameObject.GetComponentInParent<Charger>().DamageTaken(1);
-            damage.PlayOneShot(damage.clip);
+            AudioManager.Instance.PlaySound("ChargerDamage", this.transform.position, true);
         }
     }
 }

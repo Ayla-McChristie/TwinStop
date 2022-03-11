@@ -210,7 +210,7 @@ public class GunControl : MonoBehaviour
             var obj = ObjectPool_Projectiles.Instance.GetProjectile(bulletPool.prefab.name);
             obj.transform.position = projectileStartPos.transform.position;
             obj.GetComponent<Projectile>().SetUp(target, projectileStartPos.transform.position, this.gameObject.tag);
-            obj.GetComponent<AudioSource>().Play();
+            //obj.GetComponent<AudioSource>().Play();
             coolDown = true;
             if(spreadModifier <= .2f)
                 spreadModifier += 0.02f;

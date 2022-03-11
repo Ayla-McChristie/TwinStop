@@ -62,7 +62,7 @@ public class AudioManager : MonoBehaviour
         SetUpSounds();
         SetSceneMusic();
         SetPitchList();
-        audioList[13].Play();
+        audioList[14].Play();
     }
 
     void SetPitchList()
@@ -75,9 +75,28 @@ public class AudioManager : MonoBehaviour
 
     void SetSceneMusic()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(0).name)
+        {
             sceneName = SceneManager.GetActiveScene().name;
-        //GetMusic(SceneManager.GetActiveScene().name).Play();
+            return;
+        }
+        if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(1).name)
+        {
+            sceneName = "MainTheme_Demo";
+            return;
+        }
+        if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(2).name)
+        {
+            sceneName = "MainTheme_Demo";
+            return;
+        }
+        if (SceneManager.GetActiveScene().name == "Credits")
+        {
+            sceneName = "MenuMusic";
+            return;
+        }
+
+        //GetMusic(sceneName).Play();
     }
 
     AudioSource GetMusic(string name)
@@ -215,7 +234,7 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("Hy");
         if (!CheckTimeIsSlowed())
         {
             RevertPitch();
@@ -244,21 +263,27 @@ public class AudioManager : MonoBehaviour
 
     void SlowDownPitch(float pitchTune)
     {
+        Debug.Log("Hi");
         foreach (AudioSource a in audioList)
             ChangePitch(a, pitchTune);
     }
 
 
 
-    public void PlaySound(string soundName, Vector3 position)
+    public void PlaySound(string soundName, Vector3 position, bool oneShot)
     { 
         foreach(AudioSource a in audioList)
         {
             if(a.clip.name == soundName)
-            {
+            { 
+                if (!oneShot)
+                {
+                    a.Play();
+                    return;
+                }
+
                 a.PlayOneShot(a.clip);
-                Debug.Log(a.clip.name);
-                return;
+
             }
         }
         

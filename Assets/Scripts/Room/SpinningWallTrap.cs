@@ -11,6 +11,7 @@ public class SpinningWallTrap : MonoBehaviour
     void Start()
     {
         capsule = this.GetComponent<CapsuleCollider>();
+        AudioManager.Instance.PlaySound(GetComponent<AudioSource>().name, this.transform.position, false);
     }
 
     // Update is called once per frame
