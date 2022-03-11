@@ -301,7 +301,7 @@ public class TimeManager : MonoBehaviour
         {
             if (!slowTimeEnter.isPlaying && !timeEnterIsPlayed)
             {
-                slowTimeEnter.PlayOneShot(slowTimeEnter.clip);
+                AudioManager.Instance.PlaySound("TimeStop", this.transform.position);
                 timeEnterIsPlayed = true;
             }
         }
@@ -313,7 +313,7 @@ public class TimeManager : MonoBehaviour
         {
             if (!slowTimeExit.isPlaying && !timeExitIsPlayed)
             {
-                slowTimeExit.PlayOneShot(slowTimeExit.clip);
+                AudioManager.Instance.PlaySound("ReverseTimeStop", this.transform.position);
                 timeExitIsPlayed = true;
             }
         }
