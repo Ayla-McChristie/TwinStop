@@ -131,7 +131,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             if (!isInvincible)
             {
                 TakeDamage();
-                AudioManager.Instance.PlaySound("PlayerHit", this.transform.position);
+                AudioManager.Instance.PlaySound("PlayerHit", this.transform.position, true);
             }
         }
 
@@ -204,6 +204,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     void PlayerDead()
     {
         isDead = true;
-        AudioManager.Instance.PlaySound("PlayerDeath", this.transform.position);
+        AudioManager.Instance.PlaySound("PlayerDeath", this.transform.position, true);
     }
 }

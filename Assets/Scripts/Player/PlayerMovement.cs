@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Step()
     {
-        AudioManager.Instance.PlaySound("PlayerWalk", this.transform.position);
+        AudioManager.Instance.PlaySound("PlayerWalk", this.transform.position, true);
     }
 
     private void OnTriggerEnter(Collider other)

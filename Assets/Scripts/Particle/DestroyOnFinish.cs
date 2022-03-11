@@ -11,7 +11,7 @@ public class DestroyOnFinish : MonoBehaviour
     {
         ps = GetComponent<ParticleSystem>();
         audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
+        //audioSource.Play();
     }
 
     // Update is called once per frame

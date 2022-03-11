@@ -39,6 +39,8 @@ public class SpikeBehavior : MonoBehaviour
         {
             Debug.Log("I hit the player");
             other.gameObject.GetComponent<PlayerStats>().TakeDamage();
-        }    
+        }
+        if (other.transform.tag == "Enemy")
+            other.gameObject.GetComponent<Enemy>().TakeDamage();
     }
 }

@@ -80,7 +80,7 @@ public class BreakableObject : MonoBehaviour, IDamageFlash
             {
                 this.TakeDamage();
             }
-            crateBreak.Play();
+            AudioManager.Instance.PlaySound(this.crateBreak.name, this.transform.position, true);
 
             if (this.Health <= 0)
             {

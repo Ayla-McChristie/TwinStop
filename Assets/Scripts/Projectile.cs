@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     string projectileUser;
     bool dontPlay = true;
     Rigidbody rb;
-    AudioSource projectileSound;
+    public AudioClip audio;
     //ObjectPool_Projectiles opP;
 
     void Start()
@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
     {
         if (!dontPlay)
         {
-            AudioManager.Instance.PlaySound("PlayerShoot", this.transform.position);
+            AudioManager.Instance.PlaySound(this.audio.name, this.transform.position, true);
         }
         dontPlay = false;
         if (GetComponent<ParticleSystem>() != null)
@@ -121,7 +121,7 @@ public class Projectile : MonoBehaviour
         if (ExplosionPrefab != null)
         {
             var hitEffect = Instantiate(ExplosionPrefab, this.transform.position, this.transform.rotation);
-            AudioManager.Instance.PlaySound("SpellImpact", this.transform.position);
+            AudioManager.Instance.PlaySound("SpellImpact", this.transform.position, true);
         }
         this.gameObject.SetActive(false);
     }

@@ -34,7 +34,7 @@ public class Heart : MonoBehaviour
     {
         if (other.transform.tag == "Player" && isPickedUp == false)
         {
-            audio.Play();
+            AudioManager.Instance.PlaySound("HeartPickUp", this.transform.position, true);
             isPickedUp = true;
             clipLength = clip.length;
         }
