@@ -15,19 +15,25 @@ public class Projectile : MonoBehaviour
     #endregion
     Vector3 direction;
     string projectileUser;
+    bool dontPlay = true;
     Rigidbody rb;
-    AudioSource projectileSound;
+    public AudioClip audio;
     //ObjectPool_Projectiles opP;
 
     void Start()
     {
         //opP = new ObjectPool_Projectiles();
         rb = GetComponent<Rigidbody>();
-        projectileSound = GetComponent<AudioSource>();
+        //projectileSound = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
+        if (!dontPlay)
+        {
+            AudioManager.Instance.PlaySound(this.audio.name, this.transform.position, true);
+        }
+        dontPlay = false;
         if (GetComponent<ParticleSystem>() != null)
         {
             this.GetComponent<ParticleSystem>().Play();
@@ -68,22 +74,7 @@ public class Projectile : MonoBehaviour
         this.transform.position = position;
         this.projectileUser = projectileUser;
         transform.forward = direction;
-        //projectileSound.Play();
-        //IgnoreCollision(projectileUser);
-        //IgnoreProjectiles();
     }
-
-    //void IgnoreCollision(string user)
-    //{
-    //    if (user == "Player")
-    //        Physics.IgnoreCollision(GameObject.FindWithTag("Player").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-    //    else if (user == "Enemy")
-    //        foreach (var item in GameObject.FindGameObjectsWithTag(gameObject.transform.tag))
-    //        {
-    //            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
-    //        }
-        
-    //}
 
     // Update is called once per frame
     void Update()
@@ -130,6 +121,7 @@ public class Projectile : MonoBehaviour
         if (ExplosionPrefab != null)
         {
             var hitEffect = Instantiate(ExplosionPrefab, this.transform.position, this.transform.rotation);
+            AudioManager.Instance.PlaySound("SpellImpact", this.transform.position, true);
         }
         this.gameObject.SetActive(false);
     }

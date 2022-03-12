@@ -41,7 +41,7 @@ public class Charger : Enemy
         deathSound = GetComponent<AudioSource>();
         wallImpactSound = sounds[3].clip;
         volumeVal = sounds[2].volume;
-        sounds[2].Play();
+        AudioManager.Instance.PlaySound("ChargerMovement", this.transform.position, false);
         base.Start();
     }
 
@@ -83,7 +83,7 @@ public class Charger : Enemy
             sounds[2].loop = false;
             return;
         }
-        sounds[2].Play();
+        //sounds[2].Play();
         sounds[2].loop = true;
         agent.isStopped = false;
         agent.autoBraking = false;
@@ -152,8 +152,8 @@ public class Charger : Enemy
     protected override void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "PlayerBullet")
-            sounds[1].PlayOneShot(shieldHitSound);
+            AudioManager.Instance.PlaySound("ChargerShieldHit",this.transform.position, true);
         else
-            sounds[3].PlayOneShot(wallImpactSound);
+            AudioManager.Instance.PlaySound("ChargerWallImpact", this.transform.position, true);
     }
 }
