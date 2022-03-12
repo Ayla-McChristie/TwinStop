@@ -40,7 +40,7 @@ public class Key : MonoBehaviour
         {
             if(audio != null)
             {
-                audio.Play();
+                AudioManager.Instance.PlaySound("KeyPickUp", this.transform.position, true);
             }
             isPickedUp = true;
             clipLength = clip.length;

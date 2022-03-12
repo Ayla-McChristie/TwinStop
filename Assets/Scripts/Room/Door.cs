@@ -108,7 +108,7 @@ public class Door : MonoBehaviour
         if (this.IsLocked == false)
         {
             this.IsOpen = true;
-            doorOpenSound.Play();
+            AudioManager.Instance.PlaySound("DoorOpen", this.transform.position, true);
 
             if (Animator != null)
             {
@@ -128,7 +128,7 @@ public class Door : MonoBehaviour
     public void CloseDoor()
     {
         this.IsOpen = false;
-        doorCloseSound.Play();
+        AudioManager.Instance.PlaySound("DoorClose", this.transform.position, true);
 
         if (Animator != null)
         {
@@ -151,7 +151,7 @@ public class Door : MonoBehaviour
         if (Animator != null)
         {
             lockModels.GetComponent<Animator>().SetBool("IsLocked", false);
-            lockBreakSound.Play();
+            AudioManager.Instance.PlaySound("LockBreak", this.transform.position, true);
         }
     }
     /*
@@ -169,6 +169,6 @@ public class Door : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        hitDoorSound.PlayOneShot(hitDoorSound.clip);
+        AudioManager.Instance.PlaySound("DoorLocked", this.transform.position, true);
     }
 }

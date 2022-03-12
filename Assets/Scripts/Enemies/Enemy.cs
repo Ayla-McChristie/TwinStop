@@ -145,7 +145,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
         {
             if (deathSound == null)
                 return;
-            deathSound.Play();
+            AudioManager.Instance.PlaySound(deathSound.name, this.transform.position, true);
             audioPlayed = true;
         }
     }

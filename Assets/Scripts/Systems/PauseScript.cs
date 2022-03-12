@@ -6,8 +6,8 @@ public class PauseScript : MonoBehaviour
 {
     [SerializeField]
     GameObject PauseScreen;
-    [SerializeField]
-    SceneManagement sm;
+    //[SerializeField]
+    //SceneManagement sm;
     [SerializeField]
     private float timeSlowDownRate = .5f;
     [SerializeField]
@@ -34,8 +34,8 @@ public class PauseScript : MonoBehaviour
         }
         if (PauseScreen == null)
             PauseScreen = GameObject.Find("PauseMenu");
-        if (sm == null)
-            sm = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
+        //if (sm == null)
+        //    sm = GameObject.Find("SceneManagement").GetComponent<SceneManagement>();
     }
 
         // Start is called before the first frame update
@@ -53,7 +53,6 @@ public class PauseScript : MonoBehaviour
         {
 
             //Time.timeScale = 0;
-            //Time.fixedDeltaTime = 0;
             isPaused = true;
             PauseScreen.SetActive(true);
             Debug.Log("hit");
@@ -65,21 +64,5 @@ public class PauseScript : MonoBehaviour
             isPaused = false;
             PauseScreen.SetActive(false);
         }
-    }
-
-    public void ResumeGame()
-    {
-        isPaused = false;Debug.Log("Hi");
-        PauseScreen.SetActive(false);
-    }
-
-    public void GoToMainMenu(string sceneName)
-    {
-        sm.LoadCertainScene(sceneName);
-    }
-
-    public void QuitGame()
-    {
-        SceneManagement.Instance.QuitGame();
     }
 }

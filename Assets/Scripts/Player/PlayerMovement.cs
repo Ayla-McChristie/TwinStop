@@ -66,11 +66,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseScript.Instance.isPaused)
-        {
-            moveVelocity = Vector3.zero;
-            return;
-        }
+        //if (PauseScript.Instance.isPaused)
+        //{
+        //    moveVelocity = Vector3.zero;
+        //    return;
+        //}
 
         if(!freezeMovement && !GetComponent<PlayerStats>().isDead)
         {
@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Step()
     {
-        playerFootStep.Play();
+        AudioManager.Instance.PlaySound("PlayerWalk", this.transform.position, true);
     }
 
     private void OnTriggerEnter(Collider other)
