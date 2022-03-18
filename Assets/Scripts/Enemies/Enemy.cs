@@ -32,10 +32,12 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected NavMeshAgent agent;
     protected bool isDead = false;
     public LayerMask mask;
+    public bool hasChildrenRender;
     protected float fovDist = 200.0f;
     /*
      * HitFlash Variables
      */
+    Renderer[] FlashRenderers;
     [SerializeField]
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
@@ -63,9 +65,13 @@ public class Enemy : MonoBehaviour, IDamageFlash
         rigidbody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         FlashRenderer = GetComponent<Renderer>();
+        if (hasChildrenRender)
+        {
+            FlashRenderers = this.transform.GetComponentsInChildren<Renderer>();
+        }
         if (FlashRenderer == null || FlashRenderer.enabled == false)
         {
-                FlashRenderer = this.GetComponentInChildren<Renderer>();
+            FlashRenderer = this.GetComponentInChildren<Renderer>();
         }
         defaultMat = FlashRenderer.material;
     }
@@ -107,6 +113,21 @@ public class Enemy : MonoBehaviour, IDamageFlash
     {
         FlashTimer -= Time.deltaTime;
         float lerp = Mathf.Clamp01(FlashTimer / FlashDuration);
+
+        if (hasChildrenRender)
+        {
+            if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
+            {
+                foreach (Renderer r in FlashRenderers)
+                    r.material = HurtMat;
+            }
+            else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
+            {
+                foreach (Renderer r in FlashRenderers)
+                    r.material = defaultMat;
+            }
+            return;
+        }
 
         if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
         {
