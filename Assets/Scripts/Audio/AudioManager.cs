@@ -62,7 +62,7 @@ public class AudioManager : MonoBehaviour
         SetUpSounds();
         SetSceneMusic();
         SetPitchList();
-        audioList[14].Play();
+        //audioList[14].Play();
     }
 
     void SetPitchList()
@@ -78,32 +78,28 @@ public class AudioManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(0).name)
         {
             sceneName = SceneManager.GetActiveScene().name;
-            return;
         }
         if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(1).name)
         {
             sceneName = "MainTheme_Demo";
-            return;
         }
         if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(2).name)
         {
             sceneName = "MainTheme_Demo";
-            return;
         }
         if (SceneManager.GetActiveScene().name == "Credits")
         {
             sceneName = "MenuMusic";
-            return;
         }
-
-        //GetMusic(sceneName).Play();
+        //Debug.Log(SceneManager.GetActiveScene().name + " " +  SceneManager.GetSceneByBuildIndex(1).name);
+        GetMusic(sceneName).Play();
     }
 
     AudioSource GetMusic(string name)
     {
         foreach (AudioSource a in audioList)
         {
-            if (a.name == name)
+            if (a.clip.name == name)
                 return a;
         }
         return null;
