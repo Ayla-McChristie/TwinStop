@@ -2569,6 +2569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528774238}
   - component: {fileID: 528774239}
+  - component: {fileID: 528774240}
   m_Layer: 0
   m_Name: ChronoLord
   m_TagString: Untagged
@@ -2612,6 +2613,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &528774240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528774237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ecd70d7d87bd54897dd16468e63b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &542424810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3316261490732560778, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
