@@ -19,6 +19,7 @@ public class BasicEnemy : Enemy
         this.Speed = speed;
         this.Damage = damage;
         deathSound = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -31,5 +32,6 @@ public class BasicEnemy : Enemy
             agent.isStopped = false;
         }
         base.FixedUpdate();
+
     }
 }
