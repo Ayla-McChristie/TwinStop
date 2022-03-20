@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour, IDamageFlash
     public LayerMask mask;
     public bool hasChildrenRender;
     protected float fovDist = 200.0f;
+
+    protected Animator MyAnimator;
+
     /*
      * HitFlash Variables
      */
@@ -74,6 +77,9 @@ public class Enemy : MonoBehaviour, IDamageFlash
             FlashRenderer = this.GetComponentInChildren<Renderer>();
         }
         defaultMat = FlashRenderer.material;
+
+        MyAnimator = GetComponent<Animator>();
+        agent.updateRotation = true;
     }
     public virtual void FixedUpdate()
     {
@@ -176,6 +182,10 @@ public class Enemy : MonoBehaviour, IDamageFlash
     void Die()
     {
         //put code for enemy to do damage to player here
+
+        //Plays death anim
+        MyAnimator.SetTrigger("ImDead");
+
         PlayerStats.AddToKillCount();
         PlayDeathSound();
 
