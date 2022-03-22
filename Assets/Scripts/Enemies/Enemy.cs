@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
         defaultMat = FlashRenderer.material;
 
         MyAnimator = GetComponent<Animator>();
-        agent.updateRotation = true;
+        //agent.updateRotation = true;
     }
     public virtual void FixedUpdate()
     {

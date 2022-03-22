@@ -31,6 +31,8 @@ public class BasicEnemy : Enemy
             agent.SetDestination(target.transform.position);
             agent.isStopped = false;
         }
+
+        
         base.FixedUpdate();
 
     }
