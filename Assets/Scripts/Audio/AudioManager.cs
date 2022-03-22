@@ -230,7 +230,7 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Hy");
+        //Debug.Log("Hy");
         if (!CheckTimeIsSlowed())
         {
             RevertPitch();

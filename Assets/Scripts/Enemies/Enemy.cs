@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour, IDamageFlash
     }
     public float FlashTimer { get; set; }
 
+    [SerializeField]
+    GameObject deathExplosion;
+
     /*
      * Methods
      */
@@ -184,11 +187,15 @@ public class Enemy : MonoBehaviour, IDamageFlash
         //put code for enemy to do damage to player here
 
         //Plays death anim
-        MyAnimator.SetTrigger("ImDead");
+        if (MyAnimator != null)
+        {
+            MyAnimator.SetTrigger("ImDead");
+        }
 
         PlayerStats.AddToKillCount();
         PlayDeathSound();
 
+        Instantiate(deathExplosion, this.transform.position + Vector3.up, this.transform.rotation);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
