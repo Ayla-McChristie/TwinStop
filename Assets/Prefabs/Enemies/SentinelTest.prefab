@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 1587090509596471965}
   - component: {fileID: 400037407}
   - component: {fileID: 822872912000437557}
+  - component: {fileID: 2042204686896272018}
   m_Layer: 9
   m_Name: SentinelTest
   m_TagString: Enemy
@@ -331,6 +332,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &2042204686896272018
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587090509596471964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bce2dfd0ca5dda8438acd18ac68a4961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1844850303566644912
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +807,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
       propertyPath: m_Name
       value: LP_Flaming Skull Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075306870285647189, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2901276231176581679, guid: d54c6a58b42a57e4aae8915465fb85ae, type: 3}
       propertyPath: m_Materials.Array.data[0]
