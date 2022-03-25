@@ -188,11 +188,12 @@ public class Enemy : MonoBehaviour, IDamageFlash
 
         //Plays death anim
         if (MyAnimator != null)
+        { 
             if (!MyAnimator.isActiveAndEnabled)
             {
                 MyAnimator.enabled = true;
             }
-        {
+        
             MyAnimator.SetTrigger("ImDead");
         }
 
