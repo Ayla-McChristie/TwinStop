@@ -164,8 +164,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
             if (deathSound == null)
                 return;
             clipTimer += Time.deltaTime;
-            if (clipTimer >= deathSound.clip.length)
-                this.gameObject.SetActive(false);
+            //if (clipTimer >= deathSound.clip.length)
+                //this.gameObject.SetActive(false);
         }
     }
 
@@ -188,14 +188,16 @@ public class Enemy : MonoBehaviour, IDamageFlash
 
         //Plays death anim
         if (MyAnimator != null)
+            if (!MyAnimator.isActiveAndEnabled)
+            {
+                MyAnimator.enabled = true;
+            }
         {
             MyAnimator.SetTrigger("ImDead");
         }
 
         PlayerStats.AddToKillCount();
         PlayDeathSound();
-
-        Instantiate(deathExplosion, this.transform.position + Vector3.up, this.transform.rotation);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -226,5 +228,17 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected void DamagePlayer()
     {
         pStats.TakeDamage();
+    }
+
+    //Sets this object to inactive
+    public void Despawn()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    //Spawns a death explosion
+    public void Explode()
+    {
+        Instantiate(deathExplosion, this.transform.position + Vector3.up, this.transform.rotation);
     }
 }

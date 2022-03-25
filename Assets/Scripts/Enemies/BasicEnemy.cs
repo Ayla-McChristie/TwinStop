@@ -25,6 +25,7 @@ public class BasicEnemy : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        //MyAnimator.enabled = false;
         DeathSoundClipTime();
         if (!isDead)
         {
@@ -35,5 +36,10 @@ public class BasicEnemy : Enemy
         
         base.FixedUpdate();
 
+    }
+
+    private void LateUpdate()
+    {
+        //MyAnimator.enabled = true;
     }
 }
