@@ -32,7 +32,7 @@ public class TimeManager : MonoBehaviour
 
     //Keeps track of when the timer times out, turns true when the timer runs out and false after
     //the cooldown
-    bool outtaTime;
+    public bool outtaTime;
 
     //Turned true when player gets time crystal
     public bool hasTimeCrystal;
@@ -95,6 +95,7 @@ public class TimeManager : MonoBehaviour
         timeValue = MaxTimeValue; //This will (hopefully) give the player 4 seconds total of meter
         coolDownValue = MaxTimeValue;
         timeBar.SetMaxTime(MaxTimeValue); // passes the current max time value to make sure the bar has the same max -Steve
+        ReticleCursor._instance.SetMaxTime(MaxTimeValue);
         outtaTime = false;
         audio = GetComponents<AudioSource>();
         slowTimeEnter = audio[0];
@@ -129,7 +130,7 @@ public class TimeManager : MonoBehaviour
         Cooldown();
 
         EaseTimeToDefault();
-        
+        //Debug.Log(timeValue);
         Timer();
         AmIOuttaTime();
         if (outtaTime)

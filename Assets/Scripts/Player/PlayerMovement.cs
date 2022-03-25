@@ -66,13 +66,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (PauseScript.Instance.isPaused)
-        //{
-        //    moveVelocity = Vector3.zero;
-        //    return;
-        //}
-
-        if(!freezeMovement && !GetComponent<PlayerStats>().isDead)
+        if (PauseScript.Instance.isPaused)
+        {
+            anim.speed = 0;
+            moveVelocity = Vector3.zero;
+            return;
+        }
+        anim.speed = 1;
+        if (!freezeMovement && !GetComponent<PlayerStats>().isDead)
         {
             var moveInput = playerActionControls.Player.Move.ReadValue<Vector2>();
             Vector3 flattenedMoveInput = new Vector3(moveInput.x, 0, moveInput.y);
