@@ -65,4 +65,20 @@ public class PauseScript : MonoBehaviour
             PauseScreen.SetActive(false);
         }
     }
+
+    public void Resume()
+    {
+        isPaused = false;
+        PauseScreen.SetActive(false);
+    }
+
+    public void LoadScene(string name)
+    {
+        SceneManagement.Instance.LoadCertainScene(name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
