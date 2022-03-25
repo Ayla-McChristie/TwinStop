@@ -13713,7 +13713,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-108376
+  m_Name: pb_Mesh-64358
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -29042,7 +29042,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-108360
+  m_Name: pb_Mesh-64342
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -31219,6 +31219,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3796230493018893821, guid: 6ff66811af6a2bd498a58531c294b60d, type: 3}
   m_PrefabInstance: {fileID: 1348160788}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1348160790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3796230493018893810, guid: 6ff66811af6a2bd498a58531c294b60d, type: 3}
+  m_PrefabInstance: {fileID: 1348160788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1348160791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348160790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26aeffa8189ccc43bf72f7577f8a690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneNameToLoad: 
+  sceneName: 
+  text: {fileID: 0}
+  uiCanvas: {fileID: 0}
+  loadCanvas: {fileID: 0}
+  loadCam: {fileID: 0}
 --- !u!43 &1351673308
 Mesh:
   m_ObjectHideFlags: 0
