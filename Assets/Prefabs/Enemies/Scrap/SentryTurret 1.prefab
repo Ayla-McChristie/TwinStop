@@ -246,12 +246,15 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 72
+  hasChildrenRender: 0
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.2
+  deathExplosion: {fileID: 0}
   health: 10
   damage: 2
   attackRate: 0.2
   projectileStartPos: {fileID: 6842319992099685434}
+  RoomTrigger: {fileID: 0}
 --- !u!82 &1651263283783080089
 AudioSource:
   m_ObjectHideFlags: 0
@@ -564,6 +567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6448720061530455737}
   - component: {fileID: 287027773832007152}
+  - component: {fileID: 575561536739315089}
   m_Layer: 0
   m_Name: SentryTurret 1
   m_TagString: Enemy
@@ -602,6 +606,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1.13, z: 0}
+--- !u!95 &575561536739315089
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5923821300107011075}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d8f364545c074e499098852fc1ffabf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6142660431479816202
 GameObject:
   m_ObjectHideFlags: 0
