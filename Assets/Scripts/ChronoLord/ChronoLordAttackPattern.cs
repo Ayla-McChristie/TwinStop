@@ -7,19 +7,30 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Animator MyAnimator;
 
     [SerializeField]
-    GameObject[] Chargers;
+    GameObject[] Chargers, TestEnemies;
+
+    GameObject[] waveToCheck;
+
+    bool IsVulnerable;
+
+    int waveIndex;
+
+    string TriggerToSet;
     // Start is called before the first frame update
     void Start()
     {
         MyAnimator = GetComponent<Animator>();
+        IsVulnerable = false;
+        waveIndex = 1;
+        waveToCheck = Chargers;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsWaveFinished(Chargers))
+        if (IsWaveFinished(waveToCheck) && !IsVulnerable)
         {
-            MyAnimator.SetTrigger("ChargerWaveEnd");
+            MyAnimator.SetTrigger(TriggerToSet);
         }
     }
 
@@ -32,7 +43,35 @@ public class ChronoLordAttackPattern : MonoBehaviour
                 return false;
             }
         }
-        MyAnimator.SetBool("Vulnerable", true);
         return true;
+    }
+
+    void MakeInvulnerable()
+    {
+        MyAnimator.SetBool("Vulnerable", false);
+        IsVulnerable = false;
+    }
+
+    void MakeVulnerable()
+    {
+        MyAnimator.SetBool("Vulnerable", true);
+        IsVulnerable = true;
+    }
+
+    void IncrementWave()
+    {
+        switch (waveIndex)
+        {
+            case 1:
+                waveToCheck = Chargers;
+                TriggerToSet = "ChargerWaveEnd";
+                break;
+            case 2:
+                waveToCheck = TestEnemies;
+                TriggerToSet = "TestEnemyWaveEnd";
+                break;
+        }
+        waveIndex++;
+        MakeVulnerable();
     }
 }
