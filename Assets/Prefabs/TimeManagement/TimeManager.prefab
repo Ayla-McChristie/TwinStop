@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9112385296984428243
 Transform:
   m_ObjectHideFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   timeStopTimeScale: 0.1
   MaxTimeValue: 5
   TimeRecoveryRate: 1
+  outtaTime: 0
   hasTimeCrystal: 1
   ppController: {fileID: 0}
   isTimeStopped: 0
