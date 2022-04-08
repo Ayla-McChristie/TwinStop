@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a353f897e9bf7a044bdbd98d2b2bc28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 6
   numOfHearts: 6
   invicibilityDuration: 1
   keys: 0
@@ -2309,7 +2309,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  keysList: []
+  keysList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playerHit: {fileID: 3793804004008288135}
   playerDead: {fileID: -3387382793413953215}
   defaultMat: {fileID: 0}
@@ -3608,7 +3611,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311555937815000430}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.694, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2688203597817817904}
@@ -5033,7 +5036,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 72f3c6407d7c92d47b2f76a68ed4e8de, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5147,6 +5150,10 @@ PrefabInstance:
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeSpeedUpRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
+      propertyPath: TimeRecoveryRate
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 728832278482916283, guid: e320da151a1e4994d89782e665cf880e, type: 3}
       propertyPath: timeSlowDownRate
