@@ -13,7 +13,8 @@ public class PlayerRingFollow : MonoBehaviour
     [SerializeField]
      RectTransform canvasRTransform;
 
-    Image myImage;
+    //Image myImage;
+    Material mat;
     [ColorUsage(true, true)]
     [SerializeField]
     Color defaultColor, cantMoveColor, firingColor, timeStopColor;
@@ -35,7 +36,8 @@ public class PlayerRingFollow : MonoBehaviour
         //timeStopColor = new Color(1, 147, 1);
 
         isChangingColors = false;
-        myImage = this.GetComponent<Image>();
+        //myImage = this.GetComponent<Image>();
+        mat = this.GetComponent<MeshRenderer>().material;
         //player = GameObject.FindGameObjectWithTag("Player");
         timeManagerObject = GameObject.FindGameObjectWithTag("TimeManager");
 
@@ -46,19 +48,19 @@ public class PlayerRingFollow : MonoBehaviour
         gcScript = player.GetComponent<GunControl>();
         tmScript = timeManagerObject.GetComponent<TimeManager>();
 
-        rTransform = GetComponent<RectTransform>();
+        //rTransform = GetComponent<RectTransform>();
         //gameCam = Camera.Main;
-        canvasRTransform = GameObject.Find("GameUI").GetComponent<RectTransform>();
+        //canvasRTransform = GameObject.Find("GameUI").GetComponent<RectTransform>();
         //gameCam = GameObject.FindGameObjectWithTag("MainCam");
 
-        defaultColor = myImage.color;
+        defaultColor = mat.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        TrackPlayer();
-        RotateWithPlayer();
+        //TrackPlayer();
+        //RotateWithPlayer();
 
         ResetColor();
         if (gcScript.isAttacking)
@@ -122,13 +124,13 @@ public class PlayerRingFollow : MonoBehaviour
     /// <param name="green"></param>
     void ChangeColor()
     {
-        if (Color.Equals(myImage.color, newActiveColor))
+        if (Color.Equals(mat.color, newActiveColor))
         {
             isChangingColors = false;
         }
         else
         {
-            myImage.color = Color.Lerp(myImage.color, newActiveColor, .2f); ;
+            mat.color = Color.Lerp(mat.color, newActiveColor, .2f); ;
         }
         
     }
@@ -147,7 +149,7 @@ public class PlayerRingFollow : MonoBehaviour
 
     void ResetColor()
     {
-        myImage.color = Color.Lerp(myImage.color, defaultColor, .2f);
+        mat.color = Color.Lerp(mat.color, defaultColor, .2f);
         isChangingColors = false;
     }
 }
