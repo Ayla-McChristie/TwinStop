@@ -53,12 +53,19 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadCertainScene(string sceneName)
     {
-        loadCanvas.SetActive(true);
+        if(loadCanvas != null)
+            loadCanvas.SetActive(true);
         if (loadCam != null)
             loadCam.SetActive(true);
-        uiCanvas.SetActive(false);
+        if(uiCanvas != null)
+            uiCanvas.SetActive(false);
         StartCoroutine(LoadAsync(sceneName));
     }
+
+    //public void LoadCredits()
+    //{
+    //    SceneManager.LoadScene("Credits");
+    //}
 
     public void QuitGame()
     {

@@ -10785,6 +10785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManagment
       objectReference: {fileID: 0}
+    - target: {fileID: 9193105988615558120, guid: 1bb43de402f006e448f5666e0893a162, type: 3}
+      propertyPath: m_TagString
+      value: SceneManager
+      objectReference: {fileID: 0}
     - target: {fileID: 9193105988615558121, guid: 1bb43de402f006e448f5666e0893a162, type: 3}
       propertyPath: text
       value: 
@@ -10943,6 +10947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: {x: 0, y: 4, z: 0}
   isTimeBased: 0
+  isUI: 0
 --- !u!65 &1800980856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11686,7 +11691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12, y: 34}
+  m_AnchoredPosition: {x: 12, y: 14}
   m_SizeDelta: {x: 1136.9248, y: 639.5203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2009053951
