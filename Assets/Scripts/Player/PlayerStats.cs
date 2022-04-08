@@ -83,7 +83,6 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         defaultMat = FlashRenderer.material;
         UpdateHearts();
         UpdateKeys();
-        ogHeartRotation = hearts[0].transform.rotation;
         heartSizeSmall = hearts[0].transform.localScale;
     }
     void Update()
@@ -95,7 +94,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         UpdateKeys();
         GetActiveHeart();
         RotateActiveHeart();
-        BeatActiveHeart();
+        //BeatActiveHeart();
         //Debug.Log(health);
     }
     void InvincibilityCoolDown()
@@ -149,7 +148,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         if (other.gameObject.tag == "HealthPickUp")
         {
             Health++;
-            hearts[activeHeartInd].transform.rotation = ogHeartRotation;
+            //hearts[activeHeartInd].transform.rotation = ogHeartRotation;
+            hearts[activeHeartInd].GetComponent<Heart>().anim.SetBool("startBeat", false);
             hearts[activeHeartInd].transform.localScale = heartSizeSmall;
         }
 
@@ -230,7 +230,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
 
     void RotateActiveHeart()
     {
-        hearts[activeHeartInd].transform.Rotate(new Vector3(0, 0, 75f) * Time.deltaTime);
+        //hearts[activeHeartInd].transform.Rotate(new Vector3(0, 0, 75f) * Time.deltaTime);
+        hearts[activeHeartInd].GetComponent<Heart>().anim.SetBool("startBeat", true);
     }
 
     void UpdateKeys()
