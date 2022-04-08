@@ -25,12 +25,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.261
+    m_Value: 1
     min: 0
     max: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.335
+    m_Value: 0.41
     min: 0.01
     max: 1
   rounded:
@@ -55,23 +55,23 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 4
     min: -100
     max: 100
   colorFilter:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.745283, g: 0.4668565, b: 0.59469056, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   hueShift:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 2
     min: -180
     max: 180
   saturation:
     m_OverrideState: 1
-    m_Value: -64
+    m_Value: -27
     min: -100
     max: 100
 --- !u!114 &-3356052862007070424
@@ -89,14 +89,14 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   lift:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.7116573, y: 1, z: 0.8742095, w: 0.06122449}
   gamma:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 0.9807829, z: 0.97225994, w: -0.040816333}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.9807829, z: 0.97225994, w: -0.2}
   gain:
     m_OverrideState: 0
-    m_Value: {x: 0.9823052, y: 0.88757825, z: 1, w: -0.040816326}
+    m_Value: {x: 0.9823052, y: 0.88757825, z: 1, w: -1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
     max: 100
   tint:
     m_OverrideState: 1
-    m_Value: 46
+    m_Value: 6
     min: -100
     max: 100
 --- !u!114 &1197907505496984912
@@ -158,13 +158,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.042372882}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.375}
   midtones:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0.16949153}
+    m_Value: {x: 1, y: 1, z: 1, w: 1}
   highlights:
-    m_OverrideState: 0
-    m_Value: {x: 0.967917, y: 1, z: 0.9759377, w: 1}
+    m_OverrideState: 1
+    m_Value: {x: 0.967917, y: 1, z: 0.9759377, w: 0.1800003}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
