@@ -30,6 +30,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     {
         if (IsWaveFinished(waveToCheck) && !IsVulnerable)
         {
+            IncrementWave();
             MyAnimator.SetTrigger(TriggerToSet);
         }
     }
@@ -62,9 +63,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
     {
         switch (waveIndex)
         {
-            case 1:
-                waveToCheck = Chargers;
+            case 1: 
                 TriggerToSet = "ChargerWaveEnd";
+                waveToCheck = TestEnemies;
                 break;
             case 2:
                 waveToCheck = TestEnemies;
