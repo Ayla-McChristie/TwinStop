@@ -16,6 +16,21 @@ public class ChronoLordAttackPattern : MonoBehaviour
     int waveIndex;
 
     string TriggerToSet;
+
+    public Renderer FlashRenderer { get; set; }
+    public Material hurtMat;
+    public Material HurtMat { get => hurtMat; }
+    protected Material defaultMat;
+    public float flashDuration;
+    public float FlashDuration
+    {
+        get => flashDuration;
+        set => flashDuration = value;
+    }
+    public float FlashTimer { get; set; }
+    Renderer[] FlashRenderers;
+
+    public bool hasChildrenRender;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +38,17 @@ public class ChronoLordAttackPattern : MonoBehaviour
         IsVulnerable = false;
         waveIndex = 1;
         waveToCheck = Chargers;
+
+        FlashRenderer = GetComponent<Renderer>();
+        if (hasChildrenRender)
+        {
+            FlashRenderers = this.transform.GetComponentsInChildren<Renderer>();
+        }
+        if (FlashRenderer == null || FlashRenderer.enabled == false)
+        {
+            FlashRenderer = this.GetComponentInChildren<Renderer>();
+        }
+        defaultMat = FlashRenderer.material;
     }
 
     // Update is called once per frame
@@ -32,6 +58,35 @@ public class ChronoLordAttackPattern : MonoBehaviour
         {
             IncrementWave();
             MyAnimator.SetTrigger(TriggerToSet);
+        }
+    }
+    void FlashCoolDown()
+    {
+        FlashTimer -= Time.deltaTime;
+        float lerp = Mathf.Clamp01(FlashTimer / FlashDuration);
+
+        if (hasChildrenRender)
+        {
+            if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
+            {
+                foreach (Renderer r in FlashRenderers)
+                    r.material = HurtMat;
+            }
+            else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
+            {
+                foreach (Renderer r in FlashRenderers)
+                    r.material = defaultMat;
+            }
+            return;
+        }
+
+        if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
+        {
+            FlashRenderer.material = HurtMat;
+        }
+        else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
+        {
+            FlashRenderer.material = defaultMat;
         }
     }
 
@@ -75,4 +130,13 @@ public class ChronoLordAttackPattern : MonoBehaviour
         waveIndex++;
         MakeVulnerable();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            FlashTimer = FlashDuration;
+        }
+    }
+
 }
