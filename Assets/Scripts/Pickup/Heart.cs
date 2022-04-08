@@ -5,10 +5,13 @@ using UnityEngine;
 public class Heart : MonoBehaviour
 {
     AudioSource audio;
+    public Animator anim;
     AudioClip clip;
     bool isPickedUp;
+    public bool isUI;
     float clipLength;
     float clipTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,12 @@ public class Heart : MonoBehaviour
         audio = GetComponent<AudioSource>();
         isPickedUp = false;
         clip = audio.clip;
+
+        anim = GetComponent<Animator>();
+        if (isUI)
+            this.transform.localScale = new Vector3(4500f, 4500f, 4500f);
+        else
+            anim.enabled = false;
     }
 
     // Update is called once per frame
