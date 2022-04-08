@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour, IDamageFlash
 {
@@ -82,7 +83,8 @@ public class Enemy : MonoBehaviour, IDamageFlash
         defaultMat = FlashRenderer.material;
 
         MyAnimator = GetComponent<Animator>();
-        //agent.updateRotation = true;
+
+        //deathExplosion = Resources.Load(@"Assets\PrefabsVFX\vfx_Explosion_Big.prefab") as GameObject;
     }
     public virtual void FixedUpdate()
     {

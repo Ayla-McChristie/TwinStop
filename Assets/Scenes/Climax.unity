@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44793344, g: 0.49793172, b: 0.57548416, a: 1}
+  m_IndirectSpecularColor: {r: 0.44793302, g: 0.49793112, b: 0.57548314, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5040,8 +5040,10 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 72
+  hasChildrenRender: 0
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.2
+  deathExplosion: {fileID: 292104221309907919, guid: 4a26f2c696d9dcd4f8a1f0c7f21d2560, type: 3}
   speed: 8
   rotSpeed: 500
   health: 30
@@ -7421,7 +7423,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771084, y: 1}
+    m_SensorSize: {x: 1.777512, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -18051,8 +18053,10 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 72
+  hasChildrenRender: 0
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.2
+  deathExplosion: {fileID: 292104221309907919, guid: 4a26f2c696d9dcd4f8a1f0c7f21d2560, type: 3}
   speed: 8
   rotSpeed: 500
   health: 30
