@@ -32,6 +32,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
                 return false;
             }
         }
+        MyAnimator.SetBool("Vulnerable", true);
         return true;
     }
 }
