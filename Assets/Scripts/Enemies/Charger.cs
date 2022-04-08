@@ -65,7 +65,6 @@ public class Charger : Enemy
                     RotateToPlayer();
                     break;
             }
-            Debug.Log(Health);
             if (CanSeeTarget())
                 state = State.Charge;
             CheckIfPlayerIsBehind();

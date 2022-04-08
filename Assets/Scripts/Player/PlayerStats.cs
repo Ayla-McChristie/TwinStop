@@ -34,7 +34,7 @@ class PlayerStats : MonoBehaviour, IDamageFlash
     private float invincibilityTimer;
     public float invicibilityDuration;
 
-
+    
     /*
      * Key Variables
      */
@@ -46,6 +46,10 @@ class PlayerStats : MonoBehaviour, IDamageFlash
      */
     public GameObject[] hearts;
     public GameObject[] keysList;
+    int activeHeartInd;
+    Quaternion ogHeartRotation;
+    Vector3 heartSizeSmall;
+    bool isSizeDown;
     //public Image[] hearts; // all heart UI game objects go here
     //public Sprite fullHeart; // sprite of full heart here
     //public Sprite emptyHeart; // sprite of empty heart here
@@ -79,6 +83,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         defaultMat = FlashRenderer.material;
         UpdateHearts();
         UpdateKeys();
+        ogHeartRotation = hearts[0].transform.rotation;
+        heartSizeSmall = hearts[0].transform.localScale;
     }
     void Update()
     {
@@ -87,6 +93,9 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         InvincibilityCoolDown();
         UpdateHearts();
         UpdateKeys();
+        GetActiveHeart();
+        RotateActiveHeart();
+        BeatActiveHeart();
         //Debug.Log(health);
     }
     void InvincibilityCoolDown()
@@ -140,6 +149,8 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         if (other.gameObject.tag == "HealthPickUp")
         {
             Health++;
+            hearts[activeHeartInd].transform.rotation = ogHeartRotation;
+            hearts[activeHeartInd].transform.localScale = heartSizeSmall;
         }
 
         // ! Code for Key pickup
@@ -186,8 +197,42 @@ class PlayerStats : MonoBehaviour, IDamageFlash
         for (int i = 0; i < hearts.Length; i++)
         {
             hearts[i].SetActive((i < health));
-        }    
+        }
+
     }
+
+    void GetActiveHeart()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (!hearts[i].activeSelf)
+            {
+                activeHeartInd = i - 1;
+                return;
+            }
+            if (i >= hearts.Length - 1)
+                activeHeartInd = i;
+        }
+    }
+
+    void BeatActiveHeart()
+    {
+        if (hearts[activeHeartInd].transform.localScale.magnitude <= heartSizeSmall.magnitude)
+            isSizeDown = true;
+        else if (hearts[activeHeartInd].transform.localScale.magnitude >= (heartSizeSmall + new Vector3(1000, 1000, 1000)).magnitude)
+            isSizeDown = false;
+
+        if (isSizeDown)
+            hearts[activeHeartInd].transform.localScale += new Vector3(750f, 750f, 750f) * Time.deltaTime * 2;
+        else
+            hearts[activeHeartInd].transform.localScale -= new Vector3(750f, 750f, 750f) * Time.deltaTime * 2;
+    }
+
+    void RotateActiveHeart()
+    {
+        hearts[activeHeartInd].transform.Rotate(new Vector3(0, 0, 75f) * Time.deltaTime);
+    }
+
     void UpdateKeys()
     {
         if (keys > keysList.Length)

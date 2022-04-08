@@ -42,6 +42,18 @@ public class Health : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+        RotateActiveHeart();
+    }
+
+    void RotateActiveHeart()
+    {
+        for(int i = 0; i < hearts.Length; i++)
+        {
+            if (!hearts[i].enabled)
+                hearts[i - 1].transform.Rotate(new Vector3(0, 3f, 0), Space.Self);
+            if(i >= hearts.Length)
+                hearts[i].transform.Rotate(new Vector3(0, 3f, 0), Space.Self);
+        }
     }
 
     // TODO add code for projectiles

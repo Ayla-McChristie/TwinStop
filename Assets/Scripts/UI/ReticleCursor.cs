@@ -53,7 +53,6 @@ public class ReticleCursor : MonoBehaviour
         TimeMeterFill();
         DecreaseMeter();
         RegenMeter();
-        Debug.Log(timeBarVal);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(gameCan.transform as RectTransform, Input.mousePosition, gameCan.worldCamera, out pos);
         newReticle.transform.position = gameCan.transform.TransformPoint(pos);
         timeMeter.transform.position = gameCan.transform.TransformPoint(pos);

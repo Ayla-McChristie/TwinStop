@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Sentinel : Enemy
 {
-    protected enum State { Attacking, MoveToTarget}
+    protected enum State {Spawn, Attacking, MoveToTarget}
     [SerializeField]
     public float speed = 3;
     [SerializeField]
@@ -37,6 +37,7 @@ public class Sentinel : Enemy
     Vector3 projectileDir;
     float fireTimer = 0;
     float waitTimer = 0;
+    float spawnTimer = 0;
     public float maxDist = 10f;
     public float minDist = 5f;
 
@@ -96,15 +97,12 @@ public class Sentinel : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        Debug.Log(state);
         Debug.DrawRay(transform.position, transform.forward * fovDist, Color.red, 1, true); //Debug.Log(state);
         DeathSoundClipTime();
         if (!isDead)
         {
-            if (!CanSeeTarget())
-                state = State.MoveToTarget;
-            else if (CanSeeTarget())
-                state = State.Attacking;
-            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
+            Spawning();
             switch (state)
             {
                 case State.Attacking:
@@ -116,9 +114,22 @@ public class Sentinel : Enemy
                     MoveToTarget();
                     break;
             }
+            if (state == State.Spawn)
+                return;
+            if (!CanSeeTarget())
+                state = State.MoveToTarget;
+            if (CanSeeTarget() && spawnTimer >= .25f)
+                state = State.Attacking;
+            Physics.IgnoreCollision(GameObject.FindWithTag("Enemy").GetComponent<Collider>(), this.gameObject.GetComponent<Collider>(), true);
             this.transform.LookAt(target.transform.position);
         }
         base.FixedUpdate();
+    }
+
+    void Spawning()
+    {
+        if (spawnTimer <= .25f)
+            spawnTimer += Time.deltaTime;
     }
 
     void AttackTarget()

@@ -8,6 +8,8 @@ public class Rotate : MonoBehaviour
     Vector3 rotationSpeed;
     [SerializeField]
     bool isTimeBased;
+    [SerializeField]
+    bool isUI;
     AudioSource wallMove;
     TimeManager time;
     private void Start()
@@ -23,6 +25,8 @@ public class Rotate : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isUI)
+            return;
         if (isTimeBased)
         {
             this.transform.Rotate(rotationSpeed * Time.timeScale, Space.Self);

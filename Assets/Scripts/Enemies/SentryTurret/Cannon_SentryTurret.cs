@@ -22,6 +22,7 @@ public class Cannon_SentryTurret : Enemy
 
     float fireTimer = 0;
     float projectileSpeed = 12;
+    float bootUpTimer = 0;
 
     string projectileType;
 
@@ -46,9 +47,31 @@ public class Cannon_SentryTurret : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        Debug.Log(state);
+        CheckIfObjectOnScreen();
         DeadState();
         SwitchState();
         base.FixedUpdate();
+    }
+
+    void CheckIfObjectOnScreen()
+    {
+        if (this.GetComponent<Renderer>().isVisible)
+        {
+            TimeBeforeStart();
+            return;
+        }
+        state = State.Offline;
+        bootUpTimer = 0;
+        return;
+    }
+
+    void TimeBeforeStart()
+    {
+        if (bootUpTimer <= .2f)
+            bootUpTimer += Time.deltaTime;
+        else
+            state = State.Attack;
     }
 
     void DeadState()
@@ -89,7 +112,7 @@ public class Cannon_SentryTurret : Enemy
                 SeeTargetState();
                 break;
             case State.Offline:
-                DetectPlayerEnterRoom();
+                //DetectPlayerEnterRoom();
                 break;
             case State.Attack:
                 SeeTargetState();
