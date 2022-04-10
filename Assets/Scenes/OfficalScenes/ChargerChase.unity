@@ -10249,7 +10249,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2887916
+  m_Name: pb_Mesh-17596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14543,7 +14543,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.777512, y: 1}
+    m_SensorSize: {x: 1.7776026, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -31115,7 +31115,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.777512, y: 1}
+    m_SensorSize: {x: 1.7776026, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -31132,7 +31132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879665460}
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.4345618, y: 3.35, z: 0.57814175}
+  m_LocalPosition: {x: -0.43456557, y: 3.35, z: 0.57814175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1734687302}
@@ -31585,7 +31585,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2887868
+  m_Name: pb_Mesh-17548
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -37419,7 +37419,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh497308
+  m_Name: pb_Mesh53986
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -39379,7 +39379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153036410}
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5345626, y: 9.789992, z: -0.12185824}
+  m_LocalPosition: {x: -0.5345659, y: 9.789992, z: -0.12185824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 787496523}
@@ -44915,6 +44915,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amIUp: 0
+  IsPlayerOnBridge: 0
+  bridgeCheckScript: {fileID: 1751520015}
 --- !u!95 &1251290013
 Animator:
   serializedVersion: 3
@@ -58055,6 +58057,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amIUp: 0
+  IsPlayerOnBridge: 0
+  bridgeCheckScript: {fileID: 0}
 --- !u!1001 &1502103092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58480,7 +58484,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2887988
+  m_Name: pb_Mesh-17668
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -63031,6 +63035,7 @@ GameObject:
   - component: {fileID: 1751520013}
   - component: {fileID: 1751520012}
   - component: {fileID: 1751520011}
+  - component: {fileID: 1751520015}
   m_Layer: 0
   m_Name: Bridge (1)
   m_TagString: Bridge
@@ -63084,8 +63089,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8129352, z: 1}
-  m_Center: {x: -1.6199502e-16, y: -0.09353241, z: -1.3071821e-15}
+  m_Size: {x: 1, y: 1.1268777, z: 1}
+  m_Center: {x: -8.847007e-10, y: 0.06343901, z: -6.1874195e-10}
 --- !u!23 &1751520013
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63136,6 +63141,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751520009}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1751520015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751520009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c29a6762237d5943b75dc5018aaa43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPlayerOnBridge: 0
 --- !u!1 &1755634407
 GameObject:
   m_ObjectHideFlags: 0
