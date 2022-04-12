@@ -19,6 +19,9 @@ public class TimeManager : MonoBehaviour
     private float MaxTimeValue = 4f;
     [SerializeField]
     private float TimeRecoveryRate = 1.5f;
+    [Tooltip("The amount it costs for the player to activate time slow. Default: 0.75")]
+    [SerializeField]
+    private float TimeStopCost = 0.75f;
 
     //REMOVE LATER - Just for showing off new Timestop
     //[SerializeField]
@@ -283,9 +286,10 @@ public class TimeManager : MonoBehaviour
             return;
         if (hasTimeCrystal)
         {
-            if (context.performed)
+            if (context.started)//(context.performed) //changed this, since it would cause the cost to be applied whenever the button was released as well
             {
                 isTimeStopped = true;
+                timeValue -= TimeStopCost; //the cost of slowing time whenever the input is given. Prevents spamming
             }
             if (context.canceled && hasTimeCrystal)
             {

@@ -25755,7 +25755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176745447}
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.53457177, y: 9.789992, z: -0.12185824}
+  m_LocalPosition: {x: -0.534648, y: 9.789992, z: -0.12185824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -30051,6 +30051,10 @@ PrefabInstance:
       propertyPath: timeBar
       value: 
       objectReference: {fileID: 1713620137}
+    - target: {fileID: 8447591368024237186, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
+      propertyPath: TimeStopCost
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8447591368024237186, guid: db09480a4d0ebd8429e43ee387be735b, type: 3}
       propertyPath: hasTimeCrystal
       value: 1
@@ -49276,7 +49280,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7795697, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -49293,7 +49297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032891834}
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.43457294, y: 3.35, z: 0.57814175}
+  m_LocalPosition: {x: -0.4346481, y: 3.35, z: 0.57814175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963838316}
