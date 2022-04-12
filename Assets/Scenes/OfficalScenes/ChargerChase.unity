@@ -10310,6 +10310,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 2586607309129781981, guid: 82e775a29c77687448e8f7f3e9576540, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 839593e8c1ea60142894483aa2e3b355, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82e775a29c77687448e8f7f3e9576540, type: 3}
 --- !u!4 &131147038 stripped
@@ -10333,8 +10337,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.018850008, y: 0.011962512, z: 0.018764002}
-  m_Center: {x: 0.0010675996, y: 0.005469829, z: -0.0005935341}
+  m_Size: {x: 0.018850008, y: 0.010556238, z: 0.020212876}
+  m_Center: {x: 0.0010675996, y: 0.0061729657, z: 0.0001309073}
 --- !u!114 &131147041
 MonoBehaviour:
   m_ObjectHideFlags: 0
