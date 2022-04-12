@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "Player" && !isDead)
         {
             pStats.TakeDamage();
         }
