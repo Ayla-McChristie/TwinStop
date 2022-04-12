@@ -12,6 +12,8 @@ public class Heart : MonoBehaviour
     float clipLength;
     float clipTimer;
 
+    PlayerStats PStatsScript;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class Heart : MonoBehaviour
             this.transform.localScale = new Vector3(4500f, 4500f, 4500f);
         else
             anim.enabled = false;
+
+        PStatsScript = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -41,7 +45,7 @@ public class Heart : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Player" && isPickedUp == false)
+        if (other.transform.tag == "Player" && isPickedUp == false && PStatsScript.health < PStatsScript.numOfHearts)
         {
             AudioManager.Instance.PlaySound("HeartPickUp", this.transform.position, true);
             isPickedUp = true;
