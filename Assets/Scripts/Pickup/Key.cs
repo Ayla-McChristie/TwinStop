@@ -36,7 +36,7 @@ public class Key : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" )
         {
             if(audio != null)
             {
