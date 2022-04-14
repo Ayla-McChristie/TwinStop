@@ -43,6 +43,7 @@ public class Key : MonoBehaviour
                 AudioManager.Instance.PlaySound("KeyPickUp", this.transform.position, true);
             }
             isPickedUp = true;
+            GetComponent<Collider>().enabled = false;
             clipLength = clip.length;
 
             /*
