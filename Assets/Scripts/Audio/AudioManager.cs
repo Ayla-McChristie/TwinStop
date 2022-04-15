@@ -260,7 +260,6 @@ public class AudioManager : MonoBehaviour
 
     void SlowDownPitch(float pitchTune)
     {
-        Debug.Log("Hi");
         foreach (AudioSource a in audioList)
             ChangePitch(a, pitchTune);
     }

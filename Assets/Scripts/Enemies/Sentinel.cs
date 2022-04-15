@@ -295,7 +295,10 @@ public class Sentinel : Enemy
         RaycastHit hit;
         if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, fovDist, mask) 
                             && hit.collider.gameObject.tag == "Player")
+        {
+            Debug.Log(hit.collider.name);
             return true;
+        }
         return false;
     }
 

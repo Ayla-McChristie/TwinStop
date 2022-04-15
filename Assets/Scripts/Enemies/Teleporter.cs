@@ -209,6 +209,7 @@ public class Teleporter : Enemy
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(this.Health);
         base.OnCollisionEnter(collision);
     }
 }

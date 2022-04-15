@@ -118,7 +118,7 @@ public class TimeManager : MonoBehaviour
     {
         if (PauseScript.Instance.isPaused && Input.GetKey(KeyCode.Escape) && !Input.GetKeyDown(KeyCode.LeftShift))
         {
-            isTimeStopped = false;Debug.Log("HI");
+            isTimeStopped = false;
             return;
         }
         if (PauseScript.Instance.isPaused && Input.GetKey(KeyCode.Escape) && Input.GetKey(KeyCode.LeftShift))

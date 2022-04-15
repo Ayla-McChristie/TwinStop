@@ -30,14 +30,15 @@ public class Cannon_SentryTurret : Enemy
     // Start is called before the first frame update
     public override void Start()
     {
+        base.Start();
         state = State.Offline;
         target = GameObject.FindGameObjectWithTag("Player");
         this.Health = health;
         this.Damage = damage;
-        if (this.transform.GetChild(0).GetComponent<Renderer>() == null)
-            this.FlashRenderer = this.transform.GetComponent<Renderer>();
-        else 
-            this.FlashRenderer = this.transform.GetChild(0).GetComponent<Renderer>();
+        //if (this.transform.GetChild(0).GetComponent<Renderer>() == null)
+        //    this.FlashRenderer = this.transform.GetComponent<Renderer>();
+        //else 
+        //    this.FlashRenderer = this.transform.GetChild(0).GetComponent<Renderer>();
         defaultMat = FlashRenderer.material;
         projectileType = "EnemyProjectile";
         rigidbody = GetComponent<Rigidbody>();
@@ -56,11 +57,20 @@ public class Cannon_SentryTurret : Enemy
 
     void CheckIfObjectOnScreen()
     {
-        if (this.GetComponent<Renderer>().isVisible)
-        {
-            TimeBeforeStart();
-            return;
-        }
+        if (hasChildrenRender)
+            if (this.transform.GetComponentInChildren<Renderer>().isVisible)
+            {
+                TimeBeforeStart();
+                return;
+            }
+        else
+            if (this.GetComponent<Renderer>().isVisible)
+            {
+                {
+                    TimeBeforeStart();
+                    return;
+                }
+            }
         state = State.Offline;
         bootUpTimer = 0;
         return;

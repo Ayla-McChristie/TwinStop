@@ -13527,6 +13527,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SentinelMiniBoss (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2074440993724237917, guid: e092d23a431527342a1675299f55f824, type: 3}
+      propertyPath: mask.m_Bits
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 2074440993724237921, guid: e092d23a431527342a1675299f55f824, type: 3}
       propertyPath: m_RootOrder
       value: 102
@@ -25755,7 +25759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1176745447}
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.534648, y: 9.789992, z: -0.12185824}
+  m_LocalPosition: {x: -0.53454083, y: 9.789992, z: -0.12185824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -26912,7 +26916,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15074
+  m_Name: pb_Mesh-3553888
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49280,7 +49284,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7795697, y: 1}
+    m_SensorSize: {x: 1.777027, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -49297,7 +49301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032891834}
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.4346481, y: 3.35, z: 0.57814175}
+  m_LocalPosition: {x: -0.4345414, y: 3.35, z: 0.57814175}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963838316}

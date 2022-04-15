@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected float fovDist = 200.0f;
 
     protected Animator MyAnimator;
-
+    CharacterController con;
     /*
      * HitFlash Variables
      */
@@ -83,7 +83,6 @@ public class Enemy : MonoBehaviour, IDamageFlash
         defaultMat = FlashRenderer.material;
 
         MyAnimator = GetComponent<Animator>();
-
         //deathExplosion = Resources.Load(@"Assets\PrefabsVFX\vfx_Explosion_Big.prefab") as GameObject;
     }
     public virtual void FixedUpdate()
@@ -100,6 +99,9 @@ public class Enemy : MonoBehaviour, IDamageFlash
         {
             this.Die();
             this.isDead = true;
+            if(MyAnimator == null)
+                this.gameObject.SetActive(false);
+            this.gameObject.GetComponent<Collider>().enabled = false;
         }
         FlashCoolDown();
         DeathSoundClipTime();
