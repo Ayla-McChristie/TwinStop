@@ -80,12 +80,15 @@ public class ReticleCursor : MonoBehaviour
 
     public void TimeCost(float cost)
     {
-        timeMeter.fillAmount -= cost * 0.65f;
+        timeMeter.fillAmount -= cost * 0.25f;
     }
 
     void TimeMeterFill()
     {
-        timeMeter.fillAmount = Mathf.Lerp(timeMeter.fillAmount, timeBarVal / timeBarMax, 9f * Time.deltaTime);
+        if (TimeManager.Instance.isTimeStopped)
+            timeMeter.fillAmount -= 1f / timeBarMax * Time.unscaledDeltaTime;
+        else if (!TimeManager.Instance.isTimeStopped)
+            timeMeter.fillAmount += 1f / timeBarMax * Time.unscaledDeltaTime;
     }
 
     public void SetMaxTime(float time)
