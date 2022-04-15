@@ -22,6 +22,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
     public Material HurtMat { get => hurtMat; }
     protected Material defaultMat;
     public float flashDuration;
+
+    [SerializeField]
+    ChronoLordStatus MyChronoLordStatus;
     public float FlashDuration
     {
         get => flashDuration;
@@ -49,6 +52,8 @@ public class ChronoLordAttackPattern : MonoBehaviour
             FlashRenderer = this.GetComponentInChildren<Renderer>();
         }
         defaultMat = FlashRenderer.material;
+
+        MyChronoLordStatus.AmFiring();
     }
 
     // Update is called once per frame
@@ -106,12 +111,16 @@ public class ChronoLordAttackPattern : MonoBehaviour
     {
         MyAnimator.SetBool("Vulnerable", false);
         IsVulnerable = false;
+        MyChronoLordStatus.NotVulnerable();
+        MyChronoLordStatus.AmFiring();
     }
 
     void MakeVulnerable()
     {
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
+        MyChronoLordStatus.AmVulnerable();
+        MyChronoLordStatus.NotFiring();
     }
 
     void IncrementWave()

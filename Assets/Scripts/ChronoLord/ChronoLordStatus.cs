@@ -20,37 +20,25 @@ public class ChronoLordStatus : MonoBehaviour
         
     }
 
-    void AmVulnerable()
+    public void AmVulnerable()
     {
         Vulnerable = true;
         MyAnimator.SetBool("Vulnerable", true);
     }
 
-    void NotVulnerable()
+    public void NotVulnerable()
     {
         Vulnerable = false;
         MyAnimator.SetBool("Vulnerable", false);
     }
 
-    void AmIdle()
-    {
-        Vulnerable = true;
-        MyAnimator.SetBool("Idle", true);
-    }
-
-    void NotIdle()
-    {
-        Idle = false;
-        MyAnimator.SetBool("Idle", false);
-    }
-
-    void AmFiring()
+    public void AmFiring()
     {
         Vulnerable = true;
         MyAnimator.SetBool("Firing", true);
     }
 
-    void NotFiring()
+    public void NotFiring()
     {
         Firing = false;
         MyAnimator.SetBool("Firing", false);
