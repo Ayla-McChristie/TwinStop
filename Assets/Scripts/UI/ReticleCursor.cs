@@ -78,6 +78,11 @@ public class ReticleCursor : MonoBehaviour
         isFiring = isfiring;
     }
 
+    public void TimeCost(float cost)
+    {
+        timeMeter.fillAmount -= cost * 0.65f;
+    }
+
     void TimeMeterFill()
     {
         timeMeter.fillAmount = Mathf.Lerp(timeMeter.fillAmount, timeBarVal / timeBarMax, 9f * Time.deltaTime);
@@ -92,12 +97,12 @@ public class ReticleCursor : MonoBehaviour
     public void DecreaseMeter()
     {
         if (TimeManager.Instance.isTimeStopped && timeBarVal > 0 && !TimeManager.Instance.outtaTime)
-            timeBarVal -= Time.unscaledDeltaTime *1.75f;
+            timeBarVal -= Time.unscaledDeltaTime * 1.75f;
     }
 
     public void RegenMeter()
     {
         if ((!TimeManager.Instance.isTimeStopped && timeBarVal < timeBarMax) || TimeManager.Instance.outtaTime && timeBarVal < timeBarMax)
-            timeBarVal += Time.unscaledDeltaTime *1.615f;
+            timeBarVal += Time.unscaledDeltaTime * 1.615f;
     }
 }

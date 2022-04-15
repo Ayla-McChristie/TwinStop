@@ -290,6 +290,7 @@ public class TimeManager : MonoBehaviour
             {
                 isTimeStopped = true;
                 timeValue -= TimeStopCost; //the cost of slowing time whenever the input is given. Prevents spamming
+                ReticleCursor._instance.TimeCost(TimeStopCost);
             }
             if (context.canceled && hasTimeCrystal)
             {
