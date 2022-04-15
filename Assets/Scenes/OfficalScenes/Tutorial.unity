@@ -3854,6 +3854,8 @@ MonoBehaviour:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+  - WaveList:
+    - {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
 --- !u!43 &111176280
 Mesh:
   m_ObjectHideFlags: 0
@@ -6371,6 +6373,7 @@ MonoBehaviour:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+    - {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
@@ -7986,6 +7989,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: listOfWaves.Array.data[3].WaveList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: listOfWaves.Array.data[0].WaveList.Array.data[0]
       value: 
       objectReference: {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
@@ -8001,6 +8008,10 @@ PrefabInstance:
       propertyPath: listOfWaves.Array.data[2].WaveList.Array.data[1]
       value: 
       objectReference: {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
+    - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: listOfWaves.Array.data[3].WaveList.Array.data[0]
+      value: 
+      objectReference: {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
     - target: {fileID: 1204486246202233620, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.84
@@ -8857,6 +8868,7 @@ MonoBehaviour:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+    - {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
@@ -12525,7 +12537,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-64876
+  m_Name: pb_Mesh-21636
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -31797,7 +31809,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7795697, y: 1}
+    m_SensorSize: {x: 1.5702918, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -36197,6 +36209,7 @@ MonoBehaviour:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+    - {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
   - WaveList:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
@@ -43951,7 +43964,8 @@ MonoBehaviour:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
   - WaveList:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
-  - WaveList: []
+  - WaveList:
+    - {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
   - WaveList: []
 --- !u!1 &1273616788
 GameObject:
@@ -51875,6 +51889,7 @@ MonoBehaviour:
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+    - {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
   - WaveList:
     - {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
     - {fileID: 37233595769985310, guid: c599242ed4bc1984c9cba5c6c267a5dc, type: 3}
@@ -62520,11 +62535,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 571761820}
     - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: listOfWaves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: listOfWaves.Array.data[0].WaveList.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: listOfWaves.Array.data[1].WaveList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: listOfWaves.Array.data[2].WaveList.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
@@ -62535,6 +62558,10 @@ PrefabInstance:
       propertyPath: listOfWaves.Array.data[1].WaveList.Array.data[0]
       value: 
       objectReference: {fileID: 1587090509596471964, guid: 8d4912d0e97edd3438176cde1edeedc3, type: 3}
+    - target: {fileID: 1204486246202233619, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
+      propertyPath: listOfWaves.Array.data[2].WaveList.Array.data[0]
+      value: 
+      objectReference: {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
     - target: {fileID: 1204486246202233620, guid: c29232c4a1ad17441bc08903556c445c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.17
@@ -62975,7 +63002,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-51614
+  m_Name: pb_Mesh-7634
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -65852,8 +65879,20 @@ PrefabInstance:
       value: Enemy Manager
       objectReference: {fileID: 0}
     - target: {fileID: 1428346158396084011, guid: 9230f70d3ca82eb4eb259e739ed2ed41, type: 3}
+      propertyPath: enemyPools.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428346158396084011, guid: 9230f70d3ca82eb4eb259e739ed2ed41, type: 3}
       propertyPath: enemyPools.Array.data[1].name
       value: SentinelTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428346158396084011, guid: 9230f70d3ca82eb4eb259e739ed2ed41, type: 3}
+      propertyPath: enemyPools.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
+    - target: {fileID: 1428346158396084011, guid: 9230f70d3ca82eb4eb259e739ed2ed41, type: 3}
+      propertyPath: enemyPools.Array.data[4].maxSize
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9230f70d3ca82eb4eb259e739ed2ed41, type: 3}
