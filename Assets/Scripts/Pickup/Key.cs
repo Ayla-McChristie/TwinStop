@@ -16,21 +16,24 @@ public class Key : MonoBehaviour
 
     float clipLength;
     float clipTimer;
+
+    Animator MyAnimator;
     private void Start()
     {
         isPickedUp = false;
         audio = GetComponent<AudioSource>();
         clip = audio.clip;
+        MyAnimator = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (isPickedUp)
         {
-            if (clipTimer >= clipLength)
-                this.gameObject.SetActive(false);
-            else
+            if (clipTimer <= clipLength)
+            {
                 clipTimer += Time.deltaTime;
+            }
         }
     }
 
@@ -43,6 +46,7 @@ public class Key : MonoBehaviour
                 AudioManager.Instance.PlaySound("KeyPickUp", this.transform.position, true);
             }
             isPickedUp = true;
+            MyAnimator.SetTrigger("PickedUp");
             GetComponent<Collider>().enabled = false;
             clipLength = clip.length;
 
@@ -51,5 +55,10 @@ public class Key : MonoBehaviour
              */
             //Destroy(this.gameObject);
         }
+    }
+
+    public void Despawn()
+    {
+       this.gameObject.SetActive(false);
     }
 }
