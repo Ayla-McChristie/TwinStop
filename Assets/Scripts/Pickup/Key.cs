@@ -30,7 +30,7 @@ public class Key : MonoBehaviour
     {
         if (isPickedUp)
         {
-            if (clipTimer <= clipLength)
+            if (clipTimer < clipLength)
             {
                 clipTimer += Time.deltaTime;
             }

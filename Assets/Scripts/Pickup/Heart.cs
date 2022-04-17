@@ -36,20 +36,32 @@ public class Heart : MonoBehaviour
     {
         if (isPickedUp)
         {
-            if (clipTimer >= clipLength)
-                this.gameObject.SetActive(false);
-            else
+            if (clipTimer < clipLength)
                 clipTimer += Time.deltaTime;
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Player" && isPickedUp == false && PStatsScript.health < PStatsScript.numOfHearts)
+        if (other.transform.tag == "Player")
         {
-            AudioManager.Instance.PlaySound("HeartPickUp", this.transform.position, true);
-            isPickedUp = true;
-            clipLength = clip.length;
+            if(isPickedUp == false && PStatsScript.health <= PStatsScript.numOfHearts)
+            {
+                AudioManager.Instance.PlaySound("HeartPickUp", this.transform.position, true);
+                isPickedUp = true;
+                GetComponent<Collider>().enabled = false;
+                if (anim.enabled == false)
+                {
+                    anim.enabled = true;
+                }
+                anim.SetTrigger("PickedUp");
+                clipLength = clip.length;
+            }
         }
+    }
+
+    public void Despawn()
+    {
+        this.gameObject.SetActive(false);
     }
 }
