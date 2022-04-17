@@ -47,6 +47,7 @@ public class Turtle : Enemy
                 AttackPlayer();
                 break;
             case State.Defend:
+                
                 break;
         }
     }
@@ -60,10 +61,12 @@ public class Turtle : Enemy
     {
         if (TimeManager.Instance.isTimeStopped)
         {
+            MyAnimator.SetBool("TimeStopped", true);
             agent.isStopped = true;
             return;
         }
         agent.isStopped = false;
+        MyAnimator.SetBool("TimeStopped", false);
     }
 
     void AttackPlayer()
