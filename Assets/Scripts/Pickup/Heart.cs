@@ -45,7 +45,7 @@ public class Heart : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            if(isPickedUp == false && PStatsScript.health <= PStatsScript.numOfHearts)
+            if(isPickedUp == false && PStatsScript.health < PStatsScript.numOfHearts)
             {
                 AudioManager.Instance.PlaySound("HeartPickUp", this.transform.position, true);
                 isPickedUp = true;
