@@ -4865,6 +4865,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gargoyle
       objectReference: {fileID: 0}
+    - target: {fileID: 411868030946019844, guid: a8d15bfac7f2b2141b643629310e2a75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681827069131257470, guid: a8d15bfac7f2b2141b643629310e2a75, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 681827069131257470, guid: a8d15bfac7f2b2141b643629310e2a75, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -10150,7 +10158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 575672257754164919, guid: bf0e04c3f56f0004cbaa423daa011f38, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2288361680501594731, guid: bf0e04c3f56f0004cbaa423daa011f38, type: 3}
       propertyPath: m_Materials.Array.data[0]
