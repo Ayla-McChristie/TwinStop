@@ -161,7 +161,7 @@ public class Teleporter : Enemy
     {
         if (PauseScript.Instance.isPaused)
             return;
-        Vector3 randomLoc = target.transform.position + Random.insideUnitSphere * rangeOfTeleport;
+        Vector3 randomLoc = target.transform.position *2f  + Random.insideUnitSphere * rangeOfTeleport;
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomLoc, out hit, 10f, NavMesh.AllAreas))
         {
