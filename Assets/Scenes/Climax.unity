@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44793344, g: 0.49793172, b: 0.57548416, a: 1}
+  m_IndirectSpecularColor: {r: 0.44793302, g: 0.49793112, b: 0.57548314, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -635,7 +635,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: eb0005a9d787d5b439984886ee35a90f, type: 2}
     - target: {fileID: -8679921383154817045, guid: 1d5110a0e8b6da84f94b06d1cf4f8538, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1d5110a0e8b6da84f94b06d1cf4f8538, type: 3}
       propertyPath: m_LocalScale.x
@@ -3078,11 +3078,11 @@ Transform:
   m_LocalPosition: {x: -0.19, y: -6.45, z: 21.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8593601765878237178}
-  - {fileID: 910813354}
-  - {fileID: 2135987275}
   - {fileID: 13886126}
   - {fileID: 1328596833}
+  - {fileID: 910813354}
+  - {fileID: 8593601765878237178}
+  - {fileID: 2135987275}
   - {fileID: 1133585840}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -3127,7 +3127,7 @@ MonoBehaviour:
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.03
   MyChronoLordStatus: {fileID: 1798803788}
-  hasChildrenRender: 1
+  hasChildrenRender: 0
   mask:
     serializedVersion: 2
     m_Bits: 1
@@ -5285,7 +5285,7 @@ Transform:
   - {fileID: 2143076660}
   - {fileID: 473249100}
   m_Father: {fileID: 528774238}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 105.778, z: 0}
 --- !u!33 &910813355
 MeshFilter:
@@ -5745,6 +5745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba7b174c2814b47a10e284944c8c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   mask:
     serializedVersion: 2
     m_Bits: 72
@@ -7092,7 +7093,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7771599, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7397,7 +7398,7 @@ Transform:
   - {fileID: 2117112066}
   - {fileID: 1958176664}
   m_Father: {fileID: 528774238}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1339411873
 PrefabInstance:
@@ -11398,13 +11399,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135987274}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 37233596330117346}
   m_Father: {fileID: 528774238}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2137605859
 PrefabInstance:
@@ -12030,6 +12031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2a75e1584923746bfc7884f62a1fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   mask:
     serializedVersion: 2
     m_Bits: 0
@@ -16816,6 +16818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ba7b174c2814b47a10e284944c8c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   mask:
     serializedVersion: 2
     m_Bits: 72
@@ -17486,7 +17489,7 @@ Transform:
   - {fileID: 28420478760638434}
   - {fileID: 3331767397297428242}
   m_Father: {fileID: 528774238}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 105.778, z: 0}
 --- !u!23 &8598610191342424890
 MeshRenderer:
