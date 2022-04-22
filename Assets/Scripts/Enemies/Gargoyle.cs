@@ -17,6 +17,8 @@ public class Gargoyle : Enemy
     [SerializeField]
     VisualEffect fireBreath;
 
+
+    CapsuleCollider fireB;
     float distance;
     NavMeshPath path;
     float recalculatePathTime;
@@ -31,6 +33,8 @@ public class Gargoyle : Enemy
         state = State.DeActive;
         path = new NavMeshPath();
         deathSound = GetComponent<AudioSource>();
+        fireB = this.transform.Find("FireBreath").gameObject.GetComponent<CapsuleCollider>();
+        fireB.height = 0;
     }
 
     // Update is called once per frame
@@ -79,7 +83,8 @@ public class Gargoyle : Enemy
 
     void AttackTemp()
     {
-        VFXManager.fixedTimeStep = VFXManager.maxDeltaTime;
+        //VFXManager.fixedTimeStep = VFXManager.maxDeltaTime;
+        GrowFireBreath();
         fireBreath.Play();
     }
 
@@ -120,6 +125,12 @@ public class Gargoyle : Enemy
     void CalculatePath()
     {
         NavMesh.CalculatePath(this.transform.position, target.transform.position, NavMesh.AllAreas, path);
+    }
+
+    void GrowFireBreath()
+    {
+        if (fireB.height < 2.45f)
+            fireB.height += 1f * Time.deltaTime;
     }
 
     protected override void OnCollisionEnter(Collision collision)
