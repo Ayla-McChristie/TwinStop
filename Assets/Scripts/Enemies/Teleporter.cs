@@ -52,7 +52,8 @@ public class Teleporter : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        DeadState();
+        if (IsDead())
+            return;
         SwitchState();
         SwitchMethod();
         ChangeSpeed();
@@ -79,13 +80,11 @@ public class Teleporter : Enemy
         }
     }
 
-    void DeadState()
+    bool IsDead()
     {
         if (isDead)
-        {
-            DeathSoundClipTime();
-            return;
-        }
+            return true;
+        return false;
     }
 
     void SwitchState()

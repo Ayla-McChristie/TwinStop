@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 public class Gargoyle : Enemy
 {
     protected enum State {Active, DeActive,Attack }
@@ -13,8 +14,10 @@ public class Gargoyle : Enemy
     public int health = 10;
     [SerializeField]
     public int damage = 1;
+    [SerializeField]
+    VisualEffect fireBreath;
 
-    Vector3 destination;
+    float distance;
     NavMeshPath path;
     float recalculatePathTime;
     int index = 1;
@@ -23,6 +26,7 @@ public class Gargoyle : Enemy
     public override void Start()
     {
         base.Start();
+        fireBreath.Stop();
         this.Health = health;
         state = State.DeActive;
         path = new NavMeshPath();
@@ -37,7 +41,7 @@ public class Gargoyle : Enemy
         CheckTimeIsStopped();
         DeathSoundClipTime();
         //Distance2Player();
-        base.FixedUpdate();
+        base.FixedUpdate();Debug.Log(state);
     }
 
     void SwitchState()
@@ -46,11 +50,15 @@ public class Gargoyle : Enemy
         {
             case State.Active:
                 GoTowardsPlayer();
+                TurnToPlayer();
+                AttackTemp();
+                Distance2Player();
                 break;
             case State.Attack:
                 AttackTemp();
                 break;
             case State.DeActive:
+                TurnOffFire();
                 break;
         }
     }
@@ -63,20 +71,29 @@ public class Gargoyle : Enemy
             agent.isStopped = true;
             return;
         }
+        if (state == State.Attack)
+            return;
         state = State.Active;
         agent.isStopped = false;
     }
 
     void AttackTemp()
     {
-        //this.transform.Rotate(Vector3.right * Time.unscaledDeltaTime *100);
+        VFXManager.fixedTimeStep = VFXManager.maxDeltaTime;
+        fireBreath.Play();
+    }
+
+    void TurnOffFire()
+    {
+        fireBreath.Stop();
     }
 
     void Distance2Player()
     {
-        destination = target.transform.position - this.transform.position;
-        if (destination.magnitude < 2f)
-            state = State.Attack;
+        distance = Vector3.Distance(this.transform.position,target.transform.position );
+        if (distance < 3f)
+            agent.isStopped = true;
+        agent.isStopped = false;
 
     }
 

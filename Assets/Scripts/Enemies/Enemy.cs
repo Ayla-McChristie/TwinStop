@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected float Damage;
     bool attackCooldown = false;
     protected NavMeshAgent agent;
-    protected bool isDead = false;
+    public bool isDead = false;
     public LayerMask mask;
     public bool hasChildrenRender;
     protected float fovDist = 200.0f;
