@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniBossScript : Sentinel
+public class MiniBossScript : MonoBehaviour
 {
+    Sentinel sentinel = new Sentinel();
+
+    [SerializeField] GameObject roomTrigger;
     // Update is called once per frame
     void Update()
     {
-        if(this.health == 100) 
+        if(this.sentinel.health <= 100) 
         {
 
         }
