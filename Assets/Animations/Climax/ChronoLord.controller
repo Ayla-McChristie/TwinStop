@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TurtleAttack
-  m_Speed: 1
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4796573846479524750}
@@ -91,13 +91,13 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4633144944097566579}
-    m_Position: {x: 80, y: 20, z: 0}
+    m_Position: {x: 110, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 776919818213997799}
     m_Position: {x: 270, y: -150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9172716410507219306}
-    m_Position: {x: 420, y: 130, z: 0}
+    m_Position: {x: 440, y: 190, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -107,7 +107,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: -30, y: 200, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 6783077839917534598}
+  m_DefaultState: {fileID: -9172716410507219306}
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
