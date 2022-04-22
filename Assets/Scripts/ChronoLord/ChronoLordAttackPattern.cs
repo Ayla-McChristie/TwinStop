@@ -15,7 +15,10 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     int waveIndex;
 
-    string TriggerToSet;
+    string BoolToSet;
+
+    [SerializeField]
+    float Health;
 
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
@@ -43,6 +46,8 @@ public class ChronoLordAttackPattern : MonoBehaviour
         waveIndex = 1;
         waveToCheck = Chargers;
 
+        FlashTimer = 0;
+
         FlashRenderer = GetComponent<Renderer>();
         if (hasChildrenRender)
         {
@@ -63,8 +68,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
         if (IsWaveFinished(waveToCheck) && !IsVulnerable)
         {
             IncrementWave();
-            MyAnimator.SetTrigger(TriggerToSet);
+            MyAnimator.SetBool(BoolToSet, true);
         }
+        Debug.Log("baba"+FlashTimer);
     }
 
     private void FixedUpdate()
@@ -135,12 +141,12 @@ public class ChronoLordAttackPattern : MonoBehaviour
         switch (waveIndex)
         {
             case 1: 
-                TriggerToSet = "ChargerWaveEnd";
+                BoolToSet = "ChargerWaveEnd";
                 waveToCheck = TestEnemies;
                 break;
             case 2:
                 waveToCheck = TestEnemies;
-                TriggerToSet = "TestEnemyWaveEnd";
+                BoolToSet = "TestEnemyWaveEnd";
                 break;
         }
         waveIndex++;
@@ -149,11 +155,39 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "PlayerBullet")
+        if (collision.transform.tag == "PlayerBullet" && IsVulnerable)
         {
             Debug.Log("gaga");
-            FlashTimer = FlashDuration;
+            TakeDamage();
         }
+    }
+
+    void TakeDamage()
+    {
+        Health--;
+        FlashTimer = FlashDuration;
+
+        if (CheckAmIDead())
+        {
+            Die();
+        }
+    }
+
+    bool CheckAmIDead()
+    {
+        if (Health <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void Die()
+    {
+        MyAnimator.SetBool("ImDead", true);
     }
 
 }
