@@ -34,6 +34,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Renderer[] FlashRenderers;
 
     public bool hasChildrenRender;
+    public LayerMask mask;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +66,12 @@ public class ChronoLordAttackPattern : MonoBehaviour
             MyAnimator.SetTrigger(TriggerToSet);
         }
     }
+
+    private void FixedUpdate()
+    {
+        FlashCoolDown();
+    }
+
     void FlashCoolDown()
     {
         FlashTimer -= Time.deltaTime;
@@ -142,8 +149,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "PlayerBullet")
         {
+            Debug.Log("gaga");
             FlashTimer = FlashDuration;
         }
     }
