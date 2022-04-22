@@ -35,6 +35,7 @@ public class Gargoyle : Enemy
         deathSound = GetComponent<AudioSource>();
         fireB = this.transform.Find("FireBreath").gameObject.GetComponent<CapsuleCollider>();
         fireB.height = 0;
+        fireB.enabled = false;
     }
 
     // Update is called once per frame
@@ -55,8 +56,8 @@ public class Gargoyle : Enemy
             case State.Active:
                 GoTowardsPlayer();
                 TurnToPlayer();
+                //Distance2Player();
                 AttackTemp();
-                Distance2Player();
                 break;
             case State.Attack:
                 AttackTemp();
@@ -86,28 +87,37 @@ public class Gargoyle : Enemy
         //VFXManager.fixedTimeStep = VFXManager.maxDeltaTime;
         GrowFireBreath();
         fireBreath.Play();
+        fireB.enabled = true;
     }
 
     void TurnOffFire()
     {
+        fireB.enabled = false;
         fireBreath.Stop();
+        fireB.height = 0;
     }
 
     void Distance2Player()
     {
         distance = Vector3.Distance(this.transform.position,target.transform.position );
         if (distance < 3f)
+        {
             agent.isStopped = true;
+            transform.position += Vector3.zero;
+            return;
+        }
         agent.isStopped = false;
-
     }
 
     void GoTowardsPlayer()
     {
         if (index >= path.corners.Length)
+        {
+            index = 0;
             return;
+        }
         float distance = Vector3.Distance(this.transform.position, path.corners[index]);
-        if(distance < 1f)
+        if(distance < 3f)
         {
             index++;
             return;
@@ -130,7 +140,7 @@ public class Gargoyle : Enemy
     void GrowFireBreath()
     {
         if (fireB.height < 2.45f)
-            fireB.height += 1f * Time.deltaTime;
+            fireB.height += 2f * Time.unscaledDeltaTime;
     }
 
     protected override void OnCollisionEnter(Collision collision)
