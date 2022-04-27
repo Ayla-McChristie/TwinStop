@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.VFX;
 public class Gargoyle : Enemy
 {
-    protected enum State {Active, DeActive,Attack }
+    protected enum State {Active, DeActive,Attack, Offline }
     State state;
 
     [SerializeField]
@@ -16,6 +16,8 @@ public class Gargoyle : Enemy
     public int damage = 1;
     [SerializeField]
     VisualEffect fireBreath;
+    [SerializeField]
+    SentryTrigger sTrigger;
 
 
     CapsuleCollider fireB;
@@ -24,35 +26,55 @@ public class Gargoyle : Enemy
     float recalculatePathTime;
     int index = 1;
     bool collideWithPlayer;
+    bool triggered;
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         fireBreath.Stop();
         this.Health = health;
-        state = State.DeActive;
+        if (sTrigger != null)
+            state = State.Offline;
+        else
+            state = State.DeActive;
         path = new NavMeshPath();
         deathSound = GetComponent<AudioSource>();
         fireB = this.transform.Find("FireBreath").gameObject.GetComponent<CapsuleCollider>();
         fireB.height = 0;
         fireB.enabled = false;
+        triggered = false;
     }
 
     // Update is called once per frame
     public override void FixedUpdate()
     {
+        TriggerActivated();
         CalculatePath();
         SwitchState();
         CheckTimeIsStopped();
         DeathSoundClipTime();
-        //Distance2Player();
-        base.FixedUpdate();Debug.Log(state);
+        base.FixedUpdate();
+    }
+
+    void TriggerActivated()
+    {
+        if (triggered)
+            return;
+        if (sTrigger == null)
+            return;
+        if (this.sTrigger.isTriggered)
+        {
+            triggered = true;
+            state = State.DeActive;
+        }
     }
 
     void SwitchState()
     {
         switch (state)
         {
+            case State.Offline:
+                break;
             case State.Active:
                 GoTowardsPlayer();
                 TurnToPlayer();
@@ -70,6 +92,8 @@ public class Gargoyle : Enemy
 
     void CheckTimeIsStopped()
     {
+        if (state == State.Offline)
+            return;
         if (!TimeManager.Instance.isTimeStopped)
         {
             state = State.DeActive;
