@@ -190,4 +190,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
         MyAnimator.SetBool("ImDead", true);
     }
 
+    void Despawn()
+    {
+        this.gameObject.SetActive(false);
+    }
+
 }
