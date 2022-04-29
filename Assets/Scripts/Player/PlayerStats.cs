@@ -185,6 +185,14 @@ class PlayerStats : MonoBehaviour, IDamageFlash
             PlayerDead();
         }
     }
+
+    public void Instakill()
+    {
+        Health = 0;
+        UpdateHearts();
+        PlayerDead();
+    }
+
     void UpdateHearts()
     {
         // Health Lock

@@ -7,15 +7,18 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Animator MyAnimator;
 
     [SerializeField]
-    GameObject[] Chargers, TestEnemies;
+    GameObject[] Chargers, TestEnemies, Turtles;
 
     GameObject[] waveToCheck;
 
-    bool IsVulnerable;
+    bool IsVulnerable, HasIncremented;
 
     int waveIndex;
 
-    string TriggerToSet;
+    string BoolToSet;
+
+    [SerializeField]
+    float Health;
 
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
@@ -34,13 +37,17 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Renderer[] FlashRenderers;
 
     public bool hasChildrenRender;
+    public LayerMask mask;
     // Start is called before the first frame update
     void Start()
     {
+        HasIncremented = false;
         MyAnimator = GetComponent<Animator>();
         IsVulnerable = false;
         waveIndex = 1;
         waveToCheck = Chargers;
+
+        FlashTimer = 0;
 
         FlashRenderer = GetComponent<Renderer>();
         if (hasChildrenRender)
@@ -59,12 +66,19 @@ public class ChronoLordAttackPattern : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsWaveFinished(waveToCheck) && !IsVulnerable)
+        if (IsWaveFinished(waveToCheck) && !IsVulnerable && !HasIncremented)
         {
-            IncrementWave();
-            MyAnimator.SetTrigger(TriggerToSet);
+            MakeVulnerable();
+            MyAnimator.SetBool(BoolToSet, true);
         }
+        //Debug.Log("baba"+FlashTimer);
     }
+
+    private void FixedUpdate()
+    {
+        FlashCoolDown();
+    }
+
     void FlashCoolDown()
     {
         FlashTimer -= Time.deltaTime;
@@ -95,7 +109,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         }
     }
 
-    bool IsWaveFinished(GameObject[] enemiesInWave)
+    public bool IsWaveFinished(GameObject[] enemiesInWave)
     {
         foreach (GameObject enemy in enemiesInWave)
         {
@@ -109,6 +123,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     void MakeInvulnerable()
     {
+        HasIncremented = false;
         MyAnimator.SetBool("Vulnerable", false);
         IsVulnerable = false;
         MyChronoLordStatus.NotVulnerable();
@@ -117,6 +132,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     void MakeVulnerable()
     {
+        IncrementWave();
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
         MyChronoLordStatus.AmVulnerable();
@@ -125,27 +141,61 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     void IncrementWave()
     {
-        switch (waveIndex)
+        if (waveIndex == 1)
         {
-            case 1: 
-                TriggerToSet = "ChargerWaveEnd";
-                waveToCheck = TestEnemies;
-                break;
-            case 2:
-                waveToCheck = TestEnemies;
-                TriggerToSet = "TestEnemyWaveEnd";
-                break;
+            BoolToSet = "ChargerWaveEnd";
+            waveToCheck = TestEnemies;
+        }
+        else if (waveIndex > 1)
+        {
+            waveToCheck = Turtles;
+            BoolToSet = "TestEnemyWaveEnd";
         }
         waveIndex++;
-        MakeVulnerable();
+        HasIncremented = true;
+        Debug.Log("wave index" + waveIndex);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "PlayerBullet" && IsVulnerable)
         {
-            FlashTimer = FlashDuration;
+            Debug.Log("gaga");
+            TakeDamage();
         }
+    }
+
+    void TakeDamage()
+    {
+        Health--;
+        FlashTimer = FlashDuration;
+
+        if (CheckAmIDead())
+        {
+            Die();
+        }
+    }
+
+    bool CheckAmIDead()
+    {
+        if (Health <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void Die()
+    {
+        MyAnimator.SetBool("ImDead", true);
+    }
+
+    void Despawn()
+    {
+        this.gameObject.SetActive(false);
     }
 
 }

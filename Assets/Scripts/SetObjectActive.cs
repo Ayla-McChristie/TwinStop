@@ -7,6 +7,7 @@ public class SetObjectActive : MonoBehaviour
  // This code is to be used for the tutorial level to active the time mechanic - Steven
 
     public GameObject[] ActivateGameObjects;
+    public GameObject[] DeactivateGameObjects;
 
     TimeManager timeManagerScript;
 
@@ -24,11 +25,16 @@ public class SetObjectActive : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
+            foreach (GameObject gb in DeactivateGameObjects)
+            {
+                gb.SetActive(false);
+            }
             //Scans through every object in ActivateGameObjects and makes them active
             foreach(GameObject gb in ActivateGameObjects) 
             {
                 gb.SetActive(true);
             }
+
 
             //easiest way to find the time manager script ig lol -Ryan
             timeManagerScript = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();

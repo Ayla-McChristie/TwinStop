@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
     protected float Damage;
     bool attackCooldown = false;
     protected NavMeshAgent agent;
-    protected bool isDead = false;
+    public bool isDead = false;
     public LayerMask mask;
     public bool hasChildrenRender;
     protected float fovDist = 200.0f;
@@ -132,12 +132,20 @@ public class Enemy : MonoBehaviour, IDamageFlash
             if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
             {
                 foreach (Renderer r in FlashRenderers)
+                {
+                    if (r.transform.name == "Vfx_BubbleShield")
+                        return;
                     r.material = HurtMat;
+                }
             }
             else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
             {
                 foreach (Renderer r in FlashRenderers)
+                {
+                    if (r.transform.name == "Vfx_BubbleShield")
+                        return;
                     r.material = defaultMat;
+                }
             }
             return;
         }

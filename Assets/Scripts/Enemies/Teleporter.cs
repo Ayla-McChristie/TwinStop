@@ -52,7 +52,8 @@ public class Teleporter : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        DeadState();
+        if (IsDead())
+            return;
         SwitchState();
         SwitchMethod();
         ChangeSpeed();
@@ -79,13 +80,11 @@ public class Teleporter : Enemy
         }
     }
 
-    void DeadState()
+    bool IsDead()
     {
         if (isDead)
-        {
-            DeathSoundClipTime();
-            return;
-        }
+            return true;
+        return false;
     }
 
     void SwitchState()
@@ -162,7 +161,7 @@ public class Teleporter : Enemy
     {
         if (PauseScript.Instance.isPaused)
             return;
-        Vector3 randomLoc = target.transform.position + Random.insideUnitSphere * rangeOfTeleport;
+        Vector3 randomLoc = target.transform.position *2f  + Random.insideUnitSphere * rangeOfTeleport;
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomLoc, out hit, 10f, NavMesh.AllAreas))
         {
