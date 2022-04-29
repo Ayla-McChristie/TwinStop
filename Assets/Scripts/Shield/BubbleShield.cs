@@ -30,13 +30,14 @@ public class BubbleShield : MonoBehaviour
     void Start()
     {
         renderer = GetComponent<Renderer>();
-        collider = GetComponent<Collider>();Debug.Log(renderer.name);
+        collider = GetComponent<Collider>();
+        dissolveVal = renderer.material.GetFloat("Dissolve");
         if (isTurtle)
         {
             timeNormTarget = 1f;
             timeSlowTarget = -3f;
             collider.enabled = false;
-            renderer.material.SetFloat("Dissolve", 1f);
+            renderer.material.SetFloat("Dissolve", -3f);
         }
         if (isGargoyle)
         {
@@ -48,6 +49,7 @@ public class BubbleShield : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+       Debug.Log(dissolveVal);
         if (TimeManager.Instance.isTimeStopped)
         {
             if (isTurtle)
@@ -110,9 +112,10 @@ public class BubbleShield : MonoBehaviour
 
     void DissolveShield(float target)
     {
-        if (disolveCoroutine != null)
-            StopCoroutine(disolveCoroutine);
-        disolveCoroutine = StartCoroutine(Coroutine_DissolveShield(target));
+        renderer.material.SetFloat("Dissolve", target);
+        //if (disolveCoroutine != null)
+        //    StopCoroutine(disolveCoroutine);
+        //disolveCoroutine = StartCoroutine(Coroutine_DissolveShield(target));
     }
 
 
@@ -143,9 +146,10 @@ public class BubbleShield : MonoBehaviour
     IEnumerator Coroutine_DissolveShield(float target)
     {
         dissolveVal = 0;
-        while (dissolveVal < 1)
+        renderer.material.SetFloat("Dissolve", target);
+        while (dissolveVal < 3)
         {
-            renderer.material.SetFloat("Dissolve", Mathf.Lerp(renderer.material.GetFloat("Dissolve"), target, dissolveVal));
+            //renderer.material.SetFloat("Dissolve", Mathf.Lerp(renderer.material.GetFloat("Dissolve"), target, dissolveVal));
             dissolveVal += Time.unscaledDeltaTime * .5f;
             yield return null;
         }

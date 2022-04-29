@@ -75,7 +75,7 @@ public class AudioManager : MonoBehaviour
 
     void SetSceneMusic()
     {
-        sceneName = "MainTheme_Demo";
+        sceneName = "BattleMusic";
         if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(0).name)
         {
             sceneName = SceneManager.GetActiveScene().name;
