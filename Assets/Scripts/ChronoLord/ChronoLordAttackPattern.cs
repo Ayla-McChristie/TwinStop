@@ -11,7 +11,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     GameObject[] waveToCheck;
 
-    bool IsVulnerable;
+    bool IsVulnerable, HasIncremented;
 
     int waveIndex;
 
@@ -41,6 +41,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        HasIncremented = false;
         MyAnimator = GetComponent<Animator>();
         IsVulnerable = false;
         waveIndex = 1;
@@ -65,12 +66,12 @@ public class ChronoLordAttackPattern : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsWaveFinished(waveToCheck) && !IsVulnerable)
+        if (IsWaveFinished(waveToCheck) && !IsVulnerable && !HasIncremented)
         {
-            IncrementWave();
+            MakeVulnerable();
             MyAnimator.SetBool(BoolToSet, true);
         }
-        Debug.Log("baba"+FlashTimer);
+        //Debug.Log("baba"+FlashTimer);
     }
 
     private void FixedUpdate()
@@ -126,10 +127,12 @@ public class ChronoLordAttackPattern : MonoBehaviour
         IsVulnerable = false;
         MyChronoLordStatus.NotVulnerable();
         MyChronoLordStatus.AmFiring();
+        HasIncremented = true;
     }
 
     void MakeVulnerable()
     {
+        HasIncremented = false;
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
         MyChronoLordStatus.AmVulnerable();
@@ -150,7 +153,8 @@ public class ChronoLordAttackPattern : MonoBehaviour
                 break;
         }
         waveIndex++;
-        MakeVulnerable();
+        HasIncremented = true;
+        Debug.Log("wave index" + waveIndex);
     }
 
     private void OnCollisionEnter(Collision collision)
