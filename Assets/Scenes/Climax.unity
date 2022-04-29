@@ -2996,6 +2996,9 @@ MonoBehaviour:
   - {fileID: 910813353}
   TestEnemies:
   - {fileID: 37233596330117353}
+  Turtles:
+  - {fileID: 736333111}
+  - {fileID: 1409663428}
   Health: 222
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.03
@@ -3279,7 +3282,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh57198
+  m_Name: pb_Mesh33856
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4287,6 +4290,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720091114}
   m_Mesh: {fileID: -1676126305008355379, guid: 97465ad1aa370454287e7e8f0ebe4634, type: 3}
+--- !u!1 &736333111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
+  m_PrefabInstance: {fileID: 147336181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &770517932
 GameObject:
   m_ObjectHideFlags: 0
@@ -7176,7 +7184,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772512, y: 1}
+    m_SensorSize: {x: 1.7779528, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7972,6 +7980,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1409663428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6681640397216100350, guid: 746b1525064160849a2142765ea4386a, type: 3}
+  m_PrefabInstance: {fileID: 1017638654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1425457461
 GameObject:
   m_ObjectHideFlags: 0

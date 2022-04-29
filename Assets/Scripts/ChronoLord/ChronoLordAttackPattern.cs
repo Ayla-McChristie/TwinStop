@@ -7,7 +7,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Animator MyAnimator;
 
     [SerializeField]
-    GameObject[] Chargers, TestEnemies;
+    GameObject[] Chargers, TestEnemies, Turtles;
 
     GameObject[] waveToCheck;
 
@@ -109,7 +109,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         }
     }
 
-    bool IsWaveFinished(GameObject[] enemiesInWave)
+    public bool IsWaveFinished(GameObject[] enemiesInWave)
     {
         foreach (GameObject enemy in enemiesInWave)
         {
@@ -123,16 +123,16 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     void MakeInvulnerable()
     {
+        HasIncremented = false;
         MyAnimator.SetBool("Vulnerable", false);
         IsVulnerable = false;
         MyChronoLordStatus.NotVulnerable();
         MyChronoLordStatus.AmFiring();
-        HasIncremented = true;
     }
 
     void MakeVulnerable()
     {
-        HasIncremented = false;
+        IncrementWave();
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
         MyChronoLordStatus.AmVulnerable();
@@ -141,16 +141,15 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     void IncrementWave()
     {
-        switch (waveIndex)
+        if (waveIndex == 1)
         {
-            case 1: 
-                BoolToSet = "ChargerWaveEnd";
-                waveToCheck = TestEnemies;
-                break;
-            case 2:
-                waveToCheck = TestEnemies;
-                BoolToSet = "TestEnemyWaveEnd";
-                break;
+            BoolToSet = "ChargerWaveEnd";
+            waveToCheck = TestEnemies;
+        }
+        else if (waveIndex > 1)
+        {
+            waveToCheck = Turtles;
+            BoolToSet = "TestEnemyWaveEnd";
         }
         waveIndex++;
         HasIncremented = true;
