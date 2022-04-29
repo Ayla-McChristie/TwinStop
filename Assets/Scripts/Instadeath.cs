@@ -23,7 +23,7 @@ public class Instadeath : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerStatsScript.TakeDamage(6);
+            PlayerStatsScript.Instakill();
         }
     }
 }
