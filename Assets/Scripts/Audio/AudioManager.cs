@@ -82,11 +82,11 @@ public class AudioManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(1).name)
         {
-            sceneName = "MainTheme_Demo";
+            //sceneName = "MainTheme_Demo";
         }
         if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(2).name)
         {
-            sceneName = "MainTheme_Demo";
+            //sceneName = "MainTheme_Demo";
         }
         if (SceneManager.GetActiveScene().name == "Credits")
         {
