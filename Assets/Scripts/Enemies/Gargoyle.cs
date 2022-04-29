@@ -174,6 +174,8 @@ public class Gargoyle : Enemy
 
         if (collision.transform.tag == "Player")
             collideWithPlayer = true;
+        if (collision.transform.tag == "PlayerBullet")
+            this.transform.GetComponentInChildren<BubbleShield>().HitShield(collision.transform.position);
     }
 
     private void OnCollisionExit(Collision collision)

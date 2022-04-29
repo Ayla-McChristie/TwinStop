@@ -132,12 +132,20 @@ public class Enemy : MonoBehaviour, IDamageFlash
             if (FlashTimer >= 0 && FlashRenderer.material != hurtMat)
             {
                 foreach (Renderer r in FlashRenderers)
+                {
+                    if (r.transform.name == "Vfx_BubbleShield")
+                        return;
                     r.material = HurtMat;
+                }
             }
             else if (FlashTimer <= 0 && FlashRenderer.material != defaultMat)
             {
                 foreach (Renderer r in FlashRenderers)
+                {
+                    if (r.transform.name == "Vfx_BubbleShield")
+                        return;
                     r.material = defaultMat;
+                }
             }
             return;
         }
