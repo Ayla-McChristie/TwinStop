@@ -50,7 +50,7 @@ public class Cannon_SentryTurret : Enemy
     {
         Debug.Log(state);
         CheckIfObjectOnScreen();
-        DeadState();
+        //DeadState();
         SwitchState();
         base.FixedUpdate();
     }
@@ -64,7 +64,7 @@ public class Cannon_SentryTurret : Enemy
                 return;
             }
         else
-            if (this.GetComponent<Renderer>().isVisible)
+            if (this.transform.GetComponentInChildren<Renderer>().isVisible)
             {
                 {
                     TimeBeforeStart();
