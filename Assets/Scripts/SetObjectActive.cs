@@ -8,6 +8,7 @@ public class SetObjectActive : MonoBehaviour
 
     public GameObject[] ActivateGameObjects;
     public GameObject[] DeactivateGameObjects;
+    public GameObject[] TurnOnGravity;
 
     TimeManager timeManagerScript;
 
@@ -35,6 +36,10 @@ public class SetObjectActive : MonoBehaviour
                 gb.SetActive(true);
             }
 
+            foreach (GameObject item in TurnOnGravity)
+            {
+                item.GetComponent<Rigidbody>().useGravity = true;
+            }
 
             //easiest way to find the time manager script ig lol -Ryan
             timeManagerScript = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
