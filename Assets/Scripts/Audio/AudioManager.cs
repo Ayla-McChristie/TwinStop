@@ -77,23 +77,15 @@ public class AudioManager : MonoBehaviour
     void SetSceneMusic()
     {
         sceneName = "OverWorldMusic";
-        if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(0).name)
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            sceneName = SceneManager.GetActiveScene().name;
-        }
-        if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(1).name)
-        {
-            //sceneName = "MainTheme_Demo";
-        }
-        if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(2).name)
-        {
-            //sceneName = "MainTheme_Demo";
+            sceneName = "MainMenuMusic";
         }
         if (SceneManager.GetActiveScene().name == "Credits")
         {
-            sceneName = "MenuMusic";
+            sceneName = "CreditsMusic";
         }
-        //Debug.Log(SceneManager.GetActiveScene().name + " " +  SceneManager.GetSceneByBuildIndex(1).name);
+        Debug.Log(SceneManager.GetActiveScene().name);
         PlayMusic(sceneName).Play();
     }
 

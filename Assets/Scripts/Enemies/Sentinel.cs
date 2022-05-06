@@ -27,7 +27,7 @@ public class Sentinel : Enemy
     protected float moveRange = 5f;
 
     List<Transform> projectileStartPos;
-    GameObject projectile;
+    protected GameObject projectile;
 
     [SerializeField]
     Renderer flashrender;
@@ -41,7 +41,7 @@ public class Sentinel : Enemy
     public float maxDist = 10f;
     public float minDist = 5f;
 
-    string projectileType = "EnemyProjectile";
+    protected string projectileType = "EnemyProjectile";
 
     bool coolDown;
     bool waitToMove;
@@ -132,7 +132,7 @@ public class Sentinel : Enemy
             spawnTimer += Time.deltaTime;
     }
 
-    void AttackTarget()
+    protected void AttackTarget()
     {
         if(!coolDown && !target.GetComponent<PlayerStats>().isDead)
         {
@@ -183,7 +183,7 @@ public class Sentinel : Enemy
     }
 
 
-    void AttackCoolDown() //timer for when the enemy can shoot again
+    protected void AttackCoolDown() //timer for when the enemy can shoot again
     {
         if (coolDown)
         {

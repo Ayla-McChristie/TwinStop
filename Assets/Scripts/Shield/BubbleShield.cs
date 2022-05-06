@@ -50,9 +50,10 @@ public class BubbleShield : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isChronoLord && renderer.material.GetFloat("Dissolve") != -3f)
+        if (isChronoLord)
         {
-            renderer.material.SetFloat("Dissolve", -3f);
+            if(renderer.material.GetFloat("Dissolve") != -3f)
+                renderer.material.SetFloat("Dissolve", -3f);
             return;
         }
         if (TimeManager.Instance.isTimeStopped)
