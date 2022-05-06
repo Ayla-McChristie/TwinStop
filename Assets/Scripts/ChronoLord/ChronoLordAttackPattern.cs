@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChronoLordAttackPattern : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     [SerializeField]
     float Health;
+
+    [SerializeField]
+    Slider CLHealthBar;
 
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
@@ -160,7 +164,6 @@ public class ChronoLordAttackPattern : MonoBehaviour
     {
         if (collision.transform.tag == "PlayerBullet" && IsVulnerable)
         {
-            Debug.Log("gaga");
             TakeDamage();
         }
     }
@@ -168,6 +171,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     void TakeDamage()
     {
         Health--;
+        CLHealthBar.value--;
         FlashTimer = FlashDuration;
 
         if (CheckAmIDead())
