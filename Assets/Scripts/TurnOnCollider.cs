@@ -8,8 +8,8 @@ public class TurnOnCollider : MonoBehaviour
     {
         if (other.transform.tag == "FallingObjects")
         {
-            other.gameObject.GetComponent<BoxCollider>().enabled = true;
-            Debug.Log("I worked");
+            Collider boxCollider = other.gameObject.GetComponent<Collider>();
+            boxCollider.enabled = true;
         }
     }
 }
