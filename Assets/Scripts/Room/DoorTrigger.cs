@@ -47,7 +47,7 @@ public class DoorTrigger : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player" && EnemyManager.Instance.isInCombat == false) //
+        if (other.transform.tag == "Player" && EnemyManager.Instance.isInCombat == false) 
         {
             
             if (targetDoor.IsLocked == false)
@@ -81,14 +81,19 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        
+        Debug.Log(other.gameObject.transform.tag);
         if (!followPlayerScript.safetyBuffer)
         {
+            Debug.Log("safety buffer is false");
             if (other.transform.tag == "Player")
             {
+                Debug.Log("thinks it exited a playuer collision");
                 //targetDoor.CloseDoor();
                 //followPlayerScript.Move(roomCenter);
-                if(amIALargeRoom)
+                if (amIALargeRoom)
                 {
+                    Debug.Log("thinks its a large room");
                     followPlayerScript.doIFollow = true;
                 }
                 else
