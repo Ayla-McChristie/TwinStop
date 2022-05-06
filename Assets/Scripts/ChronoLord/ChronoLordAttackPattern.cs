@@ -162,6 +162,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
         BubbleShield.SetActive(false);
+        projectileStartPos.SetActive(true);
         MyChronoLordStatus.AmVulnerable();
         MyChronoLordStatus.NotFiring();
     }

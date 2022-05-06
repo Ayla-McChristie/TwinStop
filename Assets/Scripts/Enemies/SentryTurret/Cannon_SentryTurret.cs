@@ -17,6 +17,7 @@ public class Cannon_SentryTurret : Enemy
     GameObject projectile;
     public GameObject projectileStartPos;
     public GameObject RoomTrigger;
+    public bool isNotSentry;
 
     bool coolDown;
 
@@ -30,17 +31,17 @@ public class Cannon_SentryTurret : Enemy
     // Start is called before the first frame update
     public override void Start()
     {
+        if (isNotSentry)
+            state = State.Attack;
+        else
+            state = State.Offline;
+        Debug.Log(state);
+        projectileType = "EnemyProjectile";
         base.Start();
-        state = State.Offline;
         target = GameObject.FindGameObjectWithTag("Player");
         this.Health = health;
         this.Damage = damage;
-        //if (this.transform.GetChild(0).GetComponent<Renderer>() == null)
-        //    this.FlashRenderer = this.transform.GetComponent<Renderer>();
-        //else 
-        //    this.FlashRenderer = this.transform.GetChild(0).GetComponent<Renderer>();
         defaultMat = FlashRenderer.material;
-        projectileType = "EnemyProjectile";
         rigidbody = GetComponent<Rigidbody>();
         deathSound = GetComponent<AudioSource>();
     }
@@ -57,6 +58,8 @@ public class Cannon_SentryTurret : Enemy
 
     void CheckIfObjectOnScreen()
     {
+        if (isNotSentry)
+            return;
         if (hasChildrenRender)
             if (this.transform.GetComponentInChildren<Renderer>().isVisible)
             {
@@ -106,6 +109,11 @@ public class Cannon_SentryTurret : Enemy
 
     void SeeTargetState()
     {
+        if (isNotSentry)
+        {
+            this.transform.LookAt(new Vector3(target.transform.position.x, this.transform.position.y, target.transform.position.z));
+            return;
+        }
         if (CanSeeTarget())
         {
             state = State.Attack;
