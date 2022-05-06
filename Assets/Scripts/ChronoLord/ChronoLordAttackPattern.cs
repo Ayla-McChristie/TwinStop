@@ -24,6 +24,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
     [SerializeField]
     Slider CLHealthBar;
 
+    [SerializeField]
+    GameObject BubbleShield;
+
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
     public Material HurtMat { get => hurtMat; }
@@ -48,6 +51,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         HasIncremented = false;
         MyAnimator = GetComponent<Animator>();
         IsVulnerable = false;
+        BubbleShield.SetActive(true);
         waveIndex = 1;
         waveToCheck = Chargers;
 
@@ -130,6 +134,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         HasIncremented = false;
         MyAnimator.SetBool("Vulnerable", false);
         IsVulnerable = false;
+        BubbleShield.SetActive(true);
         MyChronoLordStatus.NotVulnerable();
         MyChronoLordStatus.AmFiring();
     }
@@ -139,6 +144,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         IncrementWave();
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
+        BubbleShield.SetActive(false);
         MyChronoLordStatus.AmVulnerable();
         MyChronoLordStatus.NotFiring();
     }
