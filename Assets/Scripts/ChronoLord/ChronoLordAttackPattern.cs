@@ -67,10 +67,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
         MyAnimator = GetComponent<Animator>();
         IsVulnerable = false;
         BubbleShield.SetActive(true);
+        //projectileStartPos.SetActive(false);
         waveIndex = 1;
         waveToCheck = Chargers;
-
-        projectileType = "EnemyProjectile";
 
         FlashTimer = 0;
 
@@ -152,6 +151,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         MyAnimator.SetBool("Vulnerable", false);
         IsVulnerable = false;
         BubbleShield.SetActive(true);
+        projectileStartPos.SetActive(false);
         MyChronoLordStatus.NotVulnerable();
         MyChronoLordStatus.AmFiring();
     }
