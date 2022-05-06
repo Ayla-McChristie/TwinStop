@@ -34,15 +34,15 @@ public class BubbleShield : MonoBehaviour
         dissolveVal = renderer.material.GetFloat("Dissolve");
         if (isTurtle)
         {
-            timeNormTarget = 1f;
-            timeSlowTarget = -3f;
+            timeNormTarget = 4f;
+            timeSlowTarget = 0f;
             collider.enabled = false;
-            renderer.material.SetFloat("Dissolve", 1f);
+            renderer.material.SetFloat("Dissolve", 4f);
         }
         if (isGargoyle)
         {
-            timeNormTarget = -3f;
-            timeSlowTarget = 1f;
+            timeNormTarget = 0f;
+            timeSlowTarget = 4f;
         }
 
     }
