@@ -116,10 +116,6 @@ public class EnemyManager : MonoBehaviour
             isInCombat = false;
             //Debug.Log("we are in combat");
         }
-        else
-        {
-            //Debug.Log("no combat");
-        }
     }
 
     public void StartCombatOverride()

@@ -20,15 +20,6 @@ public class RoomManager : MonoBehaviour
             Destroy(this);
         }
     }
-    private void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SetCurrentRoom(RoomTrigger triggeredRoom)
     {

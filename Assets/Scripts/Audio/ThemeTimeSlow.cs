@@ -8,7 +8,7 @@ public class ThemeTimeSlow : MonoBehaviour
     TimeManager tm;
     void Start()
     {
-        themeSound = GetComponent<AudioSource>();
+        //themeSound = GetComponent<AudioSource>();
         themeSound.pitch = 1;
     }
 
