@@ -43,6 +43,8 @@ public class AudioManager : MonoBehaviour
 
     List<AudioSource> audioList;
     List<float> oldPitchVal;
+    AudioSource overWorldMusic;
+    AudioSource battleMusic;
 
     string sceneName;
     float oldVolume;
@@ -62,7 +64,6 @@ public class AudioManager : MonoBehaviour
         SetUpSounds();
         SetSceneMusic();
         SetPitchList();
-        //audioList[14].Play();
     }
 
     void SetPitchList()
@@ -75,28 +76,28 @@ public class AudioManager : MonoBehaviour
 
     void SetSceneMusic()
     {
-        sceneName = "MainTheme_Demo";
+        sceneName = "OverWorldMusic";
         if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(0).name)
         {
             sceneName = SceneManager.GetActiveScene().name;
         }
         if (SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(1).name)
         {
-            sceneName = "MainTheme_Demo";
+            //sceneName = "MainTheme_Demo";
         }
         if(SceneManager.GetActiveScene().name == SceneManager.GetSceneByBuildIndex(2).name)
         {
-            sceneName = "MainTheme_Demo";
+            //sceneName = "MainTheme_Demo";
         }
         if (SceneManager.GetActiveScene().name == "Credits")
         {
             sceneName = "MenuMusic";
         }
         //Debug.Log(SceneManager.GetActiveScene().name + " " +  SceneManager.GetSceneByBuildIndex(1).name);
-        GetMusic(sceneName).Play();
+        PlayMusic(sceneName).Play();
     }
 
-    AudioSource GetMusic(string name)
+    AudioSource PlayMusic(string name)
     {
         foreach (AudioSource a in audioList)
         {
@@ -105,8 +106,6 @@ public class AudioManager : MonoBehaviour
         }
         return null;
     }
-
-
 
     #region SoundSetUp
     void SetUpSounds()
@@ -168,8 +167,18 @@ public class AudioManager : MonoBehaviour
             d.audio.volume = d.Volume;
             d.audio.pitch = d.Pitch;
             audioList.Add(d.audio);
+            GetMusic(d.audio);
         }
     }
+
+    void GetMusic(AudioSource a)
+    {
+        if (a.clip.name == "OverWorldMusic")
+            overWorldMusic = a;
+        if (a.clip.name == "BattleMusic")
+            battleMusic = a;
+    }
+
     void SetUpPickUps()
     {
         foreach (PickUpSounds d in pickUp)
@@ -231,15 +240,11 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Hy");
-        if (!CheckTimeIsSlowed())
-        {
-            RevertPitch();
-            return;
-        }
-        SlowDownPitch(timeStopPitch);
+        PitchSystem();
+        MusicTransitionSetUp();
     }
 
+    #region PitchSetUp
     bool CheckTimeIsSlowed()
     {
         if (TimeManager.Instance.isTimeStopped)
@@ -264,6 +269,59 @@ public class AudioManager : MonoBehaviour
             ChangePitch(a, pitchTune);
     }
 
+    void PitchSystem()
+    {
+        if (!CheckTimeIsSlowed())
+        {
+            RevertPitch();
+            return;
+        }
+        SlowDownPitch(timeStopPitch);
+    }
+    #endregion
+
+    void MusicTransitionSetUp()
+    {
+        if (EnemyManager.Instance.isInCombat)
+        {
+            MusicToBattle();
+            return;
+        }
+        MusicToOverWorld();
+    }
+
+    void MusicToOverWorld()
+    {
+        PlayMusic(overWorldMusic);
+        ChangeMusicVol(battleMusic, 0f);
+        ChangeMusicVol(overWorldMusic, .4f);
+    }
+
+    void MusicToBattle()
+    {
+        PlayMusic(battleMusic);
+        ChangeMusicVol(battleMusic, .4f);
+        ChangeMusicVol(overWorldMusic, 0f);
+    }
+
+    void PlayMusic(AudioSource a)
+    {
+        if (a.isPlaying)
+            return;
+        a.Play();
+    }
+
+    void ChangeMusicVol(AudioSource a, float volume)
+    {
+        if (a.volume == volume)
+            return;
+        if (a.volume > volume)
+        {
+            a.volume -= .1f * Time.deltaTime;
+            return;
+        }
+        a.volume += .1f * Time.deltaTime;
+    }
 
 
     public void PlaySound(string soundName, Vector3 position, bool oneShot)

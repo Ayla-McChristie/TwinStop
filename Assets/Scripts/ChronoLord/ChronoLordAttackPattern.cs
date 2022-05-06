@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChronoLordAttackPattern : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     [SerializeField]
     float Health;
+
+    [SerializeField]
+    Slider CLHealthBar;
+
+    [SerializeField]
+    GameObject BubbleShield;
 
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
@@ -44,6 +51,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         HasIncremented = false;
         MyAnimator = GetComponent<Animator>();
         IsVulnerable = false;
+        BubbleShield.SetActive(true);
         waveIndex = 1;
         waveToCheck = Chargers;
 
@@ -126,6 +134,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         HasIncremented = false;
         MyAnimator.SetBool("Vulnerable", false);
         IsVulnerable = false;
+        BubbleShield.SetActive(true);
         MyChronoLordStatus.NotVulnerable();
         MyChronoLordStatus.AmFiring();
     }
@@ -135,6 +144,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
         IncrementWave();
         MyAnimator.SetBool("Vulnerable", true);
         IsVulnerable = true;
+        BubbleShield.SetActive(false);
         MyChronoLordStatus.AmVulnerable();
         MyChronoLordStatus.NotFiring();
     }
@@ -160,7 +170,6 @@ public class ChronoLordAttackPattern : MonoBehaviour
     {
         if (collision.transform.tag == "PlayerBullet" && IsVulnerable)
         {
-            Debug.Log("gaga");
             TakeDamage();
         }
     }
@@ -168,6 +177,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     void TakeDamage()
     {
         Health--;
+        CLHealthBar.value--;
         FlashTimer = FlashDuration;
 
         if (CheckAmIDead())

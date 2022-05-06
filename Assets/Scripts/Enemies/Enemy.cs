@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour, IDamageFlash
             this.gameObject.GetComponent<Collider>().enabled = false;
         }
         FlashCoolDown();
-        DeathSoundClipTime();
+        //DeathSoundClipTime();
     }
 
     public void AddForce(Vector3 force)
