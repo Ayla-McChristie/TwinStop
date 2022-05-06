@@ -44,11 +44,17 @@ public class BubbleShield : MonoBehaviour
             timeNormTarget = -3f;
             timeSlowTarget = 1f;
         }
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isChronoLord && renderer.material.GetFloat("Dissolve") != -3f)
+        {
+            renderer.material.SetFloat("Dissolve", -3f);
+            return;
+        }
         if (TimeManager.Instance.isTimeStopped)
         {
             if (isTurtle)
