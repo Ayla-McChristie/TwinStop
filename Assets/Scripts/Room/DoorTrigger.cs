@@ -93,6 +93,7 @@ public class DoorTrigger : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("No more following the camera followme object m oves to center");
                     followPlayerScript.doIFollow = false;
 
                     followPlayerScript.Move(roomCenter);

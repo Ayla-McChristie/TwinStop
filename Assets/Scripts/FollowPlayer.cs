@@ -15,7 +15,8 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*doIFollow = false; 
+        doIFollow = false;
+        /*
         I think we can keep this off since each rooms decides if this 
         is true or false - Steve*/
     }
@@ -25,10 +26,12 @@ public class FollowPlayer : MonoBehaviour
     {
         if (doIFollow)
         {
+            Debug.Log("Following Player");
             this.transform.position = player.transform.position;
         }
         if(needToMove)
         {
+            Debug.Log("Moving to uh fuckifng g room center");
             this.transform.position = Vector3.MoveTowards(this.transform.position, currentTarget.transform.position, 100 * Time.deltaTime);
             if (this.transform.position == currentTarget.transform.position)
             {
