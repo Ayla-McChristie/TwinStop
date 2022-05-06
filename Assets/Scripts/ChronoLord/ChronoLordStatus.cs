@@ -34,7 +34,7 @@ public class ChronoLordStatus : MonoBehaviour
 
     public void AmFiring()
     {
-        Vulnerable = true;
+        Firing = true;
         MyAnimator.SetBool("Firing", true);
     }
 
@@ -42,5 +42,10 @@ public class ChronoLordStatus : MonoBehaviour
     {
         Firing = false;
         MyAnimator.SetBool("Firing", false);
+    }
+
+    public void Die()
+    {
+        MyAnimator.SetTrigger("IDied");
     }
 }

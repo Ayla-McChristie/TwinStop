@@ -229,6 +229,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     void Die()
     {
         MyAnimator.SetBool("ImDead", true);
+        MyChronoLordStatus.Die();
     }
 
     void Despawn()
