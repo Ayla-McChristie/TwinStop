@@ -26,6 +26,7 @@ public class GunControl : MonoBehaviour
 
     private PlayerActionControls playerActionControls;
     private PlayerInput playerInput;
+    string currentControlScheme;
 
     [SerializeField]
     Pool bulletPool;
@@ -46,13 +47,13 @@ public class GunControl : MonoBehaviour
     private void Awake()
     {
         playerActionControls = new PlayerActionControls();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void OnEnable()
     {
         playerActionControls.Enable();
     }
-
     private void OnDisable()
     {
         playerActionControls.Disable();
@@ -74,6 +75,11 @@ public class GunControl : MonoBehaviour
 
     void Update()
     {
+        if (playerInput.currentControlScheme != currentControlScheme)
+        {
+            OnDeviceChange(playerInput);
+            currentControlScheme = playerInput.currentControlScheme;
+        }
         if (PauseScript.Instance.isPaused)
             return;
         if (!freezeFire)
@@ -109,9 +115,23 @@ public class GunControl : MonoBehaviour
     void Aim()
     {
         var aim = playerActionControls.Player.Aim.ReadValue<Vector2>();
-        if (isGamepad)
+        if (!isGamepad)
         {
-            if (Mathf.Abs(aim.x)>controllerDeadzone||Mathf.Abs(aim.y)>controllerDeadzone)
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Plane groundPlane = new Plane(Vector3.up, player.transform.position);
+
+            float rayDistance;
+
+            if (groundPlane.Raycast(ray, out rayDistance))
+            {
+                Vector3 point = ray.GetPoint(rayDistance);
+                LookAt(point);
+            }
+            
+        }
+        else
+        {
+            if (Mathf.Abs(aim.x) > controllerDeadzone || Mathf.Abs(aim.y) > controllerDeadzone)
             {
                 Vector3 direction = Vector3.right * aim.x + Vector3.forward * aim.y;
 
@@ -122,20 +142,7 @@ public class GunControl : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Ray ray = Camera.main.ScreenPointToRay(aim);
-            Plane groundPlane = new Plane(Vector3.up, player.transform.position);
 
-            float rayDistance;
-
-            if (groundPlane.Raycast(ray, out rayDistance))
-            {
-                Vector3 point = ray.GetPoint(rayDistance);
-                LookAt(point);
-            }
-        }
-        
 
         //var aimPos = playerActionControls.Player.Aim.ReadValue<Vector2>();
         //var aimWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(aimPos.x, aimPos.y, player.transform.position.y));
