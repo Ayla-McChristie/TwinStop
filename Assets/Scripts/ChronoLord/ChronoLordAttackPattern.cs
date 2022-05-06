@@ -12,9 +12,21 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     GameObject[] waveToCheck;
 
+    [SerializeField]
+    public float attackRate = 1;
+
     bool IsVulnerable, HasIncremented;
 
+    [SerializeField]
+    bool coolDown;
+
     int waveIndex;
+
+    float fireTimer = 0;
+
+    string projectileType;
+
+    float projectileSpeed = 12;
 
     string BoolToSet;
 
@@ -25,7 +37,9 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Slider CLHealthBar;
 
     [SerializeField]
-    GameObject BubbleShield;
+    GameObject BubbleShield, projectileStartPos;
+
+    GameObject Player, projectile;
 
     public Renderer FlashRenderer { get; set; }
     public Material hurtMat;
@@ -48,12 +62,15 @@ public class ChronoLordAttackPattern : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
         HasIncremented = false;
         MyAnimator = GetComponent<Animator>();
         IsVulnerable = false;
         BubbleShield.SetActive(true);
         waveIndex = 1;
         waveToCheck = Chargers;
+
+        projectileType = "EnemyProjectile";
 
         FlashTimer = 0;
 
@@ -207,5 +224,72 @@ public class ChronoLordAttackPattern : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+
+    // --Taken from Sentry gun script--
+    void AttackTarget()
+    {
+        if (!coolDown && !Player.GetComponent<PlayerStats>().isDead)
+        {
+            Debug.Log("Fired Fired Fired");
+            projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
+            projectile.GetComponent<Projectile>().b_Speed = projectileSpeed;
+            if (GetPredictedDir(new Vector3(Player.transform.position.x, this.transform.position.y, Player.transform.position.z), this.transform.position, Player.GetComponent<Rigidbody>().velocity, projectile.GetComponent<Projectile>().b_Speed, out var direction))
+                projectile.GetComponent<Projectile>().SetUp(direction, projectileStartPos.transform.position, "Enemy");
+            else
+                projectile.GetComponent<Projectile>().SetUp((Player.transform.position - this.transform.position), projectileStartPos.transform.position, "Enemy");
+            coolDown = true;
+        }
+    }
+
+    bool GetPredictedDir(Vector3 targetPos, Vector3 shooterPos, Vector3 targetV, float b_Speed, out Vector3 result)
+    {
+        var targetToShooter = targetPos - shooterPos;
+        var distance = targetToShooter.magnitude;
+        var angle = Vector3.Angle(targetPos, targetV) * Mathf.Deg2Rad;
+
+        var speedTar = targetV.magnitude;
+        var r = speedTar / b_Speed;
+        if (SolveQuadratic(1 - r * r, 2 * r * distance * Mathf.Cos(angle), -(distance * distance), out var root1, out var root2) == 0)
+        {
+            result = Vector3.zero;
+            return false;
+        }
+        var projectedDist = Mathf.Max(root1, root2);
+        var t = projectedDist / b_Speed;
+        var c = targetPos + targetV * t;
+        result = (c - shooterPos).normalized;
+        return true;
+    }
+
+    int SolveQuadratic(float a, float b, float c, out float root1, out float root2)
+    {
+        var discriminant = b * b - 4 * a * c;
+        if (discriminant < 0)
+        {
+            root1 = Mathf.Infinity;
+            root2 = -root1;
+            return 0;
+        }
+
+        root1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
+        root2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
+
+        return discriminant > 0 ? 2 : 1;
+    }
+
+    void AttackCoolDown() //timer for when the enemy can shoot again
+    {
+        if (PauseScript.Instance.isPaused)
+            return;
+        if (!coolDown)
+            return;
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= attackRate)
+        {
+            fireTimer = 0;
+            coolDown = false;
+        }
+    }
+    //----
 
 }
