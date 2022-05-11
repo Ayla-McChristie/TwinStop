@@ -85,6 +85,10 @@ public class AudioManager : MonoBehaviour
         {
             sceneName = "CreditsMusic";
         }
+        if (SceneManager.GetActiveScene().name == "Climax")
+        {
+            sceneName = "BossMusic";
+        }
         Debug.Log(SceneManager.GetActiveScene().name);
         PlayMusic(sceneName).Play();
     }
@@ -284,16 +288,23 @@ public class AudioManager : MonoBehaviour
 
     void MusicToOverWorld()
     {
-        PlayMusic(overWorldMusic);
-        ChangeMusicVol(battleMusic, 0f);
-        ChangeMusicVol(overWorldMusic, .4f);
+        if (sceneName != "BossMusic")
+        {
+            PlayMusic(overWorldMusic);
+            ChangeMusicVol(battleMusic, 0f);
+            ChangeMusicVol(overWorldMusic, .4f);
+        }
+        
     }
 
     void MusicToBattle()
     {
-        PlayMusic(battleMusic);
-        ChangeMusicVol(battleMusic, .4f);
-        ChangeMusicVol(overWorldMusic, 0f);
+        if (sceneName != "BossMusic")
+        {
+            PlayMusic(battleMusic);
+            ChangeMusicVol(battleMusic, .4f);
+            ChangeMusicVol(overWorldMusic, 0f);
+        }
     }
 
     void PlayMusic(AudioSource a)
