@@ -95,16 +95,26 @@ public class Enemy : MonoBehaviour, IDamageFlash
             agent.isStopped = true;
             return;
         }
+        CheckHealth();
+        FlashCoolDown();
+        //DeathSoundClipTime();
+    }
+
+    protected void CheckHealth()
+    {
         if (this.Health <= 0 && this.isDead == false)
         {
             this.Die();
             this.isDead = true;
-            if(MyAnimator == null)
+            if (MyAnimator == null)
                 this.gameObject.SetActive(false);
             this.gameObject.GetComponent<Collider>().enabled = false;
         }
+    }
+
+    protected void DamageFlash()
+    {
         FlashCoolDown();
-        //DeathSoundClipTime();
     }
 
     public void AddForce(Vector3 force)

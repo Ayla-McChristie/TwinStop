@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class MiniBossScript : Sentinel
 {
-    enum MiniBossState {Attack, SpecialAttack, Dead }
+    enum MiniBossState {Attack, SpecialAttack, Dead, Spawn }
     MiniBossState mState;
     [SerializeField] GameObject roomTrigger;
     [SerializeField] GameObject MeteorMarker;
@@ -13,6 +13,11 @@ public class MiniBossScript : Sentinel
 
     float specialAttackTimer;
     float specialAttackInterval;
+    float burstTimer;
+    int fireIntervals;
+    int intervalCounter;
+    int maxHealth;
+    bool modify;
     Vector3[] randomLoc;
     List<GameObject> meteors;
     // Update is called once per frame
@@ -25,6 +30,8 @@ public class MiniBossScript : Sentinel
         CreateMeteorMarkers();
         MeteorMarker.SetActive(false);
         randomLoc = new Vector3[meteorCount];
+        fireIntervals = 1;
+        maxHealth = (int)Health;
     }
 
     void CreateMeteorMarkers()
@@ -42,7 +49,26 @@ public class MiniBossScript : Sentinel
         SwitchState();
         SpecialAttackTimer();
         RotateToPlayer();
-        Debug.Log(target.transform.position);
+        ModTest();
+        DamageFlash();
+        CheckHealth(); Debug.Log(Health);
+    }
+
+    void ModTest()
+    {
+        if ((int)PercentCalc() == 60)
+            fireCount = 5;
+        if ((int)PercentCalc() == 30)
+            fireCount = maxCount;
+        if ((int)PercentCalc() == 50)
+            fireIntervals = 2;
+        if ((int)PercentCalc() == 40)
+            fireIntervals = 3;
+    }
+
+    float PercentCalc()
+    {
+        return (Health / maxHealth) * 100;
     }
 
     void SpecialAttackTimer()
@@ -62,7 +88,6 @@ public class MiniBossScript : Sentinel
     {
         for(int i = 0; i < meteorCount; i++)
         {
-            Debug.Log(i + " " + meteorCount);
             if(i <= 0)
             {
                 randomLoc[i] = target.transform.position;
@@ -71,7 +96,7 @@ public class MiniBossScript : Sentinel
             else
             {
                 NavMeshHit hit;
-                if(NavMesh.SamplePosition(target.transform.position + Random.insideUnitSphere * 10f,out hit, 10f, NavMesh.AllAreas))
+                if(NavMesh.SamplePosition(target.transform.position + Random.insideUnitSphere * 5f,out hit, 5f, NavMesh.AllAreas))
                 {
                     randomLoc[i] = hit.position;
                     meteors[i].transform.position = hit.position;
@@ -100,6 +125,7 @@ public class MiniBossScript : Sentinel
             projectile.GetComponent<Projectile>().b_Speed = 2f;
             projectile.GetComponent<Projectile>().SetUp(Vector3.down, new Vector3(v.x, v.y + 10f, v.z), "Enemy");
         }
+        specialAttackInterval = 0;
         mState = MiniBossState.Attack;
     }
 
@@ -107,7 +133,6 @@ public class MiniBossScript : Sentinel
     {
         foreach (GameObject g in meteors)
             g.SetActive(true);
-
     }
 
     void TurnOffMarkers()
@@ -118,6 +143,43 @@ public class MiniBossScript : Sentinel
             return;
         foreach (GameObject g in meteors)
             g.SetActive(false);
+
+    }
+
+    protected override void AttackTarget()
+    {
+        if (!coolDown && !target.GetComponent<PlayerStats>().isDead)
+        {
+            FireIntervals();
+        }
+    }
+
+    void Shoot()
+    {
+        for (int i = 0; i < fireCount; i++)
+        {
+            projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
+            projectile.GetComponent<Projectile>().b_Speed = projectileSpeed;
+            projectile.GetComponent<Projectile>().SetUp(projectileStartPos[i].forward, projectileStartPos[i].position, "Enemy");
+        }
+    }
+
+    void FireIntervals()
+    {
+        if(intervalCounter >= fireIntervals)
+        {
+            coolDown = true;
+            intervalCounter = 0;
+            return;
+        }
+        if(burstTimer >= .2f)
+        {
+            Shoot();
+            burstTimer = 0;
+            intervalCounter++;
+            return;
+        }
+        burstTimer += Time.deltaTime;
 
     }
 
@@ -138,5 +200,10 @@ public class MiniBossScript : Sentinel
                 MeteorShower();
                 break;
         }
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
     }
 }

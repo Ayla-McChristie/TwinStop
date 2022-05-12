@@ -18,15 +18,13 @@ public class Sentinel : Enemy
     [SerializeField]
     bool projectiles3 = true;
     [SerializeField]
-    bool projectiles4 = false;
-    [SerializeField]
     bool projectiles5 = false;
     [SerializeField]
-    float projectileSpeed = 6;
+    protected float projectileSpeed = 6;
     State state;
     protected float moveRange = 5f;
 
-    List<Transform> projectileStartPos;
+    protected List<Transform> projectileStartPos;
     protected GameObject projectile;
 
     [SerializeField]
@@ -42,9 +40,10 @@ public class Sentinel : Enemy
     public float minDist = 5f;
 
     protected string projectileType = "EnemyProjectile";
-
-    bool coolDown;
+    protected int maxCount;
+    protected bool coolDown;
     bool waitToMove;
+    protected int fireCount;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -58,29 +57,21 @@ public class Sentinel : Enemy
         deathSound = GetComponent<AudioSource>();
         base.Start();
         FlashRenderer = flashrender;
+        
     }
 
     void CheckProjectileSet()
     {
-        int count;
-        if (projectiles3)
+
+        this.transform.Find("Projectiles").gameObject.SetActive(true);
+        maxCount = this.transform.Find("Projectiles").childCount;
+        SetShootAspect(maxCount, this.transform.Find("Projectiles"));
+        if (projectiles5)
         {
-            this.transform.Find("projectiles3").gameObject.SetActive(true);
-            count = this.transform.Find("projectiles3").childCount;
-            SetShootAspect(count, this.transform.Find("projectiles3"));
+            fireCount = 5;
+            return;
         }
-        else if (projectiles4)
-        {
-            this.transform.Find("projectiles4").gameObject.SetActive(true);
-            count = this.transform.Find("projectiles4").childCount;
-            SetShootAspect(count, this.transform.Find("projectiles4"));
-        }
-        else if (projectiles5)
-        {
-            this.transform.Find("projectiles5").gameObject.SetActive(true);
-            count = this.transform.Find("projectiles5").childCount;
-            SetShootAspect(count, this.transform.Find("projectiles5"));
-        }
+        fireCount = 3;
     }
 
     void SetShootAspect(int count, Transform projectileSet)
@@ -132,11 +123,11 @@ public class Sentinel : Enemy
             spawnTimer += Time.deltaTime;
     }
 
-    protected void AttackTarget()
+    protected virtual void AttackTarget()
     {
         if(!coolDown && !target.GetComponent<PlayerStats>().isDead)
         {
-            for(int i = 0; i < projectileStartPos.Count; i++)
+            for(int i = 0; i < fireCount; i++)
             {
                 projectile = ObjectPool_Projectiles.Instance.GetProjectile(projectileType); //Getting the projectile gameobject
                 projectile.GetComponent<Projectile>().b_Speed = projectileSpeed;
@@ -145,43 +136,6 @@ public class Sentinel : Enemy
             coolDown = true;
         }
     }
-
-    bool GetPredictedDir(Vector3 targetPos, Vector3 shooterPos, Vector3 targetV, float b_Speed, out Vector3 result)
-    {
-        var targetToShooter = targetPos - shooterPos;
-        var distance = targetToShooter.magnitude;
-        var angle = Vector3.Angle(targetPos, targetV) * Mathf.Deg2Rad;
-
-        var speedTar = targetV.magnitude;
-        var r = speedTar / b_Speed;
-        if (SolveQuadratic(1 - r * r, 2 * r * distance * Mathf.Cos(angle), -(distance * distance), out var root1, out var root2) == 0)
-        {
-            result = Vector3.zero;
-            return false;
-        }
-        var projectedDist = Mathf.Max(root1, root2);
-        var t = projectedDist / b_Speed;
-        var c = targetPos + targetV * t;
-        result = (c - shooterPos).normalized;
-        return true;
-    }
-
-    int SolveQuadratic(float a, float b, float c, out float root1, out float root2)
-    {
-        var discriminant = b * b - 4 * a * c;
-        if (discriminant < 0)
-        {
-            root1 = Mathf.Infinity;
-            root2 = -root1;
-            return 0;
-        }
-
-        root1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
-        root2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
-
-        return discriminant > 0 ? 2 : 1;
-    }
-
 
     protected void AttackCoolDown() //timer for when the enemy can shoot again
     {
