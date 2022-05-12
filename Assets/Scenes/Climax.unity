@@ -8442,7 +8442,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7782027, y: 1}
+    m_SensorSize: {x: 1.7776026, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9705,6 +9705,72 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507854795}
   m_Mesh: {fileID: 7951812495860605902, guid: 97465ad1aa370454287e7e8f0ebe4634, type: 3}
+--- !u!1001 &1509777064
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6337167374689459889}
+    m_Modifications:
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.207312
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420917032404528997, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: isTurtle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654918741664791317, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+      propertyPath: m_Name
+      value: Vfx_BubbleShield
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+--- !u!4 &1509777065 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8311289835503264175, guid: c8a5a32fbb5dda441a3b88f3befa7e85, type: 3}
+  m_PrefabInstance: {fileID: 1509777064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521826044
 GameObject:
   m_ObjectHideFlags: 0
@@ -19377,7 +19443,7 @@ MonoBehaviour:
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
   flashDuration: 0.03
   deathExplosion: {fileID: 292104221309907919, guid: cb327f5d852a42747925fa3a5b1e10ad, type: 3}
-  health: 65
+  health: 80
   damage: 1
   attackRate: 2
   speed: 2
@@ -19836,6 +19902,7 @@ Transform:
   - {fileID: 487377099933313072}
   - {fileID: 6402729143529206571}
   - {fileID: 8061847460474571767}
+  - {fileID: 1509777065}
   m_Father: {fileID: 1328596833}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
