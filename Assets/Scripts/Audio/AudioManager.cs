@@ -76,7 +76,7 @@ public class AudioManager : MonoBehaviour
 
     void SetSceneMusic()
     {
-        sceneName = "OverWorldMusic";
+        //sceneName = "OverWorldMusic";
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             sceneName = "MainMenuMusic";
@@ -89,8 +89,9 @@ public class AudioManager : MonoBehaviour
         {
             sceneName = "BossMusic";
         }
-        Debug.Log(SceneManager.GetActiveScene().name);
-        PlayMusic(sceneName).Play();
+        //Debug.Log(SceneManager.GetActiveScense().name);
+        if(sceneName != null)
+            PlayMusic(sceneName).Play();
     }
 
     AudioSource PlayMusic(string name)
@@ -311,7 +312,7 @@ public class AudioManager : MonoBehaviour
     {
         if (a.isPlaying)
             return;
-        a.Play();
+        a.Play();Debug.Log(a.clip.name);
     }
 
     void ChangeMusicVol(AudioSource a, float volume)
