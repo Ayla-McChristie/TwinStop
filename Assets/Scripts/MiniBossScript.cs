@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 public class MiniBossScript : Sentinel
 {
-    enum MiniBossState {Attack, SpecialAttack, Dead, Spawn }
+    enum MiniBossState {Attack, SpecialAttack, Dead, Spawn, offline }
     MiniBossState mState;
     [SerializeField] GameObject roomTrigger;
     [SerializeField] GameObject MeteorMarker;
     [SerializeField] float specialAttackRate;
-    [SerializeField]int meteorCount;
+    [SerializeField] int meteorCount;
+    [SerializeField] bool isBlueGiantSkull; //Otherwise is Red Giant Skull
+
 
     float specialAttackTimer;
     float specialAttackInterval;
@@ -18,13 +20,14 @@ public class MiniBossScript : Sentinel
     int intervalCounter;
     int maxHealth;
     bool modify;
+    bool isActive;
     Vector3[] randomLoc;
     List<GameObject> meteors;
     // Update is called once per frame
     public override void Start()
     {
         base.Start();
-        mState = MiniBossState.Attack;
+        mState = MiniBossState.offline;
         specialAttackRate = 20f;
         meteors = new List<GameObject>();
         CreateMeteorMarkers();
@@ -32,6 +35,7 @@ public class MiniBossScript : Sentinel
         randomLoc = new Vector3[meteorCount];
         fireIntervals = 1;
         maxHealth = (int)Health;
+        isActive = this.transform.Find("ActivationTrigger").GetComponent<SentryTrigger>().isTriggered;
     }
 
     void CreateMeteorMarkers()
@@ -51,7 +55,16 @@ public class MiniBossScript : Sentinel
         RotateToPlayer();
         ModTest();
         DamageFlash();
+        GetActivation();
         CheckHealth(); Debug.Log(Health);
+    }
+
+    void GetActivation()
+    {
+        Debug.Log(isActive);
+        if (!this.transform.Find("ActivationTrigger").GetComponent<SentryTrigger>().isTriggered)
+            return;
+        mState = MiniBossState.Attack;
     }
 
     void ModTest()
