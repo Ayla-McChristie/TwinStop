@@ -11,7 +11,7 @@ public class MiniBossScript : Sentinel
     [SerializeField] float specialAttackRate;
     [SerializeField] int meteorCount;
     [SerializeField] bool isBlueGiantSkull; //Otherwise is Red Giant Skull
-
+    [SerializeField] List<GameObject> spawnAllies;
 
     float specialAttackTimer;
     float specialAttackInterval;
