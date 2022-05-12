@@ -85,7 +85,7 @@ public class AudioManager : MonoBehaviour
         {
             sceneName = "CreditsMusic";
         }
-        if (SceneManager.GetActiveScene().name == "Climax")
+        if (SceneManager.GetActiveScene().name == "Climax" || SceneManager.GetActiveScene().name == "ChargerChase")
         {
             sceneName = "BossMusic";
         }
