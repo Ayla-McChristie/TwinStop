@@ -140,8 +140,6 @@ public class Sentinel : Enemy
     {
         if (coolDown)
         {
-            if (PauseScript.Instance.isPaused)
-                return;
             fireTimer += Time.deltaTime;
             if (fireTimer >= attackRate)
             {
