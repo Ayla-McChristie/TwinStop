@@ -6665,7 +6665,7 @@ GameObject:
   - component: {fileID: 3605918424101279527}
   - component: {fileID: 3605918424101279520}
   - component: {fileID: 3415944407011043464}
-  - component: {fileID: 9134870954298264833}
+  - component: {fileID: 6870514860171782466}
   m_Layer: 9
   m_Name: GiantRedSkull
   m_TagString: Enemy
@@ -6902,7 +6902,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9134870954298264833
+--- !u!114 &6870514860171782466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6911,7 +6911,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3605918424101279521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cb7be70316c924e937edf0021783e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 61840549c4dbfbe40b19f60230772e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
@@ -6920,7 +6920,7 @@ MonoBehaviour:
     m_Bits: 0
   hasChildrenRender: 0
   hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
-  flashDuration: 0.075
+  flashDuration: 0
   deathExplosion: {fileID: 292104221309907919, guid: 4a26f2c696d9dcd4f8a1f0c7f21d2560, type: 3}
   speed: 3
   health: 100
@@ -6935,9 +6935,9 @@ MonoBehaviour:
   minDist: 5
   roomTrigger: {fileID: 3369588229757096756}
   MeteorMarker: {fileID: 774745442006955478}
-  specialAttackRate: 10
+  specialAttackRate: 20
+  spawnRate: 0
   meteorCount: 20
-  isBlueGiantSkull: 0
 --- !u!1 &3689625608975701049
 GameObject:
   m_ObjectHideFlags: 0
