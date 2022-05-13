@@ -15,12 +15,14 @@ public class ChronoLordAttackPattern : MonoBehaviour
     [SerializeField]
     public float attackRate = 1;
 
-    bool IsVulnerable, HasIncremented;
+    bool IsVulnerable, HasIncremented, AmDead;
 
     [SerializeField]
     bool coolDown;
 
     int waveIndex;
+
+    Cannon_SentryTurret MySentryTurret;
 
     float fireTimer = 0;
 
@@ -37,7 +39,7 @@ public class ChronoLordAttackPattern : MonoBehaviour
     Slider CLHealthBar;
 
     [SerializeField]
-    GameObject BubbleShield, projectileStartPos;
+    GameObject BubbleShield, projectileStartPos, explosionvx;
 
     GameObject Player, projectile;
 
@@ -62,10 +64,11 @@ public class ChronoLordAttackPattern : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MySentryTurret = GetComponent<Cannon_SentryTurret>();
         Player = GameObject.FindGameObjectWithTag("Player");
         HasIncremented = false;
         MyAnimator = GetComponent<Animator>();
-        IsVulnerable = false;
+        AmDead = IsVulnerable = false;
         BubbleShield.SetActive(true);
         //projectileStartPos.SetActive(false);
         waveIndex = 1;
@@ -194,23 +197,26 @@ public class ChronoLordAttackPattern : MonoBehaviour
 
     void TakeDamage()
     {
-        if (Time.timeScale < 1f)
+        if (!AmDead)
         {
-            Health -= .8f;
-            Debug.Log("Half Damage. Health - " + Health);
-        }
-        else
-        {
-            Health--;
-            Debug.Log("Full Damage. Health - " + Health);
-        }
-        
-        CLHealthBar.value = Health;
-        FlashTimer = FlashDuration;
+            if (Time.timeScale < 1f)
+            {
+                Health -= .8f;
+                Debug.Log("Half Damage. Health - " + Health);
+            }
+            else
+            {
+                Health--;
+                Debug.Log("Full Damage. Health - " + Health);
+            }
 
-        if (CheckAmIDead())
-        {
-            Die();
+            CLHealthBar.value = Health;
+            FlashTimer = FlashDuration;
+
+            if (CheckAmIDead())
+            {
+                Die();
+            }
         }
     }
 
@@ -229,11 +235,14 @@ public class ChronoLordAttackPattern : MonoBehaviour
     void Die()
     {
         MyAnimator.SetBool("ImDead", true);
+        AmDead = true;
+        MySentryTurret.enabled = false;
         MyChronoLordStatus.Die();
     }
 
     void Despawn()
     {
+        Instantiate(explosionvx);
         this.gameObject.SetActive(false);
     }
 }
