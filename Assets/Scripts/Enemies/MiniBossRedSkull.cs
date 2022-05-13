@@ -29,7 +29,6 @@ public class MiniBossRedSkull : Sentinel
     {
         base.Start();
         mState = MiniBossState.offline;
-        specialAttackRate = 20f;
         meteors = new List<GameObject>();
         CreateMeteorMarkers();
         MeteorMarker.SetActive(false);
@@ -57,13 +56,14 @@ public class MiniBossRedSkull : Sentinel
         ModTest();
         DamageFlash();
         GetActivation();
-        CheckHealth(); Debug.Log(Health);
+        CheckHealth(); Debug.Log(mState);
     }
 
     void GetActivation()
     {
-        Debug.Log(isActive);
         if (!this.transform.Find("ActivationTrigger").GetComponent<SentryTrigger>().isTriggered)
+            return;
+        if (mState != MiniBossState.offline)
             return;
         mState = MiniBossState.Attack;
     }
@@ -87,10 +87,11 @@ public class MiniBossRedSkull : Sentinel
 
     void SpecialAttackTimer()
     {
-        if (mState == MiniBossState.SpecialAttack)
+        if (mState == MiniBossState.SpecialAttack || mState == MiniBossState.offline)
             return;
         if (specialAttackTimer >= specialAttackRate)
         {
+            Debug.Log("fuck");
             mState = MiniBossState.SpecialAttack;
             specialAttackTimer = 0;
             return;
@@ -128,6 +129,7 @@ public class MiniBossRedSkull : Sentinel
 
     void MeteorShower()
     {
+        Debug.Log(randomLoc.Length);
         if (specialAttackInterval < 3f)
         {
             specialAttackInterval += Time.deltaTime;
