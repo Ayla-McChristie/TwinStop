@@ -49,7 +49,7 @@ public class Cannon_SentryTurret : Enemy
     // Update is called once per frame
     public override void FixedUpdate()
     {
-        Debug.Log(state);
+        Debug.Log(Health);
         CheckIfObjectOnScreen();
         //DeadState();
         SwitchState();

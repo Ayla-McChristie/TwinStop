@@ -95,8 +95,11 @@ public class Enemy : MonoBehaviour, IDamageFlash
             agent.isStopped = true;
             return;
         }
-        if (agent.isStopped)
-            agent.isStopped = false;
+        if(agent != null)
+        {
+            if (agent.isStopped)
+                agent.isStopped = false;
+        }
         CheckHealth();
         FlashCoolDown();
         //DeathSoundClipTime();
