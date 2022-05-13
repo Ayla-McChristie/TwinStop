@@ -6495,13 +6495,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3369588229757096756}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.735, y: 0.192, z: -0.3}
+  m_LocalRotation: {x: -0.18176, y: -0.026261736, z: -0.008726129, w: 0.9829535}
+  m_LocalPosition: {x: -0.11, y: 0.412, z: 1.1}
   m_LocalScale: {x: 0.33592, y: 0.20182, z: 0.16067}
   m_Children: []
   m_Father: {fileID: 3605918424101279515}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -20.964, y: -2.974, z: -0.467}
 --- !u!65 &3369588229757096758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6513,8 +6513,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 9.374214, y: 1, z: 3.3251414}
+  m_Center: {x: -0.051319055, y: 0.000000033548275, z: -1.1625707}
 --- !u!114 &3369588229757096759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6666,6 +6666,7 @@ GameObject:
   - component: {fileID: 3605918424101279520}
   - component: {fileID: 3415944407011043464}
   - component: {fileID: 9134870954298264833}
+  - component: {fileID: 1118944122448753919}
   m_Layer: 9
   m_Name: GiantRedSkull
   m_TagString: Enemy
@@ -6909,7 +6910,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3605918424101279521}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19cb7be70316c924e937edf0021783e2, type: 3}
   m_Name: 
@@ -6923,10 +6924,10 @@ MonoBehaviour:
   flashDuration: 0.075
   deathExplosion: {fileID: 292104221309907919, guid: 4a26f2c696d9dcd4f8a1f0c7f21d2560, type: 3}
   speed: 3
-  health: 100
+  health: 300
   damage: 2
   attackRange: 2
-  attackRate: 1
+  attackRate: 0.5
   projectiles3: 1
   projectiles5: 0
   projectileSpeed: 10
@@ -6935,9 +6936,48 @@ MonoBehaviour:
   minDist: 5
   roomTrigger: {fileID: 3369588229757096756}
   MeteorMarker: {fileID: 774745442006955478}
-  specialAttackRate: 10
+  specialAttackRate: 5
+  spawnRate: 0
   meteorCount: 20
   isBlueGiantSkull: 0
+  enemySpawn: []
+  spawnAtHealthPercent: 
+--- !u!114 &1118944122448753919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605918424101279521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61840549c4dbfbe40b19f60230772e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  hasChildrenRender: 0
+  hurtMat: {fileID: 2100000, guid: 5ffd00e94ef04144aa90ee9c1d7d9b87, type: 2}
+  flashDuration: 0.03
+  deathExplosion: {fileID: 292104221309907919, guid: cb327f5d852a42747925fa3a5b1e10ad, type: 3}
+  speed: 3
+  health: 300
+  damage: 2
+  attackRange: 2
+  attackRate: 1
+  projectiles3: 1
+  projectiles5: 0
+  projectileSpeed: 6
+  flashrender: {fileID: 298889034403005276}
+  maxDist: 10
+  minDist: 5
+  roomTrigger: {fileID: 3369588229757096756}
+  MeteorMarker: {fileID: 774745442006955478}
+  specialAttackRate: 5
+  spawnRate: 0
+  meteorCount: 20
 --- !u!1 &3689625608975701049
 GameObject:
   m_ObjectHideFlags: 0

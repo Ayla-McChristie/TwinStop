@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94085235c8ee8534f98e7a2148d8ca67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   mask:
     serializedVersion: 2
     m_Bits: 72
@@ -318,7 +319,8 @@ MonoBehaviour:
   damage: 2
   attackRate: 1
   projectileStartPos: {fileID: 2447808439709035040}
-  RoomTrigger: {fileID: 0}
+  RoomTrigger: {fileID: 9179780065353604974, guid: 42f6e9f96188f8044b29b0020c776afe, type: 3}
+  isNotSentry: 0
 --- !u!95 &6279395089021767000
 Animator:
   serializedVersion: 3
