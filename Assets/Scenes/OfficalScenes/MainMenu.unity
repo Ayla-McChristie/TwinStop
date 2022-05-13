@@ -3127,22 +3127,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadSceneCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5910786658572005359, guid: bfe21457303d08f4f9808e2f74b78842, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5910786659349954897, guid: bfe21457303d08f4f9808e2f74b78842, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2654
-      objectReference: {fileID: 0}
-    - target: {fileID: 5910786659349954897, guid: bfe21457303d08f4f9808e2f74b78842, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2654
-      objectReference: {fileID: 0}
-    - target: {fileID: 5910786659349954897, guid: bfe21457303d08f4f9808e2f74b78842, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.2654
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfe21457303d08f4f9808e2f74b78842, type: 3}
 --- !u!114 &526713238 stripped
@@ -6881,25 +6865,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Cam
       objectReference: {fileID: 0}
-    - target: {fileID: 907421672694595094, guid: b2b0ca206f8cc4f4cb46b6b114ac1a5b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 907421672694595114, guid: b2b0ca206f8cc4f4cb46b6b114ac1a5b, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 907421672694595114, guid: b2b0ca206f8cc4f4cb46b6b114ac1a5b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 907421672694595114, guid: b2b0ca206f8cc4f4cb46b6b114ac1a5b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 907421672694595114, guid: b2b0ca206f8cc4f4cb46b6b114ac1a5b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 907421672694595114, guid: b2b0ca206f8cc4f4cb46b6b114ac1a5b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10739,7 +10707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1681553972
 RectTransform:
   m_ObjectHideFlags: 0
