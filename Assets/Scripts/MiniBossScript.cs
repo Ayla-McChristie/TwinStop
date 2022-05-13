@@ -82,7 +82,7 @@ public class MiniBossScript : Sentinel
 
     void EnemySpawnerSystem()
     {
-        if (!isBlueGiantSkull)
+        if (!isBlueGiantSkull || mState != MiniBossState.Attack)
             return;
         SpawnOnHealthPercent();
         if(waveTimer >= spawnRate)
@@ -144,12 +144,13 @@ public class MiniBossScript : Sentinel
 
     float PercentCalc()
     {
-        return (Health / maxHealth) * 100;
+        return (this.Health / maxHealth) * 100;
     }
 
     void SpecialAttackTimer()
     {
-        if (isBlueGiantSkull)
+        Debug.Log(specialAttackTimer);
+        if (this.isBlueGiantSkull)
             return;
         if (mState == MiniBossState.SpecialAttack)
             return;
