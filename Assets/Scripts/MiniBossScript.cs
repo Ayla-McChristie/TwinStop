@@ -9,18 +9,22 @@ public class MiniBossScript : Sentinel
     [SerializeField] GameObject roomTrigger;
     [SerializeField] GameObject MeteorMarker;
     [SerializeField] float specialAttackRate;
+    [SerializeField] float spawnRate;
     [SerializeField] int meteorCount;
     [SerializeField] bool isBlueGiantSkull; //Otherwise is Red Giant Skull
-    [SerializeField] List<GameObject> spawnAllies;
+    [SerializeField] MiniBossEnemySpawn[] enemySpawn;
+    [SerializeField] int[] spawnAtHealthPercent;
 
     float specialAttackTimer;
     float specialAttackInterval;
     float burstTimer;
+    float waveTimer;
     int fireIntervals;
     int intervalCounter;
     int maxHealth;
     bool modify;
     bool isActive;
+
     Vector3[] randomLoc;
     List<GameObject> meteors;
     // Update is called once per frame
@@ -36,6 +40,14 @@ public class MiniBossScript : Sentinel
         fireIntervals = 1;
         maxHealth = (int)Health;
         isActive = this.transform.Find("ActivationTrigger").GetComponent<SentryTrigger>().isTriggered;
+        if (enemySpawn != null)
+            TurnOffSpawners();
+    }
+
+    void TurnOffSpawners()
+    {
+        foreach (MiniBossEnemySpawn e in enemySpawn)
+            e.gameObject.SetActive(false);
     }
 
     void CreateMeteorMarkers()
@@ -57,6 +69,7 @@ public class MiniBossScript : Sentinel
         DamageFlash();
         GetActivation();
         CheckHealth(); Debug.Log(Health);
+        EnemySpawnerSystem();
     }
 
     void GetActivation()
@@ -65,6 +78,56 @@ public class MiniBossScript : Sentinel
         if (!this.transform.Find("ActivationTrigger").GetComponent<SentryTrigger>().isTriggered)
             return;
         mState = MiniBossState.Attack;
+    }
+
+    void EnemySpawnerSystem()
+    {
+        if (!isBlueGiantSkull)
+            return;
+        SpawnOnHealthPercent();
+        if(waveTimer >= spawnRate)
+        {
+            SpawnersActivation("Group");
+            waveTimer = 0;
+            return;
+        }
+        if (waveTimer >= 2.2f)
+            TurnOffSpawners();
+        waveTimer += Time.deltaTime;
+    }
+
+    void SpawnOnHealthPercent()
+    {
+        for(int i = 0; i < spawnAtHealthPercent.Length; i++)
+        {
+            if((int)PercentCalc() == spawnAtHealthPercent[i])
+            {
+                SpawnersActivation("Wave");
+            }
+
+        }
+    }
+
+    void SpawnersActivation(string type)
+    {
+        for (int i = 0; i < enemySpawn.Length; i++)
+        {
+            enemySpawn[i].gameObject.SetActive(true);
+            if (type == "Group")
+                SpawnGroup(enemySpawn[i]);
+            else
+                SpawnWave(enemySpawn[i]);
+        }
+    }
+
+    void SpawnGroup(MiniBossEnemySpawn m)
+    {
+        m.SpawnEnemy();
+    }
+
+    void SpawnWave(MiniBossEnemySpawn m)
+    {
+        m.GetEnemyWave();
     }
 
     void ModTest()
@@ -86,6 +149,8 @@ public class MiniBossScript : Sentinel
 
     void SpecialAttackTimer()
     {
+        if (isBlueGiantSkull)
+            return;
         if (mState == MiniBossState.SpecialAttack)
             return;
         if(specialAttackTimer >= specialAttackRate)

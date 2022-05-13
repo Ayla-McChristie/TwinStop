@@ -92,6 +92,12 @@ public class EnemyManager : MonoBehaviour
         isInCombat = true;
         combatOverride = false;
     }
+
+    public void SpawnEnemy(GameObject enemy, Vector3 spawnPos)
+    {
+        GameObject e = ObjectPool_Projectiles.Instance.GetProjectile(enemy.name);
+        e.transform.position = spawnPos;
+    }
     public void SpawnEnemies(List<GameObject> listOfEnemies, Transform spawnPoint, float WaitTime)
     {           
         isInCombat = true;
