@@ -22,7 +22,7 @@ public class SceneChangeDoor : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            SceneManagement sceneScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();-
+            SceneManagement sceneScript = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneManagement>();
             if (goToCredits)
             {
                 sceneScript.LoadCertainScene("Credits");
